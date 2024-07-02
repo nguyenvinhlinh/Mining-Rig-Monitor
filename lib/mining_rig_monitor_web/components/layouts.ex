@@ -10,5 +10,6 @@ defmodule MiningRigMonitorWeb.Layouts do
   """
   use MiningRigMonitorWeb, :html
 
+
   embed_templates "layouts/*"
 end
