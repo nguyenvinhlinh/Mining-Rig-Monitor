@@ -2,10 +2,11 @@ import Config
 
 # Configure your database
 config :mining_rig_monitor, MiningRigMonitor.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "mining_rig_monitor_local",
+  password: "mining_rig_monitor_local",
   hostname: "localhost",
-  database: "mining_rig_monitor_dev",
+  database: "mining_rig_monitor_local",
+  port: 15433,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
