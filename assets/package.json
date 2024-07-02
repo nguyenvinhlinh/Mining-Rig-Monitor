@@ -9,6 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "apexcharts": "^3.49.2",
     "flowbite": "^2.4.1"
   }
 }
