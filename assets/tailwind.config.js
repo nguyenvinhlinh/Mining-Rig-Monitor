@@ -9,7 +9,8 @@ module.exports = {
   content: [
     "./js/**/*.js",
     "../lib/mining_rig_monitor_web.ex",
-    "../lib/mining_rig_monitor_web/**/*.*ex"
+    "../lib/mining_rig_monitor_web/**/*.*ex",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
