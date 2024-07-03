@@ -19,7 +19,18 @@ defmodule MiningRigMonitorWeb.Router do
 
     get "/", PageController, :home
     get "/flowbite", FlowbiteController, :flowbite
+
+    live "/mining_rigs", MiningRigLive.Index, :index
+    live "/mining_rigs/new", MiningRigLive.Index, :new
+    live "/mining_rigs/:id/edit", MiningRigLive.Index, :edit
+
+    live "/mining_rigs/:id", MiningRigLive.Show, :show
+    live "/mining_rigs/:id/show/edit", MiningRigLive.Show, :edit
+
   end
+
+
+
 
   # Other scopes may use custom stacks.
   # scope "/api", MiningRigMonitorWeb do
