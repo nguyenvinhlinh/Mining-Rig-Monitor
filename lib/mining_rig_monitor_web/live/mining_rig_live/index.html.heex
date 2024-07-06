@@ -44,9 +44,17 @@
           </div>
         </div>
       </div>
-      <button id="createProductButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-        Add new mining rig
-      </button>
+
+      <.link patch={~p"/mining_rigs/new"}>
+        <.button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5
+          dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default"
+          aria-controls="drawer-create-product-default" data-drawer-placement="right">
+          New Mining Rig
+        </.button>
+      </.link>
+
+
     </div>
   </div>
 </div>
@@ -69,6 +77,9 @@
               </th>
               <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                 Mining Coin
+              </th>
+              <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                Hashrate
               </th>
               <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                 Max CPU Temp.
@@ -100,20 +111,13 @@
               </td>
 
               <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Thanh Long</td>
-              <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-                Monero
-              </td>
+              <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Monero</td>
+              <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">11 kh/s</td>
               <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">60C</td>
               <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">80C</td>
-              <td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                100%
-              </td>
-              <td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                250W
-              </td>
-              <td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                1 days 16 hours 30 minutes
-              </td>
+              <td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">100%</td>
+              <td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">250W</td>
+              <td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">1 days 16 hours 30 minutes</td>
 
               <td class="p-4 space-x-2 whitespace-nowrap">
                 <button type="button" data-modal-toggle="edit-user-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center
@@ -174,51 +178,14 @@
   </:actions>
 </.header>
 
-<.table
+<.flowbite_table
   id="mining_rigs"
   rows={@streams.mining_rigs}
   row_click={fn {_id, mining_rig} -> JS.navigate(~p"/mining_rigs/#{mining_rig}") end}
 >
   <:col :let={{_id, mining_rig}} label="Name"><%= mining_rig.name %></:col>
   <:col :let={{_id, mining_rig}} label="Code"><%= mining_rig.code %></:col>
-  <:col :let={{_id, mining_rig}} label="Cpu 1 name"><%= mining_rig.cpu_1_name %></:col>
-  <:col :let={{_id, mining_rig}} label="Cpu 2 name"><%= mining_rig.cpu_2_name %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 1 size"><%= mining_rig.ram_1_size %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 2 size"><%= mining_rig.ram_2_size %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 3 size"><%= mining_rig.ram_3_size %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 4 size"><%= mining_rig.ram_4_size %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 1 type"><%= mining_rig.ram_1_type %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 2 type"><%= mining_rig.ram_2_type %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 3 type"><%= mining_rig.ram_3_type %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 4 type"><%= mining_rig.ram_4_type %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 1 manufacture"><%= mining_rig.ram_1_manufacture %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 2 manufacture"><%= mining_rig.ram_2_manufacture %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 3 manufacture"><%= mining_rig.ram_3_manufacture %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 4 manufacture"><%= mining_rig.ram_4_manufacture %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 1 part number"><%= mining_rig.ram_1_part_number %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 2 part number"><%= mining_rig.ram_2_part_number %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 3 part number"><%= mining_rig.ram_3_part_number %></:col>
-  <:col :let={{_id, mining_rig}} label="Ram 4 part number"><%= mining_rig.ram_4_part_number %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 1 name"><%= mining_rig.vga_1_name %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 2 name"><%= mining_rig.vga_2_name %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 3 name"><%= mining_rig.vga_3_name %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 4 name"><%= mining_rig.vga_4_name %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 1 driver version"><%= mining_rig.vga_1_driver_version %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 2 driver version"><%= mining_rig.vga_2_driver_version %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 3 driver version"><%= mining_rig.vga_3_driver_version %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 4 driver version"><%= mining_rig.vga_4_driver_version %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 1 vbios version"><%= mining_rig.vga_1_vbios_version %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 2 vbios version"><%= mining_rig.vga_2_vbios_version %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 3 vbios version"><%= mining_rig.vga_3_vbios_version %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 4 vbios version"><%= mining_rig.vga_4_vbios_version %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 1 total memory"><%= mining_rig.vga_1_total_memory %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 2 total memory"><%= mining_rig.vga_2_total_memory %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 3 total memory"><%= mining_rig.vga_3_total_memory %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 4 total memory"><%= mining_rig.vga_4_total_memory %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 1 pci bus"><%= mining_rig.vga_1_pci_bus_id %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 2 pci bus"><%= mining_rig.vga_2_pci_bus_id %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 3 pci bus"><%= mining_rig.vga_3_pci_bus_id %></:col>
-  <:col :let={{_id, mining_rig}} label="Vga 4 pci bus"><%= mining_rig.vga_4_pci_bus_id %></:col>
+
   <:action :let={{_id, mining_rig}}>
     <div class="sr-only">
       <.link navigate={~p"/mining_rigs/#{mining_rig}"}>Show</.link>
@@ -233,7 +200,7 @@
       Delete
     </.link>
   </:action>
-</.table>
+</.flowbite_table>
 
 <.modal :if={@live_action in [:new, :edit]} id="mining_rig-modal" show on_cancel={JS.patch(~p"/mining_rigs")}>
   <.live_component
