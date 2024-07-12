@@ -2,7 +2,7 @@ post:
   tags:
     - ASIC
   summary: Submit ASIC specification
-  description: "This endpoint helps submitting an ASIC specification"
+  description: "This endpoint helps submitting an ASIC specification. This API should be called once time at boot."
   operationId: post-asic-spec
   security:
     - mining_rig_code: []
