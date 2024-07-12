@@ -79,31 +79,31 @@ properties:
 
   gpu_1_hashrate:
     description: >
-      GPU 1 - Hashrate
+      **GPU 1** - Hashrate
     type: float
     example: 60
 
   gpu_2_hashrate:
     description: >
-      GPU 2 - Hashrate
+      **GPU 2** - Hashrate
     type: float
     example: 60
 
   gpu_3_hashrate:
     description: >
-      GPU 3 - Hashrate
+      **GPU 3** - Hashrate
     type: float
     example: 60
 
   gpu_4_hashrate:
     description: >
-      GPU 4 - Hashrate
+      **GPU 4** - Hashrate
     type: float
     example: 60
 
   gpu_hashrate_uom:
     description: >
-      GPU hashrate unit of measurement
+      GPU hashrate - unit of measurement
     type: string
     example: MH/s
 
