@@ -23,6 +23,7 @@ defmodule MiningRigMonitorWeb.Router do
     live "/mining_rigs", MiningRigLive.Index, :index
     live "/mining_rigs/new", MiningRigLive.Index, :new
     live "/mining_rigs/:id/edit", MiningRigLive.Index, :edit
+    live "/mining_rigs/:id/pre_delete", MiningRigLive.Index, :pre_delete
 
     live "/mining_rigs/:id", MiningRigLive.Show, :show
     live "/mining_rigs/:id/show/edit", MiningRigLive.Show, :edit

@@ -9,7 +9,6 @@ defmodule MiningRigMonitorWeb.MiningRigLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage mining rig records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -19,12 +18,33 @@ defmodule MiningRigMonitorWeb.MiningRigLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
+      <.input field={@form[:name]} type="text" label="Name" />
+
         <:actions>
-          <.button phx-disable-with="Saving...">Save Mining rig</.button>
+          <button phx-disable-with="Saving..."
+            type="submit"
+            class="phx-submit-loading:opacity-75 rounded-lg bg-zinc-900  py-2 px-3 text-sm font-semibold leading-6 text-white active:text-white/80
+              text-white w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4
+              focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
+              dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Save
+          </button>
+
+
+          <button phx-click={JS.patch(~p"/mining_rigs")} type="button"
+            class="rounded-lg bg-zinc-900 py-2 px-3 text-sm font-semibold leading-6 inline-flex w-full justify-center text-gray-500 items-center
+              bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium
+              px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white
+              dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+          >
+            Cancel
+          </button>
         </:actions>
+
+
       </.simple_form>
-    </div>
+      </div>
     """
   end
 
