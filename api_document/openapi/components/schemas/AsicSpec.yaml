@@ -1,0 +1,13 @@
+type: object
+title: Scalars
+properties:
+  asic_firmware_version:
+    description: ASIC Firmware Version
+    type: string
+    examples:
+      - BOOT_3_1_image_1.0
+  asic_software_version:
+    description: ASIC Software Version
+    type: string
+    examples:
+      - ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg
