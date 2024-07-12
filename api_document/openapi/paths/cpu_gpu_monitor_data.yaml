@@ -1,9 +1,9 @@
 post:
   tags:
-    - ASIC
-  summary: Submit ASIC - specification
-  description: "This endpoint helps submitting an ASIC specification. This API should be called once time at boot."
-  operationId: post-asic-spec
+    - CPU_GPU
+  summary: Submit CPU/GPU mining rig - monitor data
+  description: "This endpoint helps submitting cpu/gpu mining rig - monitor data. This api should be call every minute"
+  operationId: post-cpu-gpu-monitor-data
   security:
     - mining_rig_code: []
   responses:
@@ -20,6 +20,6 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/AsicSpec.yaml
-    description: "Asic specification"
+          $ref: ../components/schemas/CPU_GPU_MonitorData.yaml
+    description: "CPU/GPU rig - monitor data"
     required: true

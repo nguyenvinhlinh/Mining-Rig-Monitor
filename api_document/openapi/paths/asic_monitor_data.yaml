@@ -1,7 +1,7 @@
 post:
   tags:
     - ASIC
-  summary: Submit ASIC Monitor Data
+  summary: Submit ASIC - monitor data
   description: "This endpoint helps submitting an ASIC Monitor Data / Operation Data"
   operationId: post-asic-monitor-data
   security:
