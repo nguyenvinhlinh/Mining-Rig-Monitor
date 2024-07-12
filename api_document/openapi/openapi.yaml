@@ -35,7 +35,7 @@ paths:
     $ref: 'paths/asic_monitor_data.yaml'
 
   '/cpu_gpu_spec':
-    $ref: 'paths/users_{username}.yaml'
+    $ref: 'paths/cpu_gpu_spec.yaml'
   '/cpu_gpu_monitor_data':
     $ref: 'paths/users_{username}.yaml'
 
