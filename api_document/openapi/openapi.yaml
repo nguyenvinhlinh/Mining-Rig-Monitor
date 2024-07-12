@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Mining Rig Monitor
+
+  contact:
+    name: Contact our support
+    email: nguyenvinhlinh93@gmail.com
+  license:
+    name: GNU GENERAL PUBLIC LICENSE Version 3
+  x-logo:
+    url: 'https://redocly.github.io/openapi-template/logo.png'
+    altText: OpenAPI example logo
+  description: >
+    This is an API for Mining Rig Monitor Software.
+
+tags:
+  - name: ASIC
+    description: "ASIC API"
+  - name: CPU_GPU
+    description: "CPU/GPU API"
+
+servers:
+  - url: http://127.0.0.1:4000/api/v1
+  - url: https://mining_rig_monitor_dev.hexalink.xyz/api/v1
+  - url: https://mining_rig_monitor_staging.hexalink.xyz/api/v1
+  - url: https://mining_rig_monitor.hexalink.xyz/api/v1
+paths:
+  '/asic_spec':
+    $ref: 'paths/asic_spec.yaml'
+
+  '/asic_monitor_data':
+    $ref: 'paths/asic_monitor_data.yaml'
+
+  '/cpu_gpu_spec':
+    $ref: 'paths/cpu_gpu_spec.yaml'
+
+  '/cpu_gpu_monitor_data':
+    $ref: 'paths/cpu_gpu_monitor_data.yaml'
+
+  # '/users/{username}':
+  #   $ref: 'paths/users_{username}.yaml'
+  # '/user':
+  #   $ref: 'paths/user.yaml'
+  # '/user/list':
+  #   $ref: 'paths/user-status.yaml'
+  # /pathItem:
+  #   $ref: paths/pathItem.yaml
+  # /pathItemWithExamples:
+  #   $ref: paths/pathItemWithExamples.yaml
+  # '/echo':
+  #   $ref: 'paths/echo.yaml'
+components:
+  securitySchemes:
+    mining_rig_code:
+      description: "It's a must to assign request header named `MINING_RIG_CODE`"
+      type: apiKey
+      in: header
+      name: MINING_RIG_CODE

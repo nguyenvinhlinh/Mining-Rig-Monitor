@@ -1,0 +1,299 @@
+type: object
+properties:
+  cpu_1_name:
+    description: >
+      **The first CPU** name
+
+
+      For linux, `$ cat /proc/cpuinfo`
+    type: string
+    examples:
+      - Intel(R) Core(TM) i5-4210U CPU @ 1.70GHz
+  cpu_2_name:
+    description: >
+      **The second CPU** name
+    type: string
+    examples:
+      - Intel(R) Core(TM) i5-4210U CPU @ 1.70GHz
+
+  ram_1_size:
+    description: >
+      **The first RAM** size, All the ram information can be get with `$ sudo dmidecode --type 17`
+    type: string
+    examples:
+      - 8GB
+      - 16GB
+
+  ram_2_size:
+    description: >
+      **The second RAM** size
+    type: string
+    examples:
+      - 8GB
+      - 16GB
+
+  ram_3_size:
+    description: >
+      **The third RAM** size
+    type: string
+    examples:
+      - 8GB
+      - 16GB
+
+  ram_4_size:
+    description: >
+      **The fourth RAM** size
+    type: string
+    examples:
+      - 8GB
+      - 16GB
+
+  ram_1_type:
+    description: >
+      **The first RAM** type
+    type: string
+    examples:
+      - DDR4
+      - DDR5
+
+  ram_2_type:
+    description: >
+      **The second RAM** type
+    type: string
+    examples:
+      - DDR4
+      - DDR5
+
+  ram_3_type:
+    description: >
+      **The third RAM** type
+    type: string
+    examples:
+      - DDR4
+      - DDR5
+
+  ram_4_type:
+    description: >
+      **The fourth RAM** type
+    type: string
+    examples:
+      - DDR4
+      - DDR5
+
+  ram_1_manufacture:
+    description: >
+      **The first ram** manufacture
+    type: string
+    examples:
+      - Samsung
+
+  ram_2_manufacture:
+    description: >
+      **The second ram** manufacture
+    type: string
+    examples:
+      - Samsung
+
+  ram_3_manufacture:
+    description: >
+      **The third ram** manufacture
+    type: string
+    examples:
+      - Samsung
+
+  ram_4_manufacture:
+    description: >
+      **The fourth ram** manufacture
+    type: string
+    examples:
+      - Samsung
+
+  ram_1_part_number:
+    description: >
+      **The first ram** - part number
+    type: string
+    examples:
+      - M393A2K40BB1-CRC
+
+  ram_2_part_number:
+    description: >-
+      **The second ram** - part number
+    type: string
+    examples:
+      - M393A2K40BB1-CRC
+
+  ram_3_part_number:
+    description: >-
+      **The fourth ram** - part number
+    type: string
+    examples:
+      - M393A2K40BB1-CRC
+
+  ram_4_part_number:
+    description: >-
+      **The third ram** - part number
+
+    type: string
+    examples:
+      - Samsung
+
+  gpu_1_name:
+    description: >
+      **The first gpu** name
+
+
+      it's the output of command `$ nvidia-smi --query-gpu=gpu_name,gpu_bus_id,vbios_version --format=csv`
+
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+      - NVIDIA GeForce RTX 3090
+
+  gpu_2_name:
+    description: >
+      **The second gpu** name
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+      - NVIDIA GeForce RTX 3090
+
+  gpu_3_name:
+    description: >
+      **The third gpu** name
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+      - NVIDIA GeForce RTX 3090
+
+  gpu_4_name:
+    description: >
+      **The fourth gpu** name
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+      - NVIDIA GeForce RTX 3090
+
+  gpu_1_driver_version:
+    description: >
+      **The first gpu** - driver version.
+
+
+      it's the output of command `$ nvidia-smi --query-gpu=gpu_name,gpu_bus_id,vbios_version,driver_version --format=csv`
+    type: string
+    examples:
+      - 550.90.07
+
+  gpu_2_driver_version:
+    description: >
+      **The second gpu** - driver version.
+
+    type: string
+    examples:
+      - 550.90.07
+
+  gpu_3_driver_version:
+    description: >
+      **The third gpu** - driver version.
+    type: string
+    examples:
+      - 550.90.07
+
+  gpu_4_driver_version:
+    description: >
+      **The fourth gpu** - driver version.
+    type: string
+    examples:
+      - 550.90.07
+
+  gpu_1_vbios_version:
+    description: >
+      **The first gpu**  vbios version.
+
+
+      it's the output of command `$ nvidia-smi --query-gpu=gpu_name,gpu_bus_id,vbios_version,driver_version --format=csv`
+    type: string
+    examples:
+      - 94.02.71.40.66
+
+  gpu_2_vbios_version:
+    description: >
+      **The second gpu** - vbios version.
+    type: string
+    examples:
+      - 94.02.71.40.66
+
+  gpu_3_vbios_version:
+    description: >
+      **The third gpu** - vbios version.
+    type: string
+    examples:
+      - 94.02.71.40.66
+
+  gpu_4_vbios_version:
+    description: >
+      **The fourth gpu** - vbios version.
+    type: string
+    examples:
+      - 94.02.71.40.66
+
+  gpu_1_total_memory:
+    description: >
+      **The first gpu** - total memory.
+
+
+      it's the output of command `$ nvidia-smi --query-gpu=gpu_name,gpu_bus_id,vbios_version,driver_version,memory.total --format=csv`
+    type: string
+    examples:
+      - 10240 MiB
+
+  gpu_2_total_memory:
+    description: >
+      **The second gpu** - total memory.
+    type: string
+    examples:
+      - 10240 MiB
+
+  gpu_3_total_memory:
+    description: >
+      **The third gpu** - total memory.
+    type: string
+    examples:
+      - 10240 MiB
+
+  gpu_4_total_memory:
+    description: >
+      **The fourth gpu** - total memory.
+    type: string
+    examples:
+      - 10240 MiB
+
+  gpu_1_pci_bus_id:
+    description: >
+      **The first gpu** - pci bus id.
+
+
+      it's the output of command `$ nvidia-smi --query-gpu=gpu_name,gpu_bus_id,vbios_version,driver_version,memory.total --format=csv`
+    type: string
+    examples:
+      - 00000000:05:00.0
+
+  gpu_2_pci_bus_id:
+    description: >
+      **The second gpu** - pci bus id.
+    type: string
+    examples:
+      - 00000000:05:00.0
+
+  gpu_3_pci_bus_id:
+    description: >
+      **The third gpu** - pci bus id.
+    type: string
+    examples:
+      - 00000000:05:00.0
+
+  gpu_4_pci_bus_id:
+    description: >
+      **The fourth gpu** - pci bus id.
+    type: string
+    examples:
+      - 00000000:05:00.0
