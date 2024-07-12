@@ -1,9 +1,9 @@
 post:
   tags:
     - ASIC
-  summary: Submit ASIC specification
-  description: "This endpoint helps submitting an ASIC specification"
-  operationId: post-asic-spec
+  summary: Submit ASIC Monitor Data
+  description: "This endpoint helps submitting an ASIC Monitor Data / Operation Data"
+  operationId: post-asic-monitor-data
   security:
     - mining_rig_code: []
   responses:
@@ -20,6 +20,6 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/AsicSpec.yaml
-    description: "Asic specification"
+          $ref: ../components/schemas/AsicMonitorData.yaml
+    description: "Asic monitor data"
     required: true
