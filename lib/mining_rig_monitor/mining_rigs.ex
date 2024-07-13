@@ -101,4 +101,18 @@ defmodule MiningRigMonitor.MiningRigs do
   def change_mining_rig(%MiningRig{} = mining_rig, attrs \\ %{}) do
     MiningRig.changeset(mining_rig, attrs)
   end
+
+  def query_filter_by_type(query, nil) do
+    query
+    |> where([r], is_nil(r.type))
+  end
+
+  def query_filter_by_type(query, type) do
+    query
+    |> where([r], r.type == ^type)
+  end
+
+  def list_mining_rigs_by_query(query) do
+    Repo.all(query)
+  end
 end

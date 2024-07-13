@@ -5,6 +5,7 @@ defmodule MiningRigMonitor.MiningRigs.MiningRig do
   schema "mining_rigs" do
     field :name, :string
     field :code, :string
+    field :type, :string
 
     field :vga_4_total_memory, :string
     field :vga_2_driver_version, :string
@@ -53,7 +54,12 @@ defmodule MiningRigMonitor.MiningRigs.MiningRig do
   @doc false
   def changeset(mining_rig, attrs) do
     mining_rig
-    |> cast(attrs, [:name, :code, :cpu_1_name, :cpu_2_name, :ram_1_size, :ram_2_size, :ram_3_size, :ram_4_size, :ram_1_type, :ram_2_type, :ram_3_type, :ram_4_type, :ram_1_manufacture, :ram_2_manufacture, :ram_3_manufacture, :ram_4_manufacture, :ram_1_part_number, :ram_2_part_number, :ram_3_part_number, :ram_4_part_number, :vga_1_name, :vga_2_name, :vga_3_name, :vga_4_name, :vga_1_driver_version, :vga_2_driver_version, :vga_3_driver_version, :vga_4_driver_version, :vga_1_vbios_version, :vga_2_vbios_version, :vga_3_vbios_version, :vga_4_vbios_version, :vga_1_total_memory, :vga_2_total_memory, :vga_3_total_memory, :vga_4_total_memory, :vga_1_pci_bus_id, :vga_2_pci_bus_id, :vga_3_pci_bus_id, :vga_4_pci_bus_id])
+    |> cast(attrs, [:name, :code, :type, :cpu_1_name, :cpu_2_name, :ram_1_size, :ram_2_size, :ram_3_size, :ram_4_size, :ram_1_type, :ram_2_type, :ram_3_type, :ram_4_type, :ram_1_manufacture, :ram_2_manufacture, :ram_3_manufacture, :ram_4_manufacture, :ram_1_part_number, :ram_2_part_number, :ram_3_part_number, :ram_4_part_number, :vga_1_name, :vga_2_name, :vga_3_name, :vga_4_name, :vga_1_driver_version, :vga_2_driver_version, :vga_3_driver_version, :vga_4_driver_version, :vga_1_vbios_version, :vga_2_vbios_version, :vga_3_vbios_version, :vga_4_vbios_version, :vga_1_total_memory, :vga_2_total_memory, :vga_3_total_memory, :vga_4_total_memory, :vga_1_pci_bus_id, :vga_2_pci_bus_id, :vga_3_pci_bus_id, :vga_4_pci_bus_id])
     |> validate_required([:name, :code])
   end
+
+  def type_cpu_gpu(), do: "cpu_gpu"
+  def type_asic(), do: "asic"
+  def type_nil(), do: nil
+
 end
