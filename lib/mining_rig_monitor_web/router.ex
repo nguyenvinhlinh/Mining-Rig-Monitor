@@ -28,6 +28,8 @@ defmodule MiningRigMonitorWeb.Router do
     live "/mining_rigs/:id", MiningRigLive.Show, :show
     live "/mining_rigs/:id/show/edit", MiningRigLive.Show, :edit
 
+    post "/asic_rig_monitor_records", AsicRigMonitorRecordController, :save
+
   end
 
 
