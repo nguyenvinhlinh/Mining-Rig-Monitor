@@ -45,17 +45,17 @@ properties:
       The third pool address, check JSON key named `addr`.
     type: string
     example: stratum+tcp://asia1.kaspa-pool.org:4441
-  wallet_worker_1_address:
+  pool_1_user:
     description: >
       The first pool's user address, check JSON key named `user`.
     type: string
     example: kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
-  wallet_worker_2_address:
+  pool_2_user:
     description: >
       The second pool's user address, check JSON key named `user`.
     type: string
     example: kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
-  wallet_worker_3_address:
+  pool_3_user:
     description: >
       The third pool's user address, check JSON key named `user`.
     type: string
@@ -95,39 +95,39 @@ properties:
       - Connected
 
 
-  pool_1_accept:
+  pool_1_accepted_share:
     description: >
       Number of accpted shares submitting to the first pool. Check JSON key in `pools[index] > accepted`
     type: integer
     example: 100000
-  pool_2_accept:
+  pool_2_accepted_share:
     description: >
       Number of accpted shares submitting to the second pool. Check JSON key in `pools[index] > accepted`
     type: integer
     example: 0
-  pool_3_accept:
+  pool_3_accepted_share:
     description: >
       Number of accpted shares submitting to the third pool. Check JSON key in `pools[index] > accepted`
     type: integer
     example: 0
 
-  pool_1_reject:
+  pool_1_rejected_share:
     description: >
       Number of rejected shares submitting to the first pool. Check JSON key in `pools[index] > rejected`
     type: integer
     example: 0
-  pool_2_reject:
+  pool_2_rejected_share:
     description: >
       Number of rejected shares submitting to the second pool. Check JSON key in `pools[index] > rejected`
     type: integer
     example: 0
-  pool_3_reject:
+  pool_3_rejected_share:
     description: >
       Number of rejected shares submitting to the third pool. Check JSON key in `pools[index] > rejected`
     type: integer
     example: 0
 
-  hashboard_1_5_min_hashrate:
+  hashboard_1_hashrate_5_min:
     description: >
       The average hashrate of the **first hashboard** in **5 minutes**. Check JSON key named `boards[index] > rtpow`.
 
@@ -139,7 +139,7 @@ properties:
     type: float
     example: 1234.56
 
-  hashboard_2_5_min_hashrate:
+  hashboard_2_hashrate_5_min:
     description: >
       The average hashrate of the **second hashboard** in **5 minutes**. Check JSON key named `boards[index] > rtpow`.
 
@@ -151,7 +151,7 @@ properties:
     type: float
     example: 1234.56
 
-  hashboard_3_5_min_hashrate:
+  hashboard_3_hashrate_5_min:
     description: >
       The average hashrate of the **third hashboard** in **5 minutes**. Check JSON key named `boards[index] > rtpow`.
 
@@ -163,7 +163,7 @@ properties:
     type: float
     example: 1234.56
 
-  hashboard_1_30_min_hashrate:
+  hashboard_1_hashrate_30_min:
     description: >
       The average hashrate of the **first hashboard** in **5 minutes**. Check JSON key named `boards[index] > avgpow`.
 
@@ -175,7 +175,7 @@ properties:
     type: float
     example: 1234.56
 
-  hashboard_2_30_min_hashrate:
+  hashboard_2_hashrate_30_min:
     description: >
       The average hashrate of the **second hashboard** in **5 minutes**. Check JSON key named `boards[index] > avgpow`.
 
@@ -187,7 +187,7 @@ properties:
     type: float
     example: 1234.56
 
-  hashboard_3_30_min_hashrate:
+  hashboard_3_hashrate_30_min:
     description: >
       The average hashrate of the **third hashboard** in **5 minutes**. Check JSON key named `boards[index] > avgpow`.
 
@@ -277,3 +277,13 @@ properties:
       The public/internet/wan IP
     type: string
     example:  50.85.22.87
+
+  coin_name:
+    description: Coin name
+    type: string
+    example: "Kaspa"
+
+  power:
+    description: Power(Walt)
+    type: float
+    example: 3500
