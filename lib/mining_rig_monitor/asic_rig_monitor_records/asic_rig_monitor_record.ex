@@ -10,7 +10,7 @@ defmodule MiningRigMonitor.AsicRigMonitorRecords.AsicRigMonitorRecord do
     field :hashrate_30_min, :float
     field :hashrate_uom, :string
     field :pool_rejection_rate, :float
-    field :uptime, :interval
+    field :uptime, :string
 
     field :pool_1_fieldress, :string
     field :pool_2_fieldress, :string
@@ -60,7 +60,8 @@ defmodule MiningRigMonitor.AsicRigMonitorRecords.AsicRigMonitorRecord do
     field :coin_name, :string
     field :power, :float
 
-    field :inserted_at, :timestamp
+
+    timestamps([updated_at: false])
   end
 
   @doc false
