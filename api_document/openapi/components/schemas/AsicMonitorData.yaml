@@ -1,11 +1,11 @@
 type: object
 properties:
-  5_min_hashrate:
+  hashrate_5_min:
     description: >
       5 mins hashrate, in ASIC KS5L, check JSON key named `rtpow`
     type: number
     example: 13135
-  30_min_hashrate:
+  hashrate_30_min:
     description: >
       30 mins hashrate, in ASIC KS5L, check JSON key named `avgpow`
     type: number
