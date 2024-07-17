@@ -66,7 +66,7 @@ defmodule MiningRigMonitor.AsicRigMonitorRecords.AsicRigMonitorRecord do
   @doc false
   def changeset(mining_rig, attrs) do
     mining_rig
-    |> cast(attrs, cast_column_list)
+    |> cast(attrs, cast_column_list())
     |> validate_required([:mining_rig_id])
   end
 

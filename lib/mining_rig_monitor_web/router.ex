@@ -12,6 +12,7 @@ defmodule MiningRigMonitorWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug MiningRigMonitorWeb.Plugs.MiningRigCodeAuthentication
   end
 
   scope "/", MiningRigMonitorWeb do
@@ -27,9 +28,12 @@ defmodule MiningRigMonitorWeb.Router do
 
     live "/mining_rigs/:id", MiningRigLive.Show, :show
     live "/mining_rigs/:id/show/edit", MiningRigLive.Show, :edit
+  end
 
-    post "/asic_rig_monitor_records", AsicRigMonitorRecordController, :save
-
+  scope "/api/v1" do
+    pipe_through :api
+    # post "/asic_spec", MiningRigMonitorWeb.AsicRigMonitorRecordController, :save
+    post "/asic_rig_monitor_records", MiningRigMonitorWeb.AsicRigMonitorRecordController, :save
   end
 
 

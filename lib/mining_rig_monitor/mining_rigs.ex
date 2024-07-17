@@ -115,4 +115,8 @@ defmodule MiningRigMonitor.MiningRigs do
   def list_mining_rigs_by_query(query) do
     Repo.all(query)
   end
+
+  def get_mining_rig_by_code(code) do
+    Repo.get_by(MiningRig, code: code)
+  end
 end
