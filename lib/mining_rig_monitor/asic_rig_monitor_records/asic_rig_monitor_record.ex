@@ -12,9 +12,9 @@ defmodule MiningRigMonitor.AsicRigMonitorRecords.AsicRigMonitorRecord do
     field :pool_rejection_rate, :float
     field :uptime, :string
 
-    field :pool_1_fieldress, :string
-    field :pool_2_fieldress, :string
-    field :pool_3_fieldress, :string
+    field :pool_1_address, :string
+    field :pool_2_address, :string
+    field :pool_3_address, :string
 
     field :pool_1_user, :string
     field :pool_2_user, :string
@@ -71,8 +71,8 @@ defmodule MiningRigMonitor.AsicRigMonitorRecords.AsicRigMonitorRecord do
   end
 
   defp cast_column_list  do
-    [:hashrate_5_min, :hashrate_30_min, :hashrate_uom, :pool_rejection_rate, :uptime,
-     :pool_1_ress, :pool_2_ress, :pool_3_ress, :pool_1_user,
+    [:mining_rig_id, :hashrate_5_min, :hashrate_30_min, :hashrate_uom, :pool_rejection_rate, :uptime,
+     :pool_1_address, :pool_2_address, :pool_3_address, :pool_1_user,
      :pool_2_user, :pool_3_user, :pool_1_state, :pool_2_state,
      :pool_3_state, :pool_1_accepted_share,  :pool_2_accepted_share,  :pool_3_accepted_share,
      :pool_1_rejected_share,  :pool_2_rejected_share,  :pool_3_rejected_share,  :hashboard_1_hashrate_5_min,
