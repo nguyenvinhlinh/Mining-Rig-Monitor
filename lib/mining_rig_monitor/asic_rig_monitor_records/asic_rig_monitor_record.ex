@@ -60,14 +60,26 @@ defmodule MiningRigMonitor.AsicRigMonitorRecords.AsicRigMonitorRecord do
     field :coin_name, :string
     field :power, :float
 
-
     timestamps([updated_at: false])
   end
 
   @doc false
   def changeset(mining_rig, attrs) do
     mining_rig
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, cast_column_list)
+    |> validate_required([:mining_rig_id])
+  end
+
+  defp cast_column_list  do
+    [:hashrate_5_min, :hashrate_30_min, :hashrate_uom, :pool_rejection_rate, :uptime,
+     :pool_1_ress, :pool_2_ress, :pool_3_ress, :pool_1_user,
+     :pool_2_user, :pool_3_user, :pool_1_state, :pool_2_state,
+     :pool_3_state, :pool_1_accepted_share,  :pool_2_accepted_share,  :pool_3_accepted_share,
+     :pool_1_rejected_share,  :pool_2_rejected_share,  :pool_3_rejected_share,  :hashboard_1_hashrate_5_min,
+     :hashboard_2_hashrate_5_min, :hashboard_3_hashrate_5_min, :hashboard_1_hashrate_30_min, :hashboard_2_hashrate_30_min,
+     :hashboard_3_hashrate_30_min, :hashboard_1_temp_1, :hashboard_1_temp_2, :hashboard_2_temp_1,
+     :hashboard_2_temp_2, :hashboard_3_temp_1, :hashboard_3_temp_2, :fan_1_speed,
+     :fan_2_speed, :fan_3_speed, :fan_4_speed, :lan_ip,
+     :wan_ip, :coin_name, :power]
   end
 end
