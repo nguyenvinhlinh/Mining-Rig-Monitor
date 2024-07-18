@@ -1,6 +1,17 @@
 type: object
 title: Scalars
 properties:
+  asic_model:
+    description: ASIC Model
+    type: string
+    examples:
+      - Ice River KS5L
+  asic_model_variant:
+    description: ASIC Model Variant
+    type: string
+    examples:
+      - 12TH
+      - 10TH
   asic_firmware_version:
     description: ASIC Firmware Version
     type: string
