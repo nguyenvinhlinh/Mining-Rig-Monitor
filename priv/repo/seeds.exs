@@ -9,3 +9,16 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+
+alias MiningRigMonitor.MiningRigs.MiningRig
+alias MiningRigMonitor.Repo
+
+asic_1 = %MiningRig{name: "asic_1", code: "asic_1_code"} |> Repo.insert!
+asic_2 = %MiningRig{name: "asic_2", code: "asic_2_code"} |> Repo.insert!
+asic_3 = %MiningRig{name: "asic_3", code: "asic_3_code"} |> Repo.insert!
+
+
+cpu_gpu_1 = %MiningRig{name: "cpu_gpu_1", code: "cpu_gpu_1_code"} |> Repo.insert!
+cpu_gpu_2 = %MiningRig{name: "cpu_gpu_2", code: "cpu_gpu_2_code"} |> Repo.insert!
+cpu_gpu_3 = %MiningRig{name: "cpu_gpu_3", code: "cpu_gpu_3_code"} |> Repo.insert!

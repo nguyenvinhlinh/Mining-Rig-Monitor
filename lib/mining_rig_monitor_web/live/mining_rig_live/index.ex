@@ -6,10 +6,21 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    IO.inspect "DEBUG #{__ENV__.file} @#{__ENV__.line}"
-    IO.inspect :mount
-    IO.inspect "END"
-    {:ok, stream(socket, :mining_rigs, MiningRigs.list_mining_rigs())}
+    query_new_mining_rig_list = MiningRigs.query_filter_by_type(MiningRig, MiningRig.type_nil())
+    new_mining_rig_list = MiningRigs.list_mining_rigs_by_query(query_new_mining_rig_list)
+
+    query_cpu_gpu_mining_rig_list = MiningRigs.query_filter_by_type(MiningRig, MiningRig.type_cpu_gpu())
+    cpu_gpu_mining_rig_list = MiningRigs.list_mining_rigs_by_query(query_cpu_gpu_mining_rig_list)
+
+    query_cpu_gpu_mining_rig_list = MiningRigs.query_filter_by_type(MiningRig, MiningRig.type_asic())
+    asic_mining_rig_list = MiningRigs.list_mining_rigs_by_query(query_cpu_gpu_mining_rig_list)
+
+    new_socket = socket
+    |>  stream(:new_mining_rig_list, new_mining_rig_list)
+    |>  stream(:cpu_gpu_mining_rig_list, cpu_gpu_mining_rig_list)
+    |>  stream(:asic_mining_rig_list,asic_mining_rig_list)
+
+    {:ok, new_socket}
   end
 
   @impl true
@@ -45,7 +56,10 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
 
   @impl true
   def handle_info({MiningRigMonitorWeb.MiningRigLive.FormComponent, {:saved, mining_rig}}, socket) do
-    {:noreply, stream_insert(socket, :mining_rigs, mining_rig)}
+    new_socket = socket
+    |> stream_insert(:new_mining_rig_list, mining_rig)
+
+    {:noreply, new_socket}
   end
 
   @impl true
@@ -53,6 +67,12 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
     mining_rig = MiningRigs.get_mining_rig!(id)
     {:ok, _} = MiningRigs.delete_mining_rig(mining_rig)
 
-    {:noreply, stream_delete(socket, :mining_rigs, mining_rig)}
+
+    new_socket = socket
+    |> stream_delete(:new_mining_rig_list, mining_rig)
+    |> stream_delete(:cpu_gpu_mining_rig_list, mining_rig)
+    |> stream_delete(:asic_mining_rig_list, mining_rig)
+
+    {:noreply, new_socket}
   end
 end

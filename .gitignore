@@ -37,3 +37,7 @@ npm-debug.log
 
 # Emacs temporary files
 *~
+
+# Tailwind build files
+/priv/static/assets/app.css
+/priv/static/assets/app.js
