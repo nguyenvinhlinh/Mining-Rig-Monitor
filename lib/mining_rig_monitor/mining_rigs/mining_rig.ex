@@ -48,6 +48,8 @@ defmodule MiningRigMonitor.MiningRigs.MiningRig do
     field :ram_1_manufacture, :string
     field :vga_1_pci_bus_id, :string
 
+    field :asic_model, :string
+    field :asic_model_variant, :string
     field :asic_firmware_version, :string
     field :asic_software_version, :string
 
@@ -70,7 +72,7 @@ defmodule MiningRigMonitor.MiningRigs.MiningRig do
     new_attrs = Map.put(attrs, "type", type_asic())
 
     mining_rig
-    |> cast(new_attrs, [:type, :asic_firmware_version, :asic_software_version])
+    |> cast(new_attrs, [:type, :asic_model, :asic_model_variant, :asic_firmware_version, :asic_software_version])
     |> validate_required([:type])
   end
 

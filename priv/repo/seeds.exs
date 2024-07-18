@@ -15,10 +15,14 @@ alias MiningRigMonitor.MiningRigs.MiningRig
 alias MiningRigMonitor.Repo
 
 asic_1 = %MiningRig{name: "asic_1", code: "asic_1_code", type: "asic",
+                    asic_model: "Ice River KS5M",
+                    asic_model_variant: "10TH",
                     asic_firmware_version: "BOOT_3_1_image_1.0",
                     asic_software_version: "ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg"} |> Repo.insert!
 
 asic_2 = %MiningRig{name: "asic_2", code: "asic_2_code", type: "asic",
+                    asic_model: "Ice River KS5L",
+                    asic_model_variant: "12TH",
                     asic_firmware_version: "BOOT_3_1_image_1.0",
                     asic_software_version: "ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg"} |> Repo.insert!
 asic_3 = %MiningRig{name: "asic_3", code: "asic_3_code"} |> Repo.insert!
