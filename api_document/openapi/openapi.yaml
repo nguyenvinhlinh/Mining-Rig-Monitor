@@ -29,7 +29,7 @@ paths:
   '/asic_spec':
     $ref: 'paths/asic_spec.yaml'
 
-  '/asic_monitor_data':
+  '/asic_rig_monitor_records':
     $ref: 'paths/asic_monitor_data.yaml'
 
   '/cpu_gpu_spec':
