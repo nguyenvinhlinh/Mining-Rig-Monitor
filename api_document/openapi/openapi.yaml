@@ -26,7 +26,7 @@ servers:
   - url: https://mining_rig_monitor_staging.hexalink.xyz/api/v1
   - url: https://mining_rig_monitor.hexalink.xyz/api/v1
 paths:
-  '/asic_spec':
+  '/mining_rig/asic_spec':
     $ref: 'paths/asic_spec.yaml'
 
   '/asic_rig_monitor_records':

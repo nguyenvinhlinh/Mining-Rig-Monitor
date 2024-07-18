@@ -73,6 +73,12 @@ defmodule MiningRigMonitor.MiningRigs do
     |> Repo.update()
   end
 
+  def update_asic_mining_rig(%MiningRig{} = mining_rig, attrs) do
+    mining_rig
+    |> MiningRig.changeset_asic(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a mining_rig.
 

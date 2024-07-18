@@ -48,6 +48,9 @@ defmodule MiningRigMonitor.MiningRigs.MiningRig do
     field :ram_1_manufacture, :string
     field :vga_1_pci_bus_id, :string
 
+    field :asic_firmware_version, :string
+    field :asic_software_version, :string
+
     timestamps(type: :utc_datetime)
   end
 
@@ -61,5 +64,14 @@ defmodule MiningRigMonitor.MiningRigs.MiningRig do
   def type_cpu_gpu(), do: "cpu_gpu"
   def type_asic(), do: "asic"
   def type_nil(), do: nil
+
+
+  def changeset_asic(mining_rig, attrs) do
+    new_attrs = Map.put(attrs, "type", type_asic())
+
+    mining_rig
+    |> cast(new_attrs, [:type, :asic_firmware_version, :asic_software_version])
+    |> validate_required([:type])
+  end
 
 end

@@ -34,6 +34,9 @@ defmodule MiningRigMonitorWeb.Router do
     pipe_through :api
     # post "/asic_spec", MiningRigMonitorWeb.AsicRigMonitorRecordController, :save
     post "/asic_rig_monitor_records", MiningRigMonitorWeb.AsicRigMonitorRecordController, :save
+    scope "/mining_rig" do
+      post "/asic_spec", MiningRigMonitorWeb.MiningRigController, :update_mining_rig_asic
+    end
   end
 
 
