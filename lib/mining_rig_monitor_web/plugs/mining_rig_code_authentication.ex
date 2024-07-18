@@ -43,7 +43,7 @@ defmodule MiningRigMonitorWeb.Plugs.MiningRigCodeAuthentication do
 
   def handle_mining_rig_code_not_exist(conn) do
     body = %{
-      "message": "MINING_RIG_CODE does not exist in request header."
+      "message" => "MINING_RIG_CODE does not exist in request header."
     }
     conn
     |> put_status(401)
@@ -53,7 +53,7 @@ defmodule MiningRigMonitorWeb.Plugs.MiningRigCodeAuthentication do
 
   def handle_mining_rig_code_invalid(conn) do
     body = %{
-      "message": "MINING_RIG_CODE invalid."
+      "message" => "MINING_RIG_CODE invalid."
     }
     conn
     |> put_status(401)

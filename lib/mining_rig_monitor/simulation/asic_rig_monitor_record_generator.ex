@@ -55,7 +55,7 @@ defmodule MiningRigMonitor.Simulation.AsicRigMonitorRecordGenerator do
     fan_3_speed = 5500 * (1 + Enum.random(1..10) / 100) |> Kernel.round()
     fan_4_speed = 5500 * (1 + Enum.random(1..10) / 100) |> Kernel.round()
 
-    data = %{
+    %{
       "hashrate_5_min" => hashrate_5_min,
       "hashrate_30_min" => hashrate_30_min,
       "hashrate_uom" => "GH/s",
@@ -80,8 +80,8 @@ defmodule MiningRigMonitor.Simulation.AsicRigMonitorRecordGenerator do
       "hashboard_2_hashrate_5_min" => hashboard_2_hashrate_5_min,
       "hashboard_3_hashrate_5_min" => hashboard_3_hashrate_5_min,
       "hashboard_1_hashrate_30_min" => hashboard_1_hashrate_30_min,
-      "hashboard_2_hashrate_30_min" => hashboard_1_hashrate_30_min,
-      "hashboard_3_hashrate_30_min" => hashboard_1_hashrate_30_min,
+      "hashboard_2_hashrate_30_min" => hashboard_2_hashrate_30_min,
+      "hashboard_3_hashrate_30_min" => hashboard_3_hashrate_30_min,
       "hashboard_1_temp_1" => hashboard_1_temp_1,
       "hashboard_1_temp_2" => hashboard_1_temp_2,
       "hashboard_2_temp_1" => hashboard_2_temp_1,
