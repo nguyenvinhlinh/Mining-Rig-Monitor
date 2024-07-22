@@ -1,0 +1,138 @@
+<div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+  <div class="mb-4 col-span-full xl:mb-2">
+    <nav class="flex mb-5" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+        <li class="inline-flex items-center">
+          <a href="#" class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
+            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+            Home
+          </a>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+            <a href="#" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Mining Rigs</a>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+            <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">ASIC</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">ASIC NAME</h1>
+  </div>
+  <!-- Right Content -->
+  <div class="col-span-full xl:col-auto">
+    <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <h3 class="mb-4 text-xl font-semibold dark:text-white">General Information</h3>
+      <div class="flex mb-4">
+        <div class="flex-auto">
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>ASIC Model:</b> Ice River KS5L
+          </label>
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>ASIC Variant:</b> 12TH
+          </label>
+        </div>
+
+        <div class="flex-auto">
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>LAN IP:</b> 192.168.1.1
+          </label>
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>WAN IP:</b> 192.168.1.1
+          </label>
+        </div>
+
+        <div class="flex-auto">
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>Firmware version:</b> BOOT_3_1_image_1.0
+          </label>
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>Software version:</b> ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg
+          </label>
+        </div>
+
+        <div class="flex-auto">
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>Uptime:</b> 07:23:50:20
+          </label>
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>Power:</b> 3500W
+          </label>
+        </div>
+
+
+
+        <div class="flex-auto">
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>Coin:</b> Kaspa
+          </label>
+          <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <b>Mining Rig Code:</b> asic_code_1
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<.list>
+  <:item title="Name"><%= @mining_rig.name %></:item>
+  <:item title="Code"><%= @mining_rig.code %></:item>
+  <:item title="Cpu 1 name"><%= @mining_rig.cpu_1_name %></:item>
+  <:item title="Cpu 2 name"><%= @mining_rig.cpu_2_name %></:item>
+  <:item title="Ram 1 size"><%= @mining_rig.ram_1_size %></:item>
+  <:item title="Ram 2 size"><%= @mining_rig.ram_2_size %></:item>
+  <:item title="Ram 3 size"><%= @mining_rig.ram_3_size %></:item>
+  <:item title="Ram 4 size"><%= @mining_rig.ram_4_size %></:item>
+  <:item title="Ram 1 type"><%= @mining_rig.ram_1_type %></:item>
+  <:item title="Ram 2 type"><%= @mining_rig.ram_2_type %></:item>
+  <:item title="Ram 3 type"><%= @mining_rig.ram_3_type %></:item>
+  <:item title="Ram 4 type"><%= @mining_rig.ram_4_type %></:item>
+  <:item title="Ram 1 manufacture"><%= @mining_rig.ram_1_manufacture %></:item>
+  <:item title="Ram 2 manufacture"><%= @mining_rig.ram_2_manufacture %></:item>
+  <:item title="Ram 3 manufacture"><%= @mining_rig.ram_3_manufacture %></:item>
+  <:item title="Ram 4 manufacture"><%= @mining_rig.ram_4_manufacture %></:item>
+  <:item title="Ram 1 part number"><%= @mining_rig.ram_1_part_number %></:item>
+  <:item title="Ram 2 part number"><%= @mining_rig.ram_2_part_number %></:item>
+  <:item title="Ram 3 part number"><%= @mining_rig.ram_3_part_number %></:item>
+  <:item title="Ram 4 part number"><%= @mining_rig.ram_4_part_number %></:item>
+  <:item title="Vga 1 name"><%= @mining_rig.vga_1_name %></:item>
+  <:item title="Vga 2 name"><%= @mining_rig.vga_2_name %></:item>
+  <:item title="Vga 3 name"><%= @mining_rig.vga_3_name %></:item>
+  <:item title="Vga 4 name"><%= @mining_rig.vga_4_name %></:item>
+  <:item title="Vga 1 driver version"><%= @mining_rig.vga_1_driver_version %></:item>
+  <:item title="Vga 2 driver version"><%= @mining_rig.vga_2_driver_version %></:item>
+  <:item title="Vga 3 driver version"><%= @mining_rig.vga_3_driver_version %></:item>
+  <:item title="Vga 4 driver version"><%= @mining_rig.vga_4_driver_version %></:item>
+  <:item title="Vga 1 vbios version"><%= @mining_rig.vga_1_vbios_version %></:item>
+  <:item title="Vga 2 vbios version"><%= @mining_rig.vga_2_vbios_version %></:item>
+  <:item title="Vga 3 vbios version"><%= @mining_rig.vga_3_vbios_version %></:item>
+  <:item title="Vga 4 vbios version"><%= @mining_rig.vga_4_vbios_version %></:item>
+  <:item title="Vga 1 total memory"><%= @mining_rig.vga_1_total_memory %></:item>
+  <:item title="Vga 2 total memory"><%= @mining_rig.vga_2_total_memory %></:item>
+  <:item title="Vga 3 total memory"><%= @mining_rig.vga_3_total_memory %></:item>
+  <:item title="Vga 4 total memory"><%= @mining_rig.vga_4_total_memory %></:item>
+  <:item title="Vga 1 pci bus"><%= @mining_rig.vga_1_pci_bus_id %></:item>
+  <:item title="Vga 2 pci bus"><%= @mining_rig.vga_2_pci_bus_id %></:item>
+  <:item title="Vga 3 pci bus"><%= @mining_rig.vga_3_pci_bus_id %></:item>
+  <:item title="Vga 4 pci bus"><%= @mining_rig.vga_4_pci_bus_id %></:item>
+</.list>
+
+<.back navigate={~p"/mining_rigs"}>Back to mining_rigs</.back>
+
+<.modal :if={@live_action == :edit} id="mining_rig-modal" show on_cancel={JS.patch(~p"/mining_rigs/#{@mining_rig}")}>
+  <.live_component
+    module={MiningRigMonitorWeb.MiningRigLive.FormComponent}
+    id={@mining_rig.id}
+    title={@page_title}
+    action={@live_action}
+    mining_rig={@mining_rig}
+    patch={~p"/mining_rigs/#{@mining_rig}"}
+  />
+</.modal>

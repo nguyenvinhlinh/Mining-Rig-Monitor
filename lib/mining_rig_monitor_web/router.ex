@@ -28,6 +28,8 @@ defmodule MiningRigMonitorWeb.Router do
 
     live "/mining_rigs/:id", MiningRigLive.Show, :show
     live "/mining_rigs/:id/show/edit", MiningRigLive.Show, :edit
+
+    live "/mining_rigs/asic/:id", MiningRigLive.ShowAsic, :show
   end
 
   scope "/api/v1" do
