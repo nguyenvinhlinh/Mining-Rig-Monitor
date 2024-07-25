@@ -122,16 +122,16 @@
               Hashboard 1
             </td>
             <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_1_hashrate_5_min %>
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_1_hashrate_5_min) %> <%= @latest_asic_monitor_record.hashrate_uom %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_1_hashrate_30_min %>
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_1_hashrate_30_min) %> <%= @latest_asic_monitor_record.hashrate_uom %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_1_temp_1 %> &#8451;
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_1_temp_1) %> &#8451;
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_1_temp_2 %> &#8451;
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_1_temp_2) %> &#8451;
             </td>
           </tr>
           <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
@@ -139,16 +139,16 @@
               Hashboard 2
             </td>
             <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_2_hashrate_5_min %>
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_2_hashrate_5_min) %> <%= @latest_asic_monitor_record.hashrate_uom %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_2_hashrate_30_min %>
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_2_hashrate_30_min) %> <%= @latest_asic_monitor_record.hashrate_uom %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_2_temp_1 %> &#8451;
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_2_temp_1) %> &#8451;
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_2_temp_2 %> &#8451;
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_2_temp_2) %> &#8451;
             </td>
           </tr>
           <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
@@ -156,16 +156,16 @@
               Hashboard 3
             </td>
             <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_3_hashrate_5_min %>
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_3_hashrate_5_min) %> <%= @latest_asic_monitor_record.hashrate_uom %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_3_hashrate_30_min %>
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_3_hashrate_30_min) %> <%= @latest_asic_monitor_record.hashrate_uom %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_3_temp_1 %> &#8451;
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_3_temp_1) %> &#8451;
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              <%= @latest_asic_monitor_record.hashboard_3_temp_2 %> &#8451;
+              <%= Kernel.round(@latest_asic_monitor_record.hashboard_3_temp_2) %> &#8451;
             </td>
           </tr>
         </tbody>
