@@ -27,67 +27,317 @@
     </h1>
   </div>
 </div>
-  <!-- Right Content -->
-<div class="px-4 col-span-full xl:col-auto">
-  <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    <h3 class="mb-4 text-xl font-semibold dark:text-white">General Information</h3>
 
-    <div class="grid grid-cols-8 gap-2">
-      <div class="col-span-8 sm:col-span-1">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>ASIC Model:</b> <%= @mining_rig.asic_model %>
-        </label>
-      </div>
+<!-- Right Content -->
+<div class="mx-4 p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">General Information</h3>
 
-      <div class="col-span-8 sm:col-span-1">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>ASIC Variant:</b> <%= @mining_rig.asic_model_variant %>
-        </label>
-      </div>
+  <div class="grid grid-cols-8 gap-2">
+    <div class="col-span-8 sm:col-span-1">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>ASIC Model:</b> <%= @mining_rig.asic_model %>
+      </label>
+    </div>
 
-      <div class="col-span-8 sm:col-span-2">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>Firmware version:</b> <%= @mining_rig.asic_firmware_version %>
-        </label>
-      </div>
-      <div class="col-span-8 sm:col-span-4">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>Software version:</b> <%= @mining_rig.asic_software_version %>
-        </label>
-      </div>
-      <div class="col-span-8 sm:col-span-1">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>LAN IP:</b> 192.168.1.1
-        </label>
-      </div>
-      <div class="col-span-8 sm:col-span-1">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>WAN IP:</b> 192.168.1.1
-        </label>
-      </div>
-      <div class="col-span-8 sm:col-span-1">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>Uptime:</b> 07:23:50:20
-        </label>
-      </div>
-      <div class="col-span-8 sm:col-span-1">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>Power:</b> 3500W
-        </label>
-      </div>
-      <div class="col-span-8 sm:col-span-1">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>Coin:</b> Kaspa
-        </label>
-      </div>
-      <div class="col-span-8 sm:col-span-2">
-        <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-          <b>Mining Rig Code:</b> <%= @mining_rig.code  %>
-        </label>
-      </div>
+    <div class="col-span-8 sm:col-span-1">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>ASIC Variant:</b> <%= @mining_rig.asic_model_variant %>
+      </label>
+    </div>
+
+    <div class="col-span-8 sm:col-span-2">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>Firmware version:</b> <%= @mining_rig.asic_firmware_version %>
+      </label>
+    </div>
+    <div class="col-span-8 sm:col-span-4">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>Software version:</b> <%= @mining_rig.asic_software_version %>
+      </label>
+    </div>
+    <div class="col-span-8 sm:col-span-1">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>LAN IP:</b> 192.168.1.1
+      </label>
+    </div>
+    <div class="col-span-8 sm:col-span-1">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>WAN IP:</b> 192.168.1.1
+      </label>
+    </div>
+    <div class="col-span-8 sm:col-span-1">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>Uptime:</b> 07:23:50:20
+      </label>
+    </div>
+    <div class="col-span-8 sm:col-span-1">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>Power:</b> 3500W
+      </label>
+    </div>
+    <div class="col-span-8 sm:col-span-1">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>Coin:</b> Kaspa
+      </label>
+    </div>
+    <div class="col-span-8 sm:col-span-2">
+      <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
+        <b>Mining Rig Code:</b> <%= @mining_rig.code  %>
+      </label>
     </div>
   </div>
 </div>
+
+<div class="grid grid-cols-8 gap-2">
+  <div class="col-span-8 xl:col-span-5
+              mx-4 xl:ml-4 xl:mr-0
+              p-4 mb-4
+              bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-semibold dark:text-white">Hashrate</h3>
+
+    <div class="overflow-hidden shadow" data-phx-id="m3-phx-F-TiqZAWuqBtjyuE">
+      <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+        <thead class="bg-gray-100 dark:bg-gray-700">
+          <tr>
+            <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+              Hashboard No.
+            </th>
+            <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+              5-minute hashrate
+            </th>
+            <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+              30-minute hashrate
+            </th>
+            <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+              Temp. Sensor 1
+            </th>
+            <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+              Temp.  Sensor 2
+            </th>
+
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              Hashboard 1
+            </td>
+            <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              1234 GH/s
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              1234 GH/s
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              50 &#8451;
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              60 &#8451;
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              Hashboard 1
+            </td>
+            <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              1234 GH/s
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              1234 GH/s
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              50 &#8451;
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              60 &#8451;
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              Hashboard 1
+            </td>
+            <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              1234 GH/s
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              1234 GH/s
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              50 &#8451;
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              60 &#8451;
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              Hashboard 1
+            </td>
+            <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              1234 GH/s
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              1234 GH/s
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              50 &#8451;
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              60 &#8451;
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-span-8 xl:col-span-3
+              mx-4 xl:ml-2 p-4 mb-4
+              bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-semibold dark:text-white">Fan Speed</h3>
+    <div class="overflow-hidden shadow" data-phx-id="m3-phx-F-TiqZAWuqBtjyuE">
+      <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+        <thead class="bg-gray-100 dark:bg-gray-700">
+          <tr>
+            <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+              Fan No.
+            </th>
+            <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+              Speed (RPM)
+            </th>
+
+
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700" id="mining_rigs" phx-update="stream">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              Fan 1
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              3500 RPM
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              Fan 2
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              3500 RPM
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              Fan 3
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              3500 RPM
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              Fan 4
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              3500 RPM
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="mx-4
+            p-4 mb-4
+            bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">Mining Pool</h3>
+  <div class="overflow-hidden shadow">
+    <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+      <thead class="bg-gray-100 dark:bg-gray-700">
+        <tr>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Pool Address
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            User
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            State
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Accecpted Shares
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Rejected Shares
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            stratum+tcp://asia1.kaspa-pool.org:4441
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            Connected
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            95999
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            0
+          </td>
+        </tr>
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            stratum+tcp://asia1.kaspa-pool.org:4441
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            Unconnected
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            95999
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            0
+          </td>
+        </tr>
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            stratum+tcp://asia1.kaspa-pool.org:4441
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            Unconnected
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            95999
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            0
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
 
 
 <.list>
