@@ -2,6 +2,7 @@ defmodule MiningRigMonitorWeb.MiningRigLive.ShowAsic do
   use MiningRigMonitorWeb, :live_view
 
   alias MiningRigMonitor.MiningRigs
+  alias MiningRigMonitor.AsicRigMonitorRecords
 
   @impl true
   def mount(_params, _session, socket) do
@@ -10,12 +11,13 @@ defmodule MiningRigMonitorWeb.MiningRigLive.ShowAsic do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:mining_rig, MiningRigs.get_mining_rig!(id))}
-  end
+    mining_rig = MiningRigs.get_mining_rig!(id)
+    latest_asic_monitor_record = AsicRigMonitorRecords.get_latest_asic_monitor_record(id)
 
-  defp page_title(:show), do: "Show Mining rig"
-  defp page_title(:edit), do: "Edit Mining rig"
+    new_socket = socket
+    |> assign(:mining_rig, mining_rig)
+    |> assign(:latest_asic_monitor_record, latest_asic_monitor_record)
+
+    {:noreply, new_socket}
+  end
 end

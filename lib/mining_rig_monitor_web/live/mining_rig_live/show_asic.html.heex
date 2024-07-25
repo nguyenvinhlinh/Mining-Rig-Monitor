@@ -11,7 +11,7 @@
         <li>
           <div class="flex items-center">
             <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-            <a href="#" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Mining Rigs</a>
+            <a href={~p(/mining_rigs)} class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Mining Rigs</a>
           </div>
         </li>
         <li>
@@ -56,27 +56,27 @@
     </div>
     <div class="col-span-4 2xl:col-span-1">
       <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-        <b>LAN IP:</b> 192.168.1.1
+        <b>LAN IP:</b> <%= @latest_asic_monitor_record.lan_ip %>
       </label>
     </div>
     <div class="col-span-4 2xl:col-span-1">
       <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-        <b>WAN IP:</b> 192.168.1.1
+        <b>WAN IP:</b> <%= @latest_asic_monitor_record.wan_ip %>
       </label>
     </div>
     <div class="col-span-4 2xl:col-span-2">
       <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-        <b>Uptime:</b> 07:23:50:20
+        <b>Uptime:</b> <%= @latest_asic_monitor_record.uptime %>
       </label>
     </div>
     <div class="col-span-4 2xl:col-span-1">
       <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-        <b>Power:</b> 3500W
+        <b>Power:</b> <%=   Kernel.round(@latest_asic_monitor_record.power) %> Walt
       </label>
     </div>
     <div class="col-span-4 2xl:col-span-1">
       <label for="first-name" class="block  text-sm font-medium text-gray-900 dark:text-white">
-        <b>Coin:</b> Kaspa
+        <b>Coin:</b> <%= @latest_asic_monitor_record.coin_name %>
       </label>
     </div>
     <div class="col-span-4 2xl:col-span-2">
@@ -122,70 +122,52 @@
               Hashboard 1
             </td>
             <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              1234 GH/s
+              <%= @latest_asic_monitor_record.hashboard_1_hashrate_5_min %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              1234 GH/s
+              <%= @latest_asic_monitor_record.hashboard_1_hashrate_30_min %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              50 &#8451;
+              <%= @latest_asic_monitor_record.hashboard_1_temp_1 %> &#8451;
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              60 &#8451;
+              <%= @latest_asic_monitor_record.hashboard_1_temp_2 %> &#8451;
             </td>
           </tr>
           <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              Hashboard 1
+              Hashboard 2
             </td>
             <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              1234 GH/s
+              <%= @latest_asic_monitor_record.hashboard_2_hashrate_5_min %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              1234 GH/s
+              <%= @latest_asic_monitor_record.hashboard_2_hashrate_30_min %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              50 &#8451;
+              <%= @latest_asic_monitor_record.hashboard_2_temp_1 %> &#8451;
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              60 &#8451;
+              <%= @latest_asic_monitor_record.hashboard_2_temp_2 %> &#8451;
             </td>
           </tr>
           <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              Hashboard 1
+              Hashboard 3
             </td>
             <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              1234 GH/s
+              <%= @latest_asic_monitor_record.hashboard_3_hashrate_5_min %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              1234 GH/s
+              <%= @latest_asic_monitor_record.hashboard_3_hashrate_30_min %>
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              50 &#8451;
+              <%= @latest_asic_monitor_record.hashboard_3_temp_1 %> &#8451;
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              60 &#8451;
+              <%= @latest_asic_monitor_record.hashboard_3_temp_2 %> &#8451;
             </td>
           </tr>
-          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
-            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              Hashboard 1
-            </td>
-            <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              1234 GH/s
-            </td>
-            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              1234 GH/s
-            </td>
-            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              50 &#8451;
-            </td>
-            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              60 &#8451;
-            </td>
-          </tr>
-
         </tbody>
       </table>
     </div>
@@ -215,7 +197,7 @@
               Fan 1
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              3500 RPM
+              <%= @latest_asic_monitor_record.fan_1_speed %> RPM
             </td>
           </tr>
           <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
@@ -223,7 +205,7 @@
               Fan 2
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              3500 RPM
+              <%= @latest_asic_monitor_record.fan_2_speed %> RPM
             </td>
           </tr>
           <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
@@ -231,7 +213,7 @@
               Fan 3
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              3500 RPM
+              <%= @latest_asic_monitor_record.fan_3_speed %> RPM
             </td>
           </tr>
           <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
@@ -239,7 +221,7 @@
               Fan 4
             </td>
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-              3500 RPM
+              <%= @latest_asic_monitor_record.fan_4_speed %> RPM
             </td>
           </tr>
 
@@ -276,121 +258,58 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" >
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            stratum+tcp://asia1.kaspa-pool.org:4441
+            <%= @latest_asic_monitor_record.pool_1_address %>
           </td>
           <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
+            <%= @latest_asic_monitor_record.pool_1_user %>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            Connected
+            <%= @latest_asic_monitor_record.pool_1_state %>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            95999
+            <%= @latest_asic_monitor_record.pool_1_accepted_share %>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            0
+            <%= @latest_asic_monitor_record.pool_1_rejected_share %>
           </td>
         </tr>
-        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" >
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            stratum+tcp://asia1.kaspa-pool.org:4441
+            <%= @latest_asic_monitor_record.pool_2_address %>
           </td>
           <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
+            <%= @latest_asic_monitor_record.pool_2_user %>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            Unconnected
+            <%= @latest_asic_monitor_record.pool_2_state %>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            95999
+            <%= @latest_asic_monitor_record.pool_2_accepted_share %>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            0
+            <%= @latest_asic_monitor_record.pool_2_rejected_share %>
           </td>
         </tr>
-        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            stratum+tcp://asia1.kaspa-pool.org:4441
+            <%= @latest_asic_monitor_record.pool_3_address %>
           </td>
           <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
+            <%= @latest_asic_monitor_record.pool_3_user %>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            Unconnected
+            <%= @latest_asic_monitor_record.pool_3_state %>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            95999
+            <%= @latest_asic_monitor_record.pool_3_accepted_share %>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            0
+            <%= @latest_asic_monitor_record.pool_3_rejected_share %>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-
-
-
-
-
-
-
-
-<.list>
-  <:item title="Name"><%= @mining_rig.name %></:item>
-  <:item title="Code"><%= @mining_rig.code %></:item>
-  <:item title="Cpu 1 name"><%= @mining_rig.cpu_1_name %></:item>
-  <:item title="Cpu 2 name"><%= @mining_rig.cpu_2_name %></:item>
-  <:item title="Ram 1 size"><%= @mining_rig.ram_1_size %></:item>
-  <:item title="Ram 2 size"><%= @mining_rig.ram_2_size %></:item>
-  <:item title="Ram 3 size"><%= @mining_rig.ram_3_size %></:item>
-  <:item title="Ram 4 size"><%= @mining_rig.ram_4_size %></:item>
-  <:item title="Ram 1 type"><%= @mining_rig.ram_1_type %></:item>
-  <:item title="Ram 2 type"><%= @mining_rig.ram_2_type %></:item>
-  <:item title="Ram 3 type"><%= @mining_rig.ram_3_type %></:item>
-  <:item title="Ram 4 type"><%= @mining_rig.ram_4_type %></:item>
-  <:item title="Ram 1 manufacture"><%= @mining_rig.ram_1_manufacture %></:item>
-  <:item title="Ram 2 manufacture"><%= @mining_rig.ram_2_manufacture %></:item>
-  <:item title="Ram 3 manufacture"><%= @mining_rig.ram_3_manufacture %></:item>
-  <:item title="Ram 4 manufacture"><%= @mining_rig.ram_4_manufacture %></:item>
-  <:item title="Ram 1 part number"><%= @mining_rig.ram_1_part_number %></:item>
-  <:item title="Ram 2 part number"><%= @mining_rig.ram_2_part_number %></:item>
-  <:item title="Ram 3 part number"><%= @mining_rig.ram_3_part_number %></:item>
-  <:item title="Ram 4 part number"><%= @mining_rig.ram_4_part_number %></:item>
-  <:item title="Vga 1 name"><%= @mining_rig.vga_1_name %></:item>
-  <:item title="Vga 2 name"><%= @mining_rig.vga_2_name %></:item>
-  <:item title="Vga 3 name"><%= @mining_rig.vga_3_name %></:item>
-  <:item title="Vga 4 name"><%= @mining_rig.vga_4_name %></:item>
-  <:item title="Vga 1 driver version"><%= @mining_rig.vga_1_driver_version %></:item>
-  <:item title="Vga 2 driver version"><%= @mining_rig.vga_2_driver_version %></:item>
-  <:item title="Vga 3 driver version"><%= @mining_rig.vga_3_driver_version %></:item>
-  <:item title="Vga 4 driver version"><%= @mining_rig.vga_4_driver_version %></:item>
-  <:item title="Vga 1 vbios version"><%= @mining_rig.vga_1_vbios_version %></:item>
-  <:item title="Vga 2 vbios version"><%= @mining_rig.vga_2_vbios_version %></:item>
-  <:item title="Vga 3 vbios version"><%= @mining_rig.vga_3_vbios_version %></:item>
-  <:item title="Vga 4 vbios version"><%= @mining_rig.vga_4_vbios_version %></:item>
-  <:item title="Vga 1 total memory"><%= @mining_rig.vga_1_total_memory %></:item>
-  <:item title="Vga 2 total memory"><%= @mining_rig.vga_2_total_memory %></:item>
-  <:item title="Vga 3 total memory"><%= @mining_rig.vga_3_total_memory %></:item>
-  <:item title="Vga 4 total memory"><%= @mining_rig.vga_4_total_memory %></:item>
-  <:item title="Vga 1 pci bus"><%= @mining_rig.vga_1_pci_bus_id %></:item>
-  <:item title="Vga 2 pci bus"><%= @mining_rig.vga_2_pci_bus_id %></:item>
-  <:item title="Vga 3 pci bus"><%= @mining_rig.vga_3_pci_bus_id %></:item>
-  <:item title="Vga 4 pci bus"><%= @mining_rig.vga_4_pci_bus_id %></:item>
-</.list>
-
-<.back navigate={~p"/mining_rigs"}>Back to mining_rigs</.back>
-
-<.modal :if={@live_action == :edit} id="mining_rig-modal" show on_cancel={JS.patch(~p"/mining_rigs/#{@mining_rig}")}>
-  <.live_component
-    module={MiningRigMonitorWeb.MiningRigLive.FormComponent}
-    id={@mining_rig.id}
-    title={@page_title}
-    action={@live_action}
-    mining_rig={@mining_rig}
-    patch={~p"/mining_rigs/#{@mining_rig}"}
-  />
-</.modal>
