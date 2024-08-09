@@ -46,7 +46,6 @@
       <.flowbite_table
         id="mining_rigs"
         rows={@streams.new_mining_rig_list}
-        row_click={fn {_id, mining_rig} -> JS.navigate(~p"/mining_rigs/#{mining_rig}") end}
       >
         <:col :let={{_id, mining_rig}} label="MINING RIG NAME"><%= mining_rig.name %></:col>
         <:col :let={{_id, mining_rig}} label="Code"><%= mining_rig.code %></:col>
