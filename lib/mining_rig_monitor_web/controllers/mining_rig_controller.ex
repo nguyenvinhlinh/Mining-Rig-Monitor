@@ -12,7 +12,10 @@ defmodule MiningRigMonitorWeb.MiningRigController do
     mining_rig = conn.assigns.mining_rig
 
     case MiningRigs.update_asic_mining_rig(mining_rig, new_params) do
-      {:ok, _record} -> json(conn, :ok)
+      {:ok, mining_rig} ->
+        topic_name = "mining_rig:#{mining_rig.id}"
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, topic_name, {:mining_rig_updated, mining_rig})
+        json(conn, :ok)
       {:error, changeset} -> {:error, changeset}
     end
   end

@@ -10,8 +10,10 @@ defmodule MiningRigMonitorWeb.MiningRigLive.ShowAsic do
     latest_asic_monitor_record = AsicRigMonitorRecords.get_latest_asic_monitor_record(mining_rig_id)
 
     if connected?(socket) do
-      topic_name = "asic_rig_monitor_record:#{mining_rig.id}"
-      Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, topic_name)
+      asic_rig_monitor_record_topic = "asic_rig_monitor_record:#{mining_rig.id}"
+      mining_rig_topic = "mining_rig:#{mining_rig.id}"
+      Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, asic_rig_monitor_record_topic)
+      Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, mining_rig_topic)
     end
 
     new_socket = socket
@@ -21,8 +23,11 @@ defmodule MiningRigMonitorWeb.MiningRigLive.ShowAsic do
     {:ok, new_socket}
   end
 
-  def handle_info({:mining_rig_updated, _mining_rig}, socket) do
-    {:noreply, socket}
+  def handle_info({:mining_rig_updated, mining_rig}, socket) do
+    new_socket =
+      socket
+      |> assign(:mining_rig, mining_rig)
+    {:noreply, new_socket}
   end
 
   @impl true

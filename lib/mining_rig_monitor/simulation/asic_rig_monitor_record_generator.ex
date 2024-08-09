@@ -47,9 +47,9 @@ defmodule MiningRigMonitor.Simulation.AsicRigMonitorRecordGenerator do
     hashboard_1_temp_1 = 60 * (1 + Enum.random(1..10) / 100)
     hashboard_1_temp_2 = hashboard_1_temp_1 + 3
     hashboard_2_temp_1 = 60 * (1 + Enum.random(1..10) / 100)
-    hashboard_2_temp_2 = hashboard_1_temp_1 + 3
+    hashboard_2_temp_2 = hashboard_2_temp_1 + 3
     hashboard_3_temp_1 = 60 * (1 + Enum.random(1..10) / 100)
-    hashboard_3_temp_2 = hashboard_1_temp_1 + 3
+    hashboard_3_temp_2 = hashboard_3_temp_1 + 3
     fan_1_speed = 5500 * (1 + Enum.random(1..10) / 100) |> Kernel.round()
     fan_2_speed = 5500 * (1 + Enum.random(1..10) / 100) |> Kernel.round()
     fan_3_speed = 5500 * (1 + Enum.random(1..10) / 100) |> Kernel.round()
