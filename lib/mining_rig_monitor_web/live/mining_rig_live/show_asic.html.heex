@@ -94,7 +94,7 @@
               bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
     <h3 class="mb-4 text-xl font-semibold dark:text-white">Hashrate</h3>
 
-    <div class="overflow-hidden shadow" data-phx-id="m3-phx-F-TiqZAWuqBtjyuE">
+    <div class="overflow-hidden shadow">
       <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
         <thead class="bg-gray-100 dark:bg-gray-700">
           <tr>
@@ -117,7 +117,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
               Hashboard 1
             </td>
@@ -134,7 +134,7 @@
               <%= Kernel.round(@latest_asic_monitor_record.hashboard_1_temp_2) %> &#8451;
             </td>
           </tr>
-          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
               Hashboard 2
             </td>
@@ -151,7 +151,7 @@
               <%= Kernel.round(@latest_asic_monitor_record.hashboard_2_temp_2) %> &#8451;
             </td>
           </tr>
-          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
               Hashboard 3
             </td>
@@ -169,7 +169,7 @@
             </td>
           </tr>
 
-          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
               <b>Total</b>
             </td>
@@ -209,12 +209,10 @@
             <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
               Speed (RPM)
             </th>
-
-
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700" id="mining_rigs" phx-update="stream">
-          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
               Fan 1
             </td>
@@ -222,7 +220,7 @@
               <%= @latest_asic_monitor_record.fan_1_speed %> RPM
             </td>
           </tr>
-          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
               Fan 2
             </td>
@@ -230,7 +228,7 @@
               <%= @latest_asic_monitor_record.fan_2_speed %> RPM
             </td>
           </tr>
-          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
               Fan 3
             </td>
@@ -238,7 +236,7 @@
               <%= @latest_asic_monitor_record.fan_3_speed %> RPM
             </td>
           </tr>
-          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
               Fan 4
             </td>
