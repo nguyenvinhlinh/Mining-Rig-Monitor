@@ -2,6 +2,8 @@ defmodule MiningRigMonitor.MiningRigs.MiningRig do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias MiningRigMonitor.AsicRigMonitorRecords.AsicRigMonitorRecord
+
   schema "mining_rigs" do
     field :name, :string
     field :code, :string
@@ -53,6 +55,8 @@ defmodule MiningRigMonitor.MiningRigs.MiningRig do
     field :asic_firmware_version, :string
     field :asic_software_version, :string
 
+    has_many :asic_rig_monitor_records, AsicRigMonitorRecord, [on_delete: :delete_all]
+
     timestamps(type: :utc_datetime)
   end
 
@@ -70,10 +74,8 @@ defmodule MiningRigMonitor.MiningRigs.MiningRig do
 
   def changeset_asic(mining_rig, attrs) do
     new_attrs = Map.put(attrs, "type", type_asic())
-
     mining_rig
     |> cast(new_attrs, [:type, :asic_model, :asic_model_variant, :asic_firmware_version, :asic_software_version])
     |> validate_required([:type])
   end
-
 end
