@@ -168,6 +168,28 @@
               <%= Kernel.round(@latest_asic_monitor_record.hashboard_3_temp_2) %> &#8451;
             </td>
           </tr>
+
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-phx-stream="0">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              <b>Total</b>
+            </td>
+            <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              <b>
+                <%= Kernel.round(@latest_asic_monitor_record.hashrate_5_min) %> <%= @latest_asic_monitor_record.hashrate_uom %>
+              </b>
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+              <b>
+                <%= Kernel.round(@latest_asic_monitor_record.hashrate_30_min) %> <%= @latest_asic_monitor_record.hashrate_uom %>
+              </b>
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
