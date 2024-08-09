@@ -8,18 +8,23 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
   def mount(_params, _session, socket) do
     query_new_mining_rig_list = MiningRigs.query_filter_by_type(MiningRig, MiningRig.type_nil())
     new_mining_rig_list = MiningRigs.list_mining_rigs_by_query(query_new_mining_rig_list)
+    show_new_mining_rig_list? = if Kernel.length(new_mining_rig_list) > 0, do: true, else: false
 
     query_cpu_gpu_mining_rig_list = MiningRigs.query_filter_by_type(MiningRig, MiningRig.type_cpu_gpu())
     cpu_gpu_mining_rig_list = MiningRigs.list_mining_rigs_by_query(query_cpu_gpu_mining_rig_list)
+    show_cpu_gpu_mining_rig_list? = if Kernel.length(cpu_gpu_mining_rig_list) > 0, do: true, else: false
 
     query_cpu_gpu_mining_rig_list = MiningRigs.query_filter_by_type(MiningRig, MiningRig.type_asic())
     asic_mining_rig_list = MiningRigs.list_mining_rigs_by_query(query_cpu_gpu_mining_rig_list)
+    show_asic_mining_rig_list? = if Kernel.length(asic_mining_rig_list) > 0, do: true, else: false
 
     new_socket = socket
-    |>  stream(:new_mining_rig_list, new_mining_rig_list)
-    |>  stream(:cpu_gpu_mining_rig_list, cpu_gpu_mining_rig_list)
-    |>  stream(:asic_mining_rig_list,asic_mining_rig_list)
-
+    |> stream(:new_mining_rig_list, new_mining_rig_list)
+    |> assign(:show_new_mining_rig_list?, show_new_mining_rig_list?)
+    |> stream(:cpu_gpu_mining_rig_list, cpu_gpu_mining_rig_list)
+    |> assign(:show_cpu_gpu_mining_rig_list?, show_cpu_gpu_mining_rig_list?)
+    |> stream(:asic_mining_rig_list,asic_mining_rig_list)
+    |> assign(:show_asic_mining_rig_list?, show_asic_mining_rig_list?)
     {:ok, new_socket}
   end
 
