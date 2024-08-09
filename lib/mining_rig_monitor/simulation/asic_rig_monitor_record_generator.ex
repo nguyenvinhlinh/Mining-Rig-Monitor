@@ -5,7 +5,7 @@ defmodule MiningRigMonitor.Simulation.AsicRigMonitorRecordGenerator do
 
   @asic_rig_code_list ["asic_1_code", "asic_2_code", "asic_3_code"]
   @post_url "http://127.0.0.1:4000/api/v1/asic_rig_monitor_records"
-  @post_inverval_second 10
+  @post_inverval_second 1
 
   # Client
 
@@ -61,12 +61,12 @@ defmodule MiningRigMonitor.Simulation.AsicRigMonitorRecordGenerator do
       "hashrate_uom" => "GH/s",
       "pool_rejection_rate" => 0.0001,
       "uptime" => "07:23:50:20",
-      "pool_1_address" => "stratum+tcp://asia1.kaspa-pool.org:4441",
-      "pool_2_address" => "stratum+tcp://asia1.kaspa-pool.org:4441",
-      "pool_3_address" => "stratum+tcp://asia1.kaspa-pool.org:4441",
-      "pool_1_user" => "kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1",
-      "pool_2_user" => "kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1",
-      "pool_3_user" => "kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1",
+      "pool_1_address" => "stratum+tcp://#{UUID.uuid1()}:4441",
+      "pool_2_address" => "stratum+tcp://#{UUID.uuid1()}:4441",
+      "pool_3_address" => "stratum+tcp://#{UUID.uuid1()}:4441",
+      "pool_1_user" => "kaspa:#{UUID.uuid1()}.worker_1",
+      "pool_2_user" => "kaspa:#{UUID.uuid1()}.worker_1",
+      "pool_3_user" => "kaspa:#{UUID.uuid1()}.worker_1",
       "pool_1_state" => "Connected",
       "pool_2_state" => "Unconnected",
       "pool_3_state" => "Unconnected",
