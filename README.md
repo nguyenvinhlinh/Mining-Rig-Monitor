@@ -16,6 +16,12 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+# Database Diagram
+Please check `/diagrams/db.dia`
+
+![2024-08-09 Database Diagram](diagrams/dist/db.png)
+
 # Q&A
 1. How to get info from nvidia-smi
 ```bash
@@ -51,4 +57,21 @@ Memory Device
 	Configured Voltage: Unknown
 ```
 
+3. How to get Ice River Operational Data?
+Check out this [Kaspa Asic - KS5L - API sample to get operational stage](https://hexalink.xyz/mining-rig/2024/07/15/Kaspa-Asic-KS5L-API-sample-to-get-operational-stage.html)
 
+``` sh
+$ curl 'http://192.168.1.XXX/user/userpanel' \
+  -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+  -H 'Accept-Language: en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'Cookie: language=en; ctime=1' \
+  -H 'DNT: 1' \
+  -H 'Origin: http://192.168.1.XXX' \
+  -H 'Referer: http://192.168.1.XXX/' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
+  -H 'X-Requested-With: XMLHttpRequest' \
+  --data-raw 'post=4' \
+  --insecure
+```
