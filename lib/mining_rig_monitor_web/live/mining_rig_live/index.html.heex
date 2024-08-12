@@ -30,20 +30,14 @@
 </div>
 
 <div class={ if @show_new_mining_rig_list?, do: "block", else: "hidden"}>
-  <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
-    <div class="w-full mb-1">
-      <div class="mb-4">
-        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">New mining rigs which need to setup</h1>
-      </div>
-    </div>
-  </div>
+  <div class="mx-4 p-4 mb-4
+              bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-semibold dark:text-white">New mining rigs which need to setup</h3>
 
-  <div class="flex flex-col">
-    <div class="overflow-x-auto">
-
-      <div class="inline-block min-w-full align-middle">
-        <.flowbite_table
-          id="mining_rigs"
+    <div class="overflow-hidden shadow">
+      <.flowbite_table
+          id="mining_rigs_new"
+          phx-update="stream"
           rows={@streams.new_mining_rig_list}
         >
           <:col :let={{_id, mining_rig}} label="MINING RIG NAME"><%= mining_rig.name %></:col>
@@ -71,7 +65,6 @@
             </.link>
           </:action>
         </.flowbite_table>
-      </div>
     </div>
   </div>
 </div>
@@ -90,7 +83,8 @@
 
       <div class="inline-block min-w-full align-middle">
         <.flowbite_table
-          id="mining_rigs"
+          id="mining_rigs_cpu_gpu"
+          phx-update="stream"
           rows={@streams.cpu_gpu_mining_rig_list}
           row_click={fn {_id, mining_rig} -> JS.navigate(~p"/mining_rigs/#{mining_rig}") end}
         >
@@ -144,7 +138,8 @@
 
       <div class="inline-block min-w-full align-middle">
         <.flowbite_table
-          id="mining_rigs"
+          id="mining_rigs_asic"
+          phx-update="stream"
           rows={@streams.asic_mining_rig_list}
           row_click={fn {_id, mining_rig} -> JS.navigate(~p"/mining_rigs/asic/#{mining_rig}") end}
         >
