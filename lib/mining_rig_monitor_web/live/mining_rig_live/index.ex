@@ -61,13 +61,19 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
   def handle_info({MiningRigMonitorWeb.MiningRigLive.FormComponent, {:saved, mining_rig}}, socket) do
     case mining_rig.type do
       nil ->
-        new_socket = stream_insert(socket, :new_mining_rig_list, mining_rig)
+        new_socket = socket
+        |> stream_insert(:new_mining_rig_list, mining_rig)
+        |> assign(:show_new_mining_rig_list?, true)
         {:noreply, new_socket}
       "cpu_gpu" ->
-        new_socket = stream_insert(socket, :cpu_gpu_mining_rig_list, mining_rig)
+        new_socket = socket
+        |> stream_insert(socket, :cpu_gpu_mining_rig_list, mining_rig)
+        |> assign(:show_cpu_gpu_mining_rig_list?, true)
         {:noreply, new_socket}
       "asic" ->
-        new_socket = stream_insert(socket, :asic_mining_rig_list, mining_rig)
+        new_socket = socket
+        |> stream_insert(:asic_mining_rig_list, mining_rig)
+        |> assign(:show_asic_mining_rig_list?, true)
         {:noreply, new_socket}
     end
   end
