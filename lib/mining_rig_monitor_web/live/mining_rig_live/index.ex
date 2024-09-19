@@ -66,6 +66,14 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
   end
 
   @impl true
+  def handle_event("delete", %{"id" => id}, socket) do
+    mining_rig = MiningRigs.get_mining_rig!(id)
+    {:ok, _} = MiningRigs.delete_mining_rig(mining_rig)
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "mining_rig_index", {:mining_rig_index, :delete, mining_rig})
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_info({:mining_rig_index, :create_or_update, mining_rig}, socket) do
     case mining_rig.type do
       nil ->
@@ -93,13 +101,6 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    mining_rig = MiningRigs.get_mining_rig!(id)
-    {:ok, _} = MiningRigs.delete_mining_rig(mining_rig)
-    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "mining_rig_index", {:mining_rig_index, :delete, mining_rig})
-    {:noreply, socket}
-  end
-
   def handle_info({:mining_rig_index, :delete, mining_rig}, socket) do
     case mining_rig.type do
       nil ->
