@@ -71,8 +71,7 @@ defmodule MiningRigMonitorWeb.MiningRigLive.FormComponent do
   defp save_mining_rig(socket, :edit, mining_rig_params) do
     case MiningRigs.update_mining_rig(socket.assigns.mining_rig, mining_rig_params) do
       {:ok, mining_rig} ->
-        notify_parent({:saved, mining_rig})
-
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "mining_rig_index", {:mining_rig_index, :create_or_update, mining_rig})
         {:noreply,
          socket
          |> put_flash(:info, "Mining rig updated successfully")
@@ -89,8 +88,7 @@ defmodule MiningRigMonitorWeb.MiningRigLive.FormComponent do
 
     case MiningRigs.create_mining_rig(mod_mining_rig_params) do
       {:ok, mining_rig} ->
-        notify_parent({:saved, mining_rig})
-
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "mining_rig_index", {:mining_rig_index, :create_or_update, mining_rig})
         {:noreply,
          socket
          |> put_flash(:info, "Mining rig created successfully")
