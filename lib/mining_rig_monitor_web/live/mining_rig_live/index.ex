@@ -31,6 +31,8 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
     |> assign(:new_mining_rig_list_length, new_mining_rig_list_length)
     |> assign(:cpu_gpu_mining_rig_list_length, cpu_gpu_mining_rig_list_length)
     |> assign(:asic_mining_rig_list_length, asic_mining_rig_list_length)
+
+    Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "mining_rig_index")
     {:ok, new_socket}
   end
 
@@ -64,7 +66,15 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
   end
 
   @impl true
-  def handle_info({MiningRigMonitorWeb.MiningRigLive.FormComponent, {:saved, mining_rig}}, socket) do
+  def handle_event("delete", %{"id" => id}, socket) do
+    mining_rig = MiningRigs.get_mining_rig!(id)
+    {:ok, _} = MiningRigs.delete_mining_rig(mining_rig)
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "mining_rig_index", {:mining_rig_index, :delete, mining_rig})
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:mining_rig_index, :create_or_update, mining_rig}, socket) do
     case mining_rig.type do
       nil ->
         new_mining_rig_list_length = socket.assigns.new_mining_rig_list_length + 1
@@ -72,7 +82,6 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
         |> stream_insert(:new_mining_rig_list, mining_rig)
         |> assign(:new_mining_rig_list_length, new_mining_rig_list_length)
         |> assign(:show_new_mining_rig_list?, true)
-
         {:noreply, new_socket}
       "cpu_gpu" ->
         cpu_gpu_mining_rig_list_length = socket.assigns.cpu_gpu_mining_rig_list_length + 1
@@ -92,10 +101,7 @@ defmodule MiningRigMonitorWeb.MiningRigLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    mining_rig = MiningRigs.get_mining_rig!(id)
-    {:ok, _} = MiningRigs.delete_mining_rig(mining_rig)
-
+  def handle_info({:mining_rig_index, :delete, mining_rig}, socket) do
     case mining_rig.type do
       nil ->
         new_mining_rig_list_length = socket.assigns.new_mining_rig_list_length - 1
