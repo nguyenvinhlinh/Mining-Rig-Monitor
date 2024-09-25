@@ -8,13 +8,17 @@ defmodule MiningRigMonitor.Simulation.AsicRigMonitorRecordGenerator do
   @post_inverval_second 1
 
   # Client
-
   def start_link() do
     GenServer.start_link(__MODULE__, nil, name: __MODULE__)
   end
   def start_link(_params) do
     GenServer.start_link(__MODULE__, nil, name: __MODULE__)
   end
+
+  def stop() do
+    GenServer.stop(__MODULE__)
+  end
+
 
   # Server (callbacks)
   @impl true
