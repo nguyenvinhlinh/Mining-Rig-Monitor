@@ -3,15 +3,15 @@ defmodule MiningRigMonitorWeb.MiningRigLive.ShowAsic do
 
   alias MiningRigMonitor.MiningRigs
   alias MiningRigMonitor.AsicRigMonitorRecords
-
+  alias MiningRigMonitor.Channels
   @impl true
   def mount(%{"id" => mining_rig_id}, _session, socket) do
     mining_rig = MiningRigs.get_mining_rig!(mining_rig_id)
     latest_asic_monitor_record = AsicRigMonitorRecords.get_latest_asic_monitor_record(mining_rig_id)
 
     if connected?(socket) do
-      asic_rig_monitor_record_topic = "asic_rig_monitor_record:#{mining_rig.id}"
-      mining_rig_topic = "mining_rig:#{mining_rig.id}"
+      asic_rig_monitor_record_topic = "#{Channels.asic_rig_monitor_record_channel()}:#{mining_rig.id}"
+      mining_rig_topic = "#{Channels.mining_rig_channel()}:#{mining_rig.id}"
       Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, asic_rig_monitor_record_topic)
       Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, mining_rig_topic)
     end

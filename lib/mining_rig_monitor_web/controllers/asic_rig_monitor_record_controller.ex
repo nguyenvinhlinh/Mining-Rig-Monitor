@@ -2,6 +2,7 @@ defmodule MiningRigMonitorWeb.AsicRigMonitorRecordController do
   use MiningRigMonitorWeb, :controller
 
   alias MiningRigMonitor.AsicRigMonitorRecords
+  alias MiningRigMonitor.Channels
 
   action_fallback MiningRigMonitorWeb.FallbackController
 
@@ -11,7 +12,7 @@ defmodule MiningRigMonitorWeb.AsicRigMonitorRecordController do
 
     case AsicRigMonitorRecords.create_asic_rig_monitor_record(new_params) do
       {:ok, asic_rig_monitor_record} ->
-        topic_name = "asic_rig_monitor_record:#{conn.assigns.mining_rig.id}"
+        topic_name = "#{Channels.asic_rig_monitor_record_channel()}:#{conn.assigns.mining_rig.id}"
         Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, topic_name, {:asic_rig_monitor_record_created,  asic_rig_monitor_record})
         json(conn, :ok)
       {:error, changeset} -> {:error, changeset}
