@@ -41,3 +41,4 @@ npm-debug.log
 # Tailwind build files
 /priv/static/assets/app.css
 /priv/static/assets/app.js
+*#
