@@ -58,9 +58,10 @@ defmodule MiningRigMonitorWeb do
     end
   end
 
-  def live_view_without_app_layout do
+  def live_view_no_nav_layout do
     quote do
-      use Phoenix.LiveView
+      use Phoenix.LiveView,
+        layout: {MiningRigMonitorWeb.Layouts, :app_no_nav}
       unquote(html_helpers())
     end
   end
