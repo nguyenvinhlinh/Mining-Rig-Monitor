@@ -215,6 +215,33 @@ defmodule MiningRigMonitor.Accounts do
     end
   end
 
+  @doc """
+  Force updates the user password.
+
+  ## Examples
+
+      iex> force_update_user_password(user,  %{password: ...})
+      {:ok, %User{}}
+
+      iex> force_update_user_password(user,  %{password: ...})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def force_update_user_password(user, attrs) do
+    changeset =
+      user
+      |> User.password_changeset(attrs)
+
+    Ecto.Multi.new()
+    |> Ecto.Multi.update(:user, changeset)
+    |> Ecto.Multi.delete_all(:tokens, UserToken.by_user_and_contexts_query(user, :all))
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{user: user}} -> {:ok, user}
+      {:error, :user, changeset, _} -> {:error, changeset}
+    end
+  end
+
   ## Session
 
   @doc """
