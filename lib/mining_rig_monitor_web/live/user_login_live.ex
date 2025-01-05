@@ -1,5 +1,5 @@
 defmodule MiningRigMonitorWeb.UserLoginLive do
-  use MiningRigMonitorWeb, :live_view_no_nav_layout
+  use MiningRigMonitorWeb, :live_view
 
   def mount(_params, _session, socket) do
     email = Phoenix.Flash.get(socket.assigns.flash, :email)

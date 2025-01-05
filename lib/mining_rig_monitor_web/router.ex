@@ -75,7 +75,9 @@ defmodule MiningRigMonitorWeb.Router do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
     live_session :redirect_if_user_is_authenticated,
-      on_mount: [{MiningRigMonitorWeb.UserAuth, :redirect_if_user_is_authenticated}] do
+      on_mount: [{MiningRigMonitorWeb.UserAuth, :redirect_if_user_is_authenticated}],
+      root_layout: {MiningRigMonitorWeb.Layouts, :root_no_nav} do
+
       live "/users/register", UserRegistrationLive, :new
       live "/users/log_in", UserLoginLive, :new
       live "/users/reset_password", UserForgotPasswordLive, :new

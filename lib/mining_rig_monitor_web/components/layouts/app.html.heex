@@ -1,11 +1,4 @@
-<._app_top_nav />
-
-<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
-  <._app_left_nav />
-  <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
-    <main>
-      <%= @inner_content %>
-    </main>
-    <._app_footer />
-  </div>
-</div>
+<main class="bg-gray-50 dark:bg-gray-900">
+  <.flash_group flash={@flash} />
+  <%= @inner_content %>
+</main>
