@@ -23,6 +23,10 @@ defmodule MiningRigMonitorWeb.Router do
 
     get "/", PageController, :home
     get "/flowbite", FlowbiteController, :flowbite
+  end
+
+  scope "/", MiningRigMonitorWeb do
+    pipe_through [:browser, :require_authenticated_user]
 
     live "/mining_rigs", MiningRigLive.Index, :index
     live "/mining_rigs/new", MiningRigLive.Index, :new
