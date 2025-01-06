@@ -9,10 +9,11 @@ config :bcrypt_elixir, :log_rounds, 1
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :mining_rig_monitor, MiningRigMonitor.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "mining_rig_monitor_local",
+  password: "mining_rig_monitor_local",
   hostname: "localhost",
   database: "mining_rig_monitor_test#{System.get_env("MIX_TEST_PARTITION")}",
+  port: 15433,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
 
