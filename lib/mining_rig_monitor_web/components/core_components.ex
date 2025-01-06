@@ -396,7 +396,7 @@ defmodule MiningRigMonitorWeb.CoreComponents do
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">
+    <label for={@for} class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
       <%= render_slot(@inner_block) %>
     </label>
     """
