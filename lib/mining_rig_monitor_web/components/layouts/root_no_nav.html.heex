@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
@@ -17,19 +16,6 @@
   </head>
 
   <body class="bg-gray-50 dark:bg-gray-800">
-    <._root_top_nav current_user={@conn.assigns.current_user} />
-
-    <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
-      <._root_left_nav />
-
-      <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
-        <main>
-          <.flash_group flash={@flash} />
-          <%= @inner_content %>
-        </main>
-        <._root_footer />
-      </div>
-    </div>
-
+    <%= @inner_content %>
   </body>
 </html>
