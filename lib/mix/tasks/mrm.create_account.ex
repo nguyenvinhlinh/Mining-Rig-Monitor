@@ -12,19 +12,17 @@ defmodule Mix.Tasks.Mrm.CreateAccount do
   """
   use Mix.Task
   require Logger
-  alias MiningRigMonitor.Accounts.User
   alias MiningRigMonitor.Accounts
-  alias MiningRigMonitor.Repo
 
   @requirements ["app.start"]
   def run(args) do
     parser_option = [strict: [email: :string]]
-    {parsed, args, invalid} = OptionParser.parse(args, parser_option)
+    {parsed, _args, _invalid} = OptionParser.parse(args, parser_option)
 
     with email <- Keyword.get(parsed, :email),
          {:ok} <- check_nil_email(email),
            password <- generate_random_password(),
-         {:ok, user} <- Accounts.register_user(%{email: email, password: password}) do
+         {:ok, _user} <- Accounts.register_user(%{email: email, password: password}) do
 
       Logger.info "[Mining Rig Monitor] Created a new account successfully!"
       Logger.info "[Mining Rig Monitor] Email: #{email}"
