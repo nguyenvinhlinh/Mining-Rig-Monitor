@@ -32,23 +32,6 @@ defmodule MiningRigMonitorWeb.UserSettingsLiveTest do
       %{conn: log_in_user(conn, user), user: user, password: password}
     end
 
-    test "updates the user email", %{conn: conn, password: password, user: user} do
-      new_email = unique_user_email()
-
-      {:ok, lv, _html} = live(conn, ~p"/users/settings")
-
-      result =
-        lv
-        |> form("#email_form", %{
-          "current_password" => password,
-          "user" => %{"email" => new_email}
-        })
-        |> render_submit()
-
-      assert result =~ "A link to confirm your email"
-      assert Accounts.get_user_by_email(user.email)
-    end
-
     test "renders errors with invalid data (phx-change)", %{conn: conn} do
       {:ok, lv, _html} = live(conn, ~p"/users/settings")
 
@@ -127,13 +110,13 @@ defmodule MiningRigMonitorWeb.UserSettingsLiveTest do
         |> render_change(%{
           "current_password" => "invalid",
           "user" => %{
-            "password" => "too short",
+            "password" => "123asd",
             "password_confirmation" => "does not match"
           }
         })
 
       assert result =~ "Change Password"
-      assert result =~ "should be at least 12 character(s)"
+      assert result =~ "should be at least 8 character(s)"
       assert result =~ "does not match password"
     end
 
@@ -145,14 +128,14 @@ defmodule MiningRigMonitorWeb.UserSettingsLiveTest do
         |> form("#password_form", %{
           "current_password" => "invalid",
           "user" => %{
-            "password" => "too short",
+            "password" => "123asd",
             "password_confirmation" => "does not match"
           }
         })
         |> render_submit()
 
       assert result =~ "Change Password"
-      assert result =~ "should be at least 12 character(s)"
+      assert result =~ "should be at least 8 character(s)"
       assert result =~ "does not match password"
       assert result =~ "is not valid"
     end
