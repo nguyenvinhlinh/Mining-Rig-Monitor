@@ -43,12 +43,11 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.FormComponent do
   defp save_asic_miner(socket, :new, asic_miner_params) do
     case AsicMiners.create_asic_miner(asic_miner_params) do
       {:ok, asic_miner} ->
-        notify_parent({:saved, asic_miner})
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index", {:asic_miner_index, :create_or_update, asic_miner})
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index", {:flash_index, :info, "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} created successfully!"})
 
-        {:noreply,
-         socket
-         |> put_flash(:info, "Asic miner created successfully")
-         |> push_patch(to: socket.assigns.patch)}
+        socket_mod = push_patch(socket, to: socket.assigns.patch)
+        {:noreply, socket_mod}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}

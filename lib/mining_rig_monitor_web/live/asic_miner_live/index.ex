@@ -11,15 +11,12 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     asic_miner_activated_list = AsicMiners.list_asic_miners_by_activated_state(true)
     asic_miner_not_activated_list = AsicMiners.list_asic_miners_by_activated_state(false)
 
-    IO.inspect "DEBUG #{__ENV__.file} @#{__ENV__.line}"
-    IO.inspect asic_miner_activated_list
-    IO.inspect asic_miner_not_activated_list
-    IO.inspect "END"
-
     new_socket = socket
-    #|> stream(:asic_miners, AsicMiners.list_asic_miners())
     |> stream(:asic_miner_activated_list, asic_miner_activated_list)
     |> stream(:asic_miner_not_activated_list, asic_miner_not_activated_list)
+
+    Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "asic_miner_index")
+    Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "flash_index")
 
     {:ok, new_socket}
   end
@@ -52,6 +49,25 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     {:noreply, stream_insert(socket, :asic_miners, asic_miner)}
   end
 
+  @impl true
+  def handle_info({:asic_miner_index, :create_or_update, asic_miner}, socket) do
+    case asic_miner.activated do
+      true ->
+        socket_mod = socket
+        |> stream_insert(:asic_miner_activated_list, asic_miner)
+        {:noreply, socket_mod}
+      false ->
+        socket_mod = socket
+        |> stream_insert(:asic_miner_not_activated_list, asic_miner)
+        {:noreply, socket_mod}
+    end
+  end
+
+  @impl true
+  def handle_info({:flash_index, flash_type, message}, socket) do
+    socket_mod = put_flash(socket, flash_type, message)
+    {:noreply, socket_mod}
+  end
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     asic_miner = AsicMiners.get_asic_miner!(id)
