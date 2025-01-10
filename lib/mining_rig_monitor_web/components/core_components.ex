@@ -475,11 +475,11 @@ defmodule MiningRigMonitorWeb.CoreComponents do
     ~H"""
     <div class="overflow-y-auto px-4 sm:overflow-visible sm:px-0">
       <table class="w-[40rem] mt-11 sm:w-full">
-        <thead class="text-sm text-left leading-6 text-zinc-500">
+        <thead class="bg-gray-100 dark:bg-gray-700">
           <tr>
-            <th :for={col <- @col} class="p-0 pb-4 pr-6 font-normal"><%= col[:label] %></th>
-            <th :if={@action != []} class="relative p-0 pb-4">
-              <span class="sr-only"><%= gettext("Actions") %></span>
+            <th :for={col <- @col} class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"><%= col[:label] %></th>
+            <th :if={@action != []} class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+              <%= gettext("Actions") %>
             </th>
           </tr>
         </thead>
