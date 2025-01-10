@@ -67,7 +67,7 @@ defmodule MiningRigMonitor.AsicMiners do
   """
   def create_asic_miner(attrs \\ %{}) do
     %AsicMiner{}
-    |> AsicMiner.changeset(attrs)
+    |> AsicMiner.changeset_new(attrs)
     |> Repo.insert()
   end
 
