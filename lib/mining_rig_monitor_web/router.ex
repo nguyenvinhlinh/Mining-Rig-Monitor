@@ -13,13 +13,17 @@ defmodule MiningRigMonitorWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :no_nav_layout do
+    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root_no_nav}
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
     plug MiningRigMonitorWeb.Plugs.MiningRigCodeAuthentication
   end
 
   scope "/", MiningRigMonitorWeb do
-    pipe_through :browser
+    pipe_through [:browser, :no_nav_layout]
 
     get "/", PageController, :home
     get "/flowbite", FlowbiteController, :flowbite
@@ -37,6 +41,12 @@ defmodule MiningRigMonitorWeb.Router do
     live "/mining_rigs/:id/show/edit", MiningRigLive.Show, :edit
 
     live "/mining_rigs/asic/:id", MiningRigLive.ShowAsic, :show
+    live "/asic_miners", AsicMinerLive.Index, :index
+    live "/asic_miners/new", AsicMinerLive.Index, :new
+    live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
+
+    live "/asic_miners/:id", AsicMinerLive.Show, :show
+    live "/asic_miners/:id/show/edit", AsicMinerLive.Show, :edit
   end
 
   scope "/api/v1" do

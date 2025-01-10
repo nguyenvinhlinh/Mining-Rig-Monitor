@@ -1,0 +1,31 @@
+<.header>
+  Asic miner {@asic_miner.id}
+  <:subtitle>This is a asic_miner record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/asic_miners/#{@asic_miner}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit asic_miner</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@asic_miner.name}</:item>
+  <:item title="Api code">{@asic_miner.api_code}</:item>
+  <:item title="Firmware version">{@asic_miner.firmware_version}</:item>
+  <:item title="Software version">{@asic_miner.software_version}</:item>
+  <:item title="Model">{@asic_miner.model}</:item>
+  <:item title="Model variant">{@asic_miner.model_variant}</:item>
+</.list>
+
+<.back navigate={~p"/asic_miners"}>Back to asic_miners</.back>
+
+<.modal :if={@live_action == :edit} id="asic_miner-modal" show on_cancel={JS.patch(~p"/asic_miners/#{@asic_miner}")}>
+  <.live_component
+    module={MiningRigMonitorWeb.AsicMinerLive.FormComponent}
+    id={@asic_miner.id}
+    title={@page_title}
+    action={@live_action}
+    asic_miner={@asic_miner}
+    patch={~p"/asic_miners/#{@asic_miner}"}
+  />
+</.modal>
