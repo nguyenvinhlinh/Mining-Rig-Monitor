@@ -54,14 +54,15 @@ defmodule MiningRigMonitor.AsicMiners do
   def get_asic_miner!(id), do: Repo.get!(AsicMiner, id)
 
   @doc """
-  Creates a asic_miner.
+  Creates a asic_miner by commander (this software is the commander). I can only
+  create an empty asic miner. Updating asic miner spec is a sentry responsibility!
 
   ## Examples
 
-      iex> create_asic_miner(%{field: value})
+      iex> create_asic_miner_by_commander(%{field: value})
       {:ok, %AsicMiner{}}
 
-      iex> create_asic_miner(%{field: bad_value})
+      iex> create_asic_miner_by_commander(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """

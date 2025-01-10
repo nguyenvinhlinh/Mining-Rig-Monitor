@@ -8,13 +8,13 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
   @update_attrs %{name: "some updated name", api_code: "some updated api_code", firmware_version: "some updated firmware_version", software_version: "some updated software_version", model: "some updated model", model_variant: "some updated model_variant"}
   @invalid_attrs %{name: nil, api_code: nil, firmware_version: nil, software_version: nil, model: nil, model_variant: nil}
 
-  defp create_asic_miner(_) do
-    asic_miner = asic_miner_fixture()
+  defp create_asic_miner_by_commander(_) do
+    asic_miner = asic_miner_fixture_by_commander()
     %{asic_miner: asic_miner}
   end
 
   describe "Index" do
-    setup [:create_asic_miner]
+    setup [:create_asic_miner_by_commander]
 
     test "lists all asic_miners", %{conn: conn, asic_miner: asic_miner} do
       {:ok, _index_live, html} = live(conn, ~p"/asic_miners")
@@ -78,7 +78,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
   end
 
   describe "Show" do
-    setup [:create_asic_miner]
+    setup [:create_asic_miner_by_commander]
 
     test "displays asic_miner", %{conn: conn, asic_miner: asic_miner} do
       {:ok, _show_live, html} = live(conn, ~p"/asic_miners/#{asic_miner}")

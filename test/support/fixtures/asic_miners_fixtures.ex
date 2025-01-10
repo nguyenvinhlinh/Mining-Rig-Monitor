@@ -7,18 +7,11 @@ defmodule MiningRigMonitor.AsicMinersFixtures do
   @doc """
   Generate a asic_miner.
   """
-  def asic_miner_fixture(attrs \\ %{}) do
+  def asic_miner_fixture_by_commander(attrs \\ %{}) do
     {:ok, asic_miner} =
       attrs
-      |> Enum.into(%{
-        api_code: "some api_code",
-        firmware_version: "some firmware_version",
-        model: "some model",
-        model_variant: "some model_variant",
-        name: "some name",
-        software_version: "some software_version"
-      })
-      |> MiningRigMonitor.AsicMiners.create_asic_miner()
+      |> Enum.into(%{"name" => "some name"})
+      |> MiningRigMonitor.AsicMiners.create_asic_miner_by_commander()
 
     asic_miner
   end
