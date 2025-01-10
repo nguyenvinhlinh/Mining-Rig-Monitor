@@ -7,20 +7,33 @@
     rows={@streams.asic_miner_not_activated_list}
     row_click={fn {_id, asic_miner} -> JS.navigate(~p"/asic_miners/#{asic_miner}") end}
   >
+    <:col :let={{_id, asic_miner}} label="ID">{asic_miner.id}</:col>
     <:col :let={{_id, asic_miner}} label="Name">{asic_miner.name}</:col>
     <:col :let={{_id, asic_miner}} label="Api code">{asic_miner.api_code}</:col>
+
     <:action :let={{_id, asic_miner}}>
       <div class="sr-only">
         <.link navigate={~p"/asic_miners/#{asic_miner}"}>Show</.link>
       </div>
-      <.link patch={~p"/asic_miners/#{asic_miner}/edit"}>Edit</.link>
+      <.link patch={~p"/asic_miners/#{asic_miner}/edit"}>
+        <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center
+          text-white rounded-lg bg-blue-700 hover:bg-blue-800
+          focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <.icon name="hero-pencil-square-solid" class="size-5" />
+          <span class="ml-1">Edit</span>
+        </button>
+
+      </.link>
     </:action>
     <:action :let={{id, asic_miner}}>
       <.link
         phx-click={JS.push("delete", value: %{id: asic_miner.id}) |> hide("##{id}")}
         data-confirm="Are you sure?"
       >
-        Delete
+        <button type="button"  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+          <.icon name="hero-trash-solid" class="size-5" />
+          <span class="ml-1">Delete</span>
+        </button>
       </.link>
     </:action>
   </.table>
