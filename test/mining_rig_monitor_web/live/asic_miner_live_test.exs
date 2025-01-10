@@ -79,9 +79,11 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
     end
 
     test "deletes asic_miner in listing", %{conn: conn, asic_miner: asic_miner} do
-      {:ok, index_live, _html} = live(conn, ~p"/asic_miners")
+      {:ok, index_live, _html} = conn
+      |> log_in_user(user_fixture())
+      |> live(~p"/asic_miners")
 
-      assert index_live |> element("#asic_miners-#{asic_miner.id} a", "Delete") |> render_click()
+      assert index_live |> element("#asic_miner_not_activated_list-#{asic_miner.id} a", "Delete") |> render_click()
       refute has_element?(index_live, "#asic_miners-#{asic_miner.id}")
     end
   end
@@ -90,7 +92,9 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
     setup [:create_asic_miner_by_commander]
 
     test "displays asic_miner", %{conn: conn, asic_miner: asic_miner} do
-      {:ok, _show_live, html} = live(conn, ~p"/asic_miners/#{asic_miner}")
+      {:ok, _show_live, html} = conn
+      |> log_in_user(user_fixture())
+      |> live(~p"/asic_miners/#{asic_miner}")
 
       assert html =~ "Show Asic miner"
       assert html =~ asic_miner.name
