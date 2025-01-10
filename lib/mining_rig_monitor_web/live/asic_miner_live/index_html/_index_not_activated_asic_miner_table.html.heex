@@ -1,0 +1,27 @@
+<div class="mx-4 p-4 mb-4
+  bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">New ASIC miners waiting signals from sentry!</h3>
+
+  <.table
+    id="asic_miners_not_activated"
+    rows={@streams.asic_miner_not_activated_list}
+    row_click={fn {_id, asic_miner} -> JS.navigate(~p"/asic_miners/#{asic_miner}") end}
+  >
+    <:col :let={{_id, asic_miner}} label="Name">{asic_miner.name}</:col>
+    <:col :let={{_id, asic_miner}} label="Api code">{asic_miner.api_code}</:col>
+    <:action :let={{_id, asic_miner}}>
+      <div class="sr-only">
+        <.link navigate={~p"/asic_miners/#{asic_miner}"}>Show</.link>
+      </div>
+      <.link patch={~p"/asic_miners/#{asic_miner}/edit"}>Edit</.link>
+    </:action>
+    <:action :let={{id, asic_miner}}>
+      <.link
+        phx-click={JS.push("delete", value: %{id: asic_miner.id}) |> hide("##{id}")}
+        data-confirm="Are you sure?"
+      >
+        Delete
+      </.link>
+    </:action>
+  </.table>
+</div>

@@ -10,6 +10,8 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
     field :model, :string
     field :model_variant, :string
 
+    field :activated, :boolean
+
     timestamps(type: :utc_datetime)
   end
 

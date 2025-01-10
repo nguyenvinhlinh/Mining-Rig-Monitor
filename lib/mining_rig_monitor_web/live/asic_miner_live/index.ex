@@ -8,7 +8,20 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :asic_miners, AsicMiners.list_asic_miners())}
+    asic_miner_activated_list = AsicMiners.list_asic_miners_by_activated_state(true)
+    asic_miner_not_activated_list = AsicMiners.list_asic_miners_by_activated_state(false)
+
+    IO.inspect "DEBUG #{__ENV__.file} @#{__ENV__.line}"
+    IO.inspect asic_miner_activated_list
+    IO.inspect asic_miner_not_activated_list
+    IO.inspect "END"
+
+    new_socket = socket
+    #|> stream(:asic_miners, AsicMiners.list_asic_miners())
+    |> stream(:asic_miner_activated_list, asic_miner_activated_list)
+    |> stream(:asic_miner_not_activated_list, asic_miner_not_activated_list)
+
+    {:ok, new_socket}
   end
 
   @impl true

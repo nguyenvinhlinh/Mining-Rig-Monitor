@@ -22,6 +22,22 @@ defmodule MiningRigMonitor.AsicMiners do
   end
 
   @doc """
+  Returns the list of asic_miners by given activated_state (true/false).
+
+  ## Examples
+
+      iex> list_asic_miners_by_activated_state
+      [%AsicMiner{}, ...]
+
+  """
+
+  def list_asic_miners_by_activated_state(activated_state) when is_boolean(activated_state)  do
+    AsicMiner
+    |> where(activated: ^activated_state)
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single asic_miner.
 
   Raises `Ecto.NoResultsError` if the Asic miner does not exist.
