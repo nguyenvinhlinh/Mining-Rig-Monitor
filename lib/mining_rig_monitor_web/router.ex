@@ -13,13 +13,17 @@ defmodule MiningRigMonitorWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :no_nav_layout do
+    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root_no_nav}
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
     plug MiningRigMonitorWeb.Plugs.MiningRigCodeAuthentication
   end
 
   scope "/", MiningRigMonitorWeb do
-    pipe_through :browser
+    pipe_through [:browser, :no_nav_layout]
 
     get "/", PageController, :home
     get "/flowbite", FlowbiteController, :flowbite
