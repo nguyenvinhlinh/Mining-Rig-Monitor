@@ -66,8 +66,11 @@ defmodule MiningRigMonitor.AsicMiners do
 
   """
   def create_asic_miner(attrs \\ %{}) do
+    api_code = UUID.uuid1()
+    attrs_mod = Map.put(attrs, "api_code", api_code)
+
     %AsicMiner{}
-    |> AsicMiner.changeset_new(attrs)
+    |> AsicMiner.changeset_new(attrs_mod)
     |> Repo.insert()
   end
 

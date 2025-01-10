@@ -24,7 +24,7 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
 
   def changeset_new(asic_miner, attrs) do
     asic_miner
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :api_code])
+    |> validate_required([:name, :api_code])
   end
 end
