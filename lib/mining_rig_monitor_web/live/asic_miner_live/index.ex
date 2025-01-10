@@ -64,6 +64,15 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
   end
 
   @impl true
+  def handle_info({:asic_miner_index, :delete, asic_miner}, socket) do
+    socket_mod = socket
+    |> stream_delete(:asic_miner_activated_list, asic_miner)
+    |> stream_delete(:asic_miner_not_activated_list, asic_miner)
+    {:noreply, socket_mod}
+  end
+
+
+  @impl true
   def handle_info({:flash_index, flash_type, message}, socket) do
     socket_mod = put_flash(socket, flash_type, message)
     {:noreply, socket_mod}
@@ -72,7 +81,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
   def handle_event("delete", %{"id" => id}, socket) do
     asic_miner = AsicMiners.get_asic_miner!(id)
     {:ok, _} = AsicMiners.delete_asic_miner(asic_miner)
-
-    {:noreply, stream_delete(socket, :asic_miners, asic_miner)}
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index", {:asic_miner_index, :delete, asic_miner})
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index", {:flash_index, :info, "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} deleted"})
+    {:noreply, socket}
   end
 end
