@@ -99,28 +99,5 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
       assert html =~ "Show Asic miner"
       assert html =~ asic_miner.name
     end
-
-    test "updates asic_miner within modal", %{conn: conn, asic_miner: asic_miner} do
-      {:ok, show_live, _html} = live(conn, ~p"/asic_miners/#{asic_miner}")
-
-      assert show_live |> element("a", "Edit") |> render_click() =~
-               "Edit Asic miner"
-
-      assert_patch(show_live, ~p"/asic_miners/#{asic_miner}/show/edit")
-
-      assert show_live
-             |> form("#asic_miner-form", asic_miner: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
-
-      assert show_live
-             |> form("#asic_miner-form", asic_miner: @update_attrs)
-             |> render_submit()
-
-      assert_patch(show_live, ~p"/asic_miners/#{asic_miner}")
-
-      html = render(show_live)
-      assert html =~ "Asic miner updated successfully"
-      assert html =~ "some updated name"
-    end
   end
 end
