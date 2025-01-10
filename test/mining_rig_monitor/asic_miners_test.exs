@@ -8,7 +8,7 @@ defmodule MiningRigMonitor.AsicMinersTest do
 
     import MiningRigMonitor.AsicMinersFixtures
 
-    @invalid_attrs %{name: nil, api_code: nil, firmware_version: nil, software_version: nil, model: nil, model_variant: nil}
+    @invalid_attrs %{"name" => nil, "api_code" => nil, "firmware_version" => nil, "software_version" => nil, "model" => nil, "model_variant" => nil}
 
     test "list_asic_miners/0 returns all asic_miners" do
       asic_miner = asic_miner_fixture_by_commander()
@@ -20,7 +20,6 @@ defmodule MiningRigMonitor.AsicMinersTest do
       assert AsicMiners.get_asic_miner!(asic_miner.id) == asic_miner
     end
 
-
     test "create_asic_miner_by_commander/1 with valid data creates a asic_miner" do
       valid_attrs = %{"name" => "some name"}
 
@@ -30,26 +29,22 @@ defmodule MiningRigMonitor.AsicMinersTest do
       refute Kernel.is_nil(asic_miner.api_code)
     end
 
-    test "create_asic_miner/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = AsicMiners.create_asic_miner(@invalid_attrs)
+    test "create_asic_miner_by_commander/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = AsicMiners.create_asic_miner_by_commander(@invalid_attrs)
     end
 
-    test "update_asic_miner/2 with valid data updates the asic_miner" do
-      asic_miner = asic_miner_fixture_by_commander()
-      update_attrs = %{name: "some updated name", api_code: "some updated api_code", firmware_version: "some updated firmware_version", software_version: "some updated software_version", model: "some updated model", model_variant: "some updated model_variant"}
 
-      assert {:ok, %AsicMiner{} = asic_miner} = AsicMiners.update_asic_miner(asic_miner, update_attrs)
-      assert asic_miner.name == "some updated name"
-      assert asic_miner.api_code == "some updated api_code"
-      assert asic_miner.firmware_version == "some updated firmware_version"
-      assert asic_miner.software_version == "some updated software_version"
-      assert asic_miner.model == "some updated model"
-      assert asic_miner.model_variant == "some updated model_variant"
+    test "update_asic_miner_by_commander/2 with valid data updates the asic_miner" do
+      asic_miner = asic_miner_fixture_by_commander()
+      update_attrs = %{name: "new updated name"}
+
+      assert {:ok, %AsicMiner{} = asic_miner} = AsicMiners.update_asic_miner_by_commander(asic_miner, update_attrs)
+      assert asic_miner.name == "new updated name"
     end
 
-    test "update_asic_miner/2 with invalid data returns error changeset" do
+    test "update_asic_miner_by_commander/2 with invalid data returns error changeset" do
       asic_miner = asic_miner_fixture_by_commander()
-      assert {:error, %Ecto.Changeset{}} = AsicMiners.update_asic_miner(asic_miner, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = AsicMiners.update_asic_miner_by_commander(asic_miner, @invalid_attrs)
       assert asic_miner == AsicMiners.get_asic_miner!(asic_miner.id)
     end
 
