@@ -3,31 +3,38 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
 
   import Phoenix.LiveViewTest
   import MiningRigMonitor.AsicMinersFixtures
+  import MiningRigMonitor.AccountsFixtures
 
-  @create_attrs %{name: "some name", api_code: "some api_code", firmware_version: "some firmware_version", software_version: "some software_version", model: "some model", model_variant: "some model_variant"}
+  @create_attrs %{name: "KS5L-1"}
   @update_attrs %{name: "some updated name", api_code: "some updated api_code", firmware_version: "some updated firmware_version", software_version: "some updated software_version", model: "some updated model", model_variant: "some updated model_variant"}
-  @invalid_attrs %{name: nil, api_code: nil, firmware_version: nil, software_version: nil, model: nil, model_variant: nil}
+  @invalid_attrs %{name: nil}
 
   defp create_asic_miner_by_commander(_) do
     asic_miner = asic_miner_fixture_by_commander()
     %{asic_miner: asic_miner}
   end
 
+
   describe "Index" do
     setup [:create_asic_miner_by_commander]
 
     test "lists all asic_miners", %{conn: conn, asic_miner: asic_miner} do
-      {:ok, _index_live, html} = live(conn, ~p"/asic_miners")
+      {:ok, _index_live, html} = conn
+      |> log_in_user(user_fixture())
+      |> live(~p"/asic_miners")
 
-      assert html =~ "Listing Asic miners"
+      assert html =~ "ASIC Miner Index"
       assert html =~ asic_miner.name
+      assert html =~ asic_miner.api_code
     end
 
     test "saves new asic_miner", %{conn: conn} do
-      {:ok, index_live, _html} = live(conn, ~p"/asic_miners")
+      {:ok, index_live, _html} = conn
+      |> log_in_user(user_fixture())
+      |> live(~p"/asic_miners")
 
-      assert index_live |> element("a", "New Asic miner") |> render_click() =~
-               "New Asic miner"
+      assert index_live |> element("a", "New ASIC Miner") |> render_click() =~
+               "New ASIC Miner"
 
       assert_patch(index_live, ~p"/asic_miners/new")
 
@@ -42,8 +49,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
       assert_patch(index_live, ~p"/asic_miners")
 
       html = render(index_live)
-      assert html =~ "Asic miner created successfully"
-      assert html =~ "some name"
+      assert html =~ "created successfully!"
+      assert html =~ "KS5L-1"
     end
 
     test "updates asic_miner in listing", %{conn: conn, asic_miner: asic_miner} do
