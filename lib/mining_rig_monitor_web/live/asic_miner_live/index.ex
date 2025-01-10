@@ -4,6 +4,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
   alias MiningRigMonitor.AsicMiners
   alias MiningRigMonitor.AsicMiners.AsicMiner
 
+  embed_templates "index_html/*"
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, stream(socket, :asic_miners, AsicMiners.list_asic_miners())}
