@@ -65,14 +65,14 @@ defmodule MiningRigMonitor.AsicMiners do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_asic_miner(attrs \\ %{}) do
+  def create_asic_miner_by_commander(attrs \\ %{}) do
     api_code = UUID.uuid1()
     attrs_mod = attrs
     |> Map.put("api_code", api_code)
     |> Map.put("activated", false)
 
     %AsicMiner{}
-    |> AsicMiner.changeset_new(attrs_mod)
+    |> AsicMiner.changeset_new_by_commander(attrs_mod)
     |> Repo.insert()
   end
 
@@ -88,9 +88,9 @@ defmodule MiningRigMonitor.AsicMiners do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_asic_miner(%AsicMiner{} = asic_miner, attrs) do
+  def update_asic_miner_by_commander(%AsicMiner{} = asic_miner, attrs) do
     asic_miner
-    |> AsicMiner.changeset(attrs)
+    |> AsicMiner.changeset_edit_by_commander(attrs)
     |> Repo.update()
   end
 

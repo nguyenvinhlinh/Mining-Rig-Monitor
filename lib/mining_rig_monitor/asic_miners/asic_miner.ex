@@ -22,9 +22,15 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
     |> validate_required([:name, :api_code, :firmware_version, :software_version, :model, :model_variant])
   end
 
-  def changeset_new(asic_miner, attrs) do
+  def changeset_new_by_commander(asic_miner, attrs) do
     asic_miner
     |> cast(attrs, [:name, :api_code])
     |> validate_required([:name, :api_code])
+  end
+
+  def changeset_edit_by_commander(asic_miner, attrs) do
+    asic_miner
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
   end
 end
