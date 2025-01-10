@@ -6,7 +6,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
   import MiningRigMonitor.AccountsFixtures
 
   @create_attrs %{name: "KS5L-1"}
-  @update_attrs %{name: "some updated name", api_code: "some updated api_code", firmware_version: "some updated firmware_version", software_version: "some updated software_version", model: "some updated model", model_variant: "some updated model_variant"}
+  @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
 
   defp create_asic_miner_by_commander(_) do
@@ -54,10 +54,12 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
     end
 
     test "updates asic_miner in listing", %{conn: conn, asic_miner: asic_miner} do
-      {:ok, index_live, _html} = live(conn, ~p"/asic_miners")
+      {:ok, index_live, _html} = conn
+      |> log_in_user(user_fixture())
+      |> live(~p"/asic_miners")
 
-      assert index_live |> element("#asic_miners-#{asic_miner.id} a", "Edit") |> render_click() =~
-               "Edit Asic miner"
+      assert index_live |> element("#asic_miner_not_activated_list-#{asic_miner.id}  a", "Edit") |> render_click() =~
+               "Edit ASIC miner"
 
       assert_patch(index_live, ~p"/asic_miners/#{asic_miner}/edit")
 
@@ -72,7 +74,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
       assert_patch(index_live, ~p"/asic_miners")
 
       html = render(index_live)
-      assert html =~ "Asic miner updated successfully"
+      assert html =~ "updated successfully!"
       assert html =~ "some updated name"
     end
 

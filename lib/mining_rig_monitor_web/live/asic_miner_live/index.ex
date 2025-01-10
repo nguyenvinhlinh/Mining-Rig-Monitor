@@ -28,7 +28,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Asic miner")
+    |> assign(:page_title, "Edit ASIC miner")
     |> assign(:asic_miner, AsicMiners.get_asic_miner!(id))
   end
 
