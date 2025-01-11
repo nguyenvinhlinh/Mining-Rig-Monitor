@@ -151,12 +151,13 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   @impl true
   def handle_info({:asic_miner_index, :create_or_update, asic_miner}, socket) do
+    # asic_miner's activated can only go from false to true stage.
     case asic_miner.activated do
       true ->
         asic_miner_activated_with_log = get_asic_miner_activated_with_log(asic_miner)
-
         socket_mod = socket
         |> stream_insert(:asic_miner_activated_list, asic_miner_activated_with_log)
+        |> stream_delete(:asic_miner_not_activated_list, asic_miner)
         {:noreply, socket_mod}
       false ->
         socket_mod = socket

@@ -10,7 +10,13 @@ defmodule MiningRigMonitorWeb.AsicMinerController do
     params_mod = Map.put(params, "activated", true)
 
     case AsicMiners.update_asic_miner_by_sentry(asic_miner, params_mod) do
-      {:ok, _asic_miner} ->  json(conn, :ok)
+      {:ok, asic_miner} ->
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
+          {:flash_index, :info, "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} is activated!"})
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index",
+          {:asic_miner_index, :create_or_update, asic_miner})
+
+        json(conn, nil)
       {:error, changeset} -> {:error, changeset}
     end
   end
