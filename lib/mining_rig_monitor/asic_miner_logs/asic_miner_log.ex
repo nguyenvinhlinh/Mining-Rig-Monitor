@@ -40,14 +40,14 @@ defmodule MiningRigMonitor.AsicMinerLogs.AsicMinerLog do
     field :hashboard_2_hashrate_30_min, :float
     field :hashboard_3_hashrate_30_min, :float
 
-    field :hashboard_1_temp_1, :float
-    field :hashboard_1_temp_2, :float
+    field :hashboard_1_temp_1, :integer
+    field :hashboard_1_temp_2, :integer
 
-    field :hashboard_2_temp_1, :float
-    field :hashboard_2_temp_2, :float
+    field :hashboard_2_temp_1, :integer
+    field :hashboard_2_temp_2, :integer
 
-    field :hashboard_3_temp_1, :float
-    field :hashboard_3_temp_2, :float
+    field :hashboard_3_temp_1, :integer
+    field :hashboard_3_temp_2, :integer
 
     field :fan_1_speed, :integer
     field :fan_2_speed, :integer
@@ -58,7 +58,7 @@ defmodule MiningRigMonitor.AsicMinerLogs.AsicMinerLog do
     field :wan_ip, :string
 
     field :coin_name, :string
-    field :power, :float
+    field :power, :integer
 
     timestamps(type: :utc_datetime)
   end

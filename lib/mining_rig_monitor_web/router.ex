@@ -60,7 +60,7 @@ defmodule MiningRigMonitorWeb.Router do
     scope "/asic_miners" do
       pipe_through :api_asic_miner
       post "/specs", MiningRigMonitorWeb.AsicMinerController, :update_asic_miner_specs
-      post "/logs", MiningRigMonitorWeb.AsicMinerLogController, :create
+      post "/logs",  MiningRigMonitorWeb.AsicMinerLogController, :create
     end
   end
 

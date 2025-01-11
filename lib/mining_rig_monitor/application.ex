@@ -2,8 +2,11 @@ defmodule MiningRigMonitor.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
-
+  @current_env Mix.env()
   use Application
+
+
+  alias MiningRigMonitor.GenServer.AsicMinerOperationalIndex
 
   @impl true
   def start(_type, _args) do
@@ -17,8 +20,17 @@ defmodule MiningRigMonitor.Application do
       # Start a worker by calling: MiningRigMonitor.Worker.start_link(arg)
       # {MiningRigMonitor.Worker, arg},
       # Start to serve requests, typically the last entry
-      MiningRigMonitorWeb.Endpoint
+      {AsicMinerOperationalIndex, nil},
+      MiningRigMonitorWeb.Endpoint,
     ]
+
+    children =
+    if @current_env == :dev do
+      children ++ [
+        {MiningRigMonitor.Simulation.AsicMinerLogGenerator, nil}
+      ]
+    end
+
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
