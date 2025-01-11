@@ -33,4 +33,10 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
     |> cast(attrs, [:name])
     |> validate_required([:name])
   end
+
+  def changeset_edit_by_sentry(asic_miner, attrs) do
+    asic_miner
+    |> cast(attrs, [:firmware_version, :software_version, :model, :model_variant, :activated])
+    |> validate_required([:activated])
+  end
 end

@@ -95,6 +95,12 @@ defmodule MiningRigMonitor.AsicMiners do
     |> Repo.update()
   end
 
+  def update_asic_miner_by_sentry(%AsicMiner{} = asic_miner, attrs) do
+    asic_miner
+    |> AsicMiner.changeset_edit_by_sentry(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a asic_miner.
 
@@ -122,5 +128,9 @@ defmodule MiningRigMonitor.AsicMiners do
   """
   def change_asic_miner(%AsicMiner{} = asic_miner, attrs \\ %{}) do
     AsicMiner.changeset(asic_miner, attrs)
+  end
+
+  def get_asic_miner_by_api_code(code) do
+    Repo.get_by(AsicMiner, api_code: code)
   end
 end

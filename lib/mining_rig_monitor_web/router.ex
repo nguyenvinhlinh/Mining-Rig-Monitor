@@ -22,6 +22,10 @@ defmodule MiningRigMonitorWeb.Router do
     plug MiningRigMonitorWeb.Plugs.MiningRigCodeAuthentication
   end
 
+  pipeline :api_asic_miner do
+    plug :accepts, ["json"]
+    plug MiningRigMonitorWeb.Plugs.ApiCodeAuthentication, :asic_miner
+  end
   scope "/", MiningRigMonitorWeb do
     pipe_through [:browser, :no_nav_layout]
 
@@ -41,20 +45,21 @@ defmodule MiningRigMonitorWeb.Router do
     live "/mining_rigs/:id/show/edit", MiningRigLive.Show, :edit
 
     live "/mining_rigs/asic/:id", MiningRigLive.ShowAsic, :show
+    # END TOBE REMOVE
+
     live "/asic_miners", AsicMinerLive.Index, :index
     live "/asic_miners/new", AsicMinerLive.Index, :new
     live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
 
     live "/asic_miners/:id", AsicMinerLive.Show, :show
     live "/asic_miners/:id/show/edit", AsicMinerLive.Show, :edit
+
   end
 
   scope "/api/v1" do
-    pipe_through :api
-    # post "/asic_spec", MiningRigMonitorWeb.AsicRigMonitorRecordController, :save
-    post "/asic_rig_monitor_records", MiningRigMonitorWeb.AsicRigMonitorRecordController, :save
-    scope "/mining_rig" do
-      post "/asic_spec", MiningRigMonitorWeb.MiningRigController, :update_mining_rig_asic
+    scope "/asic_miner" do
+      pipe_through :api_asic_miner
+      post "/specs", MiningRigMonitorWeb.AsicMinerController, :update_asic_miner_specs
     end
   end
 
