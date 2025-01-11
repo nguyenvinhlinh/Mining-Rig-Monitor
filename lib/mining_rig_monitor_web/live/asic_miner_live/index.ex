@@ -101,7 +101,14 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
 
     coin = Map.get(asic_miner_log, :coin_name, "----")
-    hashrate = "#{Map.get(asic_miner_log, :hashrate_5_min, "----")} #{Map.get(asic_miner_log, :hashrate_uom, nil)}"
+    hashrate =
+    if Kernel.is_nil(Map.get(asic_miner_log, :hashrate_5_min, nil)) do
+      "----"
+    else
+      "#{Kernel.round(asic_miner_log.hashrate_5_min)} #{asic_miner_log.hashrate_uom}"
+    end
+
+
     power = Map.get(asic_miner_log, :power, nil)
 
     max_fan = [Map.get(asic_miner_log, :fan_1_speed, nil),

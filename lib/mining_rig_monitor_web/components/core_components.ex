@@ -493,7 +493,7 @@ defmodule MiningRigMonitorWeb.CoreComponents do
             <td
               :for={{col, i} <- Enum.with_index(@col)}
               phx-click={@row_click && @row_click.(row)}
-              class={["max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400", @row_click && "hover:cursor-pointer"]}
+              class={["max-w-sm p-4 overflow-hidden text-base font-medium text-gray-900 whitespace-nowrap dark:text-white ", @row_click && "hover:cursor-pointer"]}
             >
             <%= render_slot(col, @row_item.(row)) %>
             </td>

@@ -11,7 +11,7 @@
     <:col :let={{_id, asic_miner}} label="Name">{asic_miner.name}</:col>
     <:col :let={{_id, asic_miner}} label="Coin">{asic_miner.coin}</:col>
     <:col :let={{_id, asic_miner}} label="Hashrate">{asic_miner.hashrate}</:col>
-    <:col :let={{_id, asic_miner}} label="Max Hashboard Temp.">
+    <:col :let={{_id, asic_miner}} label="Max Temp.">
       <%= if asic_miner.max_hashboard_temp do %>
       <%= asic_miner.max_hashboard_temp %> ℃
       <% else %>
