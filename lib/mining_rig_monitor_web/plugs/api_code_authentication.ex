@@ -20,7 +20,7 @@ defmodule MiningRigMonitorWeb.Plugs.ApiCodeAuthentication do
     else
       {:error, :api_code_not_exist} ->
         handle_api_code_not_exist(conn)
-      {:error, :mining_rig_code_invalid} ->
+      {:error, :api_code_invalid} ->
         handle_api_code_invalid(conn)
     end
   end
