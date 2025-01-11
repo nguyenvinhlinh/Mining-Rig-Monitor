@@ -6,7 +6,7 @@
     },
     "private": true,
     "scripts": {
-        "start": "redocly preview-docs",
+        "start": "redocly preview-docs --port 8085",
         "build": "redocly bundle -o dist/bundle.yaml",
         "build-html": "redocly build-docs  --output dist/mining-rig-openapi.html",
         "test": "redocly lint"

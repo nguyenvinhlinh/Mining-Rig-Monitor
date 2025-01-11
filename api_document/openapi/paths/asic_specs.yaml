@@ -1,6 +1,6 @@
 post:
   tags:
-    - ASIC
+    - ASIC Miner
   summary: Submit ASIC - specification
   description: "This endpoint helps submitting an ASIC specification. This API should be called once time at boot."
   operationId: post-asic-spec
@@ -20,6 +20,6 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/AsicSpec.yaml
+          $ref: ../components/schemas/AsicSpecs.yaml
     description: "Asic specification"
     required: true

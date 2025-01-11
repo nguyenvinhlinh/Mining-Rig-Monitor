@@ -3,4 +3,4 @@ properties:
   message:
     description: A message for HTTP code 401
     type: string
-    example: Invalid MINING_RIG_CODE
+    example: Invalid API_CODE

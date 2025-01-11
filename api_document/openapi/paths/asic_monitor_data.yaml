@@ -1,6 +1,6 @@
 post:
   tags:
-    - ASIC
+    - ASIC Miner
   summary: Submit ASIC - monitor data
   description: "This endpoint helps submitting an ASIC Monitor Data / Operation Data"
   operationId: post-asic-monitor-data
