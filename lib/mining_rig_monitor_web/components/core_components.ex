@@ -473,7 +473,7 @@ defmodule MiningRigMonitorWeb.CoreComponents do
       end
 
     ~H"""
-    <div class="overflow-y-auto px-4 sm:overflow-visible sm:px-0">
+    <div class="overflow-scroll px-4 sm:px-0">
       <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
         <thead class="bg-gray-100 dark:bg-gray-700">
           <tr>
