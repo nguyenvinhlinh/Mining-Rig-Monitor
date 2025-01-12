@@ -1,5 +1,8 @@
-<div class="mx-4 p-4 mb-4
-  bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+<div class="mx-1 p-1 mb-1
+  sm:mx-2 sm:mb-2 sm:p-3
+  md:mx-4 md:mb-4 md:p-6
+  bg-white border border-gray-200 rounded-lg shadow-sm
+  dark:border-gray-700 dark:bg-gray-800">
   <h3 class="mb-4 text-xl font-semibold dark:text-white">Activated ASIC Miners!</h3>
 
   <.table
@@ -7,32 +10,32 @@
     rows={@streams.asic_miner_activated_list}
     row_click={fn {_id, asic_miner} -> JS.navigate(~p"/asic_miners/#{asic_miner.id}") end}
   >
-    <:col :let={{_id, asic_miner}} label="ID">{asic_miner.id}</:col>
+    <:col :let={{_id, asic_miner}} label="ID" class="hidden md:table-cell">{asic_miner.id}</:col>
     <:col :let={{_id, asic_miner}} label="Name">{asic_miner.name}</:col>
     <:col :let={{_id, asic_miner}} label="Coin">{asic_miner.coin}</:col>
     <:col :let={{_id, asic_miner}} label="Hashrate">{asic_miner.hashrate}</:col>
-    <:col :let={{_id, asic_miner}} label="Max Temp.">
+    <:col :let={{_id, asic_miner}} label="Max Temp." class="hidden md:table-cell">
       <%= if asic_miner.max_hashboard_temp do %>
       <%= asic_miner.max_hashboard_temp %> ℃
       <% else %>
       <%= "----" %>
       <% end %>
     </:col>
-    <:col :let={{_id, asic_miner}} label="Max Fan">
+    <:col :let={{_id, asic_miner}} label="Max Fan" class="hidden md:table-cell">
       <%= if asic_miner.max_fan do %>
       <%=   asic_miner.max_fan %> RPM
       <% else %>
       <%=   "----" %>
       <% end %>
     </:col>
-    <:col :let={{_id, asic_miner}} label="Power(Walt)">
+    <:col :let={{_id, asic_miner}} label="Power(Walt)" class="hidden md:table-cell">
       <%= if asic_miner.power do %>
       <%=   asic_miner.power %> Walt
       <% else %>
       <%=   "----" %>
       <% end %>
     </:col>
-    <:col :let={{_id, asic_miner}} label="Uptime">{asic_miner.uptime}</:col>
+    <:col :let={{_id, asic_miner}} label="Uptime" class="hidden md:table-cell">{asic_miner.uptime}</:col>
     <:action :let={{_id, asic_miner}}>
       <div class="sr-only">
         <.link navigate={~p"/asic_miners/#{asic_miner.id}"}>Show</.link>
