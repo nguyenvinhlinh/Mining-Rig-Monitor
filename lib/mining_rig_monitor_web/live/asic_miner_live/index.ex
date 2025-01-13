@@ -28,7 +28,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     |> assign(:aggregated_total_power, aggregated_total_power)
     |> assign(:aggregated_asic_miner_alive, aggregated_asic_miner_alive)
 
-    Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "asic_miner_index")
+    Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "asic_miner_index_channel")
     Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "flash_index")
 
     {:ok, new_socket}
@@ -161,7 +161,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
   end
 
   @impl true
-  def handle_info({:asic_miner_index, :create_or_update, asic_miner}, socket) do
+  def handle_info({:asic_miner_index_channel, :create_or_update, asic_miner}, socket) do
     # asic_miner's activated can only go from false to true stage.
     case asic_miner.activated do
       true ->
@@ -178,7 +178,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
   end
 
   @impl true
-  def handle_info({:asic_miner_index, :delete, asic_miner}, socket) do
+  def handle_info({:asic_miner_index_channel, :delete, asic_miner}, socket) do
     socket_mod = socket
     |> stream_delete(:asic_miner_activated_list, asic_miner)
     |> stream_delete(:asic_miner_not_activated_list, asic_miner)
@@ -195,7 +195,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
   def handle_event("delete", %{"id" => id}, socket) do
     asic_miner = AsicMiners.get_asic_miner!(id)
     {:ok, _} = AsicMiners.delete_asic_miner(asic_miner)
-    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index", {:asic_miner_index, :delete, asic_miner})
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index_channel", {:asic_miner_index_channel, :delete, asic_miner})
     Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index", {:flash_index, :info, "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} deleted"})
     {:noreply, socket}
   end
