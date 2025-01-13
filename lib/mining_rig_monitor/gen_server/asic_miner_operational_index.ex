@@ -68,7 +68,7 @@ defmodule MiningRigMonitor.GenServer.AsicMinerOperationalIndex do
 
     coin_hashrate_map =
       Enum.reduce(state, %{},
-        fn({e_key, e_value}, acc) ->
+        fn({_asic_miner_id, e_value}, acc) ->
           e_coin_name = Map.get(e_value, :coin_name) |> String.downcase |> String.capitalize
           e_hash_rate = Map.get(e_value, :hashrate_5_min)
           e_hashrate_uom = Map.get(e_value, :hashrate_uom) |> String.downcase
@@ -93,7 +93,7 @@ defmodule MiningRigMonitor.GenServer.AsicMinerOperationalIndex do
 
     total_asic_miner = Map.keys(asic_miner_map) |> Kernel.length()
     total_running_asic_miner =
-      Enum.filter(asic_miner_operational_map, fn({e_key, e_value}) ->
+      Enum.filter(asic_miner_operational_map, fn({_asic_miner_id, e_value}) ->
         Kernel.is_nil(e_value) == false
       end)
       |> Kernel.length()
