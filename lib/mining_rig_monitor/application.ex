@@ -24,18 +24,20 @@ defmodule MiningRigMonitor.Application do
       MiningRigMonitorWeb.Endpoint,
     ]
 
-    children =
+    children_mod =
     if @current_env == :dev do
       children ++ [
         {MiningRigMonitor.Simulation.AsicMinerLogGenerator, nil}
       ]
+    else
+      children
     end
 
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: MiningRigMonitor.Supervisor]
-    Supervisor.start_link(children, opts)
+    Supervisor.start_link(children_mod, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration

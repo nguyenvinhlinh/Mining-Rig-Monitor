@@ -14,27 +14,9 @@
     <:col :let={{_id, asic_miner}} label="Name">{asic_miner.name}</:col>
     <:col :let={{_id, asic_miner}} label="Coin">{asic_miner.coin}</:col>
     <:col :let={{_id, asic_miner}} label="Hashrate">{asic_miner.hashrate}</:col>
-    <:col :let={{_id, asic_miner}} label="Max Temp." class="hidden md:table-cell">
-      <%= if asic_miner.max_hashboard_temp do %>
-      <%= asic_miner.max_hashboard_temp %> ℃
-      <% else %>
-      <%= "----" %>
-      <% end %>
-    </:col>
-    <:col :let={{_id, asic_miner}} label="Max Fan" class="hidden md:table-cell">
-      <%= if asic_miner.max_fan do %>
-      <%=   asic_miner.max_fan %> RPM
-      <% else %>
-      <%=   "----" %>
-      <% end %>
-    </:col>
-    <:col :let={{_id, asic_miner}} label="Power(Walt)" class="hidden md:table-cell">
-      <%= if asic_miner.power do %>
-      <%=   asic_miner.power %> Walt
-      <% else %>
-      <%=   "----" %>
-      <% end %>
-    </:col>
+    <:col :let={{_id, asic_miner}} label="Max Temp." class="hidden md:table-cell">{asic_miner.max_hashboard_temp}</:col>
+    <:col :let={{_id, asic_miner}} label="Max Fan" class="hidden md:table-cell"> {asic_miner.max_fan}</:col>
+    <:col :let={{_id, asic_miner}} label="Power(Walt)" class="hidden md:table-cell"> {asic_miner.power}</:col>
     <:col :let={{_id, asic_miner}} label="Uptime" class="hidden md:table-cell">{asic_miner.uptime}</:col>
     <:action :let={{_id, asic_miner}}>
       <div class="sr-only">

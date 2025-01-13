@@ -3,7 +3,7 @@ defmodule MiningRigMonitor.Simulation.AsicMinerLogGenerator do
 
   require Logger
 
-  @asic_miner_api_code_list ["asic_1_code", "asic_2_code", "asic_3_code"]
+  @asic_miner_api_code_list ["asic_1_code", "asic_2_code", "asic_3_code", "asic_4_code", "asic_5_code"]
   @post_url "http://127.0.0.1:4000/api/v1/asic_miners/logs"
   @post_inverval_second 1
 
@@ -14,6 +14,10 @@ defmodule MiningRigMonitor.Simulation.AsicMinerLogGenerator do
   end
   def start_link(_params) do
     GenServer.start_link(__MODULE__, nil, name: __MODULE__)
+  end
+
+  def stop() do
+    GenServer.stop(__MODULE__)
   end
 
   # Server (callbacks)
@@ -94,7 +98,7 @@ defmodule MiningRigMonitor.Simulation.AsicMinerLogGenerator do
       "fan_4_speed" => fan_4_speed,
       "lan_ip" => "192.168.18.50",
       "wan_ip" => "50.85.22.87",
-      "coin_name" => "Kaspa",
+      "coin_name" => Enum.random(["kaspa", "bitcoin"]),
       "power" => 3500
     }
   end
