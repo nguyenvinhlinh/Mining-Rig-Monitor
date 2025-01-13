@@ -9,8 +9,10 @@ defmodule MiningRigMonitor.GenServer.AsicMinerOperationalIndex do
   def start_link() do
     {:ok, pid} = GenServer.start_link(__MODULE__, nil, name: __MODULE__)
     Logger.info("[AsicMinerOperationalIndex] started.")
+    Logger.info("[AsicMinerOperationalIndex][broadcast_operational_data] after 5 seconds")
+    Logger.info("[AsicMinerOperationalIndex][nillify_offline_miner] after 5 seconds")
     Process.send_after(__MODULE__, {:broadcast_operational_data}, 5_000)
-    Logger.info("[AsicMinerOperationalIndex] broadcast operation data after 5 second.")
+    Process.send_after(__MODULE__, {:nillify_offline_miner}, 5_000)
     {:ok, pid}
   end
 
@@ -61,6 +63,7 @@ defmodule MiningRigMonitor.GenServer.AsicMinerOperationalIndex do
   # TODO refactor to help writing unit test.
   @impl true
   def handle_info({:broadcast_operational_data}, state) do
+    Logger.info("[AsicMinerOperationalIndex][broadcast_operational_data] Starting.")
     asic_miner_map = AsicMiners.list_asic_miners_by_activated_state(true)
     |> Enum.reduce(%{}, fn(e, acc) -> Map.put(acc, e.id, e) end)
 
@@ -126,4 +129,19 @@ defmodule MiningRigMonitor.GenServer.AsicMinerOperationalIndex do
     {:noreply, state}
   end
 
+  def handle_info({:nillify_offline_miner}, state) do
+    Logger.info("[AsicMinerOperationalIndex][nillify_offline_miner] Starting.")
+    now = NaiveDateTime.utc_now()
+    new_state =
+      Enum.reduce(state, %{}, fn({asic_miner_id, asic_miner_log}, acc) ->
+        diff_time = NaiveDateTime.diff(now, asic_miner_log.inserted_at, :second)
+        if diff_time > 60  do
+          acc
+        else
+          Map.put(acc, asic_miner_id, asic_miner_log)
+        end
+      end)
+    Process.send_after(__MODULE__, {:nillify_offline_miner}, 15_000)
+    {:noreply, new_state}
+  end
 end
