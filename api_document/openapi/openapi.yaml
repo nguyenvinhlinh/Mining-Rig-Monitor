@@ -15,10 +15,10 @@ info:
     This is an API for Mining Rig Monitor Software.
 
 tags:
-  - name: ASIC
-    description: "ASIC API"
-  - name: CPU_GPU
-    description: "CPU/GPU API"
+  - name: ASIC Miner
+    description: "ASIC Miner API"
+  - name: CPU/GPU Miner
+    description: "CPU/GPU Miner API"
 
 servers:
   - url: http://127.0.0.1:4000/api/v1
@@ -26,10 +26,10 @@ servers:
   - url: https://mining_rig_monitor_staging.hexalink.xyz/api/v1
   - url: https://mining_rig_monitor.hexalink.xyz/api/v1
 paths:
-  '/mining_rig/asic_spec':
-    $ref: 'paths/asic_spec.yaml'
+  '/asic_miner/specs':
+    $ref: 'paths/asic_specs.yaml'
 
-  '/asic_rig_monitor_records':
+  '/asic_miner/logs':
     $ref: 'paths/asic_monitor_data.yaml'
 
   '/cpu_gpu_spec':

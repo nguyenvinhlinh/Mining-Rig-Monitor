@@ -1,0 +1,23 @@
+defmodule MiningRigMonitorWeb.AsicMinerController do
+  use MiningRigMonitorWeb, :controller
+
+  alias MiningRigMonitor.AsicMiners
+
+  action_fallback MiningRigMonitorWeb.FallbackController
+
+  def update_asic_miner_specs(conn, params) do
+    asic_miner = conn.assigns.asic_miner
+    params_mod = Map.put(params, "activated", true)
+
+    case AsicMiners.update_asic_miner_by_sentry(asic_miner, params_mod) do
+      {:ok, asic_miner} ->
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
+          {:flash_index, :info, "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} is activated!"})
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index",
+          {:asic_miner_index, :create_or_update, asic_miner})
+
+        json(conn, nil)
+      {:error, changeset} -> {:error, changeset}
+    end
+  end
+end

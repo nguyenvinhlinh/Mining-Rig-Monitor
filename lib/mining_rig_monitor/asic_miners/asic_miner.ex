@@ -1,7 +1,7 @@
 defmodule MiningRigMonitor.AsicMiners.AsicMiner do
   use Ecto.Schema
   import Ecto.Changeset
-
+  alias MiningRigMonitor.AsicMinerLogs.AsicMinerLog
   schema "asic_miners" do
     field :name, :string
     field :api_code, :string
@@ -11,6 +11,8 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
     field :model_variant, :string
 
     field :activated, :boolean, default: false
+
+    has_many :asic_miner_logs, AsicMinerLog, [on_delete: :delete_all]
 
     timestamps(type: :utc_datetime)
   end
@@ -32,5 +34,11 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
     asic_miner
     |> cast(attrs, [:name])
     |> validate_required([:name])
+  end
+
+  def changeset_edit_by_sentry(asic_miner, attrs) do
+    asic_miner
+    |> cast(attrs, [:firmware_version, :software_version, :model, :model_variant, :activated])
+    |> validate_required([:activated])
   end
 end

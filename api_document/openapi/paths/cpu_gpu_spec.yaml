@@ -1,6 +1,6 @@
 post:
   tags:
-    - CPU_GPU
+    - CPU/GPU Miner
   summary: Submit CPU/GPU mining rig - specification
   description: "This endpoint helps submitting cpu/gpu mining rig specification. This API should be called once time at boot."
   operationId: post-cpu-gpu-spec

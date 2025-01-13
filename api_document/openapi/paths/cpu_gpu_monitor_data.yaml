@@ -1,6 +1,6 @@
 post:
   tags:
-    - CPU_GPU
+    - CPU/GPU Miner
   summary: Submit CPU/GPU mining rig - monitor data
   description: "This endpoint helps submitting cpu/gpu mining rig - monitor data. This api should be call every minute"
   operationId: post-cpu-gpu-monitor-data

@@ -462,6 +462,7 @@ defmodule MiningRigMonitorWeb.CoreComponents do
 
   slot :col, required: true do
     attr :label, :string
+    attr :class, :string
   end
 
   slot :action, doc: "the slot for showing user actions in the last table column"
@@ -473,11 +474,11 @@ defmodule MiningRigMonitorWeb.CoreComponents do
       end
 
     ~H"""
-    <div class="overflow-y-auto px-4 sm:overflow-visible sm:px-0">
+    <div class="overflow-auto px-4 sm:px-0">
       <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
         <thead class="bg-gray-100 dark:bg-gray-700">
           <tr>
-            <th :for={col <- @col} class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"><%= col[:label] %></th>
+            <th :for={col <- @col} class={["p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400", col[:class] ]}><%= col[:label] %></th>
             <th :if={@action != []} class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
               <%= gettext("Actions") %>
             </th>
@@ -493,7 +494,7 @@ defmodule MiningRigMonitorWeb.CoreComponents do
             <td
               :for={{col, i} <- Enum.with_index(@col)}
               phx-click={@row_click && @row_click.(row)}
-              class={["max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400", @row_click && "hover:cursor-pointer"]}
+              class={["max-w-sm p-4 overflow-hidden text-base font-medium text-gray-900 truncate whitespace-nowrap dark:text-white ", @row_click && "hover:cursor-pointer", col[:class]]}
             >
             <%= render_slot(col, @row_item.(row)) %>
             </td>
