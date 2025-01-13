@@ -13,9 +13,20 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     asic_miner_activated_list = get_asic_miner_activated_list_with_log()
     asic_miner_not_activated_list = AsicMiners.list_asic_miners_by_activated_state(false)
 
+    aggregated_coin_hashrate_map = %{
+      "Kaspa" => "100 TH/s",
+      "Bitcoin" => "40 TH/s"
+    }
+
+    aggregated_total_power = "10000W"
+    aggregated_asic_miner_alive = "2/3"
+
     new_socket = socket
     |> stream(:asic_miner_activated_list, asic_miner_activated_list)
     |> stream(:asic_miner_not_activated_list, asic_miner_not_activated_list)
+    |> assign(:aggregated_coin_hashrate_map, aggregated_coin_hashrate_map)
+    |> assign(:aggregated_total_power, aggregated_total_power)
+    |> assign(:aggregated_asic_miner_alive, aggregated_asic_miner_alive)
 
     Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "asic_miner_index")
     Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "flash_index")
