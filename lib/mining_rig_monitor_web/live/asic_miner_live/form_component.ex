@@ -28,6 +28,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.FormComponent do
       {:ok, asic_miner} ->
         Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index_channel",
           {:asic_miner_index_channel, :create_or_update, asic_miner})
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_channel:#{asic_miner.id}",
+          {:asic_miner_channel, :update_asic_miner, asic_miner})
         Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
           {:flash_index, :info, "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} updated successfully!"})
         socket_mod = push_patch(socket, to: socket.assigns.patch)

@@ -1,0 +1,106 @@
+<div class="col-span-8 xl:col-span-5
+  mx-4 xl:ml-4 xl:mr-0
+  p-4 mb-4
+  bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">Hashrate</h3>
+
+  <div class="overflow-hidden shadow">
+    <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+      <thead class="bg-gray-100 dark:bg-gray-700">
+        <tr>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Hashboard No.
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            5-minute hashrate
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            30-minute hashrate
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Temp. Sensor 1
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Temp.  Sensor 2
+          </th>
+
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            Hashboard 1
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_1_hashrate_5_min) %> <%= @asic_miner_log.hashrate_uom %>
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_1_hashrate_30_min) %> <%= @asic_miner_log.hashrate_uom %>
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_1_temp_1) %> &#8451;
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_1_temp_2) %> &#8451;
+          </td>
+        </tr>
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            Hashboard 2
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_2_hashrate_5_min) %> <%= @asic_miner_log.hashrate_uom %>
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_2_hashrate_30_min) %> <%= @asic_miner_log.hashrate_uom %>
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_2_temp_1) %> &#8451;
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_2_temp_2) %> &#8451;
+          </td>
+        </tr>
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            Hashboard 3
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_3_hashrate_5_min) %> <%= @asic_miner_log.hashrate_uom %>
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_3_hashrate_30_min) %> <%= @asic_miner_log.hashrate_uom %>
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_3_temp_1) %> &#8451;
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <%= Kernel.round(@asic_miner_log.hashboard_3_temp_2) %> &#8451;
+          </td>
+        </tr>
+
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <b>Total</b>
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <b>
+              <%= Kernel.round(@asic_miner_log.hashrate_5_min) %> <%= @asic_miner_log.hashrate_uom %>
+            </b>
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <b>
+              <%= Kernel.round(@asic_miner_log.hashrate_30_min) %> <%= @asic_miner_log.hashrate_uom %>
+            </b>
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

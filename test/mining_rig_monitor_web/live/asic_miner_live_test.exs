@@ -96,7 +96,10 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
       |> log_in_user(user_fixture())
       |> live(~p"/asic_miners/#{asic_miner}")
 
-      assert html =~ "Show Asic miner"
+      assert html =~ "General Information"
+      assert html =~ "Hashrate"
+      assert html =~ "Fan Speed"
+      assert html =~ "Mining Pool"
       assert html =~ asic_miner.name
     end
   end

@@ -1,23 +1,11 @@
-<.header>
-  Asic miner {@asic_miner.id}
-  <:subtitle>This is a asic_miner record from your database.</:subtitle>
-  <:actions>
-    <.link patch={~p"/asic_miners/#{@asic_miner}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit asic_miner</.button>
-    </.link>
-  </:actions>
-</.header>
+<._show_top asic_miner={@asic_miner}/>
 
-<.list>
-  <:item title="Name">{@asic_miner.name}</:item>
-  <:item title="Api code">{@asic_miner.api_code}</:item>
-  <:item title="Firmware version">{@asic_miner.firmware_version}</:item>
-  <:item title="Software version">{@asic_miner.software_version}</:item>
-  <:item title="Model">{@asic_miner.model}</:item>
-  <:item title="Model variant">{@asic_miner.model_variant}</:item>
-</.list>
+<._show_general_information asic_miner={@asic_miner} asic_miner_log={@asic_miner_log} />
 
-<.back navigate={~p"/asic_miners"}>Back to asic_miners</.back>
+<div class="grid grid-cols-8 gap-2">
+  <._show_hashrate_table asic_miner_log={@asic_miner_log} />
+  <._show_fan_speed_table asic_miner_log={@asic_miner_log} />
+</div>
 
 <.modal :if={@live_action == :edit} id="asic_miner-modal" show on_cancel={JS.patch(~p"/asic_miners/#{@asic_miner}")}>
   <.live_component
@@ -29,3 +17,5 @@
     patch={~p"/asic_miners/#{@asic_miner}"}
   />
 </.modal>
+
+<._show_pool_table asic_miner_log={@asic_miner_log} />

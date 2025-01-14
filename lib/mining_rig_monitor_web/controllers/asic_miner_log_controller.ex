@@ -11,6 +11,9 @@ defmodule MiningRigMonitorWeb.AsicMinerLogController do
     case AsicMinerLogs.create_asic_miner_log(asic_miner_log_params_mod) do
       {:ok, asic_miner_log} ->
         MiningRigMonitor.GenServer.AsicMinerOperationalIndex.put(asic_miner_log)
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub,
+          "asic_miner_operational_channel:#{asic_miner.id}",
+          {:asic_miner_operational_channel , :create_asic_miner_log, asic_miner_log})
         json(conn, nil)
       {:error, changeset} -> {:error, changeset}
     end
