@@ -3,8 +3,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLogControllerTest do
 
   import MiningRigMonitor.AsicMinerLogsFixtures
 
-  alias MiningRigMonitor.AsicMinerLogs.AsicMinerLog
-
   @create_attrs %{
 
   }

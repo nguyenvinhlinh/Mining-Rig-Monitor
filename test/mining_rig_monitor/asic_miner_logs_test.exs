@@ -16,7 +16,7 @@ defmodule MiningRigMonitor.AsicMinerLogsTest do
 
     test "create_asic_miner_log/1 with valid data creates a asic_miner_log", %{asic_miner: asic_miner} do
       valid_attrs = %{"asic_miner_id" => asic_miner.id}
-      assert {:ok, %AsicMinerLog{} = asic_miner_log} = AsicMinerLogs.create_asic_miner_log(valid_attrs)
+      assert {:ok, %AsicMinerLog{} = _asic_miner_log} = AsicMinerLogs.create_asic_miner_log(valid_attrs)
     end
 
     test "create_asic_miner_log/1 with invalid data returns error changeset" do
