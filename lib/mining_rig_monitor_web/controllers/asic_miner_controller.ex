@@ -15,6 +15,9 @@ defmodule MiningRigMonitorWeb.AsicMinerController do
           {:flash_index, :info, "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} is activated!"})
         Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index_channel",
           {:asic_miner_index_channel, :create_or_update, asic_miner})
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub,
+          "asic_miner_channel:#{asic_miner.id}",
+          {:asic_miner_channel , :update_asic_miner, asic_miner})
 
         json(conn, nil)
       {:error, changeset} -> {:error, changeset}

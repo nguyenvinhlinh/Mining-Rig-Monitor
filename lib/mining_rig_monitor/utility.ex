@@ -2,6 +2,7 @@ defmodule  MiningRigMonitor.Utility do
   require Logger
 
   def unify_hashrate_uom("g"), do: "GH/s"
+  def unify_hashrate_uom("G"), do: "GH/s"
   def unify_hashrate_uom(_), do: "H/s"
 
   def unify_hashrate_to_hash_second(hash, "g") when Kernel.is_number(hash) do
@@ -62,4 +63,15 @@ defmodule  MiningRigMonitor.Utility do
   def beautify_power_walt({power, "KW"}) do
     {power, "KW"}
   end
+
+  def beautify_uptime(nil), do: "OFFLINE"
+  def beautify_uptime("OFFLINE"), do: "OFFLINE"
+  def beautify_uptime(""), do: "OFFLINE"
+
+  def beautify_uptime(uptime) do
+    [e1, e2, e3, _e4] = String.split(uptime, ":")
+    "#{e1} day(s), #{e2} hour(s), #{e3} minute(s)"
+  end
+
+
 end
