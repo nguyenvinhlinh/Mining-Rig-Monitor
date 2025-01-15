@@ -35,18 +35,6 @@ defmodule MiningRigMonitorWeb.Router do
 
   scope "/", MiningRigMonitorWeb do
     pipe_through [:browser, :require_authenticated_user]
-
-    live "/mining_rigs", MiningRigLive.Index, :index
-    live "/mining_rigs/new", MiningRigLive.Index, :new
-    live "/mining_rigs/:id/edit", MiningRigLive.Index, :edit
-    live "/mining_rigs/:id/pre_delete", MiningRigLive.Index, :pre_delete
-
-    live "/mining_rigs/:id", MiningRigLive.Show, :show
-    live "/mining_rigs/:id/show/edit", MiningRigLive.Show, :edit
-
-    live "/mining_rigs/asic/:id", MiningRigLive.ShowAsic, :show
-    # END TOBE REMOVE
-
     live "/asic_miners", AsicMinerLive.Index, :index
     live "/asic_miners/new", AsicMinerLive.Index, :new
     live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
