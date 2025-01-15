@@ -142,8 +142,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     |> assign(:aggregated_asic_miner_alive, aggregated_asic_miner_alive)
     |> stream(:asic_miner_activated_list, asic_miner_activated_list)
 
-
-
     {:noreply, new_socket}
   end
 
