@@ -30,7 +30,6 @@ defmodule MiningRigMonitorWeb.Router do
     pipe_through [:browser, :no_nav_layout]
 
     get "/", PageController, :home
-    get "/flowbite", FlowbiteController, :flowbite
   end
 
   scope "/", MiningRigMonitorWeb do
