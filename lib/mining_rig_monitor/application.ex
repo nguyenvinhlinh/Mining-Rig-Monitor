@@ -10,7 +10,23 @@ defmodule MiningRigMonitor.Application do
 
   @impl true
   def start(_type, _args) do
-    children = [
+    children = children_list_for(@current_env)
+    # See https://hexdocs.pm/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: MiningRigMonitor.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+
+  # Tell Phoenix to update the endpoint configuration
+  # whenever the application is updated.
+  @impl true
+  def config_change(changed, _new, removed) do
+    MiningRigMonitorWeb.Endpoint.config_change(changed, removed)
+    :ok
+  end
+
+  def children_list_for(:dev) do
+    [
       MiningRigMonitorWeb.Telemetry,
       MiningRigMonitor.Repo,
       {DNSCluster, query: Application.get_env(:mining_rig_monitor, :dns_cluster_query) || :ignore},
@@ -22,29 +38,18 @@ defmodule MiningRigMonitor.Application do
       # Start to serve requests, typically the last entry
       {AsicMinerOperationalIndex, nil},
       MiningRigMonitorWeb.Endpoint,
+      {MiningRigMonitor.Simulation.AsicMinerLogGenerator, nil}
     ]
-
-    children_mod =
-    if @current_env == :dev do
-      children ++ [
-        {MiningRigMonitor.Simulation.AsicMinerLogGenerator, nil}
-      ]
-    else
-      children
-    end
-
-
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: MiningRigMonitor.Supervisor]
-    Supervisor.start_link(children_mod, opts)
   end
 
-  # Tell Phoenix to update the endpoint configuration
-  # whenever the application is updated.
-  @impl true
-  def config_change(changed, _new, removed) do
-    MiningRigMonitorWeb.Endpoint.config_change(changed, removed)
-    :ok
+  def children_list_for(:prod) do
+    [
+      MiningRigMonitorWeb.Telemetry,
+      MiningRigMonitor.Repo,
+      {DNSCluster, query: Application.get_env(:mining_rig_monitor, :dns_cluster_query) || :ignore},
+      {Phoenix.PubSub, name: MiningRigMonitor.PubSub},
+      {AsicMinerOperationalIndex, nil},
+      MiningRigMonitorWeb.Endpoint
+    ]
   end
 end
