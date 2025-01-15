@@ -17,11 +17,6 @@ defmodule MiningRigMonitorWeb.Router do
     plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root_no_nav}
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-    plug MiningRigMonitorWeb.Plugs.MiningRigCodeAuthentication
-  end
-
   pipeline :api_asic_miner do
     plug :accepts, ["json"]
     plug MiningRigMonitorWeb.Plugs.ApiCodeAuthentication, :asic_miner
@@ -48,14 +43,6 @@ defmodule MiningRigMonitorWeb.Router do
       post "/logs",  MiningRigMonitorWeb.AsicMinerLogController, :create
     end
   end
-
-
-
-
-  # Other scopes may use custom stacks.
-  # scope "/api", MiningRigMonitorWeb do
-  #   pipe_through :api
-  # end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:mining_rig_monitor, :dev_routes) do
