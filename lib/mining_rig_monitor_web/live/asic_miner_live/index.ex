@@ -27,6 +27,12 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     aggregated_total_power = "Sync..."
     aggregated_asic_miner_alive = "Sync..."
 
+    if connected?(socket) do
+      Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "asic_miner_index_channel")
+      Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "flash_index")
+      Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "asic_miner_index_operational_channel")
+    end
+
     new_socket = socket
     |> stream(:asic_miner_activated_list, asic_miner_activated_list)
     |> stream(:asic_miner_not_activated_list, asic_miner_not_activated_list)
@@ -34,10 +40,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     |> assign(:aggregated_total_power, aggregated_total_power)
     |> assign(:aggregated_total_power_uom, nil)
     |> assign(:aggregated_asic_miner_alive, aggregated_asic_miner_alive)
-
-    Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "asic_miner_index_channel")
-    Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "flash_index")
-    Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "asic_miner_index_operational_channel")
 
     {:ok, new_socket}
   end
