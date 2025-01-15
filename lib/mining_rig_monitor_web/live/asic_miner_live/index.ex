@@ -3,6 +3,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   alias MiningRigMonitor.AsicMiners
   alias MiningRigMonitor.AsicMiners.AsicMiner
+  alias MiningRigMonitor.AsicMinerLogs.AsicMinerLog
   alias MiningRigMonitor.Utility
 
   embed_templates "index_html/*"
@@ -157,60 +158,62 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   def get_asic_miner_activated_list(asic_miner_map, asic_miner_operational_map) do
     Enum.map(asic_miner_map, fn({asic_miner_id, asic_miner}) ->
-      asic_miner_op = Map.get(asic_miner_operational_map, asic_miner_id, %{})
-      coin = Map.get(asic_miner_op, :coin_name, "----") |> String.downcase() |> String.capitalize()
-
-      hashrate =
-      if Kernel.is_nil(Map.get(asic_miner_op, :hashrate_5_min, nil)) do
-        "----"
-      else
-        "#{Kernel.round(asic_miner_op.hashrate_5_min)} #{asic_miner_op.hashrate_uom}"
-      end
-      power =
-      if Kernel.is_nil(Map.get(asic_miner_op, :power, nil)) do
-        "----"
-      else
-        "#{Map.get(asic_miner_op, :power)} Walt"
-      end
-
-      max_fan = [Map.get(asic_miner_op, :fan_1_speed, nil),
-                 Map.get(asic_miner_op, :fan_2_speed, nil),
-                 Map.get(asic_miner_op, :fan_3_speed, nil),
-                 Map.get(asic_miner_op, :fan_4_speed, nil)]
-                 |> Enum.max()
-      max_fan_mod = if Kernel.is_nil(max_fan), do: "----", else: "#{max_fan} RPM"
-
-
-
-      max_hashboard_temp = [Map.get(asic_miner_op,  :hashboard_1_temp_1, nil),
-                            Map.get(asic_miner_op,  :hashboard_1_temp_2, nil),
-                            Map.get(asic_miner_op,  :hashboard_2_temp_1, nil),
-                            Map.get(asic_miner_op,  :hashboard_2_temp_2, nil),
-                            Map.get(asic_miner_op,  :hashboard_3_temp_1, nil),
-                            Map.get(asic_miner_op,  :hashboard_3_temp_2, nil)]
-                            |> Enum.max()
-      max_hashboard_temp_mod = if Kernel.is_nil(max_hashboard_temp), do: "----", else: "#{max_hashboard_temp} ℃"
-
-
-      uptime =
-      if Kernel.is_nil(Map.get(asic_miner_op, :uptime, nil)) do
-        "OFFLINE"
-      else
-        [e1, e2, e3, _e4] = String.split(asic_miner_op.uptime, ":")
-        "#{e1} days, #{e2} hours, #{e3} minutes"
-      end
-
-      %{
-        id: asic_miner.id,
-        name: asic_miner.name,
-        hashrate: hashrate,
-        coin: coin,
-        power: power,
-        max_hashboard_temp: max_hashboard_temp_mod,
-        max_fan: max_fan_mod,
-        uptime: uptime
-      }
-
+      asic_miner_log = Map.get(asic_miner_operational_map, asic_miner_id, %{})
+      beautify_activated_asic_miner(asic_miner, asic_miner_log)
     end)
+  end
+
+  def beautify_activated_asic_miner(%AsicMiner{} = asic_miner, %AsicMinerLog{}=asic_miner_log) do
+    coin = Map.get(asic_miner_log, :coin_name, "----") |> String.downcase() |> String.capitalize()
+
+    hashrate =
+    if Kernel.is_nil(Map.get(asic_miner_log, :hashrate_5_min, nil)) do
+      "----"
+    else
+      "#{Kernel.round(asic_miner_log.hashrate_5_min)} #{asic_miner_log.hashrate_uom}"
+    end
+
+    power =
+    if Kernel.is_nil(Map.get(asic_miner_log, :power, nil)) do
+      "----"
+    else
+        "#{Map.get(asic_miner_log, :power)} Walt"
+    end
+
+    max_fan = [Map.get(asic_miner_log, :fan_1_speed, nil),
+               Map.get(asic_miner_log, :fan_2_speed, nil),
+               Map.get(asic_miner_log, :fan_3_speed, nil),
+               Map.get(asic_miner_log, :fan_4_speed, nil)]
+               |> Enum.max()
+    max_fan_mod = if Kernel.is_nil(max_fan), do: "----", else: "#{max_fan} RPM"
+
+    max_hashboard_temp = [Map.get(asic_miner_log,  :hashboard_1_temp_1, nil),
+                          Map.get(asic_miner_log,  :hashboard_1_temp_2, nil),
+                          Map.get(asic_miner_log,  :hashboard_2_temp_1, nil),
+                          Map.get(asic_miner_log,  :hashboard_2_temp_2, nil),
+                          Map.get(asic_miner_log,  :hashboard_3_temp_1, nil),
+                          Map.get(asic_miner_log,  :hashboard_3_temp_2, nil)]
+                          |> Enum.max()
+    max_hashboard_temp_mod = if Kernel.is_nil(max_hashboard_temp), do: "----", else: "#{max_hashboard_temp} ℃"
+
+
+    uptime =
+    if Kernel.is_nil(Map.get(asic_miner_log, :uptime, nil)) do
+      "OFFLINE"
+    else
+      [e1, e2, e3, _e4] = String.split(asic_miner_log.uptime, ":")
+      "#{e1} days, #{e2} hours, #{e3} minutes"
+    end
+
+    %{
+      id: asic_miner.id,
+      name: asic_miner.name,
+      hashrate: hashrate,
+      coin: coin,
+      power: power,
+      max_hashboard_temp: max_hashboard_temp_mod,
+      max_fan: max_fan_mod,
+      uptime: uptime
+      }
   end
 end
