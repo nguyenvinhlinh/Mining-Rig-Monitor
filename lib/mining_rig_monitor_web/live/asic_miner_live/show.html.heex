@@ -7,15 +7,6 @@
   <._show_fan_speed_table asic_miner_log={@asic_miner_log} />
 </div>
 
-<.modal :if={@live_action == :edit} id="asic_miner-modal" show on_cancel={JS.patch(~p"/asic_miners/#{@asic_miner}")}>
-  <.live_component
-    module={MiningRigMonitorWeb.AsicMinerLive.FormComponent}
-    id={@asic_miner.id}
-    title={@page_title}
-    action={@live_action}
-    asic_miner={@asic_miner}
-    patch={~p"/asic_miners/#{@asic_miner}"}
-  />
-</.modal>
-
-<._show_pool_table asic_miner_log={@asic_miner_log} />
+<div class="grid grid-cols-8 gap-2">
+  <._show_pool_table asic_miner_log={@asic_miner_log} />
+</div>

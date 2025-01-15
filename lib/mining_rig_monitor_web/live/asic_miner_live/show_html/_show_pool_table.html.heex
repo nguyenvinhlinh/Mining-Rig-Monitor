@@ -1,16 +1,15 @@
-<div class="mx-4
-            p-4 mb-4
-            bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-  <h3 class="mb-4 text-xl font-semibold dark:text-white">Mining Pool</h3>
-  <div class="overflow-auto shadow">
+<div class="col-span-8 2xl:col-span-6
+  mx-4
+  p-4 mb-4
+  bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">Mining Pools</h3>
+
+  <div class="hidden lg:block overflow-auto shadow">
     <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
       <thead class="bg-gray-100 dark:bg-gray-700">
         <tr>
           <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-            Pool Address
-          </th>
-          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-            User
+            Pool Address / User
           </th>
           <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
             State
@@ -26,10 +25,11 @@
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" >
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            <%= @asic_miner_log.pool_1_address %>
-          </td>
-          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            <%= @asic_miner_log.pool_1_user %>
+            <ul class="list-disc pl-2">
+              <li> Pool: <%= @asic_miner_log.pool_1_address %> </li>
+              <li> User: <%= @asic_miner_log.pool_1_user %>    </li>
+            </ul>
+
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <%= @asic_miner_log.pool_1_state %>
@@ -43,10 +43,10 @@
         </tr>
         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" >
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            <%= @asic_miner_log.pool_2_address %>
-          </td>
-          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            <%= @asic_miner_log.pool_2_user %>
+            <ul class="list-disc pl-2">
+              <li> Pool: <%= @asic_miner_log.pool_2_address %> </li>
+              <li> User: <%= @asic_miner_log.pool_2_user %>    </li>
+            </ul>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <%= @asic_miner_log.pool_2_state %>
@@ -60,10 +60,10 @@
         </tr>
         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            <%= @asic_miner_log.pool_3_address %>
-          </td>
-          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            <%= @asic_miner_log.pool_3_user %>
+            <ul class="list-disc pl-2">
+              <li> Pool: <%= @asic_miner_log.pool_3_address %> </li>
+              <li> User: <%= @asic_miner_log.pool_3_user %>    </li>
+            </ul>
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <%= @asic_miner_log.pool_3_state %>
@@ -73,6 +73,54 @@
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <%= @asic_miner_log.pool_3_rejected_share %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lg:hidden overflow-auto shadow">
+    <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+      <thead class="bg-gray-100 dark:bg-gray-700">
+        <tr>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Pool Address Info
+          </th>
+
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" >
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <ul class="list-disc pl-2">
+              <li class="text-pretty"> Address: <%= @asic_miner_log.pool_1_address %>  </li>
+              <li class="text-pretty"> User: <%= @asic_miner_log.pool_1_user %> </li>
+              <li> State: <%= @asic_miner_log.pool_1_state %></li>
+              <li> Accepted Share: <%= @asic_miner_log.pool_1_accepted_share %> </li>
+              <li> Rejected Share: <%= @asic_miner_log.pool_1_rejected_share %> </li>
+            </ul>
+          </td>
+        </tr>
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" >
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <ul class="list-disc pl-2">
+              <li class="text-pretty"> Address: <%= @asic_miner_log.pool_2_address %>  </li>
+              <li class="text-pretty"> User: <%= @asic_miner_log.pool_2_user %> </li>
+              <li> State: <%= @asic_miner_log.pool_2_state %></li>
+              <li> Accepted Share: <%= @asic_miner_log.pool_2_accepted_share %> </li>
+              <li> Rejected Share: <%= @asic_miner_log.pool_2_rejected_share %> </li>
+            </ul>
+          </td>
+        </tr>
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" >
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            <ul class="list-disc pl-2">
+              <li class="text-pretty"> Address: <%= @asic_miner_log.pool_3_address %>  </li>
+              <li class="text-pretty"> User: <%= @asic_miner_log.pool_3_user %> </li>
+              <li> State: <%= @asic_miner_log.pool_3_state %></li>
+              <li> Accepted Share: <%= @asic_miner_log.pool_3_accepted_share %> </li>
+              <li> Rejected Share: <%= @asic_miner_log.pool_3_rejected_share %> </li>
+            </ul>
           </td>
         </tr>
       </tbody>

@@ -52,10 +52,12 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Show do
   def beautify_asic_miner_log(%AsicMinerLog{} = asic_miner_log) do
     uptime_mod = Utility.beautify_uptime(asic_miner_log.uptime)
     hashrate_uom_mod = Utility.unify_hashrate_uom(asic_miner_log.hashrate_uom)
+    coin_name_mod = asic_miner_log.coin_name |> String.downcase() |> String.capitalize()
 
     asic_miner_log_mod = asic_miner_log
     |> Map.put(:uptime, uptime_mod)
     |> Map.put(:hashrate_uom, hashrate_uom_mod)
+    |> Map.put(:coin_name, coin_name_mod)
   end
 
 
