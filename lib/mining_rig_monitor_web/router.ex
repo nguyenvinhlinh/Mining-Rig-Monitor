@@ -25,6 +25,7 @@ defmodule MiningRigMonitorWeb.Router do
     pipe_through [:browser, :no_nav_layout]
 
     get "/", PageController, :home
+
   end
 
   scope "/", MiningRigMonitorWeb do
@@ -37,6 +38,8 @@ defmodule MiningRigMonitorWeb.Router do
   end
 
   scope "/api/v1" do
+    get "/ping", MiningRigMonitorWeb.PingPongController, :ping
+
     scope "/asic_miners" do
       pipe_through :api_asic_miner
       post "/specs", MiningRigMonitorWeb.AsicMinerController, :update_asic_miner_specs
