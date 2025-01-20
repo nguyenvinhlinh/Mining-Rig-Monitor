@@ -161,7 +161,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     end)
   end
 
-  def beautify_activated_asic_miner(%AsicMiner{} = asic_miner, %AsicMinerLog{}=asic_miner_log) do
+  def beautify_activated_asic_miner(%AsicMiner{} = asic_miner, %{}=asic_miner_log) do
     coin = Map.get(asic_miner_log, :coin_name, "----") |> String.downcase() |> String.capitalize()
 
     hashrate =
