@@ -15,10 +15,13 @@ info:
     This is an API for Mining Rig Monitor Software.
 
 tags:
+  - name: Ping Pong
+    description: "Ping Pong"
   - name: ASIC Miner
     description: "ASIC Miner API"
   - name: CPU/GPU Miner
     description: "CPU/GPU Miner API"
+
 
 servers:
   - url: http://127.0.0.1:4000/api/v1
@@ -26,6 +29,9 @@ servers:
   - url: https://mining_rig_monitor_staging.hexalink.xyz/api/v1
   - url: https://mining_rig_monitor.hexalink.xyz/api/v1
 paths:
+  '/ping':
+    $ref: 'paths/ping.yaml'
+
   '/asic_miners/specs':
     $ref: 'paths/asic_specs.yaml'
 
