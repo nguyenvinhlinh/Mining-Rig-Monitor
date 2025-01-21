@@ -17,7 +17,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
       %{
         id: e.id,
         name: e.name,
-        hashrate: "Sync...",
+        hashrate_5_min: "Sync...",
+        hashrate_30_min: "Sync...",
         coin: "Sync...",
         power: "Sync...",
         max_hashboard_temp: "Sync...",
@@ -164,11 +165,18 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
   def beautify_activated_asic_miner(%AsicMiner{} = asic_miner, %{}=asic_miner_log) do
     coin = Map.get(asic_miner_log, :coin_name, "----") |> String.downcase() |> String.capitalize()
 
-    hashrate =
+    hashrate_5_min =
     if Kernel.is_nil(Map.get(asic_miner_log, :hashrate_5_min, nil)) do
       "----"
     else
       "#{Kernel.round(asic_miner_log.hashrate_5_min)} #{asic_miner_log.hashrate_uom}"
+    end
+
+    hashrate_30_min =
+    if Kernel.is_nil(Map.get(asic_miner_log, :hashrate_30_min, nil)) do
+      "----"
+    else
+      "#{Kernel.round(asic_miner_log.hashrate_30_min)} #{asic_miner_log.hashrate_uom}"
     end
 
     power =
@@ -206,7 +214,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     %{
       id: asic_miner.id,
       name: asic_miner.name,
-      hashrate: hashrate,
+      hashrate_5_min: hashrate_5_min,
+      hashrate_30_min: hashrate_30_min,
       coin: coin,
       power: power,
       max_hashboard_temp: max_hashboard_temp_mod,
