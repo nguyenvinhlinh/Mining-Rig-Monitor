@@ -82,7 +82,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
         asic_miner_mod = %{
         id: asic_miner.id,
         name: asic_miner.name,
-        hashrate: "Sync...",
+        hashrate_5_min: "Sync...",
+        hashrate_30_min: "Sync...",
         coin: "Sync...",
         power: "Sync...",
         max_hashboard_temp: "Sync...",
