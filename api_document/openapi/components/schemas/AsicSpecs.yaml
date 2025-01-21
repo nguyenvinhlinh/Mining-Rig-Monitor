@@ -24,6 +24,5 @@ properties:
       - ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg
 required:
   - model
-  - model_variant
   - firmware_version
   - software_version
