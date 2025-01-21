@@ -22,7 +22,6 @@ tags:
   - name: CPU/GPU Miner
     description: "CPU/GPU Miner API"
 
-
 servers:
   - url: http://127.0.0.1:4000/api/v1
   - url: https://mining_rig_monitor_dev.hexalink.xyz/api/v1
@@ -44,18 +43,6 @@ paths:
   '/cpu_gpu_miners/logs':
     $ref: 'paths/cpu_gpu_monitor_data.yaml'
 
-  # '/users/{username}':
-  #   $ref: 'paths/users_{username}.yaml'
-  # '/user':
-  #   $ref: 'paths/user.yaml'
-  # '/user/list':
-  #   $ref: 'paths/user-status.yaml'
-  # /pathItem:
-  #   $ref: paths/pathItem.yaml
-  # /pathItemWithExamples:
-  #   $ref: paths/pathItemWithExamples.yaml
-  # '/echo':
-  #   $ref: 'paths/echo.yaml'
 components:
   securitySchemes:
     api_code:
