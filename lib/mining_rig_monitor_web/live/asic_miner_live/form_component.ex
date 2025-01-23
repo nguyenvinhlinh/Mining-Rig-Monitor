@@ -55,6 +55,4 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.FormComponent do
         {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
-
-  defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
 end

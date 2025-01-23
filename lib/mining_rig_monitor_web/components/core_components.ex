@@ -492,7 +492,7 @@ defmodule MiningRigMonitorWeb.CoreComponents do
         >
           <tr :for={row <- @rows} id={@row_id && @row_id.(row)} class="hover:bg-gray-100 dark:hover:bg-gray-700">
             <td
-              :for={{col, i} <- Enum.with_index(@col)}
+              :for={{col, _i} <- Enum.with_index(@col)}
               phx-click={@row_click && @row_click.(row)}
               class={["max-w-sm p-4 overflow-hidden text-base font-medium text-gray-900 truncate whitespace-nowrap dark:text-white ", @row_click && "hover:cursor-pointer", col[:class]]}
             >

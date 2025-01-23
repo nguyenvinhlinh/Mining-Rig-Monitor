@@ -3,7 +3,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   alias MiningRigMonitor.AsicMiners
   alias MiningRigMonitor.AsicMiners.AsicMiner
-  alias MiningRigMonitor.AsicMinerLogs.AsicMinerLog
   alias MiningRigMonitor.Utility
 
   embed_templates "index_html/*"

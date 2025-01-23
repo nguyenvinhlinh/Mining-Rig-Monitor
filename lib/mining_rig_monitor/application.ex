@@ -2,15 +2,19 @@ defmodule MiningRigMonitor.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
-  @current_env Mix.env()
   use Application
-
-
   alias MiningRigMonitor.GenServer.AsicMinerOperationalIndex
 
   @impl true
   def start(_type, _args) do
-    children = children_list_for(@current_env)
+    children = [
+      MiningRigMonitorWeb.Telemetry,
+      MiningRigMonitor.Repo,
+      {DNSCluster, query: Application.get_env(:mining_rig_monitor, :dns_cluster_query) || :ignore},
+      {Phoenix.PubSub, name: MiningRigMonitor.PubSub},
+      {AsicMinerOperationalIndex, nil},
+      MiningRigMonitorWeb.Endpoint
+    ]
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: MiningRigMonitor.Supervisor]
@@ -23,33 +27,5 @@ defmodule MiningRigMonitor.Application do
   def config_change(changed, _new, removed) do
     MiningRigMonitorWeb.Endpoint.config_change(changed, removed)
     :ok
-  end
-
-  def children_list_for(:dev) do
-    [
-      MiningRigMonitorWeb.Telemetry,
-      MiningRigMonitor.Repo,
-      {DNSCluster, query: Application.get_env(:mining_rig_monitor, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: MiningRigMonitor.PubSub},
-      # Start the Finch HTTP client for sending emails
-      {Finch, name: MiningRigMonitor.Finch},
-      # Start a worker by calling: MiningRigMonitor.Worker.start_link(arg)
-      # {MiningRigMonitor.Worker, arg},
-      # Start to serve requests, typically the last entry
-      {AsicMinerOperationalIndex, nil},
-      MiningRigMonitorWeb.Endpoint,
-      {MiningRigMonitor.Simulation.AsicMinerLogGenerator, nil}
-    ]
-  end
-
-  def children_list_for(:prod) do
-    [
-      MiningRigMonitorWeb.Telemetry,
-      MiningRigMonitor.Repo,
-      {DNSCluster, query: Application.get_env(:mining_rig_monitor, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: MiningRigMonitor.PubSub},
-      {AsicMinerOperationalIndex, nil},
-      MiningRigMonitorWeb.Endpoint
-    ]
   end
 end
