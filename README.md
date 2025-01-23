@@ -1,26 +1,31 @@
-# MiningRigMonitor
+# Mining Rig Monitor
 
-To start your Phoenix server:
+At first, I am inspired of many mining rig monitor software such as Minerstats, HiveOS, BrainOS. They do good jobs, They really help the community so much, the crypto industry really appriciate their contribution. In particular, I am a minerstats user, and I love their software! Really cool! This software is an opensource version of Minerstat which do monitor mining rigs.
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+For a mining farm, they can selfhost this software and play with it!
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+If someone could create such a great thing and opensource it (`Bitcoin`, `Monero`, `Xmrig`, `Linux kernel`, and many many thing I can't name....), yes, this piece of software can be opensource too!
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+I will try my best to deliver it, and I really hope so! Or it's just another time, I would fail! but it's worth a try!
 
-## Learn more
+----
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+There are two three tiers regarding monitoring mining rigs.
 
-# Database Diagram
-Please check `/diagrams/db.dia`
+- **Commander**(this software)
+- **Sentry**
+- **Mining rig**:
+  - **GPU miner**
+  - **CPU miner**
+  - **ASIC miner**
 
-![2024-08-09 Database Diagram](diagrams/dist/db.png)
+This source code is focusing on the **commander**. There is one **commander** for mining farm. **A sentry** is installed on each `gpu miner/ cpu miner`. On the other hand, **one sentry** can monitor **many asic miners**.
+
+For software architecture/project management, please visit this repo. [https://github.com/nguyenvinhlinh/Mining-Rig-Monitor-Document](https://github.com/nguyenvinhlinh/Mining-Rig-Monitor-Document).
+
+Thank you!
+
+
 
 # Q&A
 1. How to get info from nvidia-smi
