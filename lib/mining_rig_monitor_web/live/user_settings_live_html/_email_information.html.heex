@@ -1,0 +1,28 @@
+<div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+  <h3 class="mb-4 text-xl font-semibold dark:text-white"> Email information</h3>
+    <.simple_form
+      for={@email_form}
+      id="email_form"
+      phx-submit="update_email"
+      phx-change="validate_email"
+    >
+      <.input field={@email_form[:email]} type="email" label="Email" required />
+      <br>
+      <.input
+        field={@email_form[:current_password]}
+        name="current_password"
+        id="current_password_for_email"
+        type="password"
+        label="Current password"
+        value={@email_form_current_password}
+        required
+      />
+      <br>
+      <:actions>
+        <.button phx-disable-with="Changing..." class="w-full px-5 py-3
+          text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800
+          focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700
+          dark:focus:ring-blue-800">Change Email</.button>
+      </:actions>
+    </.simple_form>
+</div>

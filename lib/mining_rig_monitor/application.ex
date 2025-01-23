@@ -2,8 +2,8 @@ defmodule MiningRigMonitor.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
-
   use Application
+  alias MiningRigMonitor.GenServer.AsicMinerOperationalIndex
 
   @impl true
   def start(_type, _args) do
@@ -12,14 +12,9 @@ defmodule MiningRigMonitor.Application do
       MiningRigMonitor.Repo,
       {DNSCluster, query: Application.get_env(:mining_rig_monitor, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: MiningRigMonitor.PubSub},
-      # Start the Finch HTTP client for sending emails
-      {Finch, name: MiningRigMonitor.Finch},
-      # Start a worker by calling: MiningRigMonitor.Worker.start_link(arg)
-      # {MiningRigMonitor.Worker, arg},
-      # Start to serve requests, typically the last entry
+      {AsicMinerOperationalIndex, nil},
       MiningRigMonitorWeb.Endpoint
     ]
-
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: MiningRigMonitor.Supervisor]

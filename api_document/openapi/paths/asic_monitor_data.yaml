@@ -1,0 +1,25 @@
+post:
+  tags:
+    - ASIC Miner
+  summary: Submit ASIC - monitor data
+  description: "This endpoint helps submitting an ASIC Monitor Data / Operation Data"
+  operationId: post-asic-monitor-data
+  security:
+    - api_code: []
+  responses:
+    '200':
+      description: OK with no response body
+
+    '401':
+      description: Invalid API_CODE
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/401_Unauthorized.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AsicMonitorData.yaml
+    description: "Asic monitor data"
+    required: true

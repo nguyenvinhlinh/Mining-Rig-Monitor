@@ -1,0 +1,56 @@
+<nav class="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+  <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center justify-start">
+        <button id="toggleSidebarMobile" aria-expanded="true" aria-controls="sidebar"
+          class="p-2 xl:hidden
+            text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100
+            focus:bg-gray-100 focus:ring-2 focus:ring-gray-100
+            dark:text-gray-400
+            dark:focus:bg-gray-700 dark:focus:ring-gray-700
+            dark:hover:bg-gray-700 dark:hover:text-white">
+          <.icon name="hero-bars-4-solid" id="toggleSidebarMobileHamburger" />
+          <.icon name="hero-x-mark-solid" id="toggleSidebarMobileClose" class="hidden"/>
+        </button>
+        <a href={~p(/)}  class="flex ml-2 md:mr-24">
+          <.icon name="hero-signal-solid" class="size-8" />
+          <span class="ml-1 self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Mining Rig Monitor</span>
+        </a>
+
+      </div>
+      <div class="flex items-center">
+        <div class="flex items-center ml-3">
+          <div>
+            <button type="button" class="flex text-sm  rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
+              <.icon name="hero-user-circle" class="size-8 " />
+            </button>
+          </div>
+
+          <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-2">
+            <div class="px-4 py-3" role="none">
+              <p class="text-md text-gray-900 dark:text-white" role="none">
+                <b>
+                  { @current_user.email }
+                </b>
+              </p>
+            </div>
+            <ul class="py-1" role="none">
+              <li>
+                <.link href={~p"/users/settings"}
+                  class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"  >
+                  Settings
+                </.link>
+              </li>
+                <li>
+                <.link href={~p"/users/log_out"} method="delete"
+                  class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" >
+                  Log out
+                </.link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

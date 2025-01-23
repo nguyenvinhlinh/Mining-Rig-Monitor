@@ -1,0 +1,21 @@
+<._index_top />
+
+<._index_overall_figures aggregated_coin_hashrate_map={@aggregated_coin_hashrate_map}
+    aggregated_total_power={@aggregated_total_power}
+    aggregated_total_power_uom={@aggregated_total_power_uom}
+    aggregated_asic_miner_alive={@aggregated_asic_miner_alive} />
+
+<._index_activated_asic_miner_table streams={@streams} />
+
+<._index_not_activated_asic_miner_table streams={@streams} />
+
+<.modal :if={@live_action in [:new, :edit]} id="asic_miner-modal" show on_cancel={JS.patch(~p"/asic_miners")}>
+  <.live_component
+    module={MiningRigMonitorWeb.AsicMinerLive.FormComponent}
+    id={@asic_miner.id || :new}
+    title={@page_title}
+    action={@live_action}
+    asic_miner={@asic_miner}
+    patch={~p"/asic_miners"}
+  />
+</.modal>

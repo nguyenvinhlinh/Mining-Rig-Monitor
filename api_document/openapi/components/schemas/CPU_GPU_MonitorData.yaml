@@ -1,0 +1,118 @@
+type: object
+properties:
+  cpu_1_temp:
+    description: >
+      **CPU 1** - Temterature in Celcius
+    type: float
+    example: 60
+  cpu_2_temp:
+    description: >
+      **CPU 2** - Temterature in Celcius
+    type: float
+    example: 62
+
+  gpu_1_core_temp:
+    description: >
+      **GPU 1** - Core Temterature in Celcius
+    type: float
+    example: 65
+
+  gpu_2_core_temp:
+    description: >
+      **GPU 2** - Core Temterature in Celcius
+    type: float
+    example: 60
+
+  gpu_3_core_temp:
+    description: >
+      **GPU 3** - Core Temterature in Celcius
+    type: float
+    example: 61
+
+  gpu_4_core_temp:
+    description: >
+      **GPU 4** - Mem Temterature in Celcius
+    type: float
+    example: 62
+
+  gpu_1_mem_temp:
+    description: >
+      **GPU 1** - Mem Temterature in Celcius
+    type: float
+    example: 63
+
+  gpu_2_mem_temp:
+    description: >
+      **GPU 2** - Mem Temterature in Celcius
+    type: float
+    example: 64
+
+  gpu_3_mem_temp:
+    description: >
+      **GPU 3** - Mem Temterature in Celcius
+    type: float
+    example: 61
+
+  gpu_4_mem_temp:
+    description: >
+      **GPU 4** - Mem Temterature in Celcius
+    type: float
+    example: 62
+
+  cpu_hashrate:
+    description: >
+      CPU Hashrate
+    type: float
+    example: 17.5
+
+  cpu_hashrate_uom:
+    description: >
+      CPU Hashrate - unit of measurement
+    type: string
+    example: kh/s
+
+  cpu_algorithm:
+    description: >
+      CPU Hashrate Algorithm
+    type: string
+    example: RandomX
+
+  gpu_1_hashrate:
+    description: >
+      **GPU 1** - Hashrate
+    type: float
+    example: 60
+
+  gpu_2_hashrate:
+    description: >
+      **GPU 2** - Hashrate
+    type: float
+    example: 60
+
+  gpu_3_hashrate:
+    description: >
+      **GPU 3** - Hashrate
+    type: float
+    example: 60
+
+  gpu_4_hashrate:
+    description: >
+      **GPU 4** - Hashrate
+    type: float
+    example: 60
+
+  gpu_hashrate_uom:
+    description: >
+      GPU hashrate - unit of measurement
+    type: string
+    example: MH/s
+
+  lan_ip:
+    description: LAN IP
+    type: string
+    example: 192.168.15.6
+
+  wan_ip:
+    description: WAN/PUBLIC/Internet IP
+    type: string
+    example: 54.66.85.99

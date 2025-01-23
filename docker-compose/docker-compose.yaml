@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  mining-rig-monitor-database:
+    image: postgres:13
+    ports:
+      - target: 5432
+        published: 15433
+        protocol: tcp
+        mode: host
+    environment:
+      POSTGRES_DB: mining_rig_monitor_local
+      POSTGRES_USER: mining_rig_monitor_local
+      POSTGRES_PASSWORD: mining_rig_monitor_local

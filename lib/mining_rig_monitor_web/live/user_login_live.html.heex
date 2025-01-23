@@ -1,0 +1,25 @@
+<div class="flex flex-col items-center justify-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
+  <a href="https://flowbite-admin-dashboard.vercel.app/" class="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
+    <img src="https://flowbite-admin-dashboard.vercel.app/images/logo.svg" class="mr-4 h-11" alt="FlowBite Logo">
+    <span>Mining Rig Monitor</span>
+  </a>
+  <!-- Card -->
+  <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+      Sign in to platform
+    </h2>
+    <.simple_form for={@form} id="login_form" action={~p"/users/log_in"} class="mt-8 space-y-6" phx-update="ignore">
+      <.input field={@form[:email]} type="email" placeholder="name@company.com" required="" label="Your email" />
+      <br>
+      <.input field={@form[:password]} type="password" placeholder="••••••••" required="" label="Your password"/>
+      <br>
+      <div class="flex items-start">
+        <div class="flex items-center h-5">
+          <.input field={@form[:remember_me]} type="checkbox" label="Remember me" />
+        </div>
+      </div>
+      <br/>
+      <button type="submit" class="block mx-auto w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
+    </.simple_form>
+  </div>
+</div>

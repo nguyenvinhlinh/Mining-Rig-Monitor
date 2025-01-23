@@ -1,0 +1,25 @@
+post:
+  tags:
+    - ASIC Miner
+  summary: Submit ASIC - specification
+  description: "This endpoint helps submitting an ASIC specification. This API should be called once time at boot."
+  operationId: post-asic-spec
+  security:
+    - api_code: []
+  responses:
+    '200':
+      description: OK with no response body
+
+    '401':
+      description: Invalid API_CODE
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/401_Unauthorized.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AsicSpecs.yaml
+    description: "Asic specification"
+    required: true

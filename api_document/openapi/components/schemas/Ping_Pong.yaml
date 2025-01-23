@@ -1,0 +1,7 @@
+type: object
+properties:
+  message:
+    description: message
+    type: string
+    examples:
+      - pong

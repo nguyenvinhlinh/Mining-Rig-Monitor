@@ -1,0 +1,14 @@
+{
+    "name": "acme-api",
+    "version": "1.0.0",
+    "dependencies": {
+        "@redocly/cli": "1.27.1"
+    },
+    "private": true,
+    "scripts": {
+        "start": "redocly preview-docs --port 8085",
+        "build": "redocly bundle -o dist/bundle.yaml",
+        "build-html": "redocly build-docs  --output dist/mining-rig-openapi.html",
+        "test": "redocly lint"
+    }
+}

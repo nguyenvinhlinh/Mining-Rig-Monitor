@@ -1,0 +1,302 @@
+type: object
+properties:
+  hashrate_5_min:
+    description: >
+      5 mins hashrate, in ASIC KS5L, check JSON key named `rtpow`
+    type: number
+    example: 13135
+  hashrate_30_min:
+    description: >
+      30 mins hashrate, in ASIC KS5L, check JSON key named `avgpow`
+    type: number
+    example: 8642
+  hashrate_uom:
+    description: >
+      Hashrate unit of measurement, in ASIC KS5L, check JSON key named `unit`
+    type: string
+    example: GH/s
+  pool_rejection_rate:
+    description: >
+      Pool rejection rate, in ASIC KS5L, check JSON key named `reject`
+    type: number
+    example: 0.0001
+  uptime:
+    description: >
+      Uptime, in ASIC KS5L, check JSON key named `runtime` in format: `days:hours:minutes:seconds`
+      example: "00:00:39:34". When submit to the `Mining Rig Monitor Server`, keep this format.
+
+
+      There is another idea of sending this value in second(long integer), but I would like to keep this value original.
+      I think another ASIC would follow the same format.
+    type: string
+    example: "07:23:50:20"
+  pool_1_address:
+    description: >
+      The first pool address, check JSON key named `addr`.
+    type: string
+    example: "stratum+tcp://asia1.kaspa-pool.org:4441"
+  pool_2_address:
+    description: >
+      The second pool address, check JSON key named `addr`.
+    type: string
+    example: "stratum+tcp://asia1.kaspa-pool.org:4441"
+  pool_3_address:
+    description: >
+      The third pool address, check JSON key named `addr`.
+    type: string
+    example: stratum+tcp://asia1.kaspa-pool.org:4441
+  pool_1_user:
+    description: >
+      The first pool's user address, check JSON key named `user`.
+    type: string
+    example: kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
+  pool_2_user:
+    description: >
+      The second pool's user address, check JSON key named `user`.
+    type: string
+    example: kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
+  pool_3_user:
+    description: >
+      The third pool's user address, check JSON key named `user`.
+    type: string
+    example: kaspa:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.worker_1
+  pool_1_state:
+    description: >
+      Connection state of ASIC to the first pool, check JSON key named `connect`.
+
+      - If `connect` == `1.0`, it's `Connected`
+
+      - If `connect` == `-1.0`, it's `Unconnected`
+    type: string
+    examples:
+      - Connected
+      - Unconnected
+  pool_2_state:
+    description: >
+      Connection state of ASIC to the second pool, check JSON key named `connect`.
+
+      - If `connect` == `1.0`, it's `Connected`
+
+      - If `connect` == `-1.0`, it's `Unconnected`
+    type: string
+    examples:
+      - Unconnected
+      - Connected
+  pool_3_state:
+    description: >
+      Connection state of ASIC to the third pool, check JSON key named `connect`.
+
+      - If `connect` == `1.0`, it's `Connected`
+
+      - If `connect` == `-1.0`, it's `Unconnected`
+    type: string
+    examples:
+      - Unconnected
+      - Connected
+
+
+  pool_1_accepted_share:
+    description: >
+      Number of accpted shares submitting to the first pool. Check JSON key in `pools[index] > accepted`
+    type: integer
+    example: 100000
+  pool_2_accepted_share:
+    description: >
+      Number of accpted shares submitting to the second pool. Check JSON key in `pools[index] > accepted`
+    type: integer
+    example: 0
+  pool_3_accepted_share:
+    description: >
+      Number of accpted shares submitting to the third pool. Check JSON key in `pools[index] > accepted`
+    type: integer
+    example: 0
+
+  pool_1_rejected_share:
+    description: >
+      Number of rejected shares submitting to the first pool. Check JSON key in `pools[index] > rejected`
+    type: integer
+    example: 0
+  pool_2_rejected_share:
+    description: >
+      Number of rejected shares submitting to the second pool. Check JSON key in `pools[index] > rejected`
+    type: integer
+    example: 0
+  pool_3_rejected_share:
+    description: >
+      Number of rejected shares submitting to the third pool. Check JSON key in `pools[index] > rejected`
+    type: integer
+    example: 0
+
+  hashboard_1_hashrate_5_min:
+    description: >
+      The average hashrate of the **first hashboard** in **5 minutes**. Check JSON key named `boards[index] > rtpow`.
+
+
+      The original value is in string format, ex: 3283.87G. When submit to the **Mining Rig Monitor**, please remove the unit.
+
+
+      This field only accept number. The unit of measurement has a separeted field named `hashrate_uom`.
+    type: float
+    example: 1234.56
+
+  hashboard_2_hashrate_5_min:
+    description: >
+      The average hashrate of the **second hashboard** in **5 minutes**. Check JSON key named `boards[index] > rtpow`.
+
+
+      The original value is in string format, ex: 3283.87G. When submit to the **Mining Rig Monitor**, please remove the unit.
+
+
+      This field only accept number. The unit of measurement has a separeted field named `hashrate_uom`.
+    type: float
+    example: 1234.56
+
+  hashboard_3_hashrate_5_min:
+    description: >
+      The average hashrate of the **third hashboard** in **5 minutes**. Check JSON key named `boards[index] > rtpow`.
+
+
+      The original value is in string format, ex: 3283.87G. When submit to the **Mining Rig Monitor**, please remove the unit.
+
+
+      This field only accept number. The unit of measurement has a separeted field named `hashrate_uom`.
+    type: float
+    example: 1234.56
+
+  hashboard_1_hashrate_30_min:
+    description: >
+      The average hashrate of the **first hashboard** in **5 minutes**. Check JSON key named `boards[index] > avgpow`.
+
+
+      The original value is in string format, ex: 3283.87G. When submit to the **Mining Rig Monitor**, please remove the unit.
+
+
+      This field only accept number. The unit of measurement has a separeted field named `hashrate_uom`.
+    type: float
+    example: 1234.56
+
+  hashboard_2_hashrate_30_min:
+    description: >
+      The average hashrate of the **second hashboard** in **5 minutes**. Check JSON key named `boards[index] > avgpow`.
+
+
+      The original value is in string format, ex: 3283.87G. When submit to the **Mining Rig Monitor**, please remove the unit.
+
+
+      This field only accept number. The unit of measurement has a separeted field named `hashrate_uom`.
+    type: float
+    example: 1234.56
+
+  hashboard_3_hashrate_30_min:
+    description: >
+      The average hashrate of the **third hashboard** in **5 minutes**. Check JSON key named `boards[index] > avgpow`.
+
+
+      The original value is in string format, ex: 3283.87G. When submit to the **Mining Rig Monitor**, please remove the unit.
+
+
+      This field only accept number. The unit of measurement has a separeted field named `hashrate_uom`.
+    type: float
+    example: 1234.56
+
+  hashboard_1_temp_1:
+    description: >
+      The first temperature of **the first hashboard**. Check the JSON key named `boards[index] > intmp`.
+
+      I guess, it's the air-in temperature position.
+    type: float
+    example: 50
+
+  hashboard_1_temp_2:
+    description: >
+      The second temperature of **the first hashboard**. Check the JSON key named `boards[index] > outtmp`.
+
+      I guess, it's the air-out temperature position. Air-out temperature is always greater than the air-in.
+    type: float
+    example: 55
+
+  hashboard_2_temp_1:
+    description: >
+      The first temperature of **the second hashboard**. Check the JSON key named `boards[index] > intmp`.
+
+      I guess, it's the air-in temperature position.
+    type: float
+    example: 50
+
+  hashboard_2_temp_2:
+    description: >
+      The second temperature of **the second hashboard**. Check the JSON key named `boards[index] > outtmp`.
+
+      I guess, it's the air-out temperature position. Air-out temperature is always greater than the air-in.
+    type: float
+    example: 55
+
+  hashboard_3_temp_1:
+    description: >
+      The first temperature of **the third hashboard**. Check the JSON key named `boards[index] > intmp`.
+
+      I guess, it's the air-in temperature position.
+    type: float
+    example: 50
+
+  hashboard_3_temp_2:
+    description: >
+      The second temperature of **the third hashboard**. Check the JSON key named `boards[index] > outtmp`.
+
+      I guess, it's the air-out temperature position. Air-out temperature is always greater than the air-in.
+    type: float
+    example: 55
+
+  fan_1_speed:
+    description: The speed of first fan in `rpm`. Check the JSON key named `fans[0]`
+    type: integer
+    example: 5855
+
+  fan_2_speed:
+    description: The speed of second fan in `rpm`. Check the JSON key named `fans[1]`
+    type: integer
+    example: 5900
+
+  fan_3_speed:
+    description: The speed of third fan in `rpm`. Check the JSON key named `fans[2]`
+    type: integer
+    example: 5900
+
+  fan_4_speed:
+    description: The speed of forth fan in `rpm`. Check the JSON key named `fans[3]`
+    type: integer
+    example: 5855
+
+  lan_ip:
+    description: >
+      The local IP
+    type: string
+    example: "192.168.18.50"
+  wan_ip:
+    description: >
+      The public/internet/wan IP
+    type: string
+    example:  50.85.22.87
+
+  coin_name:
+    description: Coin name
+    type: string
+    example: "Kaspa"
+
+  power:
+    description: Power(Walt)
+    type: float
+    example: 3500
+
+required:
+  - hashrate_5_min
+  - hashrate_uom
+  - uptime
+  - pool_1_address
+  - pool_1_user
+  - pool_1_state
+  - hashboard_1_temp_1,
+  - fan_1_speed
+  - lan_ip
+  - coin_name
+  - power

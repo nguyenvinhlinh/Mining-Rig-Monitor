@@ -1,0 +1,25 @@
+post:
+  tags:
+    - CPU/GPU Miner
+  summary: Submit CPU/GPU mining rig - specification
+  description: "This endpoint helps submitting cpu/gpu mining rig specification. This API should be called once time at boot."
+  operationId: post-cpu-gpu-spec
+  security:
+    - mining_rig_code: []
+  responses:
+    '200':
+      description: OK with no response body
+
+    '401':
+      description: Invalid MINING_RIG_CODE
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/401_Unauthorized.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CPU_GPU_Spec.yaml
+    description: "CPU/GPU rig specification"
+    required: true

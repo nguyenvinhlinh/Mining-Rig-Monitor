@@ -1,0 +1,6 @@
+type: object
+properties:
+  message:
+    description: A message for HTTP code 401
+    type: string
+    example: Invalid API_CODE

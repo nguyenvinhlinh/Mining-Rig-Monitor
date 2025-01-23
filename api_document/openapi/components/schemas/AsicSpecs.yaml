@@ -1,0 +1,28 @@
+type: object
+title: Scalars
+properties:
+  model:
+    description: ASIC Model
+    type: string
+    examples:
+      - Ice River KS5L
+  model_variant:
+    description: ASIC Model Variant
+    type: string
+    examples:
+      - 12TH
+      - 10TH
+  firmware_version:
+    description: ASIC Firmware Version
+    type: string
+    examples:
+      - BOOT_3_1_image_1.0
+  software_version:
+    description: ASIC Software Version
+    type: string
+    examples:
+      - ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg
+required:
+  - model
+  - firmware_version
+  - software_version
