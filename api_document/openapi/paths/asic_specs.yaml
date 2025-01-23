@@ -5,13 +5,13 @@ post:
   description: "This endpoint helps submitting an ASIC specification. This API should be called once time at boot."
   operationId: post-asic-spec
   security:
-    - mining_rig_code: []
+    - api_code: []
   responses:
     '200':
       description: OK with no response body
 
     '401':
-      description: Invalid MINING_RIG_CODE
+      description: Invalid API_CODE
       content:
         application/json:
           schema:

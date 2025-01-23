@@ -17,11 +17,6 @@ defmodule MiningRigMonitorWeb.Router do
     plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root_no_nav}
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-    plug MiningRigMonitorWeb.Plugs.MiningRigCodeAuthentication
-  end
-
   pipeline :api_asic_miner do
     plug :accepts, ["json"]
     plug MiningRigMonitorWeb.Plugs.ApiCodeAuthentication, :asic_miner
@@ -30,47 +25,27 @@ defmodule MiningRigMonitorWeb.Router do
     pipe_through [:browser, :no_nav_layout]
 
     get "/", PageController, :home
-    get "/flowbite", FlowbiteController, :flowbite
+
   end
 
   scope "/", MiningRigMonitorWeb do
     pipe_through [:browser, :require_authenticated_user]
-
-    live "/mining_rigs", MiningRigLive.Index, :index
-    live "/mining_rigs/new", MiningRigLive.Index, :new
-    live "/mining_rigs/:id/edit", MiningRigLive.Index, :edit
-    live "/mining_rigs/:id/pre_delete", MiningRigLive.Index, :pre_delete
-
-    live "/mining_rigs/:id", MiningRigLive.Show, :show
-    live "/mining_rigs/:id/show/edit", MiningRigLive.Show, :edit
-
-    live "/mining_rigs/asic/:id", MiningRigLive.ShowAsic, :show
-    # END TOBE REMOVE
-
     live "/asic_miners", AsicMinerLive.Index, :index
     live "/asic_miners/new", AsicMinerLive.Index, :new
     live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
 
     live "/asic_miners/:id", AsicMinerLive.Show, :show
-    live "/asic_miners/:id/show/edit", AsicMinerLive.Show, :edit
-
   end
 
   scope "/api/v1" do
+    get "/ping", MiningRigMonitorWeb.PingPongController, :ping
+
     scope "/asic_miners" do
       pipe_through :api_asic_miner
       post "/specs", MiningRigMonitorWeb.AsicMinerController, :update_asic_miner_specs
       post "/logs",  MiningRigMonitorWeb.AsicMinerLogController, :create
     end
   end
-
-
-
-
-  # Other scopes may use custom stacks.
-  # scope "/api", MiningRigMonitorWeb do
-  #   pipe_through :api
-  # end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:mining_rig_monitor, :dev_routes) do

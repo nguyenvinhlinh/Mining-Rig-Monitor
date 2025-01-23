@@ -15,6 +15,8 @@ info:
     This is an API for Mining Rig Monitor Software.
 
 tags:
+  - name: Ping Pong
+    description: "Ping Pong"
   - name: ASIC Miner
     description: "ASIC Miner API"
   - name: CPU/GPU Miner
@@ -26,34 +28,25 @@ servers:
   - url: https://mining_rig_monitor_staging.hexalink.xyz/api/v1
   - url: https://mining_rig_monitor.hexalink.xyz/api/v1
 paths:
-  '/asic_miner/specs':
+  '/ping':
+    $ref: 'paths/ping.yaml'
+
+  '/asic_miners/specs':
     $ref: 'paths/asic_specs.yaml'
 
-  '/asic_miner/logs':
+  '/asic_miners/logs':
     $ref: 'paths/asic_monitor_data.yaml'
 
-  '/cpu_gpu_spec':
+  '/cpu_gpu_miners/specs':
     $ref: 'paths/cpu_gpu_spec.yaml'
 
-  '/cpu_gpu_monitor_data':
+  '/cpu_gpu_miners/logs':
     $ref: 'paths/cpu_gpu_monitor_data.yaml'
 
-  # '/users/{username}':
-  #   $ref: 'paths/users_{username}.yaml'
-  # '/user':
-  #   $ref: 'paths/user.yaml'
-  # '/user/list':
-  #   $ref: 'paths/user-status.yaml'
-  # /pathItem:
-  #   $ref: paths/pathItem.yaml
-  # /pathItemWithExamples:
-  #   $ref: paths/pathItemWithExamples.yaml
-  # '/echo':
-  #   $ref: 'paths/echo.yaml'
 components:
   securitySchemes:
-    mining_rig_code:
-      description: "It's a must to assign request header named `MINING_RIG_CODE`"
+    api_code:
+      description: "It's a must to assign request header named `API_CODE`"
       type: apiKey
       in: header
-      name: MINING_RIG_CODE
+      name: API_CODE

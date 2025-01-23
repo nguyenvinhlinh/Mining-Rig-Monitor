@@ -1,0 +1,13 @@
+get:
+  tags:
+    - Ping Pong
+  summary: Ping the mining rig monitor server
+  description: "Ping the mining rig monitor server "
+  operationId: ping-pong
+  responses:
+    '200':
+      description: OK with no response body
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Ping_Pong.yaml

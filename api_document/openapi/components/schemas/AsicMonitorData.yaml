@@ -287,3 +287,16 @@ properties:
     description: Power(Walt)
     type: float
     example: 3500
+
+required:
+  - hashrate_5_min
+  - hashrate_uom
+  - uptime
+  - pool_1_address
+  - pool_1_user
+  - pool_1_state
+  - hashboard_1_temp_1,
+  - fan_1_speed
+  - lan_ip
+  - coin_name
+  - power

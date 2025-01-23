@@ -1,8 +1,11 @@
 <div class="col-span-8 xl:col-span-3
-  mx-4 xl:ml-2 p-4 mb-4
+  mx-1 p-1 mb-1
+  sm:mx-2 sm:p-2 sm:mb-3
+  md:mx-4 md:p-4 md:mb-4
+  xl:ml-1
   bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
   <h3 class="mb-4 text-xl font-semibold dark:text-white">Fan Speed</h3>
-  <div class="overflow-hidden shadow" data-phx-id="m3-phx-F-TiqZAWuqBtjyuE">
+  <div class="overflow-hidden shadow">
     <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
       <thead class="bg-gray-100 dark:bg-gray-700">
         <tr>
@@ -17,7 +20,7 @@
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            Fan 1
+            #1 Fan
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <%= @asic_miner_log.fan_1_speed %> RPM
@@ -25,7 +28,7 @@
         </tr>
         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            Fan 2
+            #2 Fan
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <%= @asic_miner_log.fan_2_speed %> RPM
@@ -33,7 +36,7 @@
         </tr>
         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            Fan 3
+            #3 Fan
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <%= @asic_miner_log.fan_3_speed %> RPM
@@ -41,7 +44,7 @@
         </tr>
         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            Fan 4
+            #4 Fan
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <%= @asic_miner_log.fan_4_speed %> RPM

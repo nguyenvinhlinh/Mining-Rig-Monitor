@@ -22,3 +22,7 @@ properties:
     type: string
     examples:
       - ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg
+required:
+  - model
+  - firmware_version
+  - software_version

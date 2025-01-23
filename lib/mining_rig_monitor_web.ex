@@ -87,9 +87,6 @@ defmodule MiningRigMonitorWeb do
       import MiningRigMonitorWeb.CoreComponents
       import MiningRigMonitorWeb.Gettext
 
-      # Flowbite UI Components
-      import MiningRigMonitorWeb.FlowbiteComponents
-
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
 
