@@ -1,0 +1,38 @@
+<.header>
+  Cpu gpu miner {@cpu_gpu_miner.id}
+  <:subtitle>This is a cpu_gpu_miner record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit cpu_gpu_miner</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@cpu_gpu_miner.name}</:item>
+  <:item title="Api code">{@cpu_gpu_miner.api_code}</:item>
+  <:item title="Cpu 1 name">{@cpu_gpu_miner.cpu_1_name}</:item>
+  <:item title="Cpu 2 name">{@cpu_gpu_miner.cpu_2_name}</:item>
+  <:item title="Ram size">{@cpu_gpu_miner.ram_size}</:item>
+  <:item title="Gpu 1 name">{@cpu_gpu_miner.gpu_1_name}</:item>
+  <:item title="Gpu 2 name">{@cpu_gpu_miner.gpu_2_name}</:item>
+  <:item title="Gpu 3 name">{@cpu_gpu_miner.gpu_3_name}</:item>
+  <:item title="Gpu 4 name">{@cpu_gpu_miner.gpu_4_name}</:item>
+  <:item title="Gpu 5 name">{@cpu_gpu_miner.gpu_5_name}</:item>
+  <:item title="Gpu 6 name">{@cpu_gpu_miner.gpu_6_name}</:item>
+  <:item title="Gpu 7 name">{@cpu_gpu_miner.gpu_7_name}</:item>
+  <:item title="Gpu 8 name">{@cpu_gpu_miner.gpu_8_name}</:item>
+</.list>
+
+<.back navigate={~p"/cpu_gpu_miners"}>Back to cpu_gpu_miners</.back>
+
+<.modal :if={@live_action == :edit} id="cpu_gpu_miner-modal" show on_cancel={JS.patch(~p"/cpu_gpu_miners/#{@cpu_gpu_miner}")}>
+  <.live_component
+    module={MiningRigMonitorWeb.CpuGpuMinerLive.FormComponent}
+    id={@cpu_gpu_miner.id}
+    title={@page_title}
+    action={@live_action}
+    cpu_gpu_miner={@cpu_gpu_miner}
+    patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}"}
+  />
+</.modal>

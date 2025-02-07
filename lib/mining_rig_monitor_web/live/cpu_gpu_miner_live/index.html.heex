@@ -1,0 +1,53 @@
+<.header>
+  Listing Cpu gpu miners
+  <:actions>
+    <.link patch={~p"/cpu_gpu_miners/new"}>
+      <.button>New Cpu gpu miner</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="cpu_gpu_miners"
+  rows={@streams.cpu_gpu_miners}
+  row_click={fn {_id, cpu_gpu_miner} -> JS.navigate(~p"/cpu_gpu_miners/#{cpu_gpu_miner}") end}
+>
+  <:col :let={{_id, cpu_gpu_miner}} label="Name">{cpu_gpu_miner.name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Api code">{cpu_gpu_miner.api_code}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Cpu 1 name">{cpu_gpu_miner.cpu_1_name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Cpu 2 name">{cpu_gpu_miner.cpu_2_name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Ram size">{cpu_gpu_miner.ram_size}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Gpu 1 name">{cpu_gpu_miner.gpu_1_name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Gpu 2 name">{cpu_gpu_miner.gpu_2_name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Gpu 3 name">{cpu_gpu_miner.gpu_3_name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Gpu 4 name">{cpu_gpu_miner.gpu_4_name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Gpu 5 name">{cpu_gpu_miner.gpu_5_name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Gpu 6 name">{cpu_gpu_miner.gpu_6_name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Gpu 7 name">{cpu_gpu_miner.gpu_7_name}</:col>
+  <:col :let={{_id, cpu_gpu_miner}} label="Gpu 8 name">{cpu_gpu_miner.gpu_8_name}</:col>
+  <:action :let={{_id, cpu_gpu_miner}}>
+    <div class="sr-only">
+      <.link navigate={~p"/cpu_gpu_miners/#{cpu_gpu_miner}"}>Show</.link>
+    </div>
+    <.link patch={~p"/cpu_gpu_miners/#{cpu_gpu_miner}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, cpu_gpu_miner}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: cpu_gpu_miner.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="cpu_gpu_miner-modal" show on_cancel={JS.patch(~p"/cpu_gpu_miners")}>
+  <.live_component
+    module={MiningRigMonitorWeb.CpuGpuMinerLive.FormComponent}
+    id={@cpu_gpu_miner.id || :new}
+    title={@page_title}
+    action={@live_action}
+    cpu_gpu_miner={@cpu_gpu_miner}
+    patch={~p"/cpu_gpu_miners"}
+  />
+</.modal>
