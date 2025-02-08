@@ -63,6 +63,14 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
   end
 
   @impl true
+  def handle_info({:cpu_gpu_miner_index_channel, :delete, cpu_gpu_miner}, socket) do
+    socket_mod = socket
+    |> stream_delete(:cpu_gpu_miner_not_activated_list, cpu_gpu_miner)
+    |> stream_delete(:cpu_gpu_miner_activated_list,     cpu_gpu_miner)
+    {:noreply, socket_mod}
+  end
+
+  @impl true
   def handle_info({:flash_index, flash_type, message}, socket) do
     socket_mod = put_flash(socket, flash_type, message)
     {:noreply, socket_mod}
@@ -72,7 +80,8 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
   def handle_event("delete", %{"id" => id}, socket) do
     cpu_gpu_miner = CpuGpuMiners.get_cpu_gpu_miner!(id)
     {:ok, _} = CpuGpuMiners.delete_cpu_gpu_miner(cpu_gpu_miner)
-
-    {:noreply, stream_delete(socket, :cpu_gpu_miners, cpu_gpu_miner)}
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_channel", {:cpu_gpu_miner_index_channel, :delete, cpu_gpu_miner})
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index", {:flash_index, :info, "CPU/GPU miner id##{cpu_gpu_miner.id} name: #{cpu_gpu_miner.name} deleted"})
+    {:noreply, socket}
   end
 end
