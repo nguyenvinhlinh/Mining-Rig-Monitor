@@ -35,6 +35,14 @@ defmodule MiningRigMonitorWeb.Router do
     live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
 
     live "/asic_miners/:id", AsicMinerLive.Show, :show
+
+    live "/cpu_gpu_miners", CpuGpuMinerLive.Index, :index
+    live "/cpu_gpu_miners/new", CpuGpuMinerLive.Index, :new
+    live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Index, :edit
+
+    live "/cpu_gpu_miners/:id", CpuGpuMinerLive.Show, :show
+    live "/cpu_gpu_miners/:id/show/edit", CpuGpuMinerLive.Show, :edit
+
   end
 
   scope "/api/v1" do
