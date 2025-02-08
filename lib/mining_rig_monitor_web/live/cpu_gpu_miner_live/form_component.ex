@@ -24,10 +24,10 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.FormComponent do
   end
 
   defp save_cpu_gpu_miner(socket, :edit, cpu_gpu_miner_params) do
-    case CpuGpuMiners.update_cpu_gpu_miner(socket.assigns.cpu_gpu_miner, cpu_gpu_miner_params) do
+    case CpuGpuMiners.update_cpu_gpu_miner_by_commander(socket.assigns.cpu_gpu_miner, cpu_gpu_miner_params) do
       {:ok, cpu_gpu_miner} ->
-        notify_parent({:saved, cpu_gpu_miner})
-
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_channel",
+          {:cpu_gpu_miner_index_channel, :create_or_update, cpu_gpu_miner})
         {:noreply,
          socket
          |> put_flash(:info, "Cpu gpu miner updated successfully")
@@ -41,17 +41,18 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.FormComponent do
   defp save_cpu_gpu_miner(socket, :new, cpu_gpu_miner_params) do
     case CpuGpuMiners.create_cpu_gpu_miner_by_commander(cpu_gpu_miner_params) do
       {:ok, cpu_gpu_miner} ->
-        notify_parent({:saved, cpu_gpu_miner})
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_channel",
+          {:cpu_gpu_miner_index_channel, :create_or_update, cpu_gpu_miner})
 
-        {:noreply,
-         socket
-         |> put_flash(:info, "Cpu gpu miner created successfully")
-         |> push_patch(to: socket.assigns.patch)}
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
+          {:flash_index, :info, "CPU/GPU miner id##{cpu_gpu_miner.id} name: #{cpu_gpu_miner.name} created successfully"})
+
+        socket_mod = push_patch(socket, to: socket.assigns.patch)
+
+        {:noreply, socket_mod}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
-
-  defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
 end

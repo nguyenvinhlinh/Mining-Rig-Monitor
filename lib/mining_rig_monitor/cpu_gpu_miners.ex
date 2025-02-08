@@ -72,6 +72,12 @@ defmodule MiningRigMonitor.CpuGpuMiners do
     |> Repo.insert()
   end
 
+  def update_cpu_gpu_miner_by_commander(%CpuGpuMiner{} = cpu_gpu_miner, attrs) do
+    cpu_gpu_miner
+    |> CpuGpuMiner.changeset_edit_by_commander(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Updates a cpu_gpu_miner.
 

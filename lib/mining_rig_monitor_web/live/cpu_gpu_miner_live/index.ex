@@ -15,6 +15,11 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
     |> stream(:cpu_gpu_miner_not_activated_list, cpu_gpu_miner_not_activated_list)
     |> stream(:cpu_gpu_miner_activated_list, cpu_gpu_miner_activated_list)
 
+    if connected?(socket) do
+      Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_channel")
+      Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "flash_index")
+    end
+
     {:ok, socket_mod}
   end
 
@@ -42,8 +47,25 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
   end
 
   @impl true
-  def handle_info({MiningRigMonitorWeb.CpuGpuMinerLive.FormComponent, {:saved, cpu_gpu_miner}}, socket) do
-    {:noreply, stream_insert(socket, :cpu_gpu_miners, cpu_gpu_miner)}
+  def handle_info({:cpu_gpu_miner_index_channel, :create_or_update, cpu_gpu_miner}, socket) do
+    case cpu_gpu_miner.activated  do
+      true ->
+        socket_mod = socket
+        |> stream_insert(:cpu_gpu_miner_activated_list, cpu_gpu_miner)
+        |> stream_delete(:cpu_gpu_miner_not_activated_list, cpu_gpu_miner)
+        {:noreply, socket_mod}
+      false ->
+        socket_mod = socket
+        |> stream_insert(:cpu_gpu_miner_not_activated_list, cpu_gpu_miner)
+        |> stream_delete(:cpu_gpu_miner_activated_list, cpu_gpu_miner)
+        {:noreply, socket_mod}
+    end
+  end
+
+  @impl true
+  def handle_info({:flash_index, flash_type, message}, socket) do
+    socket_mod = put_flash(socket, flash_type, message)
+    {:noreply, socket_mod}
   end
 
   @impl true

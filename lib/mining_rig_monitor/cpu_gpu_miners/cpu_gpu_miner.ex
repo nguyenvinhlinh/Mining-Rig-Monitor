@@ -37,4 +37,10 @@ defmodule MiningRigMonitor.CpuGpuMiners.CpuGpuMiner do
     |> cast(attrs, [:name, :api_code])
     |> validate_required([:name, :api_code])
   end
+
+  def changeset_edit_by_commander(cpu_gpu_miner, attrs) do
+    cpu_gpu_miner
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
+  end
 end
