@@ -4,6 +4,8 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMiners.CpuGpuMiner
 
+  embed_templates "index_html/*"
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, stream(socket, :cpu_gpu_miners, CpuGpuMiners.list_cpu_gpu_miners())}
