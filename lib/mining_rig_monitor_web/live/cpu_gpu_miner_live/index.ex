@@ -18,13 +18,13 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Cpu gpu miner")
+    |> assign(:page_title, "Edit CPU/GPU miner")
     |> assign(:cpu_gpu_miner, CpuGpuMiners.get_cpu_gpu_miner!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Cpu gpu miner")
+    |> assign(:page_title, "New CPU/GPU miner")
     |> assign(:cpu_gpu_miner, %CpuGpuMiner{})
   end
 

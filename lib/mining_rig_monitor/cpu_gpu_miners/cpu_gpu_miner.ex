@@ -26,4 +26,10 @@ defmodule MiningRigMonitor.CpuGpuMiners.CpuGpuMiner do
     |> cast(attrs, [:name, :api_code, :cpu_1_name, :cpu_2_name, :ram_size, :gpu_1_name, :gpu_2_name, :gpu_3_name, :gpu_4_name, :gpu_5_name, :gpu_6_name, :gpu_7_name, :gpu_8_name])
     |> validate_required([:name, :api_code, :cpu_1_name, :cpu_2_name, :ram_size, :gpu_1_name, :gpu_2_name, :gpu_3_name, :gpu_4_name, :gpu_5_name, :gpu_6_name, :gpu_7_name, :gpu_8_name])
   end
+
+  def changeset_new_by_commander(cpu_gpu_miner, attrs) do
+    cpu_gpu_miner
+    |> cast(attrs, [:name, :api_code])
+    |> validate_required([:name, :api_code])
+  end
 end

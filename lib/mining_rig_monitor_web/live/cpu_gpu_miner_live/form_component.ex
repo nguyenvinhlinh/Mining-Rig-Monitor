@@ -39,7 +39,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.FormComponent do
   end
 
   defp save_cpu_gpu_miner(socket, :new, cpu_gpu_miner_params) do
-    case CpuGpuMiners.create_cpu_gpu_miner(cpu_gpu_miner_params) do
+    case CpuGpuMiners.create_cpu_gpu_miner_by_commander(cpu_gpu_miner_params) do
       {:ok, cpu_gpu_miner} ->
         notify_parent({:saved, cpu_gpu_miner})
 

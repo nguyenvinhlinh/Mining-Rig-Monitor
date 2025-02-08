@@ -37,6 +37,17 @@ defmodule MiningRigMonitor.CpuGpuMiners do
   """
   def get_cpu_gpu_miner!(id), do: Repo.get!(CpuGpuMiner, id)
 
+  def create_cpu_gpu_miner_by_commander(attrs \\ %{}) do
+    api_code = UUID.uuid1()
+    attrs_mod = attrs
+    |> Map.put("api_code", api_code)
+    |> Map.put("activated", false)
+
+    %CpuGpuMiner{}
+    |> CpuGpuMiner.changeset_new_by_commander(attrs_mod)
+    |> Repo.insert()
+  end
+
   @doc """
   Creates a cpu_gpu_miner.
 
