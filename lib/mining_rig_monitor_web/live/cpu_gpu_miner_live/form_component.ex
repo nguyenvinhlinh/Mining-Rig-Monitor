@@ -4,43 +4,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.FormComponent do
   alias MiningRigMonitor.CpuGpuMiners
 
   @impl true
-  def render(assigns) do
-    ~H"""
-    <div>
-      <.header>
-        {@title}
-        <:subtitle>Use this form to manage cpu_gpu_miner records in your database.</:subtitle>
-      </.header>
-
-      <.simple_form
-        for={@form}
-        id="cpu_gpu_miner-form"
-        phx-target={@myself}
-        phx-change="validate"
-        phx-submit="save"
-      >
-        <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:api_code]} type="text" label="Api code" />
-        <.input field={@form[:cpu_1_name]} type="text" label="Cpu 1 name" />
-        <.input field={@form[:cpu_2_name]} type="text" label="Cpu 2 name" />
-        <.input field={@form[:ram_size]} type="text" label="Ram size" />
-        <.input field={@form[:gpu_1_name]} type="text" label="Gpu 1 name" />
-        <.input field={@form[:gpu_2_name]} type="text" label="Gpu 2 name" />
-        <.input field={@form[:gpu_3_name]} type="text" label="Gpu 3 name" />
-        <.input field={@form[:gpu_4_name]} type="text" label="Gpu 4 name" />
-        <.input field={@form[:gpu_5_name]} type="text" label="Gpu 5 name" />
-        <.input field={@form[:gpu_6_name]} type="text" label="Gpu 6 name" />
-        <.input field={@form[:gpu_7_name]} type="text" label="Gpu 7 name" />
-        <.input field={@form[:gpu_8_name]} type="text" label="Gpu 8 name" />
-        <:actions>
-          <.button phx-disable-with="Saving...">Save Cpu gpu miner</.button>
-        </:actions>
-      </.simple_form>
-    </div>
-    """
-  end
-
-  @impl true
   def update(%{cpu_gpu_miner: cpu_gpu_miner} = assigns, socket) do
     {:ok,
      socket
