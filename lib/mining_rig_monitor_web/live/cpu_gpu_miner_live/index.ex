@@ -8,7 +8,14 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :cpu_gpu_miners, CpuGpuMiners.list_cpu_gpu_miners())}
+    cpu_gpu_miner_not_activated_list = CpuGpuMiners.list_cpu_gpu_miners_by_activated_state(false)
+    cpu_gpu_miner_activated_list = CpuGpuMiners.list_cpu_gpu_miners_by_activated_state(true)
+
+    socket_mod = socket
+    |> stream(:cpu_gpu_miner_not_activated_list, cpu_gpu_miner_not_activated_list)
+    |> stream(:cpu_gpu_miner_activated_list, cpu_gpu_miner_activated_list)
+
+    {:ok, socket_mod}
   end
 
   @impl true
@@ -30,7 +37,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Cpu gpu miners")
+    |> assign(:page_title, "CPU/GPU miner index")
     |> assign(:cpu_gpu_miner, nil)
   end
 
