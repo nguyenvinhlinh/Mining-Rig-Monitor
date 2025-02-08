@@ -64,7 +64,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing ASIC miners")
+    |> assign(:page_title, "ASIC miner index")
     |> assign(:asic_miner, nil)
   end
 
