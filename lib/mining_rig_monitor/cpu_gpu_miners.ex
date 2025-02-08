@@ -21,6 +21,12 @@ defmodule MiningRigMonitor.CpuGpuMiners do
     Repo.all(CpuGpuMiner)
   end
 
+  def list_cpu_gpu_miners_by_activated_state(activated_state) when is_boolean(activated_state)  do
+    CpuGpuMiner
+    |> where(activated: ^activated_state)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single cpu_gpu_miner.
 
@@ -64,6 +70,12 @@ defmodule MiningRigMonitor.CpuGpuMiners do
     %CpuGpuMiner{}
     |> CpuGpuMiner.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def update_cpu_gpu_miner_by_commander(%CpuGpuMiner{} = cpu_gpu_miner, attrs) do
+    cpu_gpu_miner
+    |> CpuGpuMiner.changeset_edit_by_commander(attrs)
+    |> Repo.update()
   end
 
   @doc """
