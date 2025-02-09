@@ -8,7 +8,6 @@
   <.table
     id="cpu_gpu_miners_not_activated"
     rows={@streams.cpu_gpu_miner_not_activated_list}
-    row_click={fn {_id, cpu_gpu_miner} -> JS.navigate(~p"/cpu_gpu_miners/#{cpu_gpu_miner}") end}
   >
     <:col :let={{_id, cpu_gpu_miner}} label="ID" class="hidden md:table-cell">{cpu_gpu_miner.id}</:col>
     <:col :let={{_id, cpu_gpu_miner}} label="Name">{cpu_gpu_miner.name}</:col>
