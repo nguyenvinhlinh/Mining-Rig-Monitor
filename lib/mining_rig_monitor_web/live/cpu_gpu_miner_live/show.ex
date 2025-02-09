@@ -3,6 +3,8 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
 
   alias MiningRigMonitor.CpuGpuMiners
 
+  embed_templates "show_html/*"
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, socket}
