@@ -23,6 +23,7 @@ Please check `/diagrams/db.dia`
 ![2024-08-09 Database Diagram](diagrams/dist/db.png)
 
 # Q&A
+
 1. How to get info from nvidia-smi
 ```bash
 $ nvidia-smi --query-gpu=name,driver_version,vbios_version,pci.bus_id,memory.total --format=csv

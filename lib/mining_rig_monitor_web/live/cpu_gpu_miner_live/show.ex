@@ -18,6 +18,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
      |> assign(:cpu_gpu_miner, CpuGpuMiners.get_cpu_gpu_miner!(id))}
   end
 
-  defp page_title(:show), do: "Show Cpu gpu miner"
-  defp page_title(:edit), do: "Edit Cpu gpu miner"
+  defp page_title(:show), do: "Show CPU/GPU miner"
+  defp page_title(:edit), do: "Edit CPU/GPU miner"
 end

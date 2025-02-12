@@ -9,7 +9,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.FormComponent do
      socket
      |> assign(assigns)
      |> assign_new(:form, fn ->
-       to_form(CpuGpuMiners.change_cpu_gpu_miner(cpu_gpu_miner))
+       to_form(CpuGpuMiners.change_cpu_gpu_miner_by_commander(cpu_gpu_miner))
      end)}
   end
 

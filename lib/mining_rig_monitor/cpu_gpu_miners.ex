@@ -124,4 +124,8 @@ defmodule MiningRigMonitor.CpuGpuMiners do
   def change_cpu_gpu_miner(%CpuGpuMiner{} = cpu_gpu_miner, attrs \\ %{}) do
     CpuGpuMiner.changeset(cpu_gpu_miner, attrs)
   end
+
+  def change_cpu_gpu_miner_by_commander(%CpuGpuMiner{} = cpu_gpu_miner, attrs \\ %{}) do
+    CpuGpuMiner.changeset_edit_by_commander(cpu_gpu_miner, attrs)
+  end
 end

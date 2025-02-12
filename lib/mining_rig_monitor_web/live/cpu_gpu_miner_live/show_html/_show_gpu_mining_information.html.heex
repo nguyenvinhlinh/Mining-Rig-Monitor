@@ -1,0 +1,195 @@
+<div class="col-span-8
+  mx-1 p-1 mb-1
+  sm:mx-2 sm:p-2 sm:mb-2
+  md:mx-4 md:p-4 md:mb-4
+  xl:mr-1
+  bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">GPU Mining</h3>
+
+  <div :for={i <- [1,2,3,4,5,6,7,8] } class="block lg:hidden grid grid-cols-8 border-4 border-solid border-inherit">
+    <div class="col-span-4 xl:col-span-2 2xl:col-span-2
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
+        <li>
+          <b>[{i}]GPU:</b>NVIDIA GeForce RTX 3080
+        </li>
+        <li>
+          <b>[{i}]Algorithm:</b> Ethash
+        </li>
+        <li>
+          <b>[{i}]GPU Clock:</b> 950Mhz
+        </li>
+        <li>
+          <b>[{i}]Memory Clock:</b> 1000Mhz
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-span-4 xl:col-span-6 2xl:col-span-6
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
+        <li>
+          <b>[{i}]Hashrate:</b> 95MH/s
+        </li>
+        <li>
+          <b>[{i}]Core Temperature:</b> 70C
+        </li>
+        <li>
+          <b>[{i}]Memory Temperature:</b> 80C
+        </li>
+        <li>
+          <b>[{i}]Fan Speed:</b> 100%
+        </li>
+        <li>
+          <b>[{i}]Power:</b> 170W
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="hidden lg:block overflow-hidden shadow">
+    <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+      <thead class="bg-gray-100 dark:bg-gray-700">
+        <tr>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            GPU
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Hashrate (Algorithm)
+          </th>
+
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            GPU Clock
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Memory Clock
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Core Temp.
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Memory Temp.
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Fan Speed
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Power
+          </th>
+
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+        <tr :for={i <- [1,2,3,4,5,6,7,8]} class="hover:bg-gray-100 dark:hover:bg-gray-700">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            [{i}] NVIDIA GeForce RTX 3080
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            95MH/s (Ethash) <br/>
+            20KH/s (KawPow)
+          </td>
+
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            950 MHz
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            1200 Mhz
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            65
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            80
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            90%
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            175W
+          </td>
+        </tr>
+
+        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            Total
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            95MH/s (Ethash) <br/>
+            20KH/s (KawPow)
+          </td>
+
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            2000W
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+  <h3 class="my-4 text-xl font-semibold dark:text-white">Pools</h3>
+  <div class="hidden 2xl:block shadow">
+    <table class="min-w-full divide-y divide-gray-200 table-auto dark:divide-gray-600">
+      <thead class="bg-gray-100 dark:bg-gray-700">
+        <tr>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Pool Address
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Wallet Address
+          </th>
+          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+            Algorithm
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+        <tr :for={i <- [1,2]} class="hover:bg-gray-100 dark:hover:bg-gray-700">
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            xelishash.unmineable.com
+          </td>
+          <td  class="p-4 text-base font-medium text-gray-900 break-all dark:text-white hover:cursor-pointer">
+            49gTVubHUbS4QqceSqLQ57LTf7K1eqdipKikuwiLUWx3CHUf2qCsRDX4jSV465we65Uv5k7D3YPtNfBGKv981PZYPkrhWLg
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            GhostDAG
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="">
+    <div :for={i <- [1,2,3]} class="block 2xl:hidden border-4
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
+        <li>
+          <b>[{i}] Pool Address:</b> xelishash.unmineable.com
+        </li>
+        <li class="break-all">
+          <b>[{i}] Wallet Address:</b> 49gTVubHUbS4QqceSqLQ57LTf7K1eqdipKikuwiLUWx3CHUf2qCsRDX4jSV465we65Uv5k7D3YPtNfBGKv981PZYPkrhWLg
+        </li>
+        <li>
+          <b>[{i}] Algorithm:</b> Ethash
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
