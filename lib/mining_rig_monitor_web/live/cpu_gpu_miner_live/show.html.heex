@@ -8,17 +8,16 @@
   md:gap-4
   lg:gap-4" >
 
-  <div :for={i <- [1,2,3]} class="col-span-4 lg:col-span-3
-    p-1
+  <div :for={i <- [1,2,3]} class="col-span-6 lg:col-span-3
+    p-1 md:px-2 md:py-4
     bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
     <h3 class="text-center text-xl font-semibold dark:text-white">
-      <.icon name="hero-bolt-solid" class="hidden lg:inline-block size-6"/>
       RandomX: 100KH/s
     </h3>
   </div>
 
-  <div class="col-span-4 lg:col-span-3
-    p-1
+  <div class="col-span-6 lg:col-span-3
+    p-1 md:p-2 md:py-4
     bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
     <h3 class="text-center text-xl font-semibold dark:text-white">
       <.icon name="hero-bolt-solid" class="hidden lg:inline-block size-6"/>
