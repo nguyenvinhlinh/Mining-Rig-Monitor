@@ -52,89 +52,78 @@
     <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
       <thead class="bg-gray-100 dark:bg-gray-700">
         <tr>
-          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+          <th class="py-4 px-2 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
             GPU
           </th>
-          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+          <th class="py-4 px-2 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
             Hashrate (Algorithm)
           </th>
 
-          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+          <th class="py-4 px-2 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
             GPU Clock
           </th>
-          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+          <th class="py-4 px-2 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
             Memory Clock
           </th>
-          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+          <th class="py-4 px-2 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
             Core Temp.
           </th>
-          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+          <th class="py-4 px-2 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
             Memory Temp.
           </th>
-          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+          <th class="py-4 px-2 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
             Fan Speed
           </th>
-          <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+          <th class="py-4 px-2 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
             Power
           </th>
-
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <tr :for={i <- [1,2,3,4,5,6,7,8]} class="hover:bg-gray-100 dark:hover:bg-gray-700">
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             [{i}] NVIDIA GeForce RTX 3080
           </td>
-          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td  class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             95MH/s (Ethash) <br/>
             20KH/s (KawPow)
           </td>
 
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             950 MHz
           </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             1200 Mhz
           </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             65
           </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             80
           </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             90%
           </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             175W
           </td>
         </tr>
 
-        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+        <tr class="bg-gray-100 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             Total
           </td>
-          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             95MH/s (Ethash) <br/>
             20KH/s (KawPow)
           </td>
 
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-
-          </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-
-          </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-
-          </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-
-          </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-
-          </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             2000W
           </td>
         </tr>
@@ -162,13 +151,13 @@
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <tr :for={i <- [1,2]} class="hover:bg-gray-100 dark:hover:bg-gray-700">
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             xelishash.unmineable.com
           </td>
-          <td  class="p-4 text-base font-medium text-gray-900 break-all dark:text-white hover:cursor-pointer">
+          <td  class="py-1 px-2 text-base font-medium text-gray-900 break-all dark:text-white hover:cursor-pointer">
             49gTVubHUbS4QqceSqLQ57LTf7K1eqdipKikuwiLUWx3CHUf2qCsRDX4jSV465we65Uv5k7D3YPtNfBGKv981PZYPkrhWLg
           </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td class="py-1 px-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             GhostDAG
           </td>
         </tr>
