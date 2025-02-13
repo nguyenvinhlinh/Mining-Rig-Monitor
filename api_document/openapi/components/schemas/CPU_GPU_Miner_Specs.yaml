@@ -60,3 +60,8 @@ properties:
     type: string
     examples:
       - NVIDIA GeForce RTX 3080
+
+required:
+  - motherboard_name
+  - cpu_name
+  - ram_size
