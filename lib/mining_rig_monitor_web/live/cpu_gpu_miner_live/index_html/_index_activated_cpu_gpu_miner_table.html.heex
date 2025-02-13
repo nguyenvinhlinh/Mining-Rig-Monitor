@@ -12,14 +12,14 @@
   >
     <:col :let={{_id, cpu_gpu_miner}} label="ID" class="hidden md:table-cell">{cpu_gpu_miner.id}</:col>
     <:col :let={{_id, cpu_gpu_miner}} label="Name">{cpu_gpu_miner.name}</:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Coin"></:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Coin">----</:col>
     <:col :let={{_id, cpu_gpu_miner}} label="Hashrate 5m | 30m">
-
+      ----
     </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Max Temp." class="hidden md:table-cell"></:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Max Fan" class="hidden md:table-cell"> </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Power(Walt)" class="hidden md:table-cell"> </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Uptime" class="hidden md:table-cell"></:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Max Temp." class="hidden md:table-cell">----</:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Max Fan" class="hidden md:table-cell">----</:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Power(Walt)" class="hidden md:table-cell">----</:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Uptime" class="hidden md:table-cell">----</:col>
     <:action :let={{_id, cpu_gpu_miner}}>
       <div class="sr-only">
         <.link navigate={~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}"}>Show</.link>
