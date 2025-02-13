@@ -44,4 +44,15 @@ defmodule MiningRigMonitor.CpuGpuMiners.CpuGpuMiner do
     |> cast(attrs, [:name])
     |> validate_required([:name])
   end
+
+
+  def changeset_edit_by_sentry(cpu_gpu_miner, attrs) do
+    field_list = [:motherboard_name, :cpu_name, :ram_size, :activated,
+                  :gpu_1_name, :gpu_2_name, :gpu_3_name, :gpu_4_name,
+                  :gpu_5_name, :gpu_6_name, :gpu_7_name, :gpu_8_name]
+
+    cpu_gpu_miner
+    |> cast(attrs, field_list)
+    |> validate_required([:motherboard_name, :cpu_name, :ram_size])
+  end
 end

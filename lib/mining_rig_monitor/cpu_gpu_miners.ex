@@ -78,6 +78,12 @@ defmodule MiningRigMonitor.CpuGpuMiners do
     |> Repo.update()
   end
 
+  def update_cpu_gpu_miner_by_sentry(%CpuGpuMiner{} = cpu_gpu_miner, attrs) do
+    cpu_gpu_miner
+    |> CpuGpuMiner.changeset_edit_by_sentry(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Updates a cpu_gpu_miner.
 
@@ -127,5 +133,9 @@ defmodule MiningRigMonitor.CpuGpuMiners do
 
   def change_cpu_gpu_miner_by_commander(%CpuGpuMiner{} = cpu_gpu_miner, attrs \\ %{}) do
     CpuGpuMiner.changeset_edit_by_commander(cpu_gpu_miner, attrs)
+  end
+
+  def get_cpu_gpu_miner_by_api_code(code) do
+    Repo.get_by(CpuGpuMiner, api_code: code)
   end
 end

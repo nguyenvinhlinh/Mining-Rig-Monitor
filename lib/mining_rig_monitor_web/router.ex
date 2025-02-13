@@ -21,6 +21,13 @@ defmodule MiningRigMonitorWeb.Router do
     plug :accepts, ["json"]
     plug MiningRigMonitorWeb.Plugs.ApiCodeAuthentication, :asic_miner
   end
+
+  pipeline :api_cpu_gpu_miner do
+    plug :accepts, ["json"]
+    plug MiningRigMonitorWeb.Plugs.ApiCodeAuthentication, :cpu_gpu_miner
+  end
+
+
   scope "/", MiningRigMonitorWeb do
     pipe_through [:browser, :no_nav_layout]
 
@@ -52,6 +59,11 @@ defmodule MiningRigMonitorWeb.Router do
       pipe_through :api_asic_miner
       post "/specs", MiningRigMonitorWeb.AsicMinerController, :update_asic_miner_specs
       post "/logs",  MiningRigMonitorWeb.AsicMinerLogController, :create
+    end
+
+    scope "/cpu_gpu_miners" do
+      pipe_through :api_cpu_gpu_miner
+      post "/specs", MiningRigMonitorWeb.CpuGpuMinerController, :update_cpu_gpu_miner_specs
     end
   end
 
