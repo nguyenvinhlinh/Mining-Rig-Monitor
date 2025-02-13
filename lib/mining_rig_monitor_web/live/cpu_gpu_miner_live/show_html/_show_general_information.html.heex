@@ -2,9 +2,13 @@
   sm:mx-2 sm:p-2 sm:mb-3
   md:mx-4 md:p-4 md:mb-4
   bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-  <h3 class="mb-4 text-xl font-semibold dark:text-white">General Information</h3>
-  <div class="grid grid-cols-8">
-    <div class="col-span-8 lg:col-span-4 2xl:col-span-3
+
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">
+    General Information
+  </h3>
+
+  <div class="grid grid-cols-12">
+    <div class="col-span-12 2xl:col-span-4
       text-base font-medium text-gray-900 dark:text-white">
       <ul class="list-disc px-5">
         <li>
@@ -16,6 +20,12 @@
         <li>
           <b>RAM:</b> <%= @cpu_gpu_miner.ram_size %>
         </li>
+      </ul>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 2xl:col-span-4
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
         <li :if={@cpu_gpu_miner.gpu_1_name}>
           <b>GPU[1]:</b> <%= @cpu_gpu_miner.gpu_1_name %>
         </li>
@@ -28,6 +38,12 @@
         <li :if={@cpu_gpu_miner.gpu_4_name}>
           <b>GPU[4]:</b> <%= @cpu_gpu_miner.gpu_4_name %>
         </li>
+      </ul>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 2xl:col-span-4
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
         <li :if={@cpu_gpu_miner.gpu_5_name}>
           <b>GPU[5]:</b> <%= @cpu_gpu_miner.gpu_5_name %>
         </li>
@@ -43,11 +59,9 @@
       </ul>
     </div>
 
-
-
-    <div class="col-span-8 lg:col-span-4 2xl:col-span-5
+    <div class="col-span-12
       text-base font-medium text-gray-900 dark:text-white">
-      <hr class="lg:hidden h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+      <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
       <ul class="list-disc px-5">
         <li>
           <b>Uptime:</b> 6 days, 4 hours, 51 minutes
