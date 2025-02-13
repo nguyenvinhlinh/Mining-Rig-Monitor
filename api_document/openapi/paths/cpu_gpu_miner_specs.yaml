@@ -11,7 +11,7 @@ post:
       description: OK with no response body
 
     '401':
-      description: Invalid MINING_RIG_CODE
+      description: Invalid API_CODE
       content:
         application/json:
           schema:
