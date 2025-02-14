@@ -41,7 +41,7 @@ paths:
     $ref: 'paths/cpu_gpu_miner_specs.yaml'
 
   '/cpu_gpu_miners/logs':
-    $ref: 'paths/cpu_gpu_monitor_data.yaml'
+    $ref: 'paths/cpu_gpu_miner_logs.yaml'
 
 components:
   securitySchemes:
