@@ -8,8 +8,8 @@ properties:
   cpu_hashrate:
     description: >
       CPU Hashrate
-    type: float
-    example: 17.5
+    type: integer
+    example: 17
   cpu_hashrate_uom:
     description: >
       CPU Hashrate - unit of measurement
@@ -25,6 +25,10 @@ properties:
       CPU coin name
     type: string
     example: Monero
+  cpu_pool_address:
+    type: string
+  cpu_wallet:
+    type: string
 
 
   gpu_1_core_temp:
@@ -253,6 +257,15 @@ properties:
     type: string
     example: Ergo
 
+  gpu_pool_address_1:
+    type: string
+  gpu_pool_address_2:
+    type: string
+  gpu_wallet_address_1:
+    type: string
+  gpu_wallet_address_2:
+    type: string
+
 
   lan_ip:
     description: LAN IP
@@ -263,3 +276,8 @@ properties:
     description: WAN/PUBLIC/Internet IP
     type: string
     example: 54.66.85.99
+
+  uptime:
+    description: uptime `days:hours:minutes:seconds`
+    type: string
+    example: 00:00:39:34
