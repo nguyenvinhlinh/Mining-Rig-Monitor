@@ -11,6 +11,9 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     field :cpu_hashrate_uom, :string
     field :cpu_algorithm, :string
     field :cpu_coin_name, :string
+    field :cpu_pool_address, :string
+    field :cpu_wallet, :string
+    field :cpu_power, :integer
 
     field :gpu_1_core_temp, :integer
     field :gpu_2_core_temp, :integer
@@ -81,6 +84,12 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     field :gpu_coin_name_1, :string
     field :gpu_coin_name_2, :string
 
+    field :gpu_pool_address_1, :string
+    field :gpu_pool_address_2, :string
+
+    field :gpu_wallet_address_1, :string
+    field :gpu_wallet_address_2, :string
+
     field :lan_ip, :string
     field :wan_ip, :string
 
@@ -91,7 +100,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
   def changeset(cpu_gpu_miner_log, attrs) do
     field_list =
       [:cpu_temp, :cpu_hashrate, :cpu_hashrate_uom, :cpu_algorithm, :cpu_coin_name,
-       :cpu_pool_address, :cpu_wallet,
+       :cpu_pool_address, :cpu_wallet, :cpu_power,
        :gpu_1_core_temp, :gpu_2_core_temp, :gpu_3_core_temp, :gpu_4_core_temp,
        :gpu_5_core_temp, :gpu_6_core_temp, :gpu_7_core_temp, :gpu_8_core_temp,
 

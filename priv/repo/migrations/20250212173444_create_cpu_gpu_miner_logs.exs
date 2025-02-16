@@ -12,6 +12,7 @@ defmodule MiningRigMonitor.Repo.Migrations.CreateCpuGpuMinerLogs do
       add :cpu_coin_name, :string
       add :cpu_pool_address, :string
       add :cpu_wallet, :string
+      add :cpu_power, :integer
 
       add :gpu_1_core_temp, :integer
       add :gpu_2_core_temp, :integer
