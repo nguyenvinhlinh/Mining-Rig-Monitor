@@ -10,6 +10,8 @@ defmodule MiningRigMonitor.Repo.Migrations.CreateCpuGpuMinerLogs do
       add :cpu_hashrate_uom, :string
       add :cpu_algorithm, :string
       add :cpu_coin_name, :string
+      add :cpu_pool_address, :string
+      add :cpu_wallet, :string
 
       add :gpu_1_core_temp, :integer
       add :gpu_2_core_temp, :integer
@@ -82,6 +84,12 @@ defmodule MiningRigMonitor.Repo.Migrations.CreateCpuGpuMinerLogs do
 
       add :gpu_coin_name_1, :string
       add :gpu_coin_name_2, :string
+
+      add :gpu_pool_address_1, :string
+      add :gpu_pool_address_2, :string
+
+      add :gpu_wallet_address_1, :string
+      add :gpu_wallet_address_2, :string
 
       add :lan_ip, :string
       add :wan_ip, :string
