@@ -10,13 +10,10 @@
       text-base font-medium text-gray-900 dark:text-white">
       <ul class="list-disc px-5">
         <li>
-          <b>Temperature:</b> ----
+          <b>Temperature:</b> {if @cpu_gpu_miner_log.cpu_temp, do: "#{@cpu_gpu_miner_log.cpu_temp} ℃", else: "----" }
         </li>
         <li>
-          <b>CPU Usage:</b> ----
-        </li>
-        <li>
-          <b>Coin Name:</b> ----
+          <b>Coin Name:</b> {@cpu_gpu_miner_log.cpu_coin_name}
         </li>
       </ul>
     </div>
@@ -26,10 +23,10 @@
       <ul class="list-disc px-5">
 
         <li>
-          <b>Algorithm:</b> ----
+          <b>Algorithm:</b> {@cpu_gpu_miner_log.cpu_algorithm}
         </li>
         <li>
-          <b>Hashrate:</b> ----
+          <b>Hashrate:</b> {@cpu_gpu_miner_log.cpu_hashrate} {@cpu_gpu_miner_log.cpu_hashrate_uom}
         </li>
         <li>
           <b>Power:</b> ----

@@ -89,8 +89,41 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
 
   @doc false
   def changeset(cpu_gpu_miner_log, attrs) do
+    field_list =
+      [:cpu_temp, :cpu_hashrate, :cpu_hashrate_uom, :cpu_algorithm, :cpu_coin_name,
+       :cpu_pool_address, :cpu_wallet,
+       :gpu_1_core_temp, :gpu_2_core_temp, :gpu_3_core_temp, :gpu_4_core_temp,
+       :gpu_5_core_temp, :gpu_6_core_temp, :gpu_7_core_temp, :gpu_8_core_temp,
+
+       :gpu_1_mem_temp, :gpu_2_mem_temp, :gpu_3_mem_temp, :gpu_4_mem_temp,
+       :gpu_5_mem_temp, :gpu_6_mem_temp, :gpu_7_mem_temp, :gpu_8_mem_temp,
+
+       :gpu_1_hashrate_1, :gpu_2_hashrate_1, :gpu_3_hashrate_1, :gpu_4_hashrate_1,
+       :gpu_5_hashrate_1, :gpu_6_hashrate_1, :gpu_7_hashrate_1, :gpu_8_hashrate_1,
+
+       :gpu_1_hashrate_2, :gpu_2_hashrate_2, :gpu_3_hashrate_2, :gpu_4_hashrate_2,
+       :gpu_5_hashrate_2, :gpu_6_hashrate_2, :gpu_7_hashrate_2, :gpu_8_hashrate_2,
+
+       :gpu_1_core_clock, :gpu_2_core_clock, :gpu_3_core_clock, :gpu_4_core_clock,
+       :gpu_5_core_clock, :gpu_6_core_clock, :gpu_7_core_clock, :gpu_8_core_clock,
+
+       :gpu_1_mem_clock, :gpu_2_mem_clock, :gpu_3_mem_clock, :gpu_4_mem_clock,
+       :gpu_5_mem_clock, :gpu_6_mem_clock, :gpu_7_mem_clock, :gpu_8_mem_clock,
+
+       :gpu_1_power, :gpu_2_power, :gpu_3_power, :gpu_4_power,
+       :gpu_5_power, :gpu_6_power, :gpu_7_power, :gpu_8_power,
+
+       :gpu_algorithm_1, :gpu_algorithm_2,
+       :gpu_coin_name_1, :gpu_coin_name_2,
+
+       :gpu_pool_address_1, :gpu_pool_address_2,
+       :gpu_wallet_address_1, :gpu_wallet_address_2,
+       :lan_ip, :wan_ip, :cpu_gpu_miner_id
+      ]
+    required_field_list = [:cpu_gpu_miner_id]
+
     cpu_gpu_miner_log
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, field_list)
+    |> validate_required(required_field_list)
   end
 end

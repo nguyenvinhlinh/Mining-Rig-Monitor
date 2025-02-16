@@ -64,6 +64,7 @@ defmodule MiningRigMonitorWeb.Router do
     scope "/cpu_gpu_miners" do
       pipe_through :api_cpu_gpu_miner
       post "/specs", MiningRigMonitorWeb.CpuGpuMinerController, :update_cpu_gpu_miner_specs
+      post "/logs",  MiningRigMonitorWeb.CpuGpuMinerLogController, :create
     end
   end
 
