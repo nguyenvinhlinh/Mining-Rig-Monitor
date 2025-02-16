@@ -29,7 +29,7 @@
           <b>Hashrate:</b> {@cpu_gpu_miner_log.cpu_hashrate} {@cpu_gpu_miner_log.cpu_hashrate_uom}
         </li>
         <li>
-          <b>Power:</b> ----
+          <b>Power:</b> {if @cpu_gpu_miner_log.cpu_power, do: "#{@cpu_gpu_miner_log.cpu_power}W", else: "----" }
         </li>
       </ul>
     </div>
