@@ -11,16 +11,19 @@
       text-base font-medium text-gray-900 dark:text-white">
       <ul class="list-disc px-5">
         <li>
-          <b>[{i}]GPU:</b> ----
+          <b>[{i}]GPU:</b> { Map.get(@cpu_gpu_miner,  String.to_atom("gpu_#{i}_name")) }
         </li>
         <li>
-          <b>[{i}]Algorithm:</b> ----
+          <b>[{i}]Algorithm 1:</b> { @cpu_gpu_miner_log.gpu_algorithm_1 }
         </li>
         <li>
-          <b>[{i}]GPU Clock:</b> ----
+          <b>[{i}]Algorithm 2:</b> { @cpu_gpu_miner_log.gpu_algorithm_2 }
         </li>
         <li>
-          <b>[{i}]Memory Clock:</b> ----
+          <b>[{i}]GPU Clock:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_clock")) } MHz
+        </li>
+        <li>
+          <b>[{i}]Memory Clock:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_clock")) } MHz
         </li>
       </ul>
     </div>
@@ -29,24 +32,30 @@
       text-base font-medium text-gray-900 dark:text-white">
       <ul class="list-disc px-5">
         <li>
-          <b>[{i}]Hashrate:</b> ----
+          <b>[{i}]Power:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_power")) }W
         </li>
         <li>
-          <b>[{i}]Core Temperature:</b> ----
+          <b>[{i}]Hashrate 1:</b>
+          { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_1")) }
+          { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
         </li>
         <li>
-          <b>[{i}]Memory Temperature:</b> ----
+          <b>[{i}]Hashrate 2:</b>
+          { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_2")) }
+          { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
         </li>
         <li>
-          <b>[{i}]Fan Speed:</b> ----
+          <b>[{i}]Core Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) } C
         </li>
         <li>
-          <b>[{i}]Power:</b> ----
+          <b>[{i}]Memory Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) } C
+        </li>
+        <li>
+          <b>[{i}]Fan Speed:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan_speed")) }
         </li>
       </ul>
     </div>
   </div>
-
 
   <div class="hidden lg:block overflow-hidden shadow">
     <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
@@ -58,7 +67,9 @@
           <th class="p-4 text-xs font-bold text-left text-gray-500 uppercase dark:text-gray-400">
             Hashrate (Algorithm)
           </th>
-
+          <th class="p-4 text-xs font-bold text-left text-gray-500 uppercase dark:text-gray-400">
+            Coin
+          </th>
           <th class="p-4 text-xs font-bold text-left text-gray-500 uppercase dark:text-gray-400">
             GPU Clock
           </th>
@@ -82,29 +93,38 @@
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <tr :for={i <- [1,2,3,4,5,6,7,8]} class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            [{i}] ----
+            [{i}] { Map.get(@cpu_gpu_miner,  String.to_atom("gpu_#{i}_name")) }
           </td>
           <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_1")) }
+            { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
+            ({ @cpu_gpu_miner_log.gpu_algorithm_1 })
+            <br/>
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_2")) }
+            { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
+            ({ @cpu_gpu_miner_log.gpu_algorithm_2 })
           </td>
-
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
-          </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
-          </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
-          </td>
-          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            {@cpu_gpu_miner_log.gpu_coin_name_1} <br/>
+            {@cpu_gpu_miner_log.gpu_coin_name_2}
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_clock")) } MHz
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_clock")) } MHz
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) } C
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) } C
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan_speed")) }
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_power")) }W
           </td>
         </tr>
 
@@ -113,7 +133,8 @@
             Total
           </td>
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
+            { sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 } <br/>
+            { sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 } <br/>
           </td>
 
           <td></td>
@@ -121,8 +142,9 @@
           <td></td>
           <td></td>
           <td></td>
+          <td></td>
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
+            { sum_gpu_power(@cpu_gpu_miner_log) }W
           </td>
         </tr>
 
@@ -145,18 +167,24 @@
           <th class="px-2 py-4 text-xs font-bold text-left text-gray-500 uppercase dark:text-gray-400">
             Algorithm
           </th>
+          <th class="px-2 py-4 text-xs font-bold text-left text-gray-500 uppercase dark:text-gray-400">
+            Coin
+          </th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
         <tr :for={i <- [1,2]} class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
           </td>
           <td class="p-4 text-base font-medium text-gray-900 break-all dark:text-white hover:cursor-pointer">
-            ----
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_wallet_address_#{i}")) }
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            ----
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_algorithm_#{i}")) }
+          </td>
+          <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_coin_name_#{i}")) }
           </td>
         </tr>
       </tbody>
@@ -168,13 +196,13 @@
       text-base font-medium text-gray-900 dark:text-white">
       <ul class="list-disc px-5">
         <li>
-          <b>[{i}] Pool Address:</b> ----
+          <b>[{i}] Pool Address:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
         </li>
         <li class="break-all">
-          <b>[{i}] Wallet Address:</b> ----
+          <b>[{i}] Wallet Address:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_wallet_address_#{i}")) }
         </li>
         <li>
-          <b>[{i}] Algorithm:</b> ----
+          <b>[{i}] Algorithm:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_algorithm_#{i}")) }
         </li>
       </ul>
     </div>
