@@ -37,14 +37,14 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
 
   def generate_cpu_gpu_miner_log() do
     %{
-      "cpu_temp" => 60,
-      "cpu_hashrate" => 17,
+      "cpu_temp" => 60 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
+      "cpu_hashrate" => 1000 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "cpu_hashrate_uom" => "kh/s",
       "cpu_algorithm" => "RandomX",
       "cpu_coin_name" => "Monero",
-      "cpu_pool_address" => "xxx pool " ,
-      "cpu_wallet" => "xxx wallet",
-      "cpu_power" => 200,
+      "cpu_pool_address" => "stratum+tcp://#{UUID.uuid1()}:4444",
+      "cpu_wallet" => "#{UUID.uuid1()}",
+      "cpu_power" => 200 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "gpu_1_core_temp" => 60 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "gpu_2_core_temp" => 60 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "gpu_3_core_temp" => 60 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
@@ -101,14 +101,29 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
       "gpu_6_power" => 1000 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "gpu_7_power" => 1000 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "gpu_8_power" => 1000 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
+      "gpu_1_fan" => "#{Enum.random(1..100)}%",
+      "gpu_2_fan" => "#{Enum.random(1..100)}%",
+      "gpu_3_fan" => "#{Enum.random(1..100)}%",
+      "gpu_4_fan" => "#{Enum.random(1..100)}%",
+      "gpu_5_fan" => "#{Enum.random(1..100)}%",
+      "gpu_6_fan" => "#{Enum.random(1..100)}%",
+      "gpu_7_fan" => "#{Enum.random(1..100)}%",
+      "gpu_8_fan" => "#{Enum.random(1..100)}%",
+
+
       "gpu_hashrate_uom_1" => "MH/s",
       "gpu_hashrate_uom_2" => "SOL/s",
       "gpu_algorithm_1" => "Ethash",
       "gpu_algorithm_2" => "Autokylos",
       "gpu_coin_name_1" => "Ethereum",
       "gpu_coin_name_2" => "Ergo",
+      "gpu_pool_address_1" => "stratum+tcp://#{UUID.uuid1()}:4444",
+      "gpu_pool_address_2" => "stratum+tcp://#{UUID.uuid1()}:4444",
+      "gpu_wallet_address_1" => "#{UUID.uuid1()}",
+      "gpu_wallet_address_2" => "#{UUID.uuid1()}",
       "lan_ip" => "192.168.15.6",
-      "wan_ip" => "54.66.85.99"
+      "wan_ip" => "54.66.85.99",
+      "uptime" => "07:23:50:20"
     }
   end
 
