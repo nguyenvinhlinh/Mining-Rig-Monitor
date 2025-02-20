@@ -81,6 +81,9 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     field :gpu_algorithm_1, :string
     field :gpu_algorithm_2, :string
 
+    field :gpu_hashrate_uom_1, :string
+    field :gpu_hashrate_uom_2, :string
+
     field :gpu_coin_name_1, :string
     field :gpu_coin_name_2, :string
 
@@ -123,6 +126,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
        :gpu_5_power, :gpu_6_power, :gpu_7_power, :gpu_8_power,
 
        :gpu_algorithm_1, :gpu_algorithm_2,
+       :gpu_hashrate_uom_1, :gpu_hashrate_uom_2,
        :gpu_coin_name_1, :gpu_coin_name_2,
 
        :gpu_pool_address_1, :gpu_pool_address_2,
