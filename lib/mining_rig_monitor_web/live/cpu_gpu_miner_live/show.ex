@@ -38,11 +38,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
 
   def empty_cpu_gpu_miner_log() do
     %MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog{}
-    |> Map.put(:cpu_temp, nil)
-    |> Map.put(:cpu_hashrate, nil)
-    |> Map.put(:cpu_hashrate_uom, "----")
-    |> Map.put(:cpu_algorithm, "----")
-    |> Map.put(:cpu_coin_name, "----")
   end
 
   def sum_gpu_hashrate_1(cpu_gpu_miner_log) do
@@ -92,6 +87,24 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
     ]
 
     Enum.reduce(gpu_power_list, 0, fn(e, a) ->
+      if Kernel.is_nil(e), do: a, else: a + e
+    end)
+  end
+
+  def sum_total_power(cpu_gpu_miner_log) do
+    power_list = [
+      cpu_gpu_miner_log.cpu_power,
+      cpu_gpu_miner_log.gpu_1_power,
+      cpu_gpu_miner_log.gpu_2_power,
+      cpu_gpu_miner_log.gpu_3_power,
+      cpu_gpu_miner_log.gpu_4_power,
+      cpu_gpu_miner_log.gpu_5_power,
+      cpu_gpu_miner_log.gpu_6_power,
+      cpu_gpu_miner_log.gpu_7_power,
+      cpu_gpu_miner_log.gpu_8_power
+    ]
+
+    Enum.reduce(power_list, 0, fn(e, a) ->
       if Kernel.is_nil(e), do: a, else: a + e
     end)
   end
