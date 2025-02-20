@@ -6,7 +6,7 @@
   bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
   <h3 class="mb-4 text-xl font-semibold dark:text-white">GPU Mining</h3>
 
-  <div :for={i <- [1,2,3,4,5,6,7,8] } class="block lg:hidden grid grid-cols-8 border-4 border-solid border-inherit">
+  <div :for={i <- [1,2,3,4,5,6,7,8] } class="block lg:hidden my-1 grid grid-cols-8 border-4 border-solid border-inherit">
     <div class="col-span-4 xl:col-span-2 2xl:col-span-2
       text-base font-medium text-gray-900 dark:text-white">
       <ul class="list-disc px-5">
@@ -91,7 +91,7 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-        <tr :for={i <- [1,2,3,4,5,6,7,8]} class="hover:bg-gray-100 dark:hover:bg-gray-700">
+        <tr :for={i <- 1..8 } class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             [{i}] { Map.get(@cpu_gpu_miner,  String.to_atom("gpu_#{i}_name")) }
           </td>
@@ -191,8 +191,8 @@
     </table>
   </div>
 
-  <div class="">
-    <div :for={i <- [1,2,3]} class="block 2xl:hidden border-4
+  <div>
+    <div :for={i <- [1,2]} class="block 2xl:hidden my-1 border-4
       text-base font-medium text-gray-900 dark:text-white">
       <ul class="list-disc px-5">
         <li>
