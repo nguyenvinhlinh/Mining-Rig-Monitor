@@ -64,7 +64,7 @@
       <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
       <ul class="list-disc px-5">
         <li>
-          <b>Uptime:</b>  @cpu_gpu_miner_log.uptime
+          <b>Uptime:</b>  { MiningRigMonitor.Utility.beautify_uptime(@cpu_gpu_miner_log.uptime) }
         </li>
         <li>
           <b>LAN IP:</b> { @cpu_gpu_miner_log.lan_ip }
@@ -73,7 +73,7 @@
           <b>WAN IP:</b> { @cpu_gpu_miner_log.wan_ip }
         </li>
         <li>
-          <b>API Code:</b> <%= @cpu_gpu_miner.api_code  %>
+          <b>API Code:</b> { @cpu_gpu_miner.api_code }
         </li>
       </ul>
     </div>

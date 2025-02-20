@@ -78,6 +78,16 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     field :gpu_7_power, :integer
     field :gpu_8_power, :integer
 
+    field :gpu_1_fan, :string
+    field :gpu_2_fan, :string
+    field :gpu_3_fan, :string
+    field :gpu_4_fan, :string
+    field :gpu_5_fan, :string
+    field :gpu_6_fan, :string
+    field :gpu_7_fan, :string
+    field :gpu_8_fan, :string
+
+
     field :gpu_algorithm_1, :string
     field :gpu_algorithm_2, :string
 
@@ -95,6 +105,8 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
 
     field :lan_ip, :string
     field :wan_ip, :string
+    field :uptime, :string
+
 
     timestamps(type: :utc_datetime)
   end
@@ -125,13 +137,17 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
        :gpu_1_power, :gpu_2_power, :gpu_3_power, :gpu_4_power,
        :gpu_5_power, :gpu_6_power, :gpu_7_power, :gpu_8_power,
 
+       :gpu_1_fan, :gpu_2_fan, :gpu_3_fan, :gpu_4_fan,
+       :gpu_5_fan, :gpu_6_fan, :gpu_7_fan, :gpu_8_fan,
+
        :gpu_algorithm_1, :gpu_algorithm_2,
        :gpu_hashrate_uom_1, :gpu_hashrate_uom_2,
        :gpu_coin_name_1, :gpu_coin_name_2,
 
        :gpu_pool_address_1, :gpu_pool_address_2,
        :gpu_wallet_address_1, :gpu_wallet_address_2,
-       :lan_ip, :wan_ip, :cpu_gpu_miner_id
+       :lan_ip, :wan_ip, :uptime,
+       :cpu_gpu_miner_id
       ]
     required_field_list = [:cpu_gpu_miner_id]
 
