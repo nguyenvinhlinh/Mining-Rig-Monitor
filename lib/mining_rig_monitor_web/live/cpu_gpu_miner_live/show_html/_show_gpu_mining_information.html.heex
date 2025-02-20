@@ -23,10 +23,12 @@
                 <b>[{i}]GPU:</b> { Map.get(@cpu_gpu_miner,  String.to_atom("gpu_#{i}_name")) }
               </li>
               <li>
-                <b>[{i}]Algorithm 1:</b> { @cpu_gpu_miner_log.gpu_algorithm_1 }
+                <b>[{i}] {@cpu_gpu_miner_log.gpu_coin_name_1}:</b>
+                { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_1")) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 } { @cpu_gpu_miner_log.gpu_algorithm_1 }
               </li>
               <li>
-                <b>[{i}]Algorithm 2:</b> { @cpu_gpu_miner_log.gpu_algorithm_2 }
+                <b>[{i}] {@cpu_gpu_miner_log.gpu_coin_name_2}:</b>
+                { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_2")) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 } { @cpu_gpu_miner_log.gpu_algorithm_2 }
               </li>
               <li>
                 <b>[{i}]GPU Clock:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_clock")) } MHz
@@ -37,21 +39,12 @@
             </ul>
           </td>
 
-          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
+          <td  class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer align-top">
             <ul class="list-disc">
               <li>
                 <b>[{i}]Power:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_power")) }W
               </li>
-              <li>
-                <b>[{i}]Hashrate 1:</b>
-                { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_1")) }
-                { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
-              </li>
-              <li>
-                <b>[{i}]Hashrate 2:</b>
-                { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_2")) }
-                { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
-              </li>
+
               <li>
                 <b>[{i}]Core Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) } C
               </li>
