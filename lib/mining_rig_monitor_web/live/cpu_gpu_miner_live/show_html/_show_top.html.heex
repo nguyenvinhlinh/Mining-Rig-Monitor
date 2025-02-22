@@ -11,23 +11,31 @@
         <li>
           <div class="flex items-center">
             <.icon name="hero-chevron-right-solid" class="size-6 text-gray-400" />
-            <.icon name="hero-cpu-chip-solid" class="size-5" />
-            <a href={~p(/asic_miners)} class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">ASIC Miners</a>
+            <.icon name="hero-server-solid" class="size-5" />
+            <a href={~p(/cpu_gpu_miners)} class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">CPU/GPU Miners</a>
           </div>
         </li>
         <li>
           <div class="flex items-center">
             <.icon name="hero-chevron-right-solid" class="size-6 text-gray-400" />
-            <.icon name="hero-cpu-chip-solid" class="size-5" />
-            <a href={~p(/asic_miners/#{@asic_miner})} class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">
-              {@asic_miner.name}
+            <.icon name="hero-server-solid" class="size-5" />
+            <a href={~p(/cpu_gpu_miners/#{@cpu_gpu_miner})} class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">
+              {@cpu_gpu_miner.name}
             </a>
           </div>
         </li>
       </ol>
     </nav>
     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white inline">
-      ASIC Miner: {@asic_miner.name}
+      CPU/GPU Miner: {@cpu_gpu_miner.name}
     </h1>
+
+    <!-- <.link patch={~p"/cpu_gpu_miners"} class="float-right"> -->
+    <!--   <.button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 -->
+    <!--     dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" -->
+    <!--     type="button"> -->
+    <!--     Configure -->
+    <!--   </.button> -->
+    <!-- </.link> -->
   </div>
 </div>

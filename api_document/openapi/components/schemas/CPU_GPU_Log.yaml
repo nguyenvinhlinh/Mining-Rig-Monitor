@@ -1,0 +1,283 @@
+type: object
+properties:
+  cpu_temp:
+    description: >
+      **CPU** Temterature in Celcius
+    type: integer
+    example: 60
+  cpu_hashrate:
+    description: >
+      CPU Hashrate
+    type: integer
+    example: 17
+  cpu_hashrate_uom:
+    description: >
+      CPU Hashrate - unit of measurement
+    type: string
+    example: kh/s
+  cpu_algorithm:
+    description: >
+      CPU Hashrate Algorithm
+    type: string
+    example: RandomX
+  cpu_coin_name:
+    description: >
+      CPU coin name
+    type: string
+    example: Monero
+  cpu_pool_address:
+    type: string
+  cpu_wallet:
+    type: string
+
+
+  gpu_1_core_temp:
+    description: >
+      **GPU 1** - Core Temterature in Celcius
+    type: integer
+    example: 65
+  gpu_2_core_temp:
+    type: integer
+    example: 60
+  gpu_3_core_temp:
+    type: integer
+    example: 61
+  gpu_4_core_temp:
+    type: integer
+    example: 62
+  gpu_5_core_temp:
+    type: integer
+    example: 62
+  gpu_6_core_temp:
+    type: integer
+    example: 62
+  gpu_7_core_temp:
+    type: integer
+    example: 62
+  gpu_8_core_temp:
+    type: integer
+    example: 62
+
+
+  gpu_1_mem_temp:
+    description: >
+      **GPU 1** - Mem Temterature in Celcius
+    type: integer
+    example: 63
+  gpu_2_mem_temp:
+    type: integer
+    example: 64
+  gpu_3_mem_temp:
+    type: integer
+    example: 61
+  gpu_4_mem_temp:
+    type: integer
+    example: 62
+  gpu_5_mem_temp:
+    type: integer
+    example: 63
+  gpu_6_mem_temp:
+    type: integer
+    example: 64
+  gpu_7_mem_temp:
+    type: integer
+    example: 61
+  gpu_8_mem_temp:
+    type: integer
+    example: 62
+
+  gpu_1_hashrate_1:
+    description: >
+      **GPU 1** - Hashrate 1
+    type: integer
+    example: 60
+  gpu_2_hashrate_1:
+    type: integer
+    example: 60
+  gpu_3_hashrate_1:
+    type: integer
+    example: 60
+  gpu_4_hashrate_1:
+    type: integer
+    example: 60
+  gpu_5_hashrate_1:
+    type: integer
+    example: 60
+  gpu_6_hashrate_1:
+    type: integer
+    example: 60
+  gpu_7_hashrate_1:
+    type: integer
+    example: 60
+  gpu_8_hashrate_1:
+    type: integer
+    example: 60
+
+  gpu_1_hashrate_2:
+    description: >
+      **GPU 1** - Hashrate 2
+    type: integer
+    example: 60
+  gpu_2_hashrate_2:
+    type: integer
+    example: 60
+  gpu_3_hashrate_2:
+    type: integer
+    example: 60
+  gpu_4_hashrate_2:
+    type: integer
+    example: 60
+  gpu_5_hashrate_2:
+    type: integer
+    example: 60
+  gpu_6_hashrate_2:
+    type: integer
+    example: 60
+  gpu_7_hashrate_2:
+    type: integer
+    example: 60
+  gpu_8_hashrate_2:
+    type: integer
+    example: 60
+
+  gpu_1_core_clock:
+    description: >
+      **GPU 1** - core clock
+    type: integer
+    example: 60
+  gpu_2_core_clock:
+    type: integer
+    example: 60
+  gpu_3_core_clock:
+    type: integer
+    example: 60
+  gpu_4_core_clock:
+    type: integer
+    example: 60
+  gpu_5_core_clock:
+    type: integer
+    example: 60
+  gpu_6_core_clock:
+    type: integer
+    example: 60
+  gpu_7_core_clock:
+    type: integer
+    example: 60
+  gpu_8_core_clock:
+    type: integer
+    example: 60
+
+  gpu_1_mem_clock:
+    description: >
+      **GPU 1** - mem clock
+    type: integer
+    example: 60
+  gpu_2_mem_clock:
+    type: integer
+    example: 60
+  gpu_3_mem_clock:
+    type: integer
+    example: 60
+  gpu_4_mem_clock:
+    type: integer
+    example: 60
+  gpu_5_mem_clock:
+    type: integer
+    example: 60
+  gpu_6_mem_clock:
+    type: integer
+    example: 60
+  gpu_7_mem_clock:
+    type: integer
+    example: 60
+  gpu_8_mem_clock:
+    type: integer
+    example: 60
+
+
+  gpu_1_power:
+    description: >
+      **GPU 1** - power in walt
+    type: integer
+    example: 60
+  gpu_2_power:
+    type: integer
+    example: 60
+  gpu_3_power:
+    type: integer
+    example: 60
+  gpu_4_power:
+    type: integer
+    example: 60
+  gpu_5_power:
+    type: integer
+    example: 60
+  gpu_6_power:
+    type: integer
+    example: 60
+  gpu_7_power:
+    type: integer
+    example: 60
+  gpu_8_power:
+    type: integer
+    example: 60
+
+
+  gpu_hashrate_uom_1:
+    description: >
+      GPU hashrate 1 - unit of measurement
+    type: string
+    example: MH/s
+  gpu_hashrate_uom_2:
+    description: >
+      GPU hashrate 2 - unit of measurement, for dual mining
+    type: string
+    example: SOL/s
+
+
+  gpu_algorithm_1:
+    description: >
+      GPU algorithm 1
+    type: string
+    example: Ethash
+  gpu_algorithm_2:
+    description: >
+      GPU algorithm 2
+    type: string
+    example: Autokylos
+
+  gpu_coin_name_1:
+    description: >
+      GPU coin name 1
+    type: string
+    example: Ethereum
+  gpu_coin_name_2:
+    description: >
+      GPU coin name 2
+    type: string
+    example: Ergo
+
+  gpu_pool_address_1:
+    type: string
+  gpu_pool_address_2:
+    type: string
+  gpu_wallet_address_1:
+    type: string
+  gpu_wallet_address_2:
+    type: string
+
+
+  lan_ip:
+    description: LAN IP
+    type: string
+    example: 192.168.15.6
+
+  wan_ip:
+    description: WAN/PUBLIC/Internet IP
+    type: string
+    example: 54.66.85.99
+
+  uptime:
+    description: uptime `days:hours:minutes:seconds`
+    type: string
+    example: 00:00:39:34

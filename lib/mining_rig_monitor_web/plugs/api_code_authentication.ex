@@ -4,12 +4,12 @@ defmodule MiningRigMonitorWeb.Plugs.ApiCodeAuthentication do
   import Plug.Conn
 
   alias MiningRigMonitor.AsicMiners
+  alias MiningRigMonitor.CpuGpuMiners
   @header_name "api_code"
 
 
   def init(:asic_miner), do: :asic_miner
   def init(:cpu_gpu_miner), do: :cpu_gpu_miner
-
 
   def call(conn, :asic_miner) do
     with {:ok, api_code} <- get_api_code(conn),
@@ -24,6 +24,21 @@ defmodule MiningRigMonitorWeb.Plugs.ApiCodeAuthentication do
         handle_api_code_invalid(conn)
     end
   end
+
+  def call(conn, :cpu_gpu_miner) do
+    with {:ok, api_code} <- get_api_code(conn),
+         {:ok, cpu_gpu_miner} <- get_cpu_gpu_miner(api_code)
+      do
+      conn
+      |> assign(:cpu_gpu_miner, cpu_gpu_miner)
+    else
+      {:error, :api_code_not_exist} ->
+        handle_api_code_not_exist(conn)
+      {:error, :api_code_invalid} ->
+        handle_api_code_invalid(conn)
+    end
+  end
+
 
 
 
@@ -43,6 +58,13 @@ defmodule MiningRigMonitorWeb.Plugs.ApiCodeAuthentication do
     case AsicMiners.get_asic_miner_by_api_code(api_code) do
       nil -> {:error, :api_code_invalid}
       asic_miner -> {:ok, asic_miner}
+    end
+  end
+
+  def get_cpu_gpu_miner(api_code) do
+    case CpuGpuMiners.get_cpu_gpu_miner_by_api_code(api_code) do
+      nil -> {:error, :api_code_invalid}
+      cpu_gpu_miner -> {:ok, cpu_gpu_miner}
     end
   end
 

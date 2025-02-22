@@ -13,6 +13,9 @@ defmodule MiningRigMonitor.Application do
       {DNSCluster, query: Application.get_env(:mining_rig_monitor, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: MiningRigMonitor.PubSub},
       {AsicMinerOperationalIndex, nil},
+#      Uncomment it for dev env.
+#      {MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator, nil},
+#      {MiningRigMonitor.Simulation.AsicMinerLogGenerator, nil},
       MiningRigMonitorWeb.Endpoint
     ]
     # See https://hexdocs.pm/elixir/Supervisor.html

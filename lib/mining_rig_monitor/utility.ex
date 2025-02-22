@@ -1,4 +1,4 @@
-defmodule  MiningRigMonitor.Utility do
+defmodule MiningRigMonitor.Utility do
   require Logger
 
   def unify_hashrate_uom("g"), do: "GH/s"
