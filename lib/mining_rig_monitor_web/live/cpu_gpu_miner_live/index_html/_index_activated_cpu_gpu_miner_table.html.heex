@@ -28,9 +28,15 @@
     <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Core/Memory Temp." class="hidden md:table-cell">
       {cpu_gpu_miner.max_gpu_core_temp} / {cpu_gpu_miner.max_gpu_mem_temp}
     </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Fan" class="hidden md:table-cell">----</:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Power(Walt)" class="hidden md:table-cell">----</:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Uptime" class="hidden md:table-cell">----</:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Fan" class="hidden md:table-cell">
+      {cpu_gpu_miner.max_gpu_fan}{cpu_gpu_miner.gpu_fan_uom}
+    </:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Power(Walt)" class="hidden md:table-cell">
+      {cpu_gpu_miner.total_power}
+    </:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Uptime" class="hidden md:table-cell">
+      {cpu_gpu_miner.uptime}
+    </:col>
     <:action :let={{_id, cpu_gpu_miner}}>
       <div class="sr-only">
         <.link navigate={~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}"}>Show</.link>

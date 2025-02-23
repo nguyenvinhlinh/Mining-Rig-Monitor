@@ -33,7 +33,13 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
 
         cpu_temp: "SYNC...",
         max_gpu_core_temp: "SYNC...",
-        max_gpu_mem_temp: "SYNC..."
+        max_gpu_mem_temp: "SYNC...",
+        max_gpu_fan: "SYNC...",
+        gpu_fan_uom: nil,
+
+        total_power: "SYNC...",
+        uptime: "SYNC..."
+
   }
     end)
 
@@ -139,10 +145,13 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
 
     gpu_hashrate_1 = MiningRigMonitorWeb.CpuGpuMinerLive.Show.sum_gpu_hashrate_1(cpu_gpu_miner_log)
     gpu_hashrate_2 = MiningRigMonitorWeb.CpuGpuMinerLive.Show.sum_gpu_hashrate_2(cpu_gpu_miner_log)
+
     max_gpu_core_temp = find_max_gpu_core_temp(cpu_gpu_miner_log)
     max_gpu_mem_temp =  find_max_gpu_mem_temp(cpu_gpu_miner_log)
+    max_gpu_fan = find_max_gpu_fan_speed(cpu_gpu_miner_log)
 
-
+    total_power = MiningRigMonitorWeb.CpuGpuMinerLive.Show.sum_total_power(cpu_gpu_miner_log)
+    uptime =  MiningRigMonitor.Utility.beautify_uptime(cpu_gpu_miner_log.uptime)
     %{
       id: cpu_gpu_miner.id,
       name: cpu_gpu_miner.name,
@@ -164,7 +173,11 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
 
       cpu_temp: "#{cpu_gpu_miner_log.cpu_temp} ℃",
       max_gpu_core_temp: "#{max_gpu_core_temp} ℃",
-      max_gpu_mem_temp: "#{max_gpu_mem_temp} ℃"
+      max_gpu_mem_temp: "#{max_gpu_mem_temp} ℃",
+      max_gpu_fan: max_gpu_fan,
+      gpu_fan_uom: cpu_gpu_miner_log.gpu_fan_uom,
+      total_power: "#{total_power} W",
+      uptime: uptime
     }
   end
 
@@ -191,6 +204,21 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
      cpu_gpu_miner_log.gpu_6_mem_temp,
      cpu_gpu_miner_log.gpu_7_mem_temp,
      cpu_gpu_miner_log.gpu_8_mem_temp
+    ]
+    |> Enum.filter(fn(e) -> e != nil end)
+    |> Enum.max()
+  end
+
+  def find_max_gpu_fan_speed(cpu_gpu_miner_log) do
+    gpu_fan_list = [
+      cpu_gpu_miner_log.gpu_1_fan,
+      cpu_gpu_miner_log.gpu_2_fan,
+      cpu_gpu_miner_log.gpu_3_fan,
+      cpu_gpu_miner_log.gpu_4_fan,
+      cpu_gpu_miner_log.gpu_5_fan,
+      cpu_gpu_miner_log.gpu_6_fan,
+      cpu_gpu_miner_log.gpu_7_fan,
+      cpu_gpu_miner_log.gpu_8_fan
     ]
     |> Enum.filter(fn(e) -> e != nil end)
     |> Enum.max()

@@ -78,14 +78,16 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     field :gpu_7_power, :integer
     field :gpu_8_power, :integer
 
-    field :gpu_1_fan, :string
-    field :gpu_2_fan, :string
-    field :gpu_3_fan, :string
-    field :gpu_4_fan, :string
-    field :gpu_5_fan, :string
-    field :gpu_6_fan, :string
-    field :gpu_7_fan, :string
-    field :gpu_8_fan, :string
+    field :gpu_1_fan, :integer
+    field :gpu_2_fan, :integer
+    field :gpu_3_fan, :integer
+    field :gpu_4_fan, :integer
+    field :gpu_5_fan, :integer
+    field :gpu_6_fan, :integer
+    field :gpu_7_fan, :integer
+    field :gpu_8_fan, :integer
+
+    field :gpu_fan_uom, :string
 
 
     field :gpu_algorithm_1, :string
@@ -139,6 +141,8 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
 
        :gpu_1_fan, :gpu_2_fan, :gpu_3_fan, :gpu_4_fan,
        :gpu_5_fan, :gpu_6_fan, :gpu_7_fan, :gpu_8_fan,
+
+       :gpu_fan_uom,
 
        :gpu_algorithm_1, :gpu_algorithm_2,
        :gpu_hashrate_uom_1, :gpu_hashrate_uom_2,

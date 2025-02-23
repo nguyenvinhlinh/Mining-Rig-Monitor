@@ -28,14 +28,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
     {:noreply, socket_mod}
   end
 
-  # @impl true
-  # def handle_params(%{"id" => id}, _, socket) do
-  #   {:noreply,
-  #    socket
-  #    |> assign(:page_title, page_title(socket.assigns.live_action))
-  #    |> assign(:cpu_gpu_miner, CpuGpuMiners.get_cpu_gpu_miner!(id))}
-  # end
-
   def empty_cpu_gpu_miner_log() do
     %MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog{}
   end
