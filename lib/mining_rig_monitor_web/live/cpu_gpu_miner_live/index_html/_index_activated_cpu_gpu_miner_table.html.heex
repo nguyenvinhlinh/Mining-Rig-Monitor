@@ -22,8 +22,11 @@
       <br :if={cpu_gpu_miner.gpu_hashrate_1} /> { cpu_gpu_miner.gpu_hashrate_1} { cpu_gpu_miner.gpu_hashrate_uom_1} {cpu_gpu_miner.gpu_algorithm_1}
       <br :if={cpu_gpu_miner.gpu_hashrate_2} /> { cpu_gpu_miner.gpu_hashrate_2} { cpu_gpu_miner.gpu_hashrate_uom_2} {cpu_gpu_miner.gpu_algorithm_2}
     </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Max Core/Memory Temp." class="hidden md:table-cell">
-
+    <:col :let={{_id, cpu_gpu_miner}} label="CPU Temp." class="hidden md:table-cell">
+      {cpu_gpu_miner.cpu_temp}
+    </:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Core/Memory Temp." class="hidden md:table-cell">
+      {cpu_gpu_miner.max_gpu_core_temp} / {cpu_gpu_miner.max_gpu_mem_temp}
     </:col>
     <:col :let={{_id, cpu_gpu_miner}} label="Fan" class="hidden md:table-cell">----</:col>
     <:col :let={{_id, cpu_gpu_miner}} label="Power(Walt)" class="hidden md:table-cell">----</:col>

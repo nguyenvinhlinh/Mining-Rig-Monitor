@@ -23,16 +23,17 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
         cpu_hashrate_uom: nil,
         cpu_algorithm: nil,
 
-
         gpu_algorithm_1: nil,
         gpu_hashrate_1: nil,
         gpu_hashrate_uom_1: nil,
 
-
         gpu_algorithm_2: nil,
         gpu_hashrate_2: nil,
-        gpu_hashrate_uom_2: nil
+        gpu_hashrate_uom_2: nil,
 
+        cpu_temp: "SYNC...",
+        max_gpu_core_temp: "SYNC...",
+        max_gpu_mem_temp: "SYNC..."
   }
     end)
 
@@ -138,6 +139,8 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
 
     gpu_hashrate_1 = MiningRigMonitorWeb.CpuGpuMinerLive.Show.sum_gpu_hashrate_1(cpu_gpu_miner_log)
     gpu_hashrate_2 = MiningRigMonitorWeb.CpuGpuMinerLive.Show.sum_gpu_hashrate_2(cpu_gpu_miner_log)
+    max_gpu_core_temp = find_max_gpu_core_temp(cpu_gpu_miner_log)
+    max_gpu_mem_temp =  find_max_gpu_mem_temp(cpu_gpu_miner_log)
 
 
     %{
@@ -157,8 +160,39 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
       gpu_coin_name_2: cpu_gpu_miner_log.gpu_coin_name_2,
       gpu_algorithm_2: cpu_gpu_miner_log.gpu_algorithm_2,
       gpu_hashrate_2: gpu_hashrate_2,
-      gpu_hashrate_uom_2: cpu_gpu_miner_log.gpu_hashrate_uom_2
+      gpu_hashrate_uom_2: cpu_gpu_miner_log.gpu_hashrate_uom_2,
 
+      cpu_temp: "#{cpu_gpu_miner_log.cpu_temp} ℃",
+      max_gpu_core_temp: "#{max_gpu_core_temp} ℃",
+      max_gpu_mem_temp: "#{max_gpu_mem_temp} ℃"
     }
+  end
+
+  def find_max_gpu_core_temp(cpu_gpu_miner_log) do
+    [cpu_gpu_miner_log.gpu_1_core_temp,
+     cpu_gpu_miner_log.gpu_2_core_temp,
+     cpu_gpu_miner_log.gpu_3_core_temp,
+     cpu_gpu_miner_log.gpu_4_core_temp,
+     cpu_gpu_miner_log.gpu_5_core_temp,
+     cpu_gpu_miner_log.gpu_6_core_temp,
+     cpu_gpu_miner_log.gpu_7_core_temp,
+     cpu_gpu_miner_log.gpu_8_core_temp
+    ]
+    |> Enum.filter(fn(e) -> e != nil end)
+    |> Enum.max()
+  end
+
+  def find_max_gpu_mem_temp(cpu_gpu_miner_log) do
+    [cpu_gpu_miner_log.gpu_1_mem_temp,
+     cpu_gpu_miner_log.gpu_2_mem_temp,
+     cpu_gpu_miner_log.gpu_3_mem_temp,
+     cpu_gpu_miner_log.gpu_4_mem_temp,
+     cpu_gpu_miner_log.gpu_5_mem_temp,
+     cpu_gpu_miner_log.gpu_6_mem_temp,
+     cpu_gpu_miner_log.gpu_7_mem_temp,
+     cpu_gpu_miner_log.gpu_8_mem_temp
+    ]
+    |> Enum.filter(fn(e) -> e != nil end)
+    |> Enum.max()
   end
 end
