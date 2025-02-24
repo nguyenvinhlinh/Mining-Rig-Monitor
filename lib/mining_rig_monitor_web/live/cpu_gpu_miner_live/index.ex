@@ -4,15 +4,15 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMiners.CpuGpuMiner
   alias MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog
+  alias MiningRigMonitor.Utility
 
   embed_templates "index_html/*"
 
   @impl true
   def mount(_params, _session, socket) do
     cpu_gpu_miner_not_activated_list = CpuGpuMiners.list_cpu_gpu_miners_by_activated_state(false)
-    cpu_gpu_miner_activated_list =
-      CpuGpuMiners.list_cpu_gpu_miners_by_activated_state(true)
-      |> Enum.map(fn(e) ->
+    cpu_gpu_miner_activated_list = CpuGpuMiners.list_cpu_gpu_miners_by_activated_state(true)
+    |> Enum.map(fn(e) ->
       %{
         id: e.id,
         name: e.name,
@@ -42,9 +42,15 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
         uptime: "SYNC..." }
     end)
 
+    cpu_gpu_miner_alive = "Sync..."
+    aggregated_total_power = "Sync..."
+
     socket_mod = socket
     |> stream(:cpu_gpu_miner_not_activated_list, cpu_gpu_miner_not_activated_list)
     |> stream(:cpu_gpu_miner_activated_list, cpu_gpu_miner_activated_list)
+    |> assign(:cpu_gpu_miner_alive, cpu_gpu_miner_alive)
+    |> assign(:aggregated_total_power, aggregated_total_power)
+    |> assign(:aggregated_total_power_uom, nil)
 
     if connected?(socket) do
       Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_channel")
@@ -108,8 +114,22 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
     cpu_gpu_miner_operational_map = Map.get(data, :cpu_gpu_miner_operational_map)
     cpu_gpu_miner_activated_list = get_cpu_gpu_miner_activated_list(cpu_gpu_miner_map, cpu_gpu_miner_operational_map)
 
+    aggregated_total_power = data
+    |> Map.get(:aggregated_index)
+    |> Map.get(:total_power)
+
+    {aggregated_total_power, aggregated_total_power_uom} = Utility.beautify_power_walt({aggregated_total_power, "W"})
+
+    cpu_gpu_miner_alive = data
+    |> Map.get(:aggregated_index)
+    |> Map.get(:cpu_gpu_miner_alive)
+
     socket_mod = socket
     |> stream(:cpu_gpu_miner_activated_list, cpu_gpu_miner_activated_list)
+    |> assign(:aggregated_total_power, aggregated_total_power)
+    |> assign(:aggregated_total_power_uom, aggregated_total_power_uom)
+    |> assign(:cpu_gpu_miner_alive, cpu_gpu_miner_alive)
+
 
     {:noreply, socket_mod}
   end

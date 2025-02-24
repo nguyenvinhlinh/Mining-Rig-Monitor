@@ -69,9 +69,21 @@ defmodule MiningRigMonitor.GenServer.CpuGpuMinerOperationalIndex do
 
     cpu_gpu_miner_operational_map = state
 
+    total_power = Enum.reduce(cpu_gpu_miner_operational_map, 0, fn({e_key, e_value}, acc) ->
+      acc + CpuGpuMinerLog.sum_total_power(e_value)
+    end)
+    total_cpu_gpu_miner = Map.keys(cpu_gpu_miner_map) |> Kernel.length()
+    total_running_asic_miner = Map.keys(cpu_gpu_miner_operational_map) |> Kernel.length()
+    cpu_gpu_miner_alive = "#{total_running_asic_miner}/#{total_cpu_gpu_miner}"
+
     data = %{
       cpu_gpu_miner_map: cpu_gpu_miner_map,
-      cpu_gpu_miner_operational_map: cpu_gpu_miner_operational_map
+      cpu_gpu_miner_operational_map: cpu_gpu_miner_operational_map,
+      aggregated_index: %{
+        total_power: total_power,
+        cpu_gpu_miner_alive: cpu_gpu_miner_alive
+      }
+
     }
 
     Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_operational_channel",
