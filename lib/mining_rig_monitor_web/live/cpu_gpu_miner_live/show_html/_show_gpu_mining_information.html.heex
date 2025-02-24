@@ -46,13 +46,13 @@
               </li>
 
               <li>
-                <b>[{i}]Core Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) } C
+                <b>[{i}]Core Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) }℃
               </li>
               <li>
-                <b>[{i}]Memory Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) } C
+                <b>[{i}]Memory Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) }℃
               </li>
               <li>
-                <b>[{i}]Fan Speed:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan")) }
+                <b>[{i}]Fan Speed:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan")) } { Map.get(@cpu_gpu_miner_log, :gpu_fan_uom) }
               </li>
             </ul>
           </td>
@@ -129,11 +129,11 @@
             { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_clock")) } MHz
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) } ℃ <br />
-            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) } ℃
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) }℃ <br />
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) }℃
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan")) }
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan")) }{ Map.get(@cpu_gpu_miner_log, :gpu_fan_uom) }
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_power")) }W
