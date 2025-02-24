@@ -3,6 +3,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
 
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMiners.CpuGpuMiner
+  alias MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog
 
   embed_templates "index_html/*"
 
@@ -38,9 +39,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
         gpu_fan_uom: nil,
 
         total_power: "SYNC...",
-        uptime: "SYNC..."
-
-  }
+        uptime: "SYNC..." }
     end)
 
     socket_mod = socket
@@ -133,42 +132,69 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
   def get_cpu_gpu_miner_activated_list(cpu_gpu_miner_map, cpu_gpu_miner_operational_map) do
     Enum.map(cpu_gpu_miner_map, fn({cpu_gpu_miner_id, cpu_gpu_miner}) ->
 
-      cpu_gpu_miner_log = Map.get(cpu_gpu_miner_operational_map, cpu_gpu_miner_id, %{})
+      cpu_gpu_miner_log = Map.get(cpu_gpu_miner_operational_map, cpu_gpu_miner_id, nil)
       beautify_activated_cpu_gpu_miner(cpu_gpu_miner, cpu_gpu_miner_log)
     end)
   end
 
-  def beautify_activated_cpu_gpu_miner(%CpuGpuMiner{} = cpu_gpu_miner, %{} = cpu_gpu_miner_log) do
-    cpu_coin_name =   Map.get(cpu_gpu_miner_log, :cpu_coin_name, "----") |> String.downcase() |> String.capitalize()
-    gpu_coin_name_1 = Map.get(cpu_gpu_miner_log, :gpu_coin_name_1, "----") |> String.downcase() |> String.capitalize()
-    gpu_coin_name_2 = Map.get(cpu_gpu_miner_log, :gpu_coin_name_2, "----") |> String.downcase() |> String.capitalize()
+  def beautify_activated_cpu_gpu_miner(%CpuGpuMiner{} = cpu_gpu_miner, nil) do
+    %{
+      id: cpu_gpu_miner.id,
+      name: cpu_gpu_miner.name,
+      cpu_coin_name: "----",
+      gpu_coin_name_1: nil,
+      gpu_coin_name_2: nil,
 
-    gpu_hashrate_1 = MiningRigMonitorWeb.CpuGpuMinerLive.Show.sum_gpu_hashrate_1(cpu_gpu_miner_log)
-    gpu_hashrate_2 = MiningRigMonitorWeb.CpuGpuMinerLive.Show.sum_gpu_hashrate_2(cpu_gpu_miner_log)
+      cpu_hashrate: "----",
+      cpu_hashrate_uom: nil,
+      cpu_algorithm: nil,
 
-    max_gpu_core_temp = find_max_gpu_core_temp(cpu_gpu_miner_log)
-    max_gpu_mem_temp =  find_max_gpu_mem_temp(cpu_gpu_miner_log)
-    max_gpu_fan = find_max_gpu_fan_speed(cpu_gpu_miner_log)
+      gpu_algorithm_1: nil,
+      gpu_hashrate_1: nil,
+      gpu_hashrate_uom_1: nil,
 
-    total_power = MiningRigMonitorWeb.CpuGpuMinerLive.Show.sum_total_power(cpu_gpu_miner_log)
-    uptime =  MiningRigMonitor.Utility.beautify_uptime(cpu_gpu_miner_log.uptime)
+      gpu_algorithm_2: nil,
+      gpu_hashrate_2: nil,
+      gpu_hashrate_uom_2: nil,
+
+      cpu_temp: "----",
+      max_gpu_core_temp: "----",
+      max_gpu_mem_temp: "----",
+      max_gpu_fan: "----",
+      gpu_fan_uom: nil,
+
+      total_power: "----",
+      uptime: "OFFLINE"
+    }
+  end
+  def beautify_activated_cpu_gpu_miner(%CpuGpuMiner{} = cpu_gpu_miner, %CpuGpuMinerLog{} = cpu_gpu_miner_log) do
+    gpu_hashrate_1 = CpuGpuMinerLog.sum_gpu_hashrate_1(cpu_gpu_miner_log)
+    gpu_hashrate_2 = CpuGpuMinerLog.sum_gpu_hashrate_2(cpu_gpu_miner_log)
+
+    max_gpu_core_temp = CpuGpuMinerLog.find_max_gpu_core_temp(cpu_gpu_miner_log)
+    max_gpu_mem_temp =  CpuGpuMinerLog.find_max_gpu_mem_temp(cpu_gpu_miner_log)
+    max_gpu_fan =       CpuGpuMinerLog.find_max_gpu_fan_speed(cpu_gpu_miner_log)
+
+    total_power = CpuGpuMinerLog.sum_total_power(cpu_gpu_miner_log)
+    uptime = MiningRigMonitor.Utility.beautify_uptime(cpu_gpu_miner_log.uptime)
+
     %{
       id: cpu_gpu_miner.id,
       name: cpu_gpu_miner.name,
 
-      cpu_coin_name: cpu_coin_name,
-      cpu_algorithm: cpu_gpu_miner_log.cpu_algorithm,
-      cpu_hashrate: cpu_gpu_miner_log.cpu_hashrate,
+      cpu_coin_name:    cpu_gpu_miner_log.cpu_coin_name,
+      cpu_algorithm:    cpu_gpu_miner_log.cpu_algorithm,
+      cpu_hashrate:     cpu_gpu_miner_log.cpu_hashrate,
       cpu_hashrate_uom: cpu_gpu_miner_log.cpu_hashrate_uom,
 
-      gpu_coin_name_1: gpu_coin_name_1,
+      gpu_coin_name_1: cpu_gpu_miner_log.gpu_coin_name_1,
       gpu_algorithm_1: cpu_gpu_miner_log.gpu_algorithm_1,
-      gpu_hashrate_1: gpu_hashrate_1,
+      gpu_hashrate_1:  gpu_hashrate_1,
       gpu_hashrate_uom_1: cpu_gpu_miner_log.gpu_hashrate_uom_1,
 
       gpu_coin_name_2: cpu_gpu_miner_log.gpu_coin_name_2,
       gpu_algorithm_2: cpu_gpu_miner_log.gpu_algorithm_2,
-      gpu_hashrate_2: gpu_hashrate_2,
+      gpu_hashrate_2:  gpu_hashrate_2,
       gpu_hashrate_uom_2: cpu_gpu_miner_log.gpu_hashrate_uom_2,
 
       cpu_temp: "#{cpu_gpu_miner_log.cpu_temp} ℃",
@@ -179,48 +205,5 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
       total_power: "#{total_power} W",
       uptime: uptime
     }
-  end
-
-  def find_max_gpu_core_temp(cpu_gpu_miner_log) do
-    [cpu_gpu_miner_log.gpu_1_core_temp,
-     cpu_gpu_miner_log.gpu_2_core_temp,
-     cpu_gpu_miner_log.gpu_3_core_temp,
-     cpu_gpu_miner_log.gpu_4_core_temp,
-     cpu_gpu_miner_log.gpu_5_core_temp,
-     cpu_gpu_miner_log.gpu_6_core_temp,
-     cpu_gpu_miner_log.gpu_7_core_temp,
-     cpu_gpu_miner_log.gpu_8_core_temp
-    ]
-    |> Enum.filter(fn(e) -> e != nil end)
-    |> Enum.max()
-  end
-
-  def find_max_gpu_mem_temp(cpu_gpu_miner_log) do
-    [cpu_gpu_miner_log.gpu_1_mem_temp,
-     cpu_gpu_miner_log.gpu_2_mem_temp,
-     cpu_gpu_miner_log.gpu_3_mem_temp,
-     cpu_gpu_miner_log.gpu_4_mem_temp,
-     cpu_gpu_miner_log.gpu_5_mem_temp,
-     cpu_gpu_miner_log.gpu_6_mem_temp,
-     cpu_gpu_miner_log.gpu_7_mem_temp,
-     cpu_gpu_miner_log.gpu_8_mem_temp
-    ]
-    |> Enum.filter(fn(e) -> e != nil end)
-    |> Enum.max()
-  end
-
-  def find_max_gpu_fan_speed(cpu_gpu_miner_log) do
-    gpu_fan_list = [
-      cpu_gpu_miner_log.gpu_1_fan,
-      cpu_gpu_miner_log.gpu_2_fan,
-      cpu_gpu_miner_log.gpu_3_fan,
-      cpu_gpu_miner_log.gpu_4_fan,
-      cpu_gpu_miner_log.gpu_5_fan,
-      cpu_gpu_miner_log.gpu_6_fan,
-      cpu_gpu_miner_log.gpu_7_fan,
-      cpu_gpu_miner_log.gpu_8_fan
-    ]
-    |> Enum.filter(fn(e) -> e != nil end)
-    |> Enum.max()
   end
 end
