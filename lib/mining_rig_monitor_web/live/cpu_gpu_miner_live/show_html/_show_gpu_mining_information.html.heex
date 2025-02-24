@@ -145,13 +145,12 @@
             Total
           </td>
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { CpuGpuMinerLog.sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 } <br/>
-            { CpuGpuMinerLog.sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
+            { @cpu_gpu_miner_log.gpu_coin_name_1}
+            <br :if={@cpu_gpu_miner_log.gpu_coin_name_2} /> { @cpu_gpu_miner_log.gpu_coin_name_2 }
           </td>
-
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { @cpu_gpu_miner_log.gpu_coin_name_1} <br/>
-            { @cpu_gpu_miner_log.gpu_coin_name_2}
+            { CpuGpuMinerLog.sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 } <br />
+            { if @cpu_gpu_miner_log.gpu_hashrate_uom_2, do: "#{CpuGpuMinerLog.sum_gpu_hashrate_2(@cpu_gpu_miner_log)} #{@cpu_gpu_miner_log.gpu_hashrate_uom_2}" }
           </td>
           <td></td>
           <td></td>
@@ -186,7 +185,8 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-        <tr :for={i <- [1,2]} class="hover:bg-gray-100 dark:hover:bg-gray-700">
+        <tr :for={i <- [1,2]} :if={ Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
+          class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
           </td>
@@ -215,8 +215,7 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-        <tr :for={i <- [1,2] }
-            :if={ Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
+        <tr :for={i <- [1,2] } :if={ Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
           class="hover:bg-gray-100 dark:hover:bg-gray-700" >
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <ul class="list-disc px-5">
