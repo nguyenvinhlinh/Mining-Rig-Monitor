@@ -160,7 +160,6 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     |> validate_required(required_field_list)
   end
 
-
   def sum_gpu_hashrate_1(%__MODULE__{}=cpu_gpu_miner_log) do
     field_list =
       [:gpu_1_hashrate_1, :gpu_2_hashrate_1, :gpu_3_hashrate_1, :gpu_4_hashrate_1,
@@ -168,7 +167,9 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
 
     Enum.reduce(field_list, 0, fn(field, acc) ->
       value = Map.get(cpu_gpu_miner_log, field, 0)
-      acc + value
+      value_mod = if Kernel.is_nil(value), do: 0, else: value
+
+      acc + value_mod
     end)
   end
 
@@ -179,7 +180,8 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
 
     Enum.reduce(field_list, 0, fn(field, acc) ->
       value = Map.get(cpu_gpu_miner_log, field, 0)
-      acc + value
+      value_mod = if Kernel.is_nil(value), do: 0, else: value
+      acc + value_mod
     end)
   end
 
@@ -194,7 +196,6 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     end)
   end
 
-
   def find_max_gpu_mem_temp(%__MODULE__{}=cpu_gpu_miner_log) do
     field_list =
       [:gpu_1_mem_temp, :gpu_2_mem_temp, :gpu_3_mem_temp, :gpu_4_mem_temp,
@@ -205,7 +206,6 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
       if value > acc, do: value, else: acc
     end)
   end
-
 
   def find_max_gpu_fan_speed(%__MODULE__{}=cpu_gpu_miner_log) do
     field_list =
@@ -218,6 +218,18 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     end)
   end
 
+  def sum_gpu_power(%__MODULE__{}=cpu_gpu_miner_log) do
+    field_list =
+      [:gpu_1_power, :gpu_2_power, :gpu_3_power, :gpu_4_power,
+       :gpu_5_power, :gpu_6_power, :gpu_7_power, :gpu_8_power]
+
+    Enum.reduce(field_list, 0, fn(field, acc) ->
+      value = Map.get(cpu_gpu_miner_log, field, 0)
+      value_mod = if Kernel.is_nil(value), do: 0, else: value
+      acc + value_mod
+    end)
+  end
+
   def sum_total_power(%__MODULE__{}=cpu_gpu_miner_log) do
     field_list =
       [:cpu_power, :gpu_1_power, :gpu_2_power, :gpu_3_power, :gpu_4_power,
@@ -225,7 +237,8 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
 
     Enum.reduce(field_list, 0, fn(field, acc) ->
       value = Map.get(cpu_gpu_miner_log, field, 0)
-      acc + value
+      value_mod = if Kernel.is_nil(value), do: 0, else: value
+      acc + value_mod
     end)
   end
 end

@@ -63,14 +63,14 @@
             <ul class="list-disc px-5">
               <li>
                 [{ @cpu_gpu_miner_log.gpu_algorithm_1 }] {@cpu_gpu_miner_log.gpu_coin_name_1}:
-                { sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
+                { CpuGpuMinerLog.sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
               </li>
               <li>
                 [{ @cpu_gpu_miner_log.gpu_algorithm_2 }] {@cpu_gpu_miner_log.gpu_coin_name_2}:
-                { sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
+                { CpuGpuMinerLog.sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
               </li>
               <li>
-                Total power: { sum_gpu_power(@cpu_gpu_miner_log) }W
+                Total power: { CpuGpuMinerLog.sum_gpu_power(@cpu_gpu_miner_log) }W
               </li>
             </ul>
           </td>
@@ -145,8 +145,8 @@
             Total
           </td>
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 } <br/>
-            { sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
+            { CpuGpuMinerLog.sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 } <br/>
+            { CpuGpuMinerLog.sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
           </td>
 
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
@@ -157,7 +157,7 @@
           <td></td>
           <td></td>
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { sum_gpu_power(@cpu_gpu_miner_log) }W
+            { CpuGpuMinerLog.sum_gpu_power(@cpu_gpu_miner_log) }W
           </td>
         </tr>
       </tbody>
