@@ -1,6 +1,6 @@
 defmodule HashrateArithmetic  do
 
-  @uom_list  ["H/s", "KH/s", "MH/s", "GH/s", "TH/s", "PH/s"]
+  @uom_list ["H/s", "KH/s", "MH/s", "GH/s", "TH/s", "PH/s"]
 
   @doc """
   add/2, this function add two {hashrate, uom}
