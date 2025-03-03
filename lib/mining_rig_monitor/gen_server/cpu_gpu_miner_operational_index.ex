@@ -75,21 +75,67 @@ defmodule MiningRigMonitor.GenServer.CpuGpuMinerOperationalIndex do
     total_cpu_gpu_miner = Map.keys(cpu_gpu_miner_map) |> Kernel.length()
     total_running_asic_miner = Map.keys(cpu_gpu_miner_operational_map) |> Kernel.length()
     cpu_gpu_miner_alive = "#{total_running_asic_miner}/#{total_cpu_gpu_miner}"
-
+    coin_hashrate_map = get_coin_hashrate_map(cpu_gpu_miner_operational_map)
     data = %{
       cpu_gpu_miner_map: cpu_gpu_miner_map,
       cpu_gpu_miner_operational_map: cpu_gpu_miner_operational_map,
       aggregated_index: %{
         total_power: total_power,
-        cpu_gpu_miner_alive: cpu_gpu_miner_alive
+        cpu_gpu_miner_alive: cpu_gpu_miner_alive,
+        coin_hashrate_map: coin_hashrate_map
       }
-
     }
-
     Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_operational_channel",
       {:cpu_gpu_miner_index_operational_channel , :operational_data, data})
     Process.send_after(__MODULE__, {:broadcast_operational_data}, 5_000)
     {:noreply, state}
+  end
+
+  def get_coin_hashrate_map(cpu_gpu_operational_map) do
+    Enum.reduce(cpu_gpu_operational_map, %{}, fn({cpu_gpu_miner_id, cpu_gpu_miner_log}, acc) ->
+      acc_mod_1 =
+        case CpuGpuMinerLog.get_cpu_coin_hashrate_tuple(cpu_gpu_miner_log) do
+          {cpu_coin_name, cpu_hashrate, cpu_hashrate_uom} ->
+            if Map.keys(acc) |> Enum.member?(cpu_coin_name) do
+              old_hashrate = Map.get(acc, cpu_coin_name)
+              new_hashrate = {cpu_hashrate, cpu_hashrate_uom}
+              sum_hashrate = HashrateArithmetic.add(old_hashrate, new_hashrate)
+              Map.put(acc, cpu_coin_name, sum_hashrate)
+            else
+              Map.put(acc, cpu_coin_name, {cpu_hashrate, cpu_hashrate_uom})
+            end
+          nil -> acc
+        end
+
+      acc_mod_2 =
+        case CpuGpuMinerLog.get_gpu_coin_1_hashrate_tuple(cpu_gpu_miner_log) do
+          {gpu_coin_name_1, gpu_hashrate_1, gpu_hashrate_uom_1} ->
+            if Map.keys(acc_mod_1) |> Enum.member?(gpu_coin_name_1) do
+              old_hashrate = Map.get(acc, gpu_coin_name_1)
+              new_hashrate = {gpu_hashrate_1, gpu_hashrate_uom_1}
+              sum_hashrate = HashrateArithmetic.add(old_hashrate, new_hashrate)
+              Map.put(acc_mod_1, gpu_coin_name_1, sum_hashrate)
+            else
+              Map.put(acc_mod_1, gpu_coin_name_1, {gpu_hashrate_1, gpu_hashrate_uom_1})
+            end
+          nil -> acc_mod_1
+        end
+
+      acc_mod_3 =
+        case CpuGpuMinerLog.get_gpu_coin_2_hashrate_tuple(cpu_gpu_miner_log) do
+          {gpu_coin_name_2, gpu_hashrate_2, gpu_hashrate_uom_2} ->
+            if Map.keys(acc_mod_2) |> Enum.member?(gpu_coin_name_2) do
+              old_hashrate = Map.get(acc, gpu_coin_name_2)
+              new_hashrate = {gpu_hashrate_2, gpu_hashrate_uom_2}
+              sum_hashrate = HashrateArithmetic.add(old_hashrate, new_hashrate)
+              Map.put(acc_mod_2, gpu_coin_name_2, sum_hashrate)
+            else
+              Map.put(acc_mod_2, gpu_coin_name_2, {gpu_hashrate_2, gpu_hashrate_uom_2})
+            end
+          nil -> acc_mod_2
+        end
+      acc_mod_3
+    end)
   end
 
   # TODO refactor to help writing unit test.

@@ -249,6 +249,41 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
       acc + value_mod
     end)
   end
+
+
+  def get_cpu_coin_hashrate_tuple(%__MODULE__{}=cpu_gpu_miner_log) do
+    if Kernel.is_nil(cpu_gpu_miner_log.cpu_coin_name) do
+      nil
+    else
+      cpu_coin_name = cpu_gpu_miner_log.cpu_coin_name
+      cpu_hashrate = cpu_gpu_miner_log.cpu_hashrate
+      cpu_hashrate_uom = cpu_gpu_miner_log.cpu_hashrate_uom
+      {cpu_coin_name, cpu_hashrate, cpu_hashrate_uom}
+    end
+  end
+
+  def get_gpu_coin_1_hashrate_tuple(%__MODULE__{}=cpu_gpu_miner_log) do
+    if Kernel.is_nil(cpu_gpu_miner_log.gpu_coin_name_1) do
+      nil
+    else
+      gpu_coin_name_1 = cpu_gpu_miner_log.gpu_coin_name_1
+      gpu_hashrate_1 = sum_gpu_hashrate_1(cpu_gpu_miner_log)
+      gpu_hashrate_uom_1 = cpu_gpu_miner_log.gpu_hashrate_uom_1
+      {gpu_coin_name_1, gpu_hashrate_1, gpu_hashrate_uom_1}
+    end
+  end
+
+  def get_gpu_coin_2_hashrate_tuple(%__MODULE__{}=cpu_gpu_miner_log) do
+    if Kernel.is_nil(cpu_gpu_miner_log.gpu_coin_name_2) do
+      nil
+    else
+      gpu_coin_name_2 = cpu_gpu_miner_log.gpu_coin_name_2
+      gpu_hashrate_2 = sum_gpu_hashrate_2(cpu_gpu_miner_log)
+      gpu_hashrate_uom_2 = cpu_gpu_miner_log.gpu_hashrate_uom_2
+      {gpu_coin_name_2, gpu_hashrate_2, gpu_hashrate_uom_2}
+    end
+  end
+
   def validate_field_list_exist_together(changeset, field_list) when Kernel.is_list(field_list) do
     field_value_list = Enum.map(field_list, fn(field) ->
       {_type_changes_data, value} = fetch_field(changeset, field)
