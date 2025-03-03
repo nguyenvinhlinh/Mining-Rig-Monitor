@@ -155,9 +155,14 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
       ]
     required_field_list = [:cpu_gpu_miner_id]
 
+
+
     cpu_gpu_miner_log
     |> cast(attrs, field_list)
     |> validate_required(required_field_list)
+    |> validate_inclusion(:cpu_hashrate_uom,   ["H/s", "KH/s", "MH/s", "GH/s", "TH/s", "PH/s"])
+    |> validate_inclusion(:gpu_hashrate_uom_1, ["H/s", "KH/s", "MH/s", "GH/s", "TH/s", "PH/s"])
+    |> validate_inclusion(:gpu_hashrate_uom_2, ["H/s", "KH/s", "MH/s", "GH/s", "TH/s", "PH/s"])
   end
 
   def sum_gpu_hashrate_1(%__MODULE__{}=cpu_gpu_miner_log) do
