@@ -1,8 +1,6 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerLogController do
   use MiningRigMonitorWeb, :controller
-
   alias MiningRigMonitor.CpuGpuMinerLogs
-  alias MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog
 
   action_fallback MiningRigMonitorWeb.FallbackController
 

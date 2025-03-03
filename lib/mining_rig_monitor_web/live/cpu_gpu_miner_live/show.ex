@@ -22,7 +22,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
     {:ok, socket_mod}
   end
 
-  @imple true
+  @impl true
   def handle_info({:cpu_gpu_miner_operational_channel , :create_cpu_gpu_miner_log, cpu_gpu_miner_log}, socket) do
     socket_mod = socket
     |> assign(:cpu_gpu_miner_log, cpu_gpu_miner_log)
