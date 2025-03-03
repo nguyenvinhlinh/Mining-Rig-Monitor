@@ -39,7 +39,7 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
     %{
       "cpu_temp" => 60 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "cpu_hashrate" => 1000 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
-      "cpu_hashrate_uom" => "kh/s",
+      "cpu_hashrate_uom" => "KH/s",
       "cpu_algorithm" => "RandomX",
       "cpu_coin_name" => "Monero",
       "cpu_pool_address" => "stratum+tcp://#{UUID.uuid1()}:4444",
@@ -111,7 +111,7 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
       "gpu_8_fan" => Enum.random(1..100),
       "gpu_fan_uom" => "%",
       "gpu_hashrate_uom_1" => "MH/s",
-      "gpu_hashrate_uom_2" => "SOL/s",
+      "gpu_hashrate_uom_2" => "H/s",
       "gpu_algorithm_1" => "Ethash",
       "gpu_algorithm_2" => "Autokylos",
       "gpu_coin_name_1" => "Ethereum",
@@ -141,5 +141,4 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
     cpu_gpu_miner_log_data = generate_cpu_gpu_miner_log()
     submit(api_code, cpu_gpu_miner_log_data)
   end
-
 end
