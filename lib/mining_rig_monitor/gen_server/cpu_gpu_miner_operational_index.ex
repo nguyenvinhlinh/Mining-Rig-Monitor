@@ -76,6 +76,11 @@ defmodule MiningRigMonitor.GenServer.CpuGpuMinerOperationalIndex do
     total_running_asic_miner = Map.keys(cpu_gpu_miner_operational_map) |> Kernel.length()
     cpu_gpu_miner_alive = "#{total_running_asic_miner}/#{total_cpu_gpu_miner}"
     coin_hashrate_map = get_coin_hashrate_map(cpu_gpu_miner_operational_map)
+    |> Enum.reduce(%{}, fn({coin_name, hashrate_tuple}, a) ->
+      hashrate_tuple_mod = Utility.beautify_hashrate(hashrate_tuple)
+      Map.put(a, coin_name, hashrate_tuple_mod)
+    end)
+
     data = %{
       cpu_gpu_miner_map: cpu_gpu_miner_map,
       cpu_gpu_miner_operational_map: cpu_gpu_miner_operational_map,
@@ -87,7 +92,7 @@ defmodule MiningRigMonitor.GenServer.CpuGpuMinerOperationalIndex do
     }
     Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_operational_channel",
       {:cpu_gpu_miner_index_operational_channel , :operational_data, data})
-    Process.send_after(__MODULE__, {:broadcast_operational_data}, 5_000)
+    Process.send_after(__MODULE__, {:broadcast_operational_data}, 1_000)
     {:noreply, state}
   end
 

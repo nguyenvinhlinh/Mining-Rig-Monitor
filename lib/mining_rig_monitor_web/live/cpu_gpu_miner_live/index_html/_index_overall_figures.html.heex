@@ -6,19 +6,12 @@
   md:gap-4
   lg:gap-4" >
 
-  <div  class="col-span-6 lg:col-span-3
-    p-1 md:px-2 md:py-4
-    bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
-    <h3 class="text-center text-xl font-semibold dark:text-white">
-      XXXA
-    </h3>
-  </div>
 
-  <div class="col-span-6 lg:col-span-3
+  <div :for={ {coin_name, {hashrate, uom}}  <- @aggregated_coin_hashrate_map } class="col-span-6 lg:col-span-3
     p-1 md:px-2 md:py-4
     bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
     <h3 class="text-center text-xl font-semibold dark:text-white">
-      XXXX
+      {coin_name}:{hashrate} {uom}
     </h3>
   </div>
 

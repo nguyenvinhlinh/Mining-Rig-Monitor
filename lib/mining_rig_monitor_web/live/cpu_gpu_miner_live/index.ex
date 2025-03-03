@@ -51,6 +51,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
     |> assign(:cpu_gpu_miner_alive, cpu_gpu_miner_alive)
     |> assign(:aggregated_total_power, aggregated_total_power)
     |> assign(:aggregated_total_power_uom, nil)
+    |> assign(:aggregated_coin_hashrate_map, %{})
 
     if connected?(socket) do
       Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_channel")
@@ -120,16 +121,21 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
 
     {aggregated_total_power, aggregated_total_power_uom} = Utility.beautify_power_walt({aggregated_total_power, "W"})
 
+
     cpu_gpu_miner_alive = data
     |> Map.get(:aggregated_index)
     |> Map.get(:cpu_gpu_miner_alive)
+
+    aggregated_coin_hashrate_map = data
+    |> Map.get(:aggregated_index)
+    |> Map.get(:coin_hashrate_map)
 
     socket_mod = socket
     |> stream(:cpu_gpu_miner_activated_list, cpu_gpu_miner_activated_list)
     |> assign(:aggregated_total_power, aggregated_total_power)
     |> assign(:aggregated_total_power_uom, aggregated_total_power_uom)
     |> assign(:cpu_gpu_miner_alive, cpu_gpu_miner_alive)
-
+    |> assign(:aggregated_coin_hashrate_map, aggregated_coin_hashrate_map)
 
     {:noreply, socket_mod}
   end
