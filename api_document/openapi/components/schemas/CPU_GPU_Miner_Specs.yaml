@@ -1,0 +1,67 @@
+type: object
+properties:
+  motherboard_name:
+    description: Motherboard name
+    type: string
+    example: Supermicro X10DRL-i 1.01
+  cpu_name:
+    description: >
+      CPU name
+      For linux, `$ cat /proc/cpuinfo`
+    type: string
+    examples:
+      - Intel(R) Core(TM) i5-4210U CPU @ 1.70GHz
+
+  ram_size:
+    description: >
+      The first RAM size, All the ram information can be get with `$ sudo dmidecode --type 17`
+    type: string
+    examples:
+      - 8GB
+      - 16GB
+
+  gpu_1_name:
+    description: GPU name
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+
+  gpu_2_name:
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+
+  gpu_3_name:
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+
+  gpu_4_name:
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+
+  gpu_5_name:
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+
+  gpu_6_name:
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+
+  gpu_7_name:
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+
+  gpu_8_name:
+    type: string
+    examples:
+      - NVIDIA GeForce RTX 3080
+
+required:
+  - motherboard_name
+  - cpu_name
+  - ram_size

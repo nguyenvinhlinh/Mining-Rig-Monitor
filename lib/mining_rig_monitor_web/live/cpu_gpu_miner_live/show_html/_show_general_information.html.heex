@@ -1,0 +1,81 @@
+<div class="mx-1 p-1 mb-1
+  sm:mx-2 sm:p-2 sm:mb-3
+  md:mx-4 md:p-4 md:mb-4
+  bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">
+    General Information
+  </h3>
+
+  <div class="grid grid-cols-12">
+    <div class="col-span-12 2xl:col-span-4
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
+        <li>
+          <b>Motherboard:</b> <%= @cpu_gpu_miner.motherboard_name %>
+        </li>
+        <li>
+          <b>CPU:</b> <%= @cpu_gpu_miner.cpu_name %>
+        </li>
+        <li>
+          <b>RAM:</b> <%= @cpu_gpu_miner.ram_size %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 2xl:col-span-4
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
+        <li :if={@cpu_gpu_miner.gpu_1_name}>
+          <b>GPU[1]:</b> <%= @cpu_gpu_miner.gpu_1_name %>
+        </li>
+        <li :if={@cpu_gpu_miner.gpu_2_name}>
+          <b>GPU[2]:</b> <%= @cpu_gpu_miner.gpu_2_name %>
+        </li>
+        <li :if={@cpu_gpu_miner.gpu_3_name} >
+          <b>GPU[3]:</b> <%= @cpu_gpu_miner.gpu_3_name %>
+        </li>
+        <li :if={@cpu_gpu_miner.gpu_4_name}>
+          <b>GPU[4]:</b> <%= @cpu_gpu_miner.gpu_4_name %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 2xl:col-span-4
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
+        <li :if={@cpu_gpu_miner.gpu_5_name}>
+          <b>GPU[5]:</b> <%= @cpu_gpu_miner.gpu_5_name %>
+        </li>
+        <li :if={@cpu_gpu_miner.gpu_6_name}>
+          <b>GPU[6]:</b> <%= @cpu_gpu_miner.gpu_6_name %>
+        </li>
+        <li :if={@cpu_gpu_miner.gpu_7_name}>
+          <b>GPU[7]:</b> <%= @cpu_gpu_miner.gpu_7_name %>
+        </li>
+        <li :if={@cpu_gpu_miner.gpu_8_name}>
+          <b>GPU[8]:</b> <%= @cpu_gpu_miner.gpu_8_name %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-span-12
+      text-base font-medium text-gray-900 dark:text-white">
+      <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+      <ul class="list-disc px-5">
+        <li>
+          <b>Uptime:</b>  { MiningRigMonitor.Utility.beautify_uptime(@cpu_gpu_miner_log.uptime) }
+        </li>
+        <li>
+          <b>LAN IP:</b> { @cpu_gpu_miner_log.lan_ip }
+        </li>
+        <li>
+          <b>WAN IP:</b> { @cpu_gpu_miner_log.wan_ip }
+        </li>
+        <li>
+          <b>API Code:</b> { @cpu_gpu_miner.api_code }
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

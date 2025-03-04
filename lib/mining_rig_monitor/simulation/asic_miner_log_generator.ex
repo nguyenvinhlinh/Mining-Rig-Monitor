@@ -3,7 +3,7 @@ defmodule MiningRigMonitor.Simulation.AsicMinerLogGenerator do
 
   require Logger
 
-  @asic_miner_api_code_list ["asic_1_code", "asic_2_code", "asic_3_code", "asic_4_code", "asic_5_code"]
+  @asic_miner_api_code_list ["api_code_1", "api_code_2", "api_code_3", "api_code_4", "api_code_5"]
   @post_url "http://127.0.0.1:4000/api/v1/asic_miners/logs"
   @post_inverval_second 1
 

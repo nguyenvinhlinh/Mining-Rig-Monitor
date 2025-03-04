@@ -28,6 +28,7 @@ Thank you!
 
 
 # Q&A
+
 1. How to get info from nvidia-smi
 ```bash
 $ nvidia-smi --query-gpu=name,driver_version,vbios_version,pci.bus_id,memory.total --format=csv

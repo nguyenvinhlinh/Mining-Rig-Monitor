@@ -1,0 +1,68 @@
+<div class="mx-1 p-1 mb-1
+  sm:mx-2 sm:mb-2 sm:p-3
+  md:mx-4 md:mb-4 md:p-6
+  bg-white border border-gray-200 rounded-lg shadow-sm
+  dark:border-gray-700 dark:bg-gray-800">
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">Activated CPU/GPU Miners!</h3>
+
+  <.table
+    id="cpu_gpu_miners_activated"
+    rows={@streams.cpu_gpu_miner_activated_list}
+    row_click={fn {_id, cpu_gpu_miner} -> JS.navigate(~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}") end}
+  >
+    <:col :let={{_id, cpu_gpu_miner}} label="ID" class="hidden 2xl:table-cell">{cpu_gpu_miner.id}</:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Name">{cpu_gpu_miner.name}</:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Coin">
+      {cpu_gpu_miner.cpu_coin_name}
+      <br :if={cpu_gpu_miner.gpu_coin_name_1} /> {cpu_gpu_miner.gpu_coin_name_1}
+      <br :if={cpu_gpu_miner.gpu_coin_name_2} /> {cpu_gpu_miner.gpu_coin_name_2}
+    </:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Hashrate">
+      { cpu_gpu_miner.cpu_hashrate} {cpu_gpu_miner.cpu_hashrate_uom} {cpu_gpu_miner.cpu_algorithm}
+      <br :if={cpu_gpu_miner.gpu_hashrate_1} /> { cpu_gpu_miner.gpu_hashrate_1} { cpu_gpu_miner.gpu_hashrate_uom_1} {cpu_gpu_miner.gpu_algorithm_1}
+      <br :if={cpu_gpu_miner.gpu_hashrate_2} /> { cpu_gpu_miner.gpu_hashrate_2} { cpu_gpu_miner.gpu_hashrate_uom_2} {cpu_gpu_miner.gpu_algorithm_2}
+    </:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="CPU Temp." class="hidden md:table-cell">
+      {cpu_gpu_miner.cpu_temp}
+    </:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Core/Memory Temp." class="hidden lg:table-cell">
+      {cpu_gpu_miner.max_gpu_core_temp} / {cpu_gpu_miner.max_gpu_mem_temp}
+    </:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Fan" class="hidden lg:table-cell">
+      {cpu_gpu_miner.max_gpu_fan}{cpu_gpu_miner.gpu_fan_uom}
+    </:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Power" class="hidden xl:table-cell">
+      {cpu_gpu_miner.total_power}
+    </:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="Uptime" class="hidden 2xl:table-cell">
+      {cpu_gpu_miner.uptime}
+    </:col>
+    <:action :let={{_id, cpu_gpu_miner}}>
+      <div class="sr-only">
+        <.link navigate={~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}"}>Show</.link>
+      </div>
+      <.link patch={~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}/edit"}>
+        <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center
+          text-white rounded-lg bg-blue-700 hover:bg-blue-800
+          focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <.icon name="hero-pencil-square-solid" class="size-5" />
+          <span class="ml-1">Edit</span>
+        </button>
+
+      </.link>
+    </:action>
+
+    <:action :let={{id, cpu_gpu_miner}}>
+      <.link
+        phx-click={JS.push("delete", value: %{id: cpu_gpu_miner.id}) |> hide("##{id}")}
+        data-confirm="Are you sure?"
+      >
+        <button type="button"  class="mr-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white
+          bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+          <.icon name="hero-trash-solid" class="size-5" />
+          <span class="ml-1">Delete</span>
+        </button>
+      </.link>
+    </:action>
+  </.table>
+</div>

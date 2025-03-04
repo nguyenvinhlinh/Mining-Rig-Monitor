@@ -1,8 +1,9 @@
-defmodule  MiningRigMonitor.Utility do
+defmodule MiningRigMonitor.Utility do
   require Logger
 
   def unify_hashrate_uom("g"), do: "GH/s"
   def unify_hashrate_uom("G"), do: "GH/s"
+
   def unify_hashrate_uom(_), do: "H/s"
 
   def unify_hashrate_to_hash_second(hash, "g") when Kernel.is_number(hash) do
@@ -18,7 +19,7 @@ defmodule  MiningRigMonitor.Utility do
   end
 
   def beautify_hashrate({hash, "H/s"}) do
-    if hash > 10_000 do
+    if hash > 1_000 do
       beautify_hashrate({hash / 1_000, "KH/s"})
     else
       {hash, "H/s"}
@@ -26,7 +27,7 @@ defmodule  MiningRigMonitor.Utility do
   end
 
   def beautify_hashrate({hash, "KH/s"}) do
-    if hash > 10_000 do
+    if hash > 1_000 do
       beautify_hashrate({hash / 1_000, "MH/s"})
     else
       {hash, "KH/s"}
@@ -34,7 +35,7 @@ defmodule  MiningRigMonitor.Utility do
   end
 
   def beautify_hashrate({hash, "MH/s"}) do
-    if hash > 10_000 do
+    if hash > 1_000 do
       beautify_hashrate({hash / 1_000, "GH/s"})
     else
       {hash, "MH/s"}
@@ -42,7 +43,7 @@ defmodule  MiningRigMonitor.Utility do
   end
 
   def beautify_hashrate({hash, "GH/s"}) do
-    if hash > 10_000 do
+    if hash > 1_000 do
       beautify_hashrate({hash / 1_000, "TH/s"})
     else
       {hash, "TH/s"}
@@ -50,7 +51,15 @@ defmodule  MiningRigMonitor.Utility do
   end
 
   def beautify_hashrate({hash, "TH/s"}) do
-    {hash, "TH/s"}
+    if hash > 1_000 do
+      beautify_hashrate({hash / 1_000, "PH/s"})
+    else
+      {hash, "TH/s"}
+    end
+  end
+
+  def beautify_hashrate({hash, "PH/s"}) do
+    {hash, "PH/s"}
   end
 
   def beautify_power_walt({power, "W"}) do
