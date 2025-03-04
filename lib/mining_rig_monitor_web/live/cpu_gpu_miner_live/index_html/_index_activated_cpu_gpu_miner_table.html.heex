@@ -10,7 +10,7 @@
     rows={@streams.cpu_gpu_miner_activated_list}
     row_click={fn {_id, cpu_gpu_miner} -> JS.navigate(~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}") end}
   >
-    <:col :let={{_id, cpu_gpu_miner}} label="ID" class="hidden md:table-cell">{cpu_gpu_miner.id}</:col>
+    <:col :let={{_id, cpu_gpu_miner}} label="ID" class="hidden 2xl:table-cell">{cpu_gpu_miner.id}</:col>
     <:col :let={{_id, cpu_gpu_miner}} label="Name">{cpu_gpu_miner.name}</:col>
     <:col :let={{_id, cpu_gpu_miner}} label="Coin">
       {cpu_gpu_miner.cpu_coin_name}
@@ -25,16 +25,16 @@
     <:col :let={{_id, cpu_gpu_miner}} label="CPU Temp." class="hidden md:table-cell">
       {cpu_gpu_miner.cpu_temp}
     </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Core/Memory Temp." class="hidden md:table-cell">
+    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Core/Memory Temp." class="hidden lg:table-cell">
       {cpu_gpu_miner.max_gpu_core_temp} / {cpu_gpu_miner.max_gpu_mem_temp}
     </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Fan" class="hidden md:table-cell">
+    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Fan" class="hidden lg:table-cell">
       {cpu_gpu_miner.max_gpu_fan}{cpu_gpu_miner.gpu_fan_uom}
     </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Power(Walt)" class="hidden md:table-cell">
+    <:col :let={{_id, cpu_gpu_miner}} label="Power" class="hidden xl:table-cell">
       {cpu_gpu_miner.total_power}
     </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Uptime" class="hidden md:table-cell">
+    <:col :let={{_id, cpu_gpu_miner}} label="Uptime" class="hidden 2xl:table-cell">
       {cpu_gpu_miner.uptime}
     </:col>
     <:action :let={{_id, cpu_gpu_miner}}>
@@ -57,7 +57,7 @@
         phx-click={JS.push("delete", value: %{id: cpu_gpu_miner.id}) |> hide("##{id}")}
         data-confirm="Are you sure?"
       >
-        <button type="button"  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white
+        <button type="button"  class="mr-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white
           bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
           <.icon name="hero-trash-solid" class="size-5" />
           <span class="ml-1">Delete</span>
