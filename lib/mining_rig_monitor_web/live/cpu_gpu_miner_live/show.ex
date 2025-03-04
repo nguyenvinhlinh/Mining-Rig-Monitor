@@ -37,6 +37,15 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
     {:noreply, socket_mod}
   end
 
+  @impl true
+  def handle_info({:cpu_gpu_miner_channel, :delete, cpu_gpu_miner}, socket) do
+    socket_mod = socket
+    |> put_flash(:info, "CPU/GPU miner id##{cpu_gpu_miner.id} name: #{cpu_gpu_miner.name} deleted!")
+    |> push_navigate(to: ~p(/cpu_gpu_miners))
+
+    {:noreply, socket_mod}
+  end
+
   def empty_cpu_gpu_miner_log() do
     %MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog{}
   end

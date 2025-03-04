@@ -181,7 +181,10 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
     cpu_gpu_miner = CpuGpuMiners.get_cpu_gpu_miner!(id)
     {:ok, _} = CpuGpuMiners.delete_cpu_gpu_miner(cpu_gpu_miner)
     Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_channel", {:cpu_gpu_miner_index_channel, :delete, cpu_gpu_miner})
-    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index", {:flash_index, :info, "CPU/GPU miner id##{cpu_gpu_miner.id} name: #{cpu_gpu_miner.name} deleted"})
+
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_channel:#{cpu_gpu_miner.id}", {:cpu_gpu_miner_channel, :delete, cpu_gpu_miner})
+
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index", {:flash_index, :info, "CPU/GPU miner id##{cpu_gpu_miner.id} name: #{cpu_gpu_miner.name} deleted!"})
     {:noreply, socket}
   end
 
