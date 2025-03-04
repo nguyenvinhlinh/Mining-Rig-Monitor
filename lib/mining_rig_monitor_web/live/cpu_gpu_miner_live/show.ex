@@ -12,6 +12,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
     cpu_gpu_miner_log = empty_cpu_gpu_miner_log()
 
     if connected?(socket) do
+      Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "cpu_gpu_miner_channel:#{cpu_gpu_miner.id}")
       Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "cpu_gpu_miner_operational_channel:#{cpu_gpu_miner.id}")
     end
 
@@ -26,6 +27,13 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
   def handle_info({:cpu_gpu_miner_operational_channel , :create_cpu_gpu_miner_log, cpu_gpu_miner_log}, socket) do
     socket_mod = socket
     |> assign(:cpu_gpu_miner_log, cpu_gpu_miner_log)
+    {:noreply, socket_mod}
+  end
+
+  @impl true
+  def handle_info({:cpu_gpu_miner_channel, :update, cpu_gpu_miner}, socket) do
+    socket_mod = socket
+    |> assign(:cpu_gpu_miner, cpu_gpu_miner)
     {:noreply, socket_mod}
   end
 
