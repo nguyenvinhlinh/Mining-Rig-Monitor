@@ -5,9 +5,9 @@
   aggregated_coin_hashrate_map={@aggregated_coin_hashrate_map}
 />
 
-<._index_not_activated_cpu_gpu_miner_table streams={@streams} />
-
 <._index_activated_cpu_gpu_miner_table streams={@streams} />
+
+<._index_not_activated_cpu_gpu_miner_table streams={@streams} />
 
 <.modal :if={@live_action in [:new, :edit]} id="cpu_gpu_miner-modal" show on_cancel={JS.patch(~p"/cpu_gpu_miners")}>
   <.live_component
