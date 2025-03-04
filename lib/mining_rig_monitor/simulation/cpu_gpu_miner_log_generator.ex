@@ -4,7 +4,7 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
   require Logger
 
   @post_url "http://127.0.0.1:4000/api/v1/cpu_gpu_miners/logs"
-  @api_code_list ["api_code_1", "api_code_2"]
+  @api_code_list ["api_code_1", "api_code_2", "api_code_3"]
   @post_inverval_second 1
 
 
@@ -39,7 +39,7 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
     %{
       "cpu_temp" => 60 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "cpu_hashrate" => 1000 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
-      "cpu_hashrate_uom" => "kh/s",
+      "cpu_hashrate_uom" => "KH/s",
       "cpu_algorithm" => "RandomX",
       "cpu_coin_name" => "Monero",
       "cpu_pool_address" => "stratum+tcp://#{UUID.uuid1()}:4444",
@@ -101,18 +101,17 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
       "gpu_6_power" => 1000 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "gpu_7_power" => 1000 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "gpu_8_power" => 1000 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
-      "gpu_1_fan" => "#{Enum.random(1..100)}%",
-      "gpu_2_fan" => "#{Enum.random(1..100)}%",
-      "gpu_3_fan" => "#{Enum.random(1..100)}%",
-      "gpu_4_fan" => "#{Enum.random(1..100)}%",
-      "gpu_5_fan" => "#{Enum.random(1..100)}%",
-      "gpu_6_fan" => "#{Enum.random(1..100)}%",
-      "gpu_7_fan" => "#{Enum.random(1..100)}%",
-      "gpu_8_fan" => "#{Enum.random(1..100)}%",
-
-
+      "gpu_1_fan" => Enum.random(1..100),
+      "gpu_2_fan" => Enum.random(1..100),
+      "gpu_3_fan" => Enum.random(1..100),
+      "gpu_4_fan" => Enum.random(1..100),
+      "gpu_5_fan" => Enum.random(1..100),
+      "gpu_6_fan" => Enum.random(1..100),
+      "gpu_7_fan" => Enum.random(1..100),
+      "gpu_8_fan" => Enum.random(1..100),
+      "gpu_fan_uom" => "%",
       "gpu_hashrate_uom_1" => "MH/s",
-      "gpu_hashrate_uom_2" => "SOL/s",
+      "gpu_hashrate_uom_2" => "H/s",
       "gpu_algorithm_1" => "Ethash",
       "gpu_algorithm_2" => "Autokylos",
       "gpu_coin_name_1" => "Ethereum",
@@ -142,5 +141,4 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
     cpu_gpu_miner_log_data = generate_cpu_gpu_miner_log()
     submit(api_code, cpu_gpu_miner_log_data)
   end
-
 end

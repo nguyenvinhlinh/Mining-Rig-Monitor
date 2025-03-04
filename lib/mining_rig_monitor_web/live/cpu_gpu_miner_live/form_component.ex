@@ -28,6 +28,10 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.FormComponent do
       {:ok, cpu_gpu_miner} ->
         Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_channel",
           {:cpu_gpu_miner_index_channel, :create_or_update, cpu_gpu_miner})
+
+        Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_channel:#{cpu_gpu_miner.id}",
+          {:cpu_gpu_miner_channel, :update, cpu_gpu_miner})
+
         {:noreply,
          socket
          |> put_flash(:info, "Cpu gpu miner updated successfully")

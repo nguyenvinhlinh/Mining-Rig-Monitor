@@ -46,13 +46,13 @@
               </li>
 
               <li>
-                <b>[{i}]Core Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) } C
+                <b>[{i}]Core Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) }℃
               </li>
               <li>
-                <b>[{i}]Memory Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) } C
+                <b>[{i}]Memory Temperature:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) }℃
               </li>
               <li>
-                <b>[{i}]Fan Speed:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan")) }
+                <b>[{i}]Fan Speed:</b> { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan")) } { Map.get(@cpu_gpu_miner_log, :gpu_fan_uom) }
               </li>
             </ul>
           </td>
@@ -63,14 +63,14 @@
             <ul class="list-disc px-5">
               <li>
                 [{ @cpu_gpu_miner_log.gpu_algorithm_1 }] {@cpu_gpu_miner_log.gpu_coin_name_1}:
-                { sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
+                { CpuGpuMinerLog.sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
               </li>
               <li>
                 [{ @cpu_gpu_miner_log.gpu_algorithm_2 }] {@cpu_gpu_miner_log.gpu_coin_name_2}:
-                { sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
+                { CpuGpuMinerLog.sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
               </li>
               <li>
-                Total power: { sum_gpu_power(@cpu_gpu_miner_log) }W
+                Total power: { CpuGpuMinerLog.sum_gpu_power(@cpu_gpu_miner_log) }W
               </li>
             </ul>
           </td>
@@ -129,11 +129,11 @@
             { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_clock")) } MHz
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) } ℃ <br />
-            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) } ℃
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) }℃ <br />
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) }℃
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan")) }
+            { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan")) }{ Map.get(@cpu_gpu_miner_log, :gpu_fan_uom) }
           </td>
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_power")) }W
@@ -145,19 +145,18 @@
             Total
           </td>
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 } <br/>
-            { sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
+            { @cpu_gpu_miner_log.gpu_coin_name_1}
+            <br :if={@cpu_gpu_miner_log.gpu_coin_name_2} /> { @cpu_gpu_miner_log.gpu_coin_name_2 }
           </td>
-
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { @cpu_gpu_miner_log.gpu_coin_name_1} <br/>
-            { @cpu_gpu_miner_log.gpu_coin_name_2}
+            { CpuGpuMinerLog.sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 } <br />
+            { if @cpu_gpu_miner_log.gpu_hashrate_uom_2, do: "#{CpuGpuMinerLog.sum_gpu_hashrate_2(@cpu_gpu_miner_log)} #{@cpu_gpu_miner_log.gpu_hashrate_uom_2}" }
           </td>
           <td></td>
           <td></td>
           <td></td>
           <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
-            { sum_gpu_power(@cpu_gpu_miner_log) }W
+            { CpuGpuMinerLog.sum_gpu_power(@cpu_gpu_miner_log) }W
           </td>
         </tr>
       </tbody>
@@ -186,7 +185,8 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-        <tr :for={i <- [1,2]} class="hover:bg-gray-100 dark:hover:bg-gray-700">
+        <tr :for={i <- [1,2]} :if={ Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
+          class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
           </td>
@@ -215,8 +215,7 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-        <tr :for={i <- [1,2] }
-            :if={ Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
+        <tr :for={i <- [1,2] } :if={ Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
           class="hover:bg-gray-100 dark:hover:bg-gray-700" >
           <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white hover:cursor-pointer">
             <ul class="list-disc px-5">

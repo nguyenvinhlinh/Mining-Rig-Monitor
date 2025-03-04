@@ -4,6 +4,7 @@ defmodule MiningRigMonitor.Application do
   @moduledoc false
   use Application
   alias MiningRigMonitor.GenServer.AsicMinerOperationalIndex
+  alias MiningRigMonitor.GenServer.CpuGpuMinerOperationalIndex
 
   @impl true
   def start(_type, _args) do
@@ -13,6 +14,7 @@ defmodule MiningRigMonitor.Application do
       {DNSCluster, query: Application.get_env(:mining_rig_monitor, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: MiningRigMonitor.PubSub},
       {AsicMinerOperationalIndex, nil},
+      {CpuGpuMinerOperationalIndex, nil},
 #      Uncomment it for dev env.
 #      {MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator, nil},
 #      {MiningRigMonitor.Simulation.AsicMinerLogGenerator, nil},

@@ -20,7 +20,7 @@
     bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
     <h3 class="text-center text-xl font-semibold dark:text-white">
       { @cpu_gpu_miner_log.gpu_coin_name_1 }:
-      { sum_gpu_hashrate_1(@cpu_gpu_miner_log) }
+      { CpuGpuMinerLog.sum_gpu_hashrate_1(@cpu_gpu_miner_log) }
       { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
     </h3>
   </div>
@@ -30,7 +30,7 @@
     bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
     <h3 class="text-center text-xl font-semibold dark:text-white">
       { @cpu_gpu_miner_log.gpu_coin_name_2 }:
-      { sum_gpu_hashrate_2(@cpu_gpu_miner_log) }
+      { CpuGpuMinerLog.sum_gpu_hashrate_2(@cpu_gpu_miner_log) }
       { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
     </h3>
   </div>
@@ -40,7 +40,7 @@
     bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
     <h3 class="text-center text-xl font-semibold dark:text-white">
       <.icon name="hero-bolt-solid" class="hidden lg:inline-block size-6"/>
-      { sum_total_power(@cpu_gpu_miner_log) } W
+      { CpuGpuMinerLog.sum_total_power(@cpu_gpu_miner_log) } W
     </h3>
   </div>
 </div>
