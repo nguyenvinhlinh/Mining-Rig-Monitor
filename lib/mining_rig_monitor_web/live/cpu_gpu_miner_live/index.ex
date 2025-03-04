@@ -89,8 +89,38 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
   def handle_info({:cpu_gpu_miner_index_channel, :create_or_update, cpu_gpu_miner}, socket) do
     case cpu_gpu_miner.activated  do
       true ->
+        cpu_gpu_miner_mod =
+          %{
+            id: cpu_gpu_miner.id,
+            name: cpu_gpu_miner.name,
+            cpu_coin_name: "SYNC...",
+            gpu_coin_name_1: nil,
+            gpu_coin_name_2: nil,
+
+            cpu_hashrate: "SYNC...",
+            cpu_hashrate_uom: nil,
+            cpu_algorithm: nil,
+
+            gpu_algorithm_1: nil,
+            gpu_hashrate_1: nil,
+            gpu_hashrate_uom_1: nil,
+
+            gpu_algorithm_2: nil,
+            gpu_hashrate_2: nil,
+            gpu_hashrate_uom_2: nil,
+
+            cpu_temp: "SYNC...",
+            max_gpu_core_temp: "SYNC...",
+            max_gpu_mem_temp: "SYNC...",
+            max_gpu_fan: "SYNC...",
+            gpu_fan_uom: nil,
+
+            total_power: "SYNC...",
+            uptime: "SYNC..."
+          }
+
         socket_mod = socket
-        |> stream_insert(:cpu_gpu_miner_activated_list, cpu_gpu_miner)
+        |> stream_insert(:cpu_gpu_miner_activated_list, cpu_gpu_miner_mod)
         |> stream_delete(:cpu_gpu_miner_not_activated_list, cpu_gpu_miner)
         {:noreply, socket_mod}
       false ->
