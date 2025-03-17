@@ -43,7 +43,16 @@ defmodule MiningRigMonitorWeb.AddressLive.Index do
 
   @impl true
   def handle_info({MiningRigMonitorWeb.AddressLive.FormComponent, {:saved, address}}, socket) do
-    {:noreply, stream_insert(socket, :addresses, address)}
+    case address.type do
+      "wallet" ->
+        socket_mod = socket
+        |> stream_insert(:wallet_address_list, address)
+        {:noreply, socket_mod}
+      "pool" ->
+        socket_mod = socket
+        |> stream_insert(:pool_address_list, address)
+        {:noreply, socket_mod}
+    end
   end
 
   @impl true
