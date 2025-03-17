@@ -12,7 +12,7 @@
     phx-submit="save"
   >
     <.input field={@form[:name]} type="text" label="Name" />
-    <.input field={@form[:type]} options={@address_type_option_list} type="select" label="Type" />
+    <.input :if={@action == :new} field={@form[:type]} options={@address_type_option_list} type="select" label="Type" />
     <.input field={@form[:address]} type="text" label="Address" />
 
     <:actions>

@@ -56,7 +56,7 @@ defmodule MiningRigMonitor.Addresses do
   """
   def create_address(attrs \\ %{}) do
     %Address{}
-    |> Address.changeset(attrs)
+    |> Address.changeset_new(attrs)
     |> Repo.insert()
   end
 
@@ -74,7 +74,7 @@ defmodule MiningRigMonitor.Addresses do
   """
   def update_address(%Address{} = address, attrs) do
     address
-    |> Address.changeset(attrs)
+    |> Address.changeset_update(attrs)
     |> Repo.update()
   end
 
