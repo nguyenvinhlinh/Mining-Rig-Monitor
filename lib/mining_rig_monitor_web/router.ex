@@ -53,8 +53,6 @@ defmodule MiningRigMonitorWeb.Router do
     live "/addresses", AddressLive.Index, :index
     live "/addresses/new", AddressLive.Index, :new
     live "/addresses/:id/edit", AddressLive.Index, :edit
-
-    live "/addresses/:id", AddressLive.Show, :show
     live "/addresses/:id/show/edit", AddressLive.Show, :edit
   end
 
