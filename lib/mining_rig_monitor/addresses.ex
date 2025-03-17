@@ -21,6 +21,11 @@ defmodule MiningRigMonitor.Addresses do
     Repo.all(Address)
   end
 
+  def list_addresses_by_type(type) do
+    query = from a in Address, where: a.type == ^type
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single address.
 
