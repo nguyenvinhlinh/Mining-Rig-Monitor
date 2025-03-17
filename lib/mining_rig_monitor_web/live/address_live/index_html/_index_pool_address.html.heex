@@ -11,7 +11,7 @@
   >
     <:col :let={{_id, pool_address}} label="ID" class="hidden 2xl:table-cell">{pool_address.id}</:col>
     <:col :let={{_id, pool_address}} label="Name">{pool_address.name}</:col>
-    <:col :let={{_id, pool_address}} label="Name">{pool_address.address}</:col>
+    <:col :let={{_id, pool_address}} label="Address">{pool_address.address}</:col>
 
     <:action :let={{_id, pool_address}}>
       <.link patch={~p"/addresses/#{pool_address.id}/edit"}>
