@@ -335,7 +335,10 @@ defmodule MiningRigMonitorWeb.CoreComponents do
       <select
         id={@id}
         name={@name}
-        class="mt-2 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-zinc-400 focus:ring-0 sm:text-sm"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+        focus:ring-primary-500 focus:border-primary-500
+        block w-full p-2.5
+        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
         multiple={@multiple}
         {@rest}
       >

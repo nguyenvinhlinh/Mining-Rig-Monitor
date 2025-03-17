@@ -14,7 +14,7 @@ defmodule MiningRigMonitor.Addresses.Address do
   end
 
   def type_wallet(), do: @type_wallet
-  def type_pool(), do: @type_pool
+  def type_pool(),   do: @type_pool
 
   @doc false
   def changeset(address, attrs) do

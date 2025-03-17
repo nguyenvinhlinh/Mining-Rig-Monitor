@@ -2,43 +2,23 @@ defmodule MiningRigMonitorWeb.AddressLive.FormComponent do
   use MiningRigMonitorWeb, :live_component
 
   alias MiningRigMonitor.Addresses
-
-  @impl true
-  def render(assigns) do
-    ~H"""
-    <div>
-      <.header>
-        {@title}
-        <:subtitle>Use this form to manage address records in your database.</:subtitle>
-      </.header>
-
-      <.simple_form
-        for={@form}
-        id="address-form"
-        phx-target={@myself}
-        phx-change="validate"
-        phx-submit="save"
-      >
-        <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:type]} type="text" label="Type" />
-        <.input field={@form[:address]} type="text" label="Address" />
-        <:actions>
-          <.button phx-disable-with="Saving...">Save Address</.button>
-        </:actions>
-      </.simple_form>
-    </div>
-    """
-  end
+  alias MiningRigMonitor.Addresses.Address
 
   @impl true
   def update(%{address: address} = assigns, socket) do
-    {:ok,
-     socket
-     |> assign(assigns)
-     |> assign_new(:form, fn ->
-       to_form(Addresses.change_address(address))
-     end)}
-  end
+    address_type_option_list = [
+      "Wallet Address": Address.type_wallet(),
+      "Pool Address": Address.type_pool()
+    ]
+
+    socket_mod = socket
+    |> assign(assigns)
+    |> assign_new(:form, fn ->
+      to_form(Addresses.change_address(address))
+    end)
+    |> assign(:address_type_option_list, address_type_option_list)
+    {:ok, socket_mod}
+end
 
   @impl true
   def handle_event("validate", %{"address" => address_params}, socket) do
