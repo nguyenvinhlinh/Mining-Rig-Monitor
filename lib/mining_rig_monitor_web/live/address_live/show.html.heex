@@ -1,0 +1,28 @@
+<.header>
+  Address {@address.id}
+  <:subtitle>This is a address record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/addresses/#{@address}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit address</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@address.name}</:item>
+  <:item title="Type">{@address.type}</:item>
+  <:item title="Address">{@address.address}</:item>
+</.list>
+
+<.back navigate={~p"/addresses"}>Back to addresses</.back>
+
+<.modal :if={@live_action == :edit} id="address-modal" show on_cancel={JS.patch(~p"/addresses/#{@address}")}>
+  <.live_component
+    module={MiningRigMonitorWeb.AddressLive.FormComponent}
+    id={@address.id}
+    title={@page_title}
+    action={@live_action}
+    address={@address}
+    patch={~p"/addresses/#{@address}"}
+  />
+</.modal>
