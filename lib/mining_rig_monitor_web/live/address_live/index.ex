@@ -62,6 +62,10 @@ defmodule MiningRigMonitorWeb.AddressLive.Index do
     address = Addresses.get_address!(id)
     {:ok, _} = Addresses.delete_address(address)
 
-    {:noreply, stream_delete(socket, :addresses, address)}
+    socket_mod = socket
+    |> stream_delete(:pool_address_list, address)
+    |> stream_delete(:wallet_address_list, address)
+
+    {:noreply, socket_mod}
   end
 end
