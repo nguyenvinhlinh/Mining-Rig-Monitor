@@ -7,8 +7,8 @@ defmodule MiningRigMonitorWeb.AddressLive.FormComponent do
   @impl true
   def update(%{address: address} = assigns, socket) do
     address_type_option_list = [
-      "Wallet Address": Address.type_wallet(),
-      "Pool Address": Address.type_pool()
+      "Pool Address":   Address.type_pool(),
+      "Wallet Address": Address.type_wallet()
     ]
 
     socket_mod = socket
