@@ -4,9 +4,18 @@ defmodule MiningRigMonitorWeb.AddressLive.Index do
   alias MiningRigMonitor.Addresses
   alias MiningRigMonitor.Addresses.Address
 
+  embed_templates "index_html/*"
+
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :addresses, Addresses.list_addresses())}
+    wallet_address_list = Addresses.list_addresses_by_type(Address.type_wallet())
+    pool_address_list =   Addresses.list_addresses_by_type(Address.type_pool())
+
+    socket_mod = socket
+    |> stream(:wallet_address_list, wallet_address_list)
+    |> stream(:pool_address_list, pool_address_list)
+
+    {:ok, socket_mod}
   end
 
   @impl true
