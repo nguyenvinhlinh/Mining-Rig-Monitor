@@ -28,27 +28,27 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Cpu gpu miner playbook")
-    |> assign(:cpu_gpu_miner_playbook, CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(id))
-  end
+  # defp apply_action(socket, :edit, %{"id" => id}) do
+  #   socket
+  #   |> assign(:page_title, "Edit Cpu gpu miner playbook")
+  #   |> assign(:cpu_gpu_miner_playbook, CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(id))
+  # end
 
-  defp apply_action(socket, :new, _params) do
+  defp apply_action(socket, :new, %{"cpu_gpu_miner_id"=> cpu_gpu_miner_id}=params) do
     socket
-    |> assign(:page_title, "New Cpu gpu miner playbook")
-    |> assign(:cpu_gpu_miner_playbook, %CpuGpuMinerPlaybook{})
+    |> assign(:page_title, "New CPU/GPU miner playbook")
+    |> assign(:cpu_gpu_miner_playbook, %CpuGpuMinerPlaybook{cpu_gpu_miner_id: cpu_gpu_miner_id})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Cpu gpu miner playbooks")
+    |> assign(:page_title, "Listing CPU/GPU miner playbooks")
     |> assign(:cpu_gpu_miner_playbook, nil)
   end
 
   @impl true
   def handle_info({MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent, {:saved, cpu_gpu_miner_playbook}}, socket) do
-    {:noreply, stream_insert(socket, :cpu_gpu_miner_playbooks, cpu_gpu_miner_playbook)}
+    {:noreply, stream_insert(socket, :cpu_gpu_miner_playbook_list, cpu_gpu_miner_playbook)}
   end
 
   @impl true

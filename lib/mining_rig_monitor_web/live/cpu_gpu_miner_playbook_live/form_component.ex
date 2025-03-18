@@ -4,34 +4,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent do
   alias MiningRigMonitor.CpuGpuMinerPlaybooks
 
   @impl true
-  def render(assigns) do
-    ~H"""
-    <div>
-      <.header>
-        {@title}
-        <:subtitle>Use this form to manage cpu_gpu_miner_playbook records in your database.</:subtitle>
-      </.header>
-
-      <.simple_form
-        for={@form}
-        id="cpu_gpu_miner_playbook-form"
-        phx-target={@myself}
-        phx-change="validate"
-        phx-submit="save"
-      >
-        <.input field={@form[:cpu_gpu_miner_id]} type="number" label="Cpu gpu miner" />
-        <.input field={@form[:software_name]} type="text" label="Software name" />
-        <.input field={@form[:software_version]} type="text" label="Software version" />
-        <.input field={@form[:command_argument]} type="text" label="Command argument" />
-        <:actions>
-          <.button phx-disable-with="Saving...">Save Cpu gpu miner playbook</.button>
-        </:actions>
-      </.simple_form>
-    </div>
-    """
-  end
-
-  @impl true
   def update(%{cpu_gpu_miner_playbook: cpu_gpu_miner_playbook} = assigns, socket) do
     {:ok,
      socket
@@ -67,13 +39,17 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent do
   end
 
   defp save_cpu_gpu_miner_playbook(socket, :new, cpu_gpu_miner_playbook_params) do
-    case CpuGpuMinerPlaybooks.create_cpu_gpu_miner_playbook(cpu_gpu_miner_playbook_params) do
+    cpu_gpu_miner = socket.assigns.cpu_gpu_miner
+    cpu_gpu_miner_playbook_params_mod = cpu_gpu_miner_playbook_params
+    |> Map.put("cpu_gpu_miner_id", cpu_gpu_miner.id)
+
+    case CpuGpuMinerPlaybooks.create_cpu_gpu_miner_playbook(cpu_gpu_miner_playbook_params_mod) do
       {:ok, cpu_gpu_miner_playbook} ->
         notify_parent({:saved, cpu_gpu_miner_playbook})
 
         {:noreply,
          socket
-         |> put_flash(:info, "Cpu gpu miner playbook created successfully")
+         |> put_flash(:info, "CPU/GPU miner playbook created successfully")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

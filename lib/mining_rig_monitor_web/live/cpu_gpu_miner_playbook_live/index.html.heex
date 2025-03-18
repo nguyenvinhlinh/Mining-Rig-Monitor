@@ -8,7 +8,8 @@
     id={@cpu_gpu_miner_playbook.id || :new}
     title={@page_title}
     action={@live_action}
+    cpu_gpu_miner={@cpu_gpu_miner}
     cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook}
-    patch={~p"/cpu_gpu_miner_playbooks"}
+    patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks"}
   />
 </.modal>
