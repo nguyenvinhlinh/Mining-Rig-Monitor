@@ -16,9 +16,12 @@ alias MiningRigMonitor.Repo
 alias MiningRigMonitor.AsicMiners.AsicMiner
 alias MiningRigMonitor.CpuGpuMiners.CpuGpuMiner
 alias MiningRigMonitor.Addresses.Address
+alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
 
 Repo.delete_all(MiningRigMonitor.AsicMinerLogs.AsicMinerLog)
 Repo.delete_all(MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog)
+
+Repo.delete_all(CpuGpuMinerPlaybook)
 Repo.delete_all(AsicMiner)
 Repo.delete_all(CpuGpuMiner)
 Repo.delete_all(Address)
@@ -53,7 +56,7 @@ Repo.delete_all(Address)
 }
 |> Repo.insert!
 
-%CpuGpuMiner{
+cpu_gpu_miner_1 = %CpuGpuMiner{
   name: "CPU/GPU Miner 1",
   api_code: "api_code_1",
   motherboard_name: "B850 MSI",
@@ -71,7 +74,7 @@ Repo.delete_all(Address)
 }
 |> Repo.insert!
 
-%CpuGpuMiner{
+cpu_gpu_miner_2 = %CpuGpuMiner{
   name: "CPU/GPU Miner 2",
   api_code: "api_code_2",
   motherboard_name: "B850 MSI",
@@ -149,3 +152,31 @@ Repo.delete_all(Address)
   address: "sg.beam.gfwroute.com:1130"
 }
 |> Repo.insert!
+
+%CpuGpuMinerPlaybook{
+  cpu_gpu_miner_id: cpu_gpu_miner_1.id,
+  software_name: "XMRIG",
+  software_version: "6.22.2",
+  command_argument: "A very long list of argument in one line"
+} |> Repo.insert!
+
+%CpuGpuMinerPlaybook{
+  cpu_gpu_miner_id: cpu_gpu_miner_1.id,
+  software_name: "BZMiner",
+  software_version: "23.0.2",
+  command_argument: "A very long list of argument in one line"
+} |> Repo.insert!
+
+%CpuGpuMinerPlaybook{
+  cpu_gpu_miner_id: cpu_gpu_miner_2.id,
+  software_name: "Phoenix",
+  software_version: "1.2.3",
+  command_argument: "A very long list of argument in one line"
+} |> Repo.insert!
+
+%CpuGpuMinerPlaybook{
+  cpu_gpu_miner_id: cpu_gpu_miner_2.id,
+  software_name: "Scash Miner",
+  software_version: "23.0.2",
+  command_argument: "A very long list of argument in one line"
+} |> Repo.insert!
