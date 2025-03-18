@@ -26,9 +26,9 @@
       </.link>
     </:action>
 
-    <:action :let={{id, cpu_gpu_miner}}>
+    <:action :let={{id, playbook}}>
       <.link
-        phx-click={JS.push("delete", value: %{id: cpu_gpu_miner.id}) |> hide("##{id}")}
+        phx-click={JS.push("delete", value: %{playbook_id: playbook.id}) |> hide("##{id}")}
         data-confirm="Are you sure?"
       >
         <button type="button"  class="mr-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white
