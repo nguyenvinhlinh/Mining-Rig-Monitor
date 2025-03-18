@@ -18,11 +18,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
     {:ok, socket_mod}
   end
 
-  # @impl true
-  # def mount(_params, _session, socket) do
-  #   {:ok, stream(socket, :cpu_gpu_miner_playbooks, CpuGpuMinerPlaybooks.list_cpu_gpu_miner_playbooks())}
-  # end
-
   @impl true
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
@@ -52,10 +47,10 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
+  def handle_event("delete", %{"playbook_id" => id}, socket) do
     cpu_gpu_miner_playbook = CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(id)
     {:ok, _} = CpuGpuMinerPlaybooks.delete_cpu_gpu_miner_playbook(cpu_gpu_miner_playbook)
 
-    {:noreply, stream_delete(socket, :cpu_gpu_miner_playbooks, cpu_gpu_miner_playbook)}
+    {:noreply, stream_delete(socket, :cpu_gpu_miner_playbook_list, cpu_gpu_miner_playbook)}
   end
 end
