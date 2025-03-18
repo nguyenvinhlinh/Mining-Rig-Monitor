@@ -28,11 +28,11 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  # defp apply_action(socket, :edit, %{"id" => id}) do
-  #   socket
-  #   |> assign(:page_title, "Edit Cpu gpu miner playbook")
-  #   |> assign(:cpu_gpu_miner_playbook, CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(id))
-  # end
+  defp apply_action(socket, :edit, %{"playbook_id" => playbook_id}) do
+    socket
+    |> assign(:page_title, "Edit CPU/GPU miner playbook")
+    |> assign(:cpu_gpu_miner_playbook, CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(playbook_id))
+  end
 
   defp apply_action(socket, :new, %{"cpu_gpu_miner_id"=> cpu_gpu_miner_id}=params) do
     socket
