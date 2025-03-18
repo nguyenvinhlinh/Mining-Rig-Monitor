@@ -1,36 +1,6 @@
-<.header>
-  Listing Cpu gpu miner playbooks
-  <:actions>
-    <.link patch={~p"/cpu_gpu_miner_playbooks/new"}>
-      <.button>New Cpu gpu miner playbook</.button>
-    </.link>
-  </:actions>
-</.header>
+<._index_top cpu_gpu_miner={@cpu_gpu_miner}/>
 
-<.table
-  id="cpu_gpu_miner_playbooks"
-  rows={@streams.cpu_gpu_miner_playbooks}
-  row_click={fn {_id, cpu_gpu_miner_playbook} -> JS.navigate(~p"/cpu_gpu_miner_playbooks/#{cpu_gpu_miner_playbook}") end}
->
-  <:col :let={{_id, cpu_gpu_miner_playbook}} label="Cpu gpu miner">{cpu_gpu_miner_playbook.cpu_gpu_miner_id}</:col>
-  <:col :let={{_id, cpu_gpu_miner_playbook}} label="Software name">{cpu_gpu_miner_playbook.software_name}</:col>
-  <:col :let={{_id, cpu_gpu_miner_playbook}} label="Software version">{cpu_gpu_miner_playbook.software_version}</:col>
-  <:col :let={{_id, cpu_gpu_miner_playbook}} label="Command argument">{cpu_gpu_miner_playbook.command_argument}</:col>
-  <:action :let={{_id, cpu_gpu_miner_playbook}}>
-    <div class="sr-only">
-      <.link navigate={~p"/cpu_gpu_miner_playbooks/#{cpu_gpu_miner_playbook}"}>Show</.link>
-    </div>
-    <.link patch={~p"/cpu_gpu_miner_playbooks/#{cpu_gpu_miner_playbook}/edit"}>Edit</.link>
-  </:action>
-  <:action :let={{id, cpu_gpu_miner_playbook}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: cpu_gpu_miner_playbook.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
-    >
-      Delete
-    </.link>
-  </:action>
-</.table>
+<._index_playbook_table streams={@streams}/>
 
 <.modal :if={@live_action in [:new, :edit]} id="cpu_gpu_miner_playbook-modal" show on_cancel={JS.patch(~p"/cpu_gpu_miner_playbooks")}>
   <.live_component

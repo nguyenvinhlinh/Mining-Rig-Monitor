@@ -21,6 +21,13 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks do
     Repo.all(CpuGpuMinerPlaybook)
   end
 
+  def list_cpu_gpu_miner_playbooks_by_cpu_gpu_miner_id(id) do
+    query = CpuGpuMinerPlaybook
+    |> where([cgmp], cgmp.cpu_gpu_miner_id == ^id )
+    |> order_by([cgmp], asc: cgmp.id)
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single cpu_gpu_miner_playbook.
 

@@ -1,13 +1,27 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
   use MiningRigMonitorWeb, :live_view
-
+  alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMinerPlaybooks
   alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
 
+  embed_templates "index_html/*"
+
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, stream(socket, :cpu_gpu_miner_playbooks, CpuGpuMinerPlaybooks.list_cpu_gpu_miner_playbooks())}
+  def mount(%{"cpu_gpu_miner_id" => cpu_gpu_miner_id}, _session, socket) do
+    cpu_gpu_miner = CpuGpuMiners.get_cpu_gpu_miner(cpu_gpu_miner_id)
+    cpu_gpu_miner_playbook_list =  CpuGpuMinerPlaybooks.list_cpu_gpu_miner_playbooks_by_cpu_gpu_miner_id(cpu_gpu_miner_id)
+
+    socket_mod = socket
+    |> stream(:cpu_gpu_miner_playbook_list, cpu_gpu_miner_playbook_list)
+    |> assign(:cpu_gpu_miner, cpu_gpu_miner)
+
+    {:ok, socket_mod}
   end
+
+  # @impl true
+  # def mount(_params, _session, socket) do
+  #   {:ok, stream(socket, :cpu_gpu_miner_playbooks, CpuGpuMinerPlaybooks.list_cpu_gpu_miner_playbooks())}
+  # end
 
   @impl true
   def handle_params(params, _url, socket) do
