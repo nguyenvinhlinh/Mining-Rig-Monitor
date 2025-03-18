@@ -15,6 +15,7 @@
             <a href={~p(/cpu_gpu_miners)} class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">CPU/GPU Miners</a>
           </div>
         </li>
+
         <li>
           <div class="flex items-center">
             <.icon name="hero-chevron-right-solid" class="size-6 text-gray-400" />
@@ -24,25 +25,29 @@
             </a>
           </div>
         </li>
+
+        <li>
+          <div class="flex items-center">
+            <.icon name="hero-chevron-right-solid" class="size-6 text-gray-400" />
+            <.icon name="hero-wrench-screwdriver-solid" class="size-5" />
+            <a href={~p(/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks)} class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">
+              Playbooks
+            </a>
+          </div>
+        </li>
+
+
       </ol>
     </nav>
     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white inline">
-      CPU/GPU Miner: {@cpu_gpu_miner.name}
+      {@cpu_gpu_miner.name} - Playbook Index
     </h1>
-    <.link patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks"} class="float-right">
+    <.link patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/new"} class="float-right">
       <.button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2
         dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
         type="button">
-        Playbooks
+        New Playbook
       </.button>
     </.link>
-
-    <!-- <.link patch={~p"/cpu_gpu_miners"} class="float-right"> -->
-    <!--   <.button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 -->
-    <!--     dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" -->
-    <!--     type="button"> -->
-    <!--     Configure -->
-    <!--   </.button> -->
-    <!-- </.link> -->
   </div>
 </div>
