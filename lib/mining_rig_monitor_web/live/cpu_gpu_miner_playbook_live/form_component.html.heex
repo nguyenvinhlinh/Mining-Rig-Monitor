@@ -10,9 +10,9 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <.input field={@form[:software_name]} type="text" label="Software Name" />
-    <.input field={@form[:software_version]} type="text" label="Software Version" />
-    <.input field={@form[:command_argument]} type="text" label="Command Argument" />
+    <.input field={@form[:software_name]} type="select" options={@software_name_option_list} label="Software Name" />
+    <.input field={@form[:software_version]} type="select" options={@software_version_option_list} label="Software Version" />
+    <.input field={@form[:command_argument]} type="textarea" label="Command Argument" />
 
     <:actions>
       <.button phx-disable-with="Saving..."
