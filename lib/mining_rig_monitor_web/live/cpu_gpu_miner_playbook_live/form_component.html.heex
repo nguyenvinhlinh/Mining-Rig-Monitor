@@ -13,7 +13,10 @@
     <.input field={@form[:software_name]} type="select" options={@software_name_option_list} label="Software Name" />
     <.input field={@form[:software_version]} type="select" options={@software_version_option_list} label="Software Version" />
     <.input field={@form[:command_argument]} type="textarea" label="Command Argument" />
-
+    <.input field={@form[:coin_name_1]} type="text" label="Coin 1" />
+    <.input field={@form[:algorithm_1]} type="text" label="Algorithm 1" />
+    <.input field={@form[:coin_name_2]} type="text" label="Coin 2" />
+    <.input field={@form[:algorithm_2]} type="text" label="Algorithm 2" />
     <:actions>
       <.button phx-disable-with="Saving..."
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4

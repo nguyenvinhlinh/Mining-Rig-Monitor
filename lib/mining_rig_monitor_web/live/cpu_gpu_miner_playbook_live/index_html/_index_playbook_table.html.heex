@@ -12,6 +12,12 @@
     <:col :let={{_id, playbook}} label="ID" class="hidden 2xl:table-cell">{playbook.id}</:col>
     <:col :let={{_id, playbook}} label="Software Name">{playbook.software_name}</:col>
     <:col :let={{_id, playbook}} label="Software Version">{playbook.software_version}</:col>
+    <:col :let={{_id, playbook}} label="[1] Coin/Algorithm">
+      { if(playbook.coin_name_1,  do: "#{playbook.coin_name_1}/#{playbook.algorithm_1}") }
+    </:col>
+    <:col :let={{_id, playbook}} label="[2] Coin/Algorithm">
+      { if(playbook.coin_name_2,  do: "#{playbook.coin_name_2}/#{playbook.algorithm_2}") }
+    </:col>
     <:col :let={{_id, playbook}} label="Command Argument">{playbook.command_argument}</:col>
 
     <:action :let={{_id, playbook}}>

@@ -7,15 +7,23 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     field :software_name, :string
     field :software_version, :string
     field :command_argument, :string
-
+    field :coin_name_1, :string
+    field :coin_name_2, :string
+    field :algorithm_1, :string
+    field :algorithm_2, :string
     timestamps(type: :utc_datetime)
   end
 
   @doc false
   def changeset(cpu_gpu_miner_playbook, attrs) do
+    field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
+                  :command_argument, :coin_name_1, :algorithm_1]
+    field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
+                  :command_argument, :coin_name_1, :algorithm_1]
+
     cpu_gpu_miner_playbook
-    |> cast(attrs, [:cpu_gpu_miner_id, :software_name, :software_version, :command_argument])
-    |> validate_required([:cpu_gpu_miner_id, :software_name, :software_version, :command_argument])
+    |> cast(attrs, field_list)
+    |> validate_required(field_list)
   end
 
   def get_software_name_list() do
