@@ -1,0 +1,34 @@
+type: object
+properties:
+  id:
+    description: playbook id
+    type: integer
+    example: 60
+  software_name:
+    description: software name
+    type: string
+    example: XMRig
+  software_version:
+    description: software version
+    type: string
+    example: 6.22.2
+  module_name:
+    description: Elixir module which gonna handle the setup/start/stop mining for this miner software.
+    type: string
+    example: Miner.XMRIG_6.22.2
+  command_argument:
+    description: command argument passing to miner software
+    type: string
+    example: "--no-color --url $POOL_ADDRESS --algo rx/0 --user $WALLET_ADDRESS --pass $WORKER_NAME"
+  coin_name_1:
+    type: string
+    example: Monero
+  coin_name_2:
+    type: string
+    example: Raven
+  algorithm_1:
+    type: string
+    example: RandomX
+  algorithm_2:
+    type: string
+    example: KawPow

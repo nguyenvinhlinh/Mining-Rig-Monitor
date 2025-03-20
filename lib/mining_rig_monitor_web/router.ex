@@ -71,8 +71,10 @@ defmodule MiningRigMonitorWeb.Router do
 
     scope "/cpu_gpu_miners" do
       pipe_through :api_cpu_gpu_miner
-      post "/specs", MiningRigMonitorWeb.CpuGpuMinerController, :update_cpu_gpu_miner_specs
-      post "/logs",  MiningRigMonitorWeb.CpuGpuMinerLogController, :create
+      post "/specs",    MiningRigMonitorWeb.CpuGpuMinerController, :update_cpu_gpu_miner_specs
+      post "/logs",     MiningRigMonitorWeb.CpuGpuMinerLogController, :create
+      get "/playbooks", MiningRigMonitorWeb.CpuGpuMinerPlaybookController, :get_playbook_list
+      get "/playbooks/:playbook_id/module", MiningRigMonitorWeb.CpuGpuMinerPlaybookController, :get_playbook_module_binary
     end
   end
 

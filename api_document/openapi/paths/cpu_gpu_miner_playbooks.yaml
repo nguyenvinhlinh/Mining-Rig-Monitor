@@ -1,0 +1,24 @@
+get:
+  tags:
+    - CPU/GPU Miner
+  summary: Get mining playbook list for a given CPU/GPU miner
+  description: Get mining playbook list for a given CPU/GPU miner
+  operationId: get-cpu-gpu-miner-playbook-list
+  security:
+    - api_code: []
+  responses:
+    '200':
+      description: "CPU/GPU miner playbook list"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/CPU_GPU_MINER_PLAYBOOK.yaml
+
+    '401':
+      description: Invalid API_CODE
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/401_Unauthorized.yaml

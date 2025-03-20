@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 1.0.0
+  version: 2.0.0
   title: Mining Rig Monitor
 
   contact:
@@ -42,6 +42,12 @@ paths:
 
   '/cpu_gpu_miners/logs':
     $ref: 'paths/cpu_gpu_miner_logs.yaml'
+
+  '/cpu_gpu_miners/playbooks':
+    $ref: './paths/cpu_gpu_miner_playbooks.yaml'
+
+  '/cpu_gpu_miners/playbooks/{playbook_id}/module':
+    $ref: './paths/cpu_gpu_miner_playbook_module.yaml'
 
 components:
   securitySchemes:
