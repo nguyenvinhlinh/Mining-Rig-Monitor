@@ -1,8 +1,8 @@
 get:
   tags:
     - CPU/GPU Miner
-  summary: Get a list of playbook for a given CPU/GPU miner
-  description: "This endpoint helps submitting cpu/gpu mining rig - monitor data. This api should be call every minute"
+  summary: Get mining playbook list for a given CPU/GPU miner
+  description: Get mining playbook list for a given CPU/GPU miner
   operationId: get-cpu-gpu-miner-playbook-list
   security:
     - api_code: []
@@ -12,7 +12,9 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/CPU_GPU_MINER_PLAYBOOK.yaml
+            type: array
+            items:
+              $ref: ../components/schemas/CPU_GPU_MINER_PLAYBOOK.yaml
 
     '401':
       description: Invalid API_CODE

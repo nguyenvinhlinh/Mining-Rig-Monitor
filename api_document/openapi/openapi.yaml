@@ -46,6 +46,9 @@ paths:
   '/cpu_gpu_miners/playbooks':
     $ref: './paths/cpu_gpu_miner_playbooks.yaml'
 
+  '/cpu_gpu_miners/playbooks/{playbook_id}/module':
+    $ref: './paths/cpu_gpu_miner_playbook_module.yaml'
+
 components:
   securitySchemes:
     api_code:

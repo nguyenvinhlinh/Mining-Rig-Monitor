@@ -1,0 +1,23 @@
+get:
+  tags:
+    - CPU/GPU Miner
+  summary: Get CPU/GPU miner module in binary
+  description: "This endpoint get elixir binary module to setup/start/stop mining software."
+  operationId: get-cpu-gpu-miner-playbook-module
+  security:
+    - api_code: []
+
+  responses:
+    '200':
+      description: "Get CPU/GPU miner playbook module in binary"
+      content:
+        application/octet-stream:
+          schema:
+            type: string
+            format: binary
+    '401':
+      description: Invalid API_CODE
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/401_Unauthorized.yaml
