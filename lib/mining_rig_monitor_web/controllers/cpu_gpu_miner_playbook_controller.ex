@@ -17,8 +17,11 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookController do
         software_version: e.software_version,
         command_argument: e.command_argument,
         module: module,
-        coin_name_1: "XXX",
-        coin_name_2: nil}
+        coin_name_1: e.coin_name_1,
+        algorithm_1: e.algorithm_1,
+        coin_name_2: e.coin_name_2,
+        algorithm_2: e.algorithm_2
+      }
     end)
     json(conn, data)
   end
