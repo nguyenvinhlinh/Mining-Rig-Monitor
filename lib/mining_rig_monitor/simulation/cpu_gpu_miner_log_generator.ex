@@ -16,6 +16,10 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
     GenServer.start_link(__MODULE__, nil, name: __MODULE__)
   end
 
+  def stop() do
+    GenServer.stop(__MODULE__)
+  end
+
   @impl true
   def init(_) do
     Logger.info("[CpuGpuMinerLogGenerator] Start")
