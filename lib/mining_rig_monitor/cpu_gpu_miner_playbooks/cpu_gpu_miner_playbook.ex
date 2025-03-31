@@ -40,8 +40,8 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
 
   def get_software_module_by_name_and_version("XMRig", version) do
     case version do
-      "6.22.2" -> "Miner.XMRIG_6_22_2"
-      _latest -> "Miner.XMRIG_6_22_2"
+      "6.22.2" -> Miner.XMRIG_6_22_2
+      _latest -> Miner.XMRIG_6_22_2
     end
   end
 end
