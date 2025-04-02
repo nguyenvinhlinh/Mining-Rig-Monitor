@@ -24,6 +24,7 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     cpu_gpu_miner_playbook
     |> cast(attrs, field_list)
     |> validate_required(field_list)
+    |> unique_constraint([:cpu_gpu_miner_id, :software_name], error_key: :software_name)
   end
 
   def get_software_name_list() do
