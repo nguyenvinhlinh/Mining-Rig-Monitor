@@ -11,21 +11,19 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookController do
 
     data = Enum.map(playbook_list, fn(e) ->
       module = CpuGpuMinerPlaybook.get_software_module_by_name_and_version(e.software_name, e.software_version)
-      Kernel.to_string |> String.replace("Elixir.", "")
-      module_mod = module
-      |> Kernel.to_string
-      |> String.replace("Elixir.", "")
 
       %{
         id: e.id,
         software_name: e.software_name,
         software_version: e.software_version,
         command_argument: e.command_argument,
-        module: module_mod,
+        module: module,
         coin_name_1: e.coin_name_1,
         algorithm_1: e.algorithm_1,
         coin_name_2: e.coin_name_2,
-        algorithm_2: e.algorithm_2
+        algorithm_2: e.algorithm_2,
+        inserted_at: e.inserted_at |> NaiveDateTime.to_iso8601(:extended),
+        updated_at:  e.updated_at  |> NaiveDateTime.to_iso8601(:extended)
       }
     end)
     json(conn, data)
