@@ -3,11 +3,10 @@
   md:mx-4 md:mb-4 md:p-6
   bg-white border border-gray-200 rounded-lg shadow-sm
   dark:border-gray-700 dark:bg-gray-800">
-
-
   <.table
     id="cpu_gpu_miner_playbook_list"
     rows={@streams.cpu_gpu_miner_playbook_list}
+    row_click={fn {_id, playbook} -> JS.navigate(~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/#{playbook}") end}
   >
     <:col :let={{_id, playbook}} label="ID" class="hidden 2xl:table-cell">{playbook.id}</:col>
     <:col :let={{_id, playbook}} label="Software Name">{playbook.software_name}</:col>
@@ -18,10 +17,8 @@
     <:col :let={{_id, playbook}} label="[2] Coin/Algorithm">
       { if(playbook.coin_name_2,  do: "#{playbook.coin_name_2}/#{playbook.algorithm_2}") }
     </:col>
-    <:col :let={{_id, playbook}} label="Command Argument">{playbook.command_argument}</:col>
 
     <:action :let={{_id, playbook}}>
-
       <.link patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/#{playbook}/edit"}>
         <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center
           text-white rounded-lg bg-blue-700 hover:bg-blue-800

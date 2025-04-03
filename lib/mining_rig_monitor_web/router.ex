@@ -51,6 +51,7 @@ defmodule MiningRigMonitorWeb.Router do
     live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks", CpuGpuMinerPlaybookLive.Index, :index
     live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new", CpuGpuMinerPlaybookLive.Index, :new
     live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/edit", CpuGpuMinerPlaybookLive.Index, :edit
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/", CpuGpuMinerPlaybookLive.Show, :show
 
 
     live "/addresses", AddressLive.Index, :index

@@ -9,13 +9,12 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id}, _, socket) do
+  def handle_params(%{"playbook_id" => id}, _, socket) do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:cpu_gpu_miner_playbook, CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(id))}
   end
 
-  defp page_title(:show), do: "Show Cpu gpu miner playbook"
-  defp page_title(:edit), do: "Edit Cpu gpu miner playbook"
+  defp page_title(:show), do: "Show CPU/GPU miner playbook"
 end
