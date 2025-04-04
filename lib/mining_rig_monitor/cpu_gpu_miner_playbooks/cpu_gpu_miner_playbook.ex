@@ -2,6 +2,8 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias MiningRigMonitor.Addresses.Address
+
   schema "cpu_gpu_miner_playbooks" do
     field :cpu_gpu_miner_id, :integer
     field :software_name, :string
@@ -11,19 +13,29 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     field :coin_name_2, :string
     field :algorithm_1, :string
     field :algorithm_2, :string
+
+    belongs_to(:cpu_wallet_address,   Address, foreign_key: :cpu_wallet_address_id)
+    belongs_to(:gpu_wallet_address_1, Address, foreign_key: :gpu_wallet_address_1_id)
+    belongs_to(:gpu_wallet_address_2, Address, foreign_key: :gpu_wallet_address_2_id)
+
+    belongs_to(:cpu_pool_address,   Address, foreign_key: :cpu_pool_address_id)
+    belongs_to(:gpu_pool_address_1, Address, foreign_key: :gpu_pool_address_1_id)
+    belongs_to(:gpu_pool_address_2, Address, foreign_key: :gpu_pool_address_2_id)
+
     timestamps(type: :utc_datetime)
   end
 
   @doc false
   def changeset(cpu_gpu_miner_playbook, attrs) do
     field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
-                  :command_argument, :coin_name_1, :algorithm_1]
-    field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
+                  :command_argument, :coin_name_1, :algorithm_1,
+                  :coin_name_2, :algorithm_2]
+    required_field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
                   :command_argument, :coin_name_1, :algorithm_1]
 
     cpu_gpu_miner_playbook
     |> cast(attrs, field_list)
-    |> validate_required(field_list)
+    |> validate_required(required_field_list)
     |> unique_constraint([:cpu_gpu_miner_id, :software_name], error_key: :software_name)
   end
 
