@@ -39,6 +39,31 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     |> unique_constraint([:cpu_gpu_miner_id, :software_name], error_key: :software_name)
   end
 
+  def get_command_argument_replaced(%__MODULE__{}=playbook) do
+    command_argument = if playbook.command_argument == nil, do: "", else: playbook.command_argument
+
+    cpu_wallet_address =   if playbook.cpu_wallet_address_id,   do: playbook.cpu_wallet_address.address ,  else: ""
+    gpu_wallet_address_1 = if playbook.gpu_wallet_address_1_id, do: playbook.gpu_wallet_address_1.address, else: ""
+    gpu_wallet_address_2 = if playbook.gpu_wallet_address_2_id, do: playbook.gpu_wallet_address_2.address, else: ""
+
+    cpu_pool_address =   if playbook.cpu_pool_address_id,   do: playbook.cpu_pool_address.address ,  else: ""
+    gpu_pool_address_1 = if playbook.gpu_pool_address_1_id, do: playbook.gpu_pool_address_1.address, else: ""
+    gpu_pool_address_2 = if playbook.gpu_pool_address_2_id, do: playbook.gpu_pool_address_2.address, else: ""
+
+    replacement_list = [
+      {"$CPU_WALLET",   cpu_wallet_address},
+      {"$GPU_WALLET_1", gpu_wallet_address_1},
+      {"$GPU_WALLET_2", gpu_wallet_address_2},
+      {"$CPU_POOL",     cpu_pool_address},
+      {"$GPU_POOL_1",   gpu_pool_address_1},
+      {"$GPU_POOL_2",   gpu_pool_address_2}
+    ]
+
+    Enum.reduce(replacement_list, command_argument, fn({e_key, e_value}, acc) ->
+      String.replace(acc, e_key, e_value)
+    end)
+  end
+
   def get_software_name_list() do
     ["XMRig", "BZMiner"]
   end

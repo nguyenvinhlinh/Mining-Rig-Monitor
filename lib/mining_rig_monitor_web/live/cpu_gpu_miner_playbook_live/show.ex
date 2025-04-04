@@ -3,6 +3,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
   require Logger
 
   alias MiningRigMonitor.CpuGpuMinerPlaybooks
+  alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.Repo
 
@@ -24,6 +25,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
     |> assign(:page_title, page_title(socket.assigns.live_action))
     |> assign(:cpu_gpu_miner, cpu_gpu_miner)
     |> assign(:cpu_gpu_miner_playbook, cpu_gpu_miner_playbook)
+    |> assign(:command_argument_replaced, CpuGpuMinerPlaybook.get_command_argument_replaced(cpu_gpu_miner_playbook))
     {:noreply, socket_mod}
 
     end
