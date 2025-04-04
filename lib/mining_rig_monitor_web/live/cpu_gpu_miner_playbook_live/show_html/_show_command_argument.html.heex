@@ -12,12 +12,17 @@
       text-base font-medium text-gray-900 dark:text-white">
       <ul class="list-disc px-5">
 
-        <li>
-          <b>Command argument :</b> {@cpu_gpu_miner_playbook.command_argument}
+        <li class="break-all">
+          <b>Origin:</b>
+          <code>
+            {@cpu_gpu_miner_playbook.command_argument}
+          </code>
         </li>
-
-        <li>
-          <b>Command argument after replacement:</b> {@command_argument_replaced}
+        <li class="break-all">
+          <b>After replacement:</b>
+          <code>
+            {@command_argument_replaced}
+          </code>
         </li>
       </ul>
     </div>
