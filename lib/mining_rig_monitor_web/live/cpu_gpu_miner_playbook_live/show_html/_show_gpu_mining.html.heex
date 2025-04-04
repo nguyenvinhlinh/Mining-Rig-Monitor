@@ -1,0 +1,32 @@
+<div class="mx-1 p-1 mb-1
+  sm:mx-2 sm:p-2 sm:mb-3
+  md:mx-4 md:p-4 md:mb-4
+  bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">
+    GPU Mining
+  </h3>
+
+  <div class="grid grid-cols-12">
+    <div class="col-span-12
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
+        <li :if={@cpu_gpu_miner_playbook.gpu_wallet_address_1} class="break-all">
+          <b>GPU Wallet [1]:</b> {@cpu_gpu_miner_playbook.gpu_wallet_address_1.name} - {@cpu_gpu_miner_playbook.gpu_wallet_address_1.address}
+        </li>
+
+        <li :if={@cpu_gpu_miner_playbook.gpu_wallet_address_2} class="break-all">
+          <b>GPU Wallet [2]:</b> {@cpu_gpu_miner_playbook.gpu_wallet_address_2.name} - {@cpu_gpu_miner_playbook.gpu_wallet_address_2.address}
+        </li>
+
+        <li :if={@cpu_gpu_miner_playbook.gpu_pool_address_1} class="break-all">
+          <b>GPU Pool [1]:</b> {@cpu_gpu_miner_playbook.gpu_pool_address_1.address}
+        </li>
+
+        <li :if={@cpu_gpu_miner_playbook.gpu_pool_address_2} class="break-all">
+          <b>GPU Pool [2]:</b> {@cpu_gpu_miner_playbook.gpu_pool_address_2.address}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

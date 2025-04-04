@@ -1,0 +1,48 @@
+<div class="mx-1 p-1 mb-1
+  sm:mx-2 sm:p-2 sm:mb-3
+  md:mx-4 md:p-4 md:mb-4
+  bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+
+  <h3 class="mb-4 text-xl font-semibold dark:text-white">
+    General Information
+  </h3>
+
+  <div class="grid grid-cols-12">
+    <div class="col-span-6
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
+        <li>
+          <b>Software name:</b> {@cpu_gpu_miner_playbook.software_name}
+        </li>
+        <li>
+          <b>Software version:</b> {@cpu_gpu_miner_playbook.software_version}
+        </li>
+        <li>
+          <b>Inserted at:</b> {@cpu_gpu_miner_playbook.inserted_at |> NaiveDateTime.to_string() }
+        </li>
+        <li>
+          <b>Updated at:</b> {@cpu_gpu_miner_playbook.updated_at   |> NaiveDateTime.to_string() }
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-span-6
+      text-base font-medium text-gray-900 dark:text-white">
+      <ul class="list-disc px-5">
+
+        <li>
+          <b>Coin name [1]:</b> {@cpu_gpu_miner_playbook.coin_name_1}
+        </li>
+        <li>
+          <b>Coin name [2]:</b> {@cpu_gpu_miner_playbook.coin_name_2}
+        </li>
+        <li>
+          <b>Algorithm [1]:</b> {@cpu_gpu_miner_playbook.algorithm_1}
+        </li>
+        <li>
+          <b>Algorithm [2]:</b> {@cpu_gpu_miner_playbook.algorithm_2}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
