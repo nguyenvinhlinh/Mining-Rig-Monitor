@@ -157,7 +157,7 @@ hashvault_pool_address = %Address{
   cpu_gpu_miner_id: cpu_gpu_miner_1.id,
   software_name: "XMRig",
   software_version: "6.22.2",
-  command_argument: "A very long list of argument in one line",
+  command_argument: "--no-color --url $CPU_POOL --algo rx/0 --user $CPU_WALLET --pass $WORKER_NAME",
   coin_name_1: "Monero",
   algorithm_1: "RandomX",
   cpu_wallet_address_id: monero_address.id,

@@ -21,11 +21,15 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
                    :cpu_pool_address, :gpu_pool_address_1, :gpu_pool_address_2])
     Logger.warning("[CpuGpuMinerPlaybookLive.Show] Preload cpu_gpu_miner_playbook_list's addresses will be overload. Should be improved!")
     cpu_gpu_miner = CpuGpuMiners.get_cpu_gpu_miner!(cpu_gpu_miner_playbook.cpu_gpu_miner_id)
+
+    worker_name = cpu_gpu_miner.name
+    |> String.replace(~r([^a-zA-Z0-9]),"")
+
     socket_mod = socket
     |> assign(:page_title, page_title(socket.assigns.live_action))
     |> assign(:cpu_gpu_miner, cpu_gpu_miner)
     |> assign(:cpu_gpu_miner_playbook, cpu_gpu_miner_playbook)
-    |> assign(:command_argument_replaced, CpuGpuMinerPlaybook.get_command_argument_replaced(cpu_gpu_miner_playbook))
+    |> assign(:command_argument_replaced, CpuGpuMinerPlaybook.get_command_argument_replaced(cpu_gpu_miner_playbook, [worker_name: worker_name]))
     {:noreply, socket_mod}
 
     end
