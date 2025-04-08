@@ -12,7 +12,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     field :cpu_algorithm, :string
     field :cpu_coin_name, :string
     field :cpu_pool_address, :string
-    field :cpu_wallet, :string
+    field :cpu_wallet_address, :string
     field :cpu_power, :integer
 
     field :gpu_1_core_temp, :integer
@@ -117,7 +117,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
   def changeset(cpu_gpu_miner_log, attrs) do
     field_list =
       [:cpu_temp, :cpu_hashrate, :cpu_hashrate_uom, :cpu_algorithm, :cpu_coin_name,
-       :cpu_pool_address, :cpu_wallet, :cpu_power,
+       :cpu_pool_address, :cpu_wallet_address, :cpu_power,
        :gpu_1_core_temp, :gpu_2_core_temp, :gpu_3_core_temp, :gpu_4_core_temp,
        :gpu_5_core_temp, :gpu_6_core_temp, :gpu_7_core_temp, :gpu_8_core_temp,
 
@@ -238,6 +238,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     end)
   end
 
+  def sum_total_power(nil), do: 0
   def sum_total_power(%__MODULE__{}=cpu_gpu_miner_log) do
     field_list =
       [:cpu_power, :gpu_1_power, :gpu_2_power, :gpu_3_power, :gpu_4_power,

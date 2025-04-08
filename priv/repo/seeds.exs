@@ -110,17 +110,17 @@ cpu_gpu_miner_2 = %CpuGpuMiner{
 }
 |> Repo.insert!
 
-%Address{
+kaspa_address = %Address{
   name: "Kaspa",
   type: "wallet",
   address: "kaspa:qp9rv9jvx2kyf6wu4lupuruunq5zsuszyxs0dr3l89ej7wsgs48jqkewy6xtl"
 }
 |> Repo.insert!
 
-%Address{
+monero_address = %Address{
   name: "Monero",
   type: "wallet",
-  address: "4AUzXvUpuuRCh3PqMhBmUyfP3TFPhz5cL1iDbgThY6rnUv9vtbPACW2TMJZ8ArprwheeBXEc9rYh62m6vZ8nLW7a8t9iBDn"
+  address: "84CHRDdXzTYLPSBHpnT5iTEFzc5CQuKk43XjLHZ7bdPm6Yw1ZZrbLDJ1M6zhyq5pECdKyDS6xxnUaPczpKXfNd3LJ2bBVeY"
 }
 |> Repo.insert!
 
@@ -132,14 +132,14 @@ cpu_gpu_miner_2 = %CpuGpuMiner{
 |> Repo.insert!
 
 
-%Address{
+woolypooly_pool_address = %Address{
   name: "Woolypooly-kaspa",
   type: "pool",
   address: "pool.br.woolypooly.com:3112"
 }
 |> Repo.insert!
 
-%Address{
+hashvault_pool_address = %Address{
   name: "Hashvault-monero",
   type: "pool",
   address: "pool.hashvault.pro:443"
@@ -155,28 +155,26 @@ cpu_gpu_miner_2 = %CpuGpuMiner{
 
 %CpuGpuMinerPlaybook{
   cpu_gpu_miner_id: cpu_gpu_miner_1.id,
-  software_name: "XMRIG",
+  software_name: "XMRig",
   software_version: "6.22.2",
-  command_argument: "A very long list of argument in one line"
-} |> Repo.insert!
-
-%CpuGpuMinerPlaybook{
-  cpu_gpu_miner_id: cpu_gpu_miner_1.id,
-  software_name: "BZMiner",
-  software_version: "23.0.2",
-  command_argument: "A very long list of argument in one line"
-} |> Repo.insert!
-
-%CpuGpuMinerPlaybook{
-  cpu_gpu_miner_id: cpu_gpu_miner_2.id,
-  software_name: "Phoenix",
-  software_version: "1.2.3",
-  command_argument: "A very long list of argument in one line"
+  command_argument: "--no-color --url $CPU_POOL --algo rx/0 --user $CPU_WALLET --pass $WORKER_NAME",
+  cpu_coin_name: "Monero",
+  cpu_algorithm: "RandomX",
+  cpu_wallet_address_id: monero_address.id,
+  cpu_pool_address_id: hashvault_pool_address.id
 } |> Repo.insert!
 
 %CpuGpuMinerPlaybook{
   cpu_gpu_miner_id: cpu_gpu_miner_2.id,
-  software_name: "Scash Miner",
-  software_version: "23.0.2",
-  command_argument: "A very long list of argument in one line"
+  software_name: "XMRig",
+  software_version: "6.22.2",
+  command_argument: "A very long list of argument in one line",
+  cpu_coin_name: "Monero",
+  cpu_algorithm: "RandomX",
+  gpu_coin_name_1: "Kaspa",
+  gpu_algorithm_1: "KHeavyHash",
+  cpu_wallet_address_id: monero_address.id,
+  cpu_pool_address_id: hashvault_pool_address.id,
+  gpu_wallet_address_1_id: kaspa_address.id,
+  gpu_pool_address_1_id: woolypooly_pool_address.id
 } |> Repo.insert!

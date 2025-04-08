@@ -3,7 +3,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
 
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog
-
+  alias MiningRigMonitor.GenServer.CpuGpuMinerOperationalIndex
   embed_templates "show_html/*"
 
   @impl true
@@ -25,10 +25,18 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
           Phoenix.PubSub.subscribe(MiningRigMonitor.PubSub, "cpu_gpu_miner_operational_channel:#{cpu_gpu_miner.id}")
         end
 
+        cpu_gpu_miner_log = CpuGpuMinerOperationalIndex.get(cpu_gpu_miner.id)
+        cpu_gpu_miner_log_mod =
+        if Kernel.is_nil(cpu_gpu_miner_log) do
+          empty_cpu_gpu_miner_log()
+        else
+          cpu_gpu_miner_log
+        end
+
         socket_mod = socket
         |> assign(:page_title, "Miner: #{cpu_gpu_miner.name}")
         |> assign(:cpu_gpu_miner, cpu_gpu_miner)
-        |> assign(:cpu_gpu_miner_log, empty_cpu_gpu_miner_log())
+        |> assign(:cpu_gpu_miner_log, cpu_gpu_miner_log_mod)
         {:noreply, socket_mod}
     end
   end

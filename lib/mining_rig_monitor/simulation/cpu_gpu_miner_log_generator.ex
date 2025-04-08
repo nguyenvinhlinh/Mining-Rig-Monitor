@@ -47,7 +47,7 @@ defmodule MiningRigMonitor.Simulation.CpuGpuMinerLogGenerator do
       "cpu_algorithm" => "RandomX",
       "cpu_coin_name" => "Monero",
       "cpu_pool_address" => "stratum+tcp://#{UUID.uuid1()}:4444",
-      "cpu_wallet" => "#{UUID.uuid1()}",
+      "cpu_wallet_address" => "#{UUID.uuid1()}",
       "cpu_power" => 200 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "gpu_1_core_temp" => 60 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
       "gpu_2_core_temp" => 60 * (1 + Enum.random(1..10) / 100) |> Kernel.round(),
