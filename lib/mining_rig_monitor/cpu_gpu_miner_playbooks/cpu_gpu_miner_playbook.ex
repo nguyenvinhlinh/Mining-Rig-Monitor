@@ -43,6 +43,7 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     command_argument = if playbook.command_argument == nil, do: "", else: playbook.command_argument
 
     worker_name = Keyword.get(args, :worker_name, "worker")
+    |> String.replace(~r([^a-zA-Z0-9]),"_")
 
     cpu_wallet_address =   if playbook.cpu_wallet_address_id,   do: playbook.cpu_wallet_address.address ,  else: ""
     gpu_wallet_address_1 = if playbook.gpu_wallet_address_1_id, do: playbook.gpu_wallet_address_1.address, else: ""

@@ -23,13 +23,14 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
     cpu_gpu_miner = CpuGpuMiners.get_cpu_gpu_miner!(cpu_gpu_miner_playbook.cpu_gpu_miner_id)
 
     worker_name = cpu_gpu_miner.name
-    |> String.replace(~r([^a-zA-Z0-9]),"")
+
+    command_argument_replaced = CpuGpuMinerPlaybook.get_command_argument_replaced(cpu_gpu_miner_playbook, [worker_name: worker_name])
 
     socket_mod = socket
     |> assign(:page_title, page_title(socket.assigns.live_action))
     |> assign(:cpu_gpu_miner, cpu_gpu_miner)
     |> assign(:cpu_gpu_miner_playbook, cpu_gpu_miner_playbook)
-    |> assign(:command_argument_replaced, CpuGpuMinerPlaybook.get_command_argument_replaced(cpu_gpu_miner_playbook, [worker_name: worker_name]))
+    |> assign(:command_argument_replaced, command_argument_replaced)
     {:noreply, socket_mod}
 
     end

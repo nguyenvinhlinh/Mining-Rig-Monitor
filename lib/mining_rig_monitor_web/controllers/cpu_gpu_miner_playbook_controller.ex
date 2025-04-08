@@ -1,29 +1,35 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookController do
   use MiningRigMonitorWeb, :controller
+  require Logger
   alias MiningRigMonitor.CpuGpuMinerPlaybooks
   alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
-
+  alias MiningRigMonitor.Repo
   action_fallback MiningRigMonitorWeb.FallbackController
 
   def get_playbook_list(conn, _params) do
     cpu_gpu_miner = conn.assigns.cpu_gpu_miner
+    Logger.warning("[CpuGpuMinerPlaybookController] Preload cpu_gpu_miner_playbook_list's addresses will be overload. Should be improved!")
     playbook_list = CpuGpuMinerPlaybooks.list_cpu_gpu_miner_playbooks_by_cpu_gpu_miner_id(cpu_gpu_miner.id)
+    |> Repo.preload([:cpu_wallet_address, :gpu_wallet_address_1, :gpu_wallet_address_2,
+                   :cpu_pool_address, :gpu_pool_address_1, :gpu_pool_address_2])
 
-    data = Enum.map(playbook_list, fn(e) ->
-      module = CpuGpuMinerPlaybook.get_software_module_by_name_and_version(e.software_name, e.software_version)
+    worker_name = cpu_gpu_miner.name
+    data = Enum.map(playbook_list, fn(playbook) ->
+      module = CpuGpuMinerPlaybook.get_software_module_by_name_and_version(playbook.software_name, playbook.software_version)
+      command_argument_replaced = CpuGpuMinerPlaybook.get_command_argument_replaced(playbook, [worker_name: worker_name])
 
       %{
-        id: e.id,
-        software_name: e.software_name,
-        software_version: e.software_version,
-        command_argument: e.command_argument,
+        id: playbook.id,
+        software_name: playbook.software_name,
+        software_version: playbook.software_version,
+        command_argument: command_argument_replaced,
         module: module,
-        coin_name_1: e.coin_name_1,
-        algorithm_1: e.algorithm_1,
-        coin_name_2: e.coin_name_2,
-        algorithm_2: e.algorithm_2,
-        inserted_at: e.inserted_at |> NaiveDateTime.to_iso8601(:extended),
-        updated_at:  e.updated_at  |> NaiveDateTime.to_iso8601(:extended)
+        coin_name_1: playbook.coin_name_1,
+        algorithm_1: playbook.algorithm_1,
+        coin_name_2: playbook.coin_name_2,
+        algorithm_2: playbook.algorithm_2,
+        inserted_at: playbook.inserted_at |> NaiveDateTime.to_iso8601(:extended),
+        updated_at:  playbook.updated_at  |> NaiveDateTime.to_iso8601(:extended)
       }
     end)
     json(conn, data)
