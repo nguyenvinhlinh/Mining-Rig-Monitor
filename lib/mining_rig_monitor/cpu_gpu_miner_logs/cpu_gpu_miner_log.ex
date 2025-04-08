@@ -238,6 +238,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     end)
   end
 
+  def sum_total_power(nil), do: 0
   def sum_total_power(%__MODULE__{}=cpu_gpu_miner_log) do
     field_list =
       [:cpu_power, :gpu_1_power, :gpu_2_power, :gpu_3_power, :gpu_4_power,

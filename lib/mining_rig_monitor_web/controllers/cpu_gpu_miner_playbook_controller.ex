@@ -40,10 +40,14 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookController do
         command_argument: command_argument_replaced,
         module: module,
 
-        coin_name_1: playbook.coin_name_1,
-        algorithm_1: playbook.algorithm_1,
-        coin_name_2: playbook.coin_name_2,
-        algorithm_2: playbook.algorithm_2,
+        cpu_coin_name: playbook.cpu_coin_name,
+        cpu_algorithm: playbook.cpu_algorithm,
+
+        gpu_coin_name_1: playbook.gpu_coin_name_1,
+        gpu_algorithm_1: playbook.gpu_algorithm_1,
+
+        gpu_coin_name_2: playbook.gpu_coin_name_2,
+        gpu_algorithm_2: playbook.gpu_algorithm_2,
 
         cpu_wallet_address: cpu_wallet_address,
         gpu_wallet_address_1: gpu_wallet_address_1,

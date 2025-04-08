@@ -9,10 +9,14 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     field :software_name, :string
     field :software_version, :string
     field :command_argument, :string
-    field :coin_name_1, :string
-    field :coin_name_2, :string
-    field :algorithm_1, :string
-    field :algorithm_2, :string
+
+    field :cpu_coin_name, :string
+    field :gpu_coin_name_1, :string
+    field :gpu_coin_name_2, :string
+
+    field :cpu_algorithm,   :string
+    field :gpu_algorithm_1, :string
+    field :gpu_algorithm_2, :string
 
     belongs_to(:cpu_wallet_address,   Address, foreign_key: :cpu_wallet_address_id)
     belongs_to(:gpu_wallet_address_1, Address, foreign_key: :gpu_wallet_address_1_id)
@@ -28,10 +32,11 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
   @doc false
   def changeset(cpu_gpu_miner_playbook, attrs) do
     field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
-                  :command_argument, :coin_name_1, :algorithm_1,
-                  :coin_name_2, :algorithm_2]
+                  :command_argument,
+                  :cpu_coin_name, :gpu_coin_name_1, :gpu_coin_name_2,
+                  :cpu_algorithm, :gpu_algorithm_1, :gpu_algorithm_2]
     required_field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
-                  :command_argument, :coin_name_1, :algorithm_1]
+                           :command_argument]
 
     cpu_gpu_miner_playbook
     |> cast(attrs, field_list)
