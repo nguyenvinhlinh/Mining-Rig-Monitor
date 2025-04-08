@@ -13,10 +13,9 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookController do
     |> Repo.preload([:cpu_wallet_address, :gpu_wallet_address_1, :gpu_wallet_address_2,
                    :cpu_pool_address, :gpu_pool_address_1, :gpu_pool_address_2])
 
-    worker_name = cpu_gpu_miner.name
     data = Enum.map(playbook_list, fn(playbook) ->
       module = CpuGpuMinerPlaybook.get_software_module_by_name_and_version(playbook.software_name, playbook.software_version)
-      command_argument_replaced = CpuGpuMinerPlaybook.get_command_argument_replaced(playbook, [worker_name: worker_name])
+      command_argument_replaced = CpuGpuMinerPlaybook.get_command_argument_replaced(playbook, [worker_name: cpu_gpu_miner.name])
 
       address_col_list = [
         :cpu_wallet_address, :gpu_wallet_address_1, :gpu_wallet_address_2,
