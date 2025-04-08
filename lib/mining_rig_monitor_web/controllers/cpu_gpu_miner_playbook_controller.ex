@@ -18,16 +18,42 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookController do
       module = CpuGpuMinerPlaybook.get_software_module_by_name_and_version(playbook.software_name, playbook.software_version)
       command_argument_replaced = CpuGpuMinerPlaybook.get_command_argument_replaced(playbook, [worker_name: worker_name])
 
+      address_col_list = [
+        :cpu_wallet_address, :gpu_wallet_address_1, :gpu_wallet_address_2,
+        :cpu_pool_address, :gpu_pool_address_1, :gpu_pool_address_2
+      ]
+
+      [cpu_wallet_address, gpu_wallet_address_1, gpu_wallet_address_2,
+       cpu_pool_address, gpu_pool_address_1, gpu_pool_address_2] =
+        Enum.map(address_col_list, fn(attr) ->
+          if Map.get(playbook, attr) == nil do
+            nil
+          else
+            Map.get(playbook, attr)
+            |> Map.get(:address)
+          end
+        end)
+
       %{
         id: playbook.id,
         software_name: playbook.software_name,
         software_version: playbook.software_version,
         command_argument: command_argument_replaced,
         module: module,
+
         coin_name_1: playbook.coin_name_1,
         algorithm_1: playbook.algorithm_1,
         coin_name_2: playbook.coin_name_2,
         algorithm_2: playbook.algorithm_2,
+
+        cpu_wallet_address: cpu_wallet_address,
+        gpu_wallet_address_1: gpu_wallet_address_1,
+        gpu_wallet_address_2: gpu_wallet_address_2,
+
+        cpu_pool_address: cpu_pool_address,
+        gpu_pool_address_1: gpu_pool_address_1,
+        gpu_pool_address_2: gpu_pool_address_2,
+
         inserted_at: playbook.inserted_at |> NaiveDateTime.to_iso8601(:extended),
         updated_at:  playbook.updated_at  |> NaiveDateTime.to_iso8601(:extended)
       }
