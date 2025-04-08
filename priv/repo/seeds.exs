@@ -120,7 +120,7 @@ kaspa_address = %Address{
 monero_address = %Address{
   name: "Monero",
   type: "wallet",
-  address: "4AUzXvUpuuRCh3PqMhBmUyfP3TFPhz5cL1iDbgThY6rnUv9vtbPACW2TMJZ8ArprwheeBXEc9rYh62m6vZ8nLW7a8t9iBDn"
+  address: "84CHRDdXzTYLPSBHpnT5iTEFzc5CQuKk43XjLHZ7bdPm6Yw1ZZrbLDJ1M6zhyq5pECdKyDS6xxnUaPczpKXfNd3LJ2bBVeY"
 }
 |> Repo.insert!
 
