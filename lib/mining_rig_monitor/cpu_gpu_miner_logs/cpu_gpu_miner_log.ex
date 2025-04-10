@@ -199,8 +199,8 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
        :gpu_5_core_temp, :gpu_6_core_temp, :gpu_7_core_temp, :gpu_8_core_temp]
 
     Enum.reduce(field_list, 0, fn(field, acc) ->
-      value = Map.get(cpu_gpu_miner_log, field, 0)
-      if value > acc, do: value, else: acc
+      value = Map.get(cpu_gpu_miner_log, field)
+      if value != nil && value > acc, do: value, else: acc
     end)
   end
 
@@ -210,8 +210,8 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
        :gpu_5_mem_temp, :gpu_6_mem_temp, :gpu_7_mem_temp, :gpu_8_mem_temp]
 
     Enum.reduce(field_list, 0, fn(field, acc) ->
-      value = Map.get(cpu_gpu_miner_log, field, 0)
-      if value > acc, do: value, else: acc
+      value = Map.get(cpu_gpu_miner_log, field)
+      if value != nil && value > acc, do: value, else: acc
     end)
   end
 
@@ -222,7 +222,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
 
     Enum.reduce(field_list, 0, fn(field, acc) ->
       value = Map.get(cpu_gpu_miner_log, field, 0)
-      if value > acc,  do: value, else: acc
+      if value != nil && value > acc,  do: value, else: acc
     end)
   end
 
