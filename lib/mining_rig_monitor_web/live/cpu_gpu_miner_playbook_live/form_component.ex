@@ -9,10 +9,25 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent do
     software_name_option_list = CpuGpuMinerPlaybook.get_software_name_list()
     software_version_option_list = CpuGpuMinerPlaybook.get_software_version_list_by_name("XMRig")
 
+    wallet_address_option_list = MiningRigMonitor.Addresses.list_addresses_by_type("wallet")
+    |> Enum.map(fn(e) ->
+      {e.name, e.id}
+    end)
+    wallet_address_option_list_mod = [{"----", ""}] ++ wallet_address_option_list
+
+
+    pool_address_option_list = MiningRigMonitor.Addresses.list_addresses_by_type("pool")
+    |> Enum.map(fn(e) ->
+      {e.name, e.id}
+    end)
+    pool_address_option_list_mod = [{"----", ""}] ++ pool_address_option_list
+
     socket_mod = socket
     |> assign(assigns)
     |> assign(:software_name_option_list,    software_name_option_list)
     |> assign(:software_version_option_list, software_version_option_list)
+    |> assign(:wallet_address_option_list,   wallet_address_option_list_mod)
+    |> assign(:pool_address_option_list,     pool_address_option_list_mod)
     |> assign_new(:form, fn ->
       to_form(CpuGpuMinerPlaybooks.change_cpu_gpu_miner_playbook(cpu_gpu_miner_playbook))
     end)
@@ -25,10 +40,24 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent do
     software_name_option_list = CpuGpuMinerPlaybook.get_software_name_list()
     software_version_option_list = CpuGpuMinerPlaybook.get_software_version_list_by_name(cpu_gpu_miner_playbook.software_name)
 
+    wallet_address_option_list = MiningRigMonitor.Addresses.list_addresses_by_type("wallet")
+    |> Enum.map(fn(e) ->
+      {e.name, e.id}
+    end)
+    wallet_address_option_list_mod = [{"----", nil}] ++ wallet_address_option_list
+
+    pool_address_option_list = MiningRigMonitor.Addresses.list_addresses_by_type("pool")
+    |> Enum.map(fn(e) ->
+      {e.name, e.id}
+    end)
+    pool_address_option_list_mod = [{"----", nil}] ++ pool_address_option_list
+
     socket_mod = socket
     |> assign(assigns)
     |> assign(:software_name_option_list,    software_name_option_list)
     |> assign(:software_version_option_list, software_version_option_list)
+    |> assign(:wallet_address_option_list,   wallet_address_option_list_mod)
+    |> assign(:pool_address_option_list,     pool_address_option_list_mod)
     |> assign_new(:form, fn ->
       to_form(CpuGpuMinerPlaybooks.change_cpu_gpu_miner_playbook(cpu_gpu_miner_playbook))
     end)
@@ -38,14 +67,8 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"cpu_gpu_miner_playbook" => cpu_gpu_miner_playbook_params}, socket) do
-
     params_software_name = Map.get(cpu_gpu_miner_playbook_params, "software_name")
     software_version_option_list = CpuGpuMinerPlaybook.get_software_version_list_by_name(params_software_name)
-    IO.inspect "DEBUG #{__ENV__.file} @#{__ENV__.line}"
-    IO.inspect :validate_function_call
-    IO.inspect cpu_gpu_miner_playbook_params
-    IO.inspect "END"
-
 
     changeset = CpuGpuMinerPlaybooks.change_cpu_gpu_miner_playbook(socket.assigns.cpu_gpu_miner_playbook, cpu_gpu_miner_playbook_params)
     form = to_form(changeset, action: :validate)
@@ -65,10 +88,11 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent do
       {:ok, cpu_gpu_miner_playbook} ->
         notify_parent({:saved, cpu_gpu_miner_playbook})
 
-        {:noreply,
-         socket
-         |> put_flash(:info, "Cpu gpu miner playbook updated successfully")
-         |> push_patch(to: socket.assigns.patch)}
+        socket_mod = socket
+        |> put_flash(:info, "CPU/GPU miner playbook updated successfully")
+        |> push_patch(to: socket.assigns.patch)
+
+        {:noreply, socket_mod}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}

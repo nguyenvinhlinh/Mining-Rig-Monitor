@@ -51,21 +51,12 @@
       {@cpu_gpu_miner_playbook.software_name} {@cpu_gpu_miner_playbook.software_version}
     </h1>
 
-
-    <!-- <.link patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks"} class="float-right"> -->
-    <!--   <.button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 -->
-    <!--     dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" -->
-    <!--     type="button"> -->
-    <!--     Playbooks -->
-    <!--   </.button> -->
-    <!-- </.link> -->
-
-    <!-- <.link patch={~p"/cpu_gpu_miners"} class="float-right"> -->
-    <!--   <.button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 -->
-    <!--     dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" -->
-    <!--     type="button"> -->
-    <!--     Configure -->
-    <!--   </.button> -->
-    <!-- </.link> -->
+    <.link patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/#{@cpu_gpu_miner_playbook}/show/edit"} class="float-right">
+      <.button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2
+        dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        type="button">
+        Edit Playbook
+      </.button>
+    </.link>
   </div>
 </div>
