@@ -46,9 +46,19 @@ defmodule MiningRigMonitorWeb.Router do
     live "/cpu_gpu_miners", CpuGpuMinerLive.Index, :index
     live "/cpu_gpu_miners/new", CpuGpuMinerLive.Index, :new
     live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Index, :edit
-
     live "/cpu_gpu_miners/:id", CpuGpuMinerLive.Show, :show
-    live "/cpu_gpu_miners/:id/show/edit", CpuGpuMinerLive.Show, :edit
+
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks", CpuGpuMinerPlaybookLive.Index, :index
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new", CpuGpuMinerPlaybookLive.Index, :new
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/edit", CpuGpuMinerPlaybookLive.Index, :edit
+
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id",          CpuGpuMinerPlaybookLive.Show, :show
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/show/edit", CpuGpuMinerPlaybookLive.Show, :edit
+
+    live "/addresses", AddressLive.Index, :index
+    live "/addresses/new", AddressLive.Index, :new
+    live "/addresses/:id/edit", AddressLive.Index, :edit
+
 
   end
 
@@ -63,8 +73,10 @@ defmodule MiningRigMonitorWeb.Router do
 
     scope "/cpu_gpu_miners" do
       pipe_through :api_cpu_gpu_miner
-      post "/specs", MiningRigMonitorWeb.CpuGpuMinerController, :update_cpu_gpu_miner_specs
-      post "/logs",  MiningRigMonitorWeb.CpuGpuMinerLogController, :create
+      post "/specs",    MiningRigMonitorWeb.CpuGpuMinerController, :update_cpu_gpu_miner_specs
+      post "/logs",     MiningRigMonitorWeb.CpuGpuMinerLogController, :create
+      get "/playbooks", MiningRigMonitorWeb.CpuGpuMinerPlaybookController, :get_playbook_list
+      get "/playbooks/:playbook_id/module", MiningRigMonitorWeb.CpuGpuMinerPlaybookController, :get_playbook_module_binary
     end
   end
 

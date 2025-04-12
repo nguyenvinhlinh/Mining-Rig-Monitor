@@ -1,0 +1,67 @@
+<div class="mx-1 p-1 mb-1
+  sm:mx-2 sm:mb-2 sm:p-3
+  md:mx-4 md:mb-4 md:p-6
+  bg-white border border-gray-200 rounded-lg shadow-sm
+  dark:border-gray-700 dark:bg-gray-800">
+  <.table
+    id="cpu_gpu_miner_playbook_list"
+    rows={@streams.cpu_gpu_miner_playbook_list}
+    row_click={fn {_id, playbook} -> JS.navigate(~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/#{playbook}") end}
+  >
+    <:col :let={{_id, playbook}} label="ID" class="hidden 2xl:table-cell">{playbook.id}</:col>
+    <:col :let={{_id, playbook}} label="Software Name/Version">
+      {playbook.software_name} {playbook.software_version}
+    </:col>
+
+    <:col :let={{_id, playbook}} label="Coin/Algorithm">
+      { if(playbook.cpu_coin_name,  do: "[CPU] #{playbook.cpu_coin_name}/#{playbook.cpu_algorithm}") }
+      <br :if={playbook.gpu_coin_name_1}/>
+      { if(playbook.gpu_coin_name_1,  do: "[GPU] #{playbook.gpu_coin_name_1}/#{playbook.gpu_algorithm_1}") }
+      <br :if={playbook.gpu_coin_name_2}/>
+      { if(playbook.gpu_coin_name_2,  do: "[GPU] #{playbook.gpu_coin_name_2}/#{playbook.gpu_algorithm_2}") }
+    </:col>
+
+    <:col :let={{_id, playbook}} label="Wallet Address">
+      { if(playbook.cpu_wallet_address,  do: "[CPU Wallet] #{playbook.cpu_wallet_address.name}") }
+      <br :if={playbook.gpu_wallet_address_1}/>
+      { if(playbook.gpu_wallet_address_1,  do: "[GPU Wallet 1] #{playbook.gpu_wallet_address_1.name}") }
+      <br :if={playbook.gpu_wallet_address_2}/>
+      { if(playbook.gpu_wallet_address_2,  do: "[GPU Wallet 2] #{playbook.gpu_wallet_address_2.name}") }
+    </:col>
+
+    <:col :let={{_id, playbook}} label="Pool Address">
+      { if(playbook.cpu_pool_address,  do: "[CPU Pool] #{playbook.cpu_pool_address.name}") }
+      <br :if={playbook.gpu_pool_address_1}/>
+      { if(playbook.gpu_pool_address_1,  do: "[GPU Pool 1] #{playbook.gpu_pool_address_1.name}") }
+      <br :if={playbook.gpu_pool_address_2}/>
+      { if(playbook.gpu_pool_address_2,  do: "[GPU Pool 2] #{playbook.gpu_pool_address_2.name}") }
+    </:col>
+
+
+
+
+    <:action :let={{_id, playbook}}>
+      <.link patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/#{playbook}/edit"}>
+        <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center
+          text-white rounded-lg bg-blue-700 hover:bg-blue-800
+          focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <.icon name="hero-pencil-square-solid" class="size-5" />
+          <span class="ml-1">Edit</span>
+        </button>
+      </.link>
+    </:action>
+
+    <:action :let={{id, playbook}}>
+      <.link
+        phx-click={JS.push("delete", value: %{playbook_id: playbook.id}) |> hide("##{id}")}
+        data-confirm="Are you sure?"
+      >
+        <button type="button"  class="mr-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white
+          bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+          <.icon name="hero-trash-solid" class="size-5" />
+          <span class="ml-1">Delete</span>
+        </button>
+      </.link>
+    </:action>
+  </.table>
+</div>

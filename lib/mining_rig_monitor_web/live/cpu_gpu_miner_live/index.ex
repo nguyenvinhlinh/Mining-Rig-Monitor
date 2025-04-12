@@ -235,7 +235,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
     max_gpu_fan =       CpuGpuMinerLog.find_max_gpu_fan_speed(cpu_gpu_miner_log)
 
     total_power = CpuGpuMinerLog.sum_total_power(cpu_gpu_miner_log)
-    uptime = MiningRigMonitor.Utility.beautify_uptime(cpu_gpu_miner_log.uptime)
 
     %{
       id: cpu_gpu_miner.id,
@@ -246,14 +245,14 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
       cpu_hashrate:     cpu_gpu_miner_log.cpu_hashrate,
       cpu_hashrate_uom: cpu_gpu_miner_log.cpu_hashrate_uom,
 
-      gpu_coin_name_1: cpu_gpu_miner_log.gpu_coin_name_1,
-      gpu_algorithm_1: cpu_gpu_miner_log.gpu_algorithm_1,
-      gpu_hashrate_1:  gpu_hashrate_1,
+      gpu_coin_name_1:    cpu_gpu_miner_log.gpu_coin_name_1,
+      gpu_algorithm_1:    cpu_gpu_miner_log.gpu_algorithm_1,
+      gpu_hashrate_1:     gpu_hashrate_1,
       gpu_hashrate_uom_1: cpu_gpu_miner_log.gpu_hashrate_uom_1,
 
-      gpu_coin_name_2: cpu_gpu_miner_log.gpu_coin_name_2,
-      gpu_algorithm_2: cpu_gpu_miner_log.gpu_algorithm_2,
-      gpu_hashrate_2:  gpu_hashrate_2,
+      gpu_coin_name_2:    cpu_gpu_miner_log.gpu_coin_name_2,
+      gpu_algorithm_2:    cpu_gpu_miner_log.gpu_algorithm_2,
+      gpu_hashrate_2:     gpu_hashrate_2,
       gpu_hashrate_uom_2: cpu_gpu_miner_log.gpu_hashrate_uom_2,
 
       cpu_temp: "#{cpu_gpu_miner_log.cpu_temp} ℃",
@@ -262,7 +261,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
       max_gpu_fan: max_gpu_fan,
       gpu_fan_uom: cpu_gpu_miner_log.gpu_fan_uom,
       total_power: "#{total_power} W",
-      uptime: uptime
+      uptime: cpu_gpu_miner_log.uptime
     }
   end
 end

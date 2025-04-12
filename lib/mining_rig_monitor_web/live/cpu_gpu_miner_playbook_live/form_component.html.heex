@@ -1,0 +1,195 @@
+<div>
+  <.header>
+    {@title}
+  </.header>
+
+  <.simple_form
+    for={@form}
+    id="cpu_gpu_miner_playbook-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save"
+  >
+    <div class="grid gap-4 grid-cols-2">
+      <div class="col-span-2 sm:col-span-1">
+        <.input field={@form[:software_name]} type="select" options={@software_name_option_list} label="Software Name" />
+      </div>
+
+      <div class="col-span-2 sm:col-span-1">
+        <.input field={@form[:software_version]} type="select" options={@software_version_option_list} label="Software Version" />
+      </div>
+    </div>
+
+    <.input field={@form[:command_argument]} type="textarea" label="Command Argument" />
+
+    <div class="inline-flex items-center justify-center w-full">
+      <hr class="w-64 h-1 my-8 bg-gray-200 border-0 rounded-sm dark:bg-gray-700" />
+      <div class="absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900">
+        <b>CPU Mining</b>
+      </div>
+    </div>
+
+    <div class="grid gap-2 grid-cols-8">
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:cpu_coin_name]} type="text" label="[CPU] Coin Name" />
+      </div>
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:cpu_algorithm]} type="text" label="[CPU] Algorithm" />
+      </div>
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:cpu_pool_address_id]} type="select" options={@pool_address_option_list} label="[CPU] Pool Address" />
+        <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+          $CPU_POOL
+        </span>
+      </div>
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:cpu_wallet_address_id]} type="select" options={@wallet_address_option_list} label="[CPU] Wallet Address" />
+        <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+          $CPU_WALLET
+        </span>
+      </div>
+    </div>
+
+    <div class="inline-flex items-center justify-center w-full">
+      <hr class="w-64 h-1 my-8 bg-gray-200 border-0 rounded-sm dark:bg-gray-700" />
+      <div class="absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900">
+        <b>GPU Mining [1]</b>
+      </div>
+    </div>
+
+
+    <div class="grid gap-2 grid-cols-8">
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:gpu_coin_name_1]} type="text" label="[GPU] Coin Name [1]" />
+      </div>
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:gpu_algorithm_1]} type="text" label="[GPU] Algorithm [1]" />
+      </div>
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:gpu_pool_address_1_id]} type="select" options={@pool_address_option_list} label="[GPU] Pool Address [1]" />
+        <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+          $GPU_POOL_1
+        </span>
+
+      </div>
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:gpu_wallet_address_1_id]} type="select" options={@wallet_address_option_list} label="[GPU] Wallet Address [1]" />
+        <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+          $GPU_WALLET_1
+        </span>
+      </div>
+    </div>
+
+    <div class="inline-flex items-center justify-center w-full">
+      <hr class="w-64 h-1 my-8 bg-gray-200 border-0 rounded-sm dark:bg-gray-700" />
+      <div class="absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900">
+        <b>GPU Mining [2]</b>
+      </div>
+    </div>
+
+    <div class="grid gap-2 grid-cols-8">
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:gpu_coin_name_2]} type="text" label="[GPU] Coin Name [2]" />
+      </div>
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:gpu_algorithm_2]} type="text" label="[GPU] Algorithm [2]" />
+      </div>
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:gpu_pool_address_2_id]} type="select" options={@pool_address_option_list} label="[GPU] Pool Address [2]" />
+        <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+          $GPU_POOL_2
+        </span>
+      </div>
+      <div class="col-span-4 xl:col-span-2">
+        <.input field={@form[:gpu_wallet_address_2_id]} type="select" options={@wallet_address_option_list}label="[GPU] Wallet Address [2]" />
+        <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+          $GPU_WALLET_2
+        </span>
+      </div>
+    </div>
+
+    <div class="inline-flex items-center justify-center w-full">
+      <hr class="w-64 h-1 my-8 bg-gray-200 border-0 rounded-sm dark:bg-gray-700" />
+      <div class="absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900">
+        <b>String Replacement Helpers</b>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12">
+      <div class="col-span-12
+        text-base font-medium text-gray-900 dark:text-white">
+        <ul class="list-disc px-5 sm:px-1 md:px-5">
+          <li>
+            <b>Worker Name:</b>
+            <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+              $WORKER_NAME
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-span-12 lg:col-span-6
+        text-base font-medium text-gray-900 dark:text-white">
+        <ul class="list-disc px-5 sm:px-1 md:px-5">
+          <li>
+            <b>CPU Wallet:</b>
+            <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+              $CPU_WALLET
+            </span>
+          </li>
+          <li>
+            <b>GPU Wallet [1]:</b>
+            <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+              $GPU_WALLET_1
+            </span>
+          </li>
+          <li>
+            <b>GPU Wallet [2]:</b>
+            <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+              $GPU_WALLET_2
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-span-12 lg:col-span-6
+        text-base font-medium text-gray-900 dark:text-white">
+        <ul class="list-disc px-5 sm:px-1 md:px-5">
+          <li>
+            <b>CPU Pool:</b>
+            <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+              $CPU_POOL
+            </span>
+          </li>
+          <li>
+            <b>GPU Pool [1]:</b>
+            <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+              $GPU_POOL_1
+            </span>
+          </li>
+          <li>
+            <b>GPU Pool [2]:</b>
+            <span class="bg-green-100 text-green-800  me-2 px-1 py-0 rounded-sm dark:bg-green-900 dark:text-green-300">
+              $GPU_POOL_2
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+    <:actions>
+      <.button phx-disable-with="Saving..."
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+          focus:ring-blue-300 font-medium rounded-lg text-sm px-5
+          py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700
+          focus:outline-none dark:focus:ring-blue-800" >
+        Save CPU/GPU Miner Playbook</.button>
+    </:actions>
+  </.simple_form>
+</div>

@@ -1,0 +1,15 @@
+<._index_top cpu_gpu_miner={@cpu_gpu_miner}/>
+
+<._index_playbook_table cpu_gpu_miner={@cpu_gpu_miner} streams={@streams}/>
+
+<.modal :if={@live_action in [:new, :edit]} id="cpu_gpu_miner_playbook-modal" show on_cancel={JS.patch(~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks")}>
+  <.live_component
+    module={MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent}
+    id={@cpu_gpu_miner_playbook.id || :new}
+    title={@page_title}
+    action={@live_action}
+    cpu_gpu_miner={@cpu_gpu_miner}
+    cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook}
+    patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks"}
+  />
+</.modal>

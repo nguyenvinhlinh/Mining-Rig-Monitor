@@ -1,6 +1,7 @@
 defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
   use Ecto.Schema
   import Ecto.Changeset
+  import MiningRigMonitor.ChangesetHelper
 
   alias MiningRigMonitor.CpuGpuMiners.CpuGpuMiner
   schema "cpu_gpu_miner_logs" do
@@ -12,7 +13,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     field :cpu_algorithm, :string
     field :cpu_coin_name, :string
     field :cpu_pool_address, :string
-    field :cpu_wallet, :string
+    field :cpu_wallet_address, :string
     field :cpu_power, :integer
 
     field :gpu_1_core_temp, :integer
@@ -117,7 +118,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
   def changeset(cpu_gpu_miner_log, attrs) do
     field_list =
       [:cpu_temp, :cpu_hashrate, :cpu_hashrate_uom, :cpu_algorithm, :cpu_coin_name,
-       :cpu_pool_address, :cpu_wallet, :cpu_power,
+       :cpu_pool_address, :cpu_wallet_address, :cpu_power,
        :gpu_1_core_temp, :gpu_2_core_temp, :gpu_3_core_temp, :gpu_4_core_temp,
        :gpu_5_core_temp, :gpu_6_core_temp, :gpu_7_core_temp, :gpu_8_core_temp,
 
@@ -163,9 +164,9 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     |> validate_inclusion(:cpu_hashrate_uom,   ["H/s", "KH/s", "MH/s", "GH/s", "TH/s", "PH/s"])
     |> validate_inclusion(:gpu_hashrate_uom_1, ["H/s", "KH/s", "MH/s", "GH/s", "TH/s", "PH/s"])
     |> validate_inclusion(:gpu_hashrate_uom_2, ["H/s", "KH/s", "MH/s", "GH/s", "TH/s", "PH/s"])
-    |> validate_field_list_exist_together([:cpu_hashrate, :cpu_hashrate_uom, :cpu_coin_name])
-    |> validate_field_list_exist_together([:gpu_hashrate_uom_1, :gpu_coin_name_1])
-    |> validate_field_list_exist_together([:gpu_hashrate_uom_2, :gpu_coin_name_2])
+    |> validate_field_list_exist_together([:cpu_coin_name, :cpu_algorithm, :cpu_hashrate, :cpu_hashrate_uom], error_key: :cpu_coin_name)
+    |> validate_field_list_exist_together([:gpu_coin_name_1, :gpu_algorithm_1, :gpu_hashrate_uom_1], error_key: :gpu_coin_name_1)
+    |> validate_field_list_exist_together([:gpu_coin_name_2, :gpu_algorithm_2, :gpu_hashrate_uom_2], error_key: :gpu_coin_name_2)
   end
 
   def sum_gpu_hashrate_1(%__MODULE__{}=cpu_gpu_miner_log) do
@@ -199,8 +200,8 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
        :gpu_5_core_temp, :gpu_6_core_temp, :gpu_7_core_temp, :gpu_8_core_temp]
 
     Enum.reduce(field_list, 0, fn(field, acc) ->
-      value = Map.get(cpu_gpu_miner_log, field, 0)
-      if value > acc, do: value, else: acc
+      value = Map.get(cpu_gpu_miner_log, field)
+      if value != nil && value > acc, do: value, else: acc
     end)
   end
 
@@ -210,8 +211,8 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
        :gpu_5_mem_temp, :gpu_6_mem_temp, :gpu_7_mem_temp, :gpu_8_mem_temp]
 
     Enum.reduce(field_list, 0, fn(field, acc) ->
-      value = Map.get(cpu_gpu_miner_log, field, 0)
-      if value > acc, do: value, else: acc
+      value = Map.get(cpu_gpu_miner_log, field)
+      if value != nil && value > acc, do: value, else: acc
     end)
   end
 
@@ -222,7 +223,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
 
     Enum.reduce(field_list, 0, fn(field, acc) ->
       value = Map.get(cpu_gpu_miner_log, field, 0)
-      if value > acc,  do: value, else: acc
+      if value != nil && value > acc,  do: value, else: acc
     end)
   end
 
@@ -238,6 +239,7 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
     end)
   end
 
+  def sum_total_power(nil), do: 0
   def sum_total_power(%__MODULE__{}=cpu_gpu_miner_log) do
     field_list =
       [:cpu_power, :gpu_1_power, :gpu_2_power, :gpu_3_power, :gpu_4_power,
@@ -281,27 +283,6 @@ defmodule MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog do
       gpu_hashrate_2 = sum_gpu_hashrate_2(cpu_gpu_miner_log)
       gpu_hashrate_uom_2 = cpu_gpu_miner_log.gpu_hashrate_uom_2
       {gpu_coin_name_2, gpu_hashrate_2, gpu_hashrate_uom_2}
-    end
-  end
-
-  def validate_field_list_exist_together(changeset, field_list) when Kernel.is_list(field_list) do
-    field_value_list = Enum.map(field_list, fn(field) ->
-      {_type_changes_data, value} = fetch_field(changeset, field)
-      value
-    end)
-
-    field_list_length = Kernel.length(field_list)
-
-    field_value_not_nil_list = Enum.filter(field_value_list, fn(e) ->
-      Kernel.is_nil(e) == false
-    end)
-
-    if Kernel.length(field_value_not_nil_list) == 0 or Kernel.length(field_value_not_nil_list) == field_list_length do
-      changeset
-    else
-      key = List.first(field_list)
-      changeset
-      |> add_error(key, "Must be exist as #{field_list |> Enum.join(",")}")
     end
   end
 end

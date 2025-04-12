@@ -60,13 +60,13 @@ defmodule MiningRigMonitorWeb.CoreComponents do
         tabindex="0"
       >
         <div class="flex min-h-full items-center justify-center">
-          <div class="w-full max-w-3xl p-4 sm:p-6 lg:py-8">
+          <div class="w-full max-w-4xl p-2 sm:p-6 lg:py-8">
             <.focus_wrap
               id={"#{@id}-container"}
               phx-window-keydown={JS.exec("data-cancel", to: "##{@id}")}
               phx-key="escape"
               phx-click-away={JS.exec("data-cancel", to: "##{@id}")}
-              class="shadow-zinc-700/10 ring-zinc-700/10 relative hidden rounded-2xl bg-white p-14 shadow-lg ring-1 transition"
+              class="shadow-zinc-700/10 ring-zinc-700/10 relative hidden rounded-2xl bg-white p-4 sm:p-14 shadow-lg ring-1 transition"
             >
               <div class="absolute top-6 right-5">
                 <button
@@ -335,7 +335,10 @@ defmodule MiningRigMonitorWeb.CoreComponents do
       <select
         id={@id}
         name={@name}
-        class="mt-2 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-zinc-400 focus:ring-0 sm:text-sm"
+        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+        focus:ring-primary-500 focus:border-primary-500
+        block w-full p-2.5
+        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
         multiple={@multiple}
         {@rest}
       >
@@ -355,7 +358,7 @@ defmodule MiningRigMonitorWeb.CoreComponents do
         id={@id}
         name={@name}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6 min-h-[6rem]",
+          "my-2  block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6 min-h-[6rem]",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
@@ -377,7 +380,7 @@ defmodule MiningRigMonitorWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500",
+          "mb-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500",
           @errors == [] && "",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
