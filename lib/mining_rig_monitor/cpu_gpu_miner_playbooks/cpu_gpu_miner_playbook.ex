@@ -1,6 +1,7 @@
 defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
   use Ecto.Schema
   import Ecto.Changeset
+  import MiningRigMonitor.ChangesetHelper
 
   alias MiningRigMonitor.Addresses.Address
 
@@ -44,6 +45,9 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     |> cast(attrs, field_list)
     |> validate_required(required_field_list)
     |> unique_constraint([:cpu_gpu_miner_id, :software_name], error_key: :software_name)
+    |> validate_field_list_exist_together([:cpu_coin_name, :cpu_algorithm],     error_key: :cpu_coin_name)
+    |> validate_field_list_exist_together([:gpu_coin_name_1, :gpu_algorithm_1], error_key: :gpu_coin_name_1)
+    |> validate_field_list_exist_together([:gpu_coin_name_2, :gpu_algorithm_2], error_key: :gpu_coin_name_2)
   end
 
   def get_command_argument_replaced(%__MODULE__{}=playbook, args \\ []) do

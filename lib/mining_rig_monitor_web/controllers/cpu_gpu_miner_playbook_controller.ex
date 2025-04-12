@@ -42,19 +42,17 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookController do
 
         cpu_coin_name: playbook.cpu_coin_name,
         cpu_algorithm: playbook.cpu_algorithm,
+        cpu_wallet_address: cpu_wallet_address,
+        cpu_pool_address: cpu_pool_address,
 
         gpu_coin_name_1: playbook.gpu_coin_name_1,
         gpu_algorithm_1: playbook.gpu_algorithm_1,
+        gpu_wallet_address_1: gpu_wallet_address_1,
+        gpu_pool_address_1: gpu_pool_address_1,
 
         gpu_coin_name_2: playbook.gpu_coin_name_2,
         gpu_algorithm_2: playbook.gpu_algorithm_2,
-
-        cpu_wallet_address: cpu_wallet_address,
-        gpu_wallet_address_1: gpu_wallet_address_1,
         gpu_wallet_address_2: gpu_wallet_address_2,
-
-        cpu_pool_address: cpu_pool_address,
-        gpu_pool_address_1: gpu_pool_address_1,
         gpu_pool_address_2: gpu_pool_address_2,
 
         inserted_at: playbook.inserted_at |> NaiveDateTime.to_iso8601(:extended),
