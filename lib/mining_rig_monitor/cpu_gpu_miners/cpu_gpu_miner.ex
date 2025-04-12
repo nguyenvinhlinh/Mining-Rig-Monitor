@@ -3,6 +3,7 @@ defmodule MiningRigMonitor.CpuGpuMiners.CpuGpuMiner do
   import Ecto.Changeset
 
   alias MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog
+  alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
 
   schema "cpu_gpu_miners" do
     field :name, :string
@@ -25,6 +26,7 @@ defmodule MiningRigMonitor.CpuGpuMiners.CpuGpuMiner do
 
     field :activated, :boolean, default: false
     has_many :cpu_gpu_miner_logs, CpuGpuMinerLog, [on_delete: :delete_all]
+    has_many :cpu_gpu_miner_playbooks, CpuGpuMinerPlaybook, [on_delete: :delete_all]
 
     timestamps(type: :utc_datetime)
   end
