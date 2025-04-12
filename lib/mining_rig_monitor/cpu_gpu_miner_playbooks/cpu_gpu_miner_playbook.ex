@@ -1,6 +1,7 @@
 defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
   use Ecto.Schema
   import Ecto.Changeset
+  import MiningRigMonitor.ChangesetHelper
 
   alias MiningRigMonitor.Addresses.Address
 
@@ -34,7 +35,9 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
                   :command_argument,
                   :cpu_coin_name, :gpu_coin_name_1, :gpu_coin_name_2,
-                  :cpu_algorithm, :gpu_algorithm_1, :gpu_algorithm_2]
+                  :cpu_algorithm, :gpu_algorithm_1, :gpu_algorithm_2,
+                  :cpu_wallet_address_id, :gpu_wallet_address_1_id, :gpu_wallet_address_2_id,
+                  :cpu_pool_address_id,   :gpu_pool_address_1_id,   :gpu_pool_address_2_id]
     required_field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
                            :command_argument]
 
@@ -42,21 +45,23 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     |> cast(attrs, field_list)
     |> validate_required(required_field_list)
     |> unique_constraint([:cpu_gpu_miner_id, :software_name], error_key: :software_name)
+    |> validate_field_list_exist_together([:cpu_coin_name, :cpu_algorithm],     error_key: :cpu_coin_name)
+    |> validate_field_list_exist_together([:gpu_coin_name_1, :gpu_algorithm_1], error_key: :gpu_coin_name_1)
+    |> validate_field_list_exist_together([:gpu_coin_name_2, :gpu_algorithm_2], error_key: :gpu_coin_name_2)
   end
 
   def get_command_argument_replaced(%__MODULE__{}=playbook, args \\ []) do
     command_argument = if playbook.command_argument == nil, do: "", else: playbook.command_argument
-
     worker_name = Keyword.get(args, :worker_name, "worker")
     |> String.replace(~r([^a-zA-Z0-9]),"-")
 
-    cpu_wallet_address =   if playbook.cpu_wallet_address_id,   do: playbook.cpu_wallet_address.address ,  else: ""
-    gpu_wallet_address_1 = if playbook.gpu_wallet_address_1_id, do: playbook.gpu_wallet_address_1.address, else: ""
-    gpu_wallet_address_2 = if playbook.gpu_wallet_address_2_id, do: playbook.gpu_wallet_address_2.address, else: ""
+    cpu_wallet_address =   if Kernel.is_nil(playbook.cpu_wallet_address_id),   do: "", else: playbook.cpu_wallet_address.address
+    gpu_wallet_address_1 = if Kernel.is_nil(playbook.gpu_wallet_address_1_id), do: "", else: playbook.gpu_wallet_address_1.address
+    gpu_wallet_address_2 = if Kernel.is_nil(playbook.gpu_wallet_address_2_id), do: "", else: playbook.gpu_wallet_address_2.address
 
-    cpu_pool_address =   if playbook.cpu_pool_address_id,   do: playbook.cpu_pool_address.address ,  else: ""
-    gpu_pool_address_1 = if playbook.gpu_pool_address_1_id, do: playbook.gpu_pool_address_1.address, else: ""
-    gpu_pool_address_2 = if playbook.gpu_pool_address_2_id, do: playbook.gpu_pool_address_2.address, else: ""
+    cpu_pool_address =   if Kernel.is_nil(playbook.cpu_pool_address_id),   do: "", else: playbook.cpu_pool_address.address
+    gpu_pool_address_1 = if Kernel.is_nil(playbook.gpu_pool_address_1_id), do: "", else: playbook.gpu_pool_address_1.address
+    gpu_pool_address_2 = if Kernel.is_nil(playbook.gpu_pool_address_2_id), do: "", else: playbook.gpu_pool_address_2.address
 
     replacement_list = [
       {"$WORKER_NAME",  worker_name},

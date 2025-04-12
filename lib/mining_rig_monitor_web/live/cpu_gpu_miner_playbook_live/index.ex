@@ -48,7 +48,10 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
 
   @impl true
   def handle_info({MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent, {:saved, cpu_gpu_miner_playbook}}, socket) do
-    {:noreply, stream_insert(socket, :cpu_gpu_miner_playbook_list, cpu_gpu_miner_playbook)}
+    cpu_gpu_miner_playbook_mod = cpu_gpu_miner_playbook
+    |> Repo.preload([:cpu_wallet_address, :gpu_wallet_address_1, :gpu_wallet_address_2,
+                   :cpu_pool_address, :gpu_pool_address_1, :gpu_pool_address_2])
+    {:noreply, stream_insert(socket, :cpu_gpu_miner_playbook_list, cpu_gpu_miner_playbook_mod)}
   end
 
   @impl true
