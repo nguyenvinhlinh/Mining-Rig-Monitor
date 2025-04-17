@@ -4,6 +4,7 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
   import MiningRigMonitor.ChangesetHelper
 
   alias MiningRigMonitor.Addresses.Address
+  alias MiningRigMonitor.Utility
 
   schema "cpu_gpu_miner_playbooks" do
     field :cpu_gpu_miner_id, :integer
@@ -53,6 +54,7 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
   def get_command_argument_replaced(%__MODULE__{}=playbook, args \\ []) do
     command_argument = if playbook.command_argument == nil, do: "", else: playbook.command_argument
     worker_name = Keyword.get(args, :worker_name, "worker")
+    |> Utility.remove_diacritical_marks()
     |> String.replace(~r([^a-zA-Z0-9]),"-")
 
     cpu_wallet_address =   if Kernel.is_nil(playbook.cpu_wallet_address_id),   do: "", else: playbook.cpu_wallet_address.address

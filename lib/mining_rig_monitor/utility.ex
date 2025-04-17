@@ -82,5 +82,19 @@ defmodule MiningRigMonitor.Utility do
     "#{e1} day(s), #{e2} hour(s), #{e3} minute(s)"
   end
 
+  def remove_diacritical_marks(string) when is_binary(string) do
+    # á à ã ạ ả: dấu sắc, huyền, ngã, nặng, hỏi
+    list_1 = [769, 768, 771, 803, 777]
+    # â, ă, ư
+    list_2 = [770, 774, 795]
+
+    string
+    |> String.normalize(:nfd)
+    |> String.to_charlist()
+    |> Enum.filter(fn(e) ->
+      Enum.member?(list_1 ++ list_2, e) == false
+    end)
+    |> Kernel.to_string()
+  end
 
 end
