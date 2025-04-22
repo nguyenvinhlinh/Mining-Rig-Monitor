@@ -1,8 +1,6 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerLogControllerTest do
   use MiningRigMonitorWeb.ConnCase
 
-  import MiningRigMonitor.CpuGpuMinerLogsFixtures
-
   alias MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog
 
   @create_attrs %{
