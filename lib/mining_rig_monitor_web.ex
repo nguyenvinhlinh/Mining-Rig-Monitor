@@ -51,8 +51,7 @@ defmodule MiningRigMonitorWeb do
 
   def live_view do
     quote do
-      use Phoenix.LiveView,
-        layout: {MiningRigMonitorWeb.Layouts, :app}
+      use Phoenix.LiveView
 
       unquote(html_helpers())
     end
