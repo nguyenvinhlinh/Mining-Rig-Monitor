@@ -32,14 +32,13 @@ defmodule MiningRigMonitor.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:bcrypt_elixir, "~> 3.0"},
-      {:phoenix, "~> 1.7.14"},
+      {:phoenix, "1.8.0-rc.1", override: true},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 1.0.0", override: true},
+      {:phoenix_live_view, "~> 1.0.9"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.6"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
@@ -60,7 +59,8 @@ defmodule MiningRigMonitor.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:uuid, "~> 1.1"},
-      {:httpoison, "~> 2.2"}
+      {:httpoison, "~> 2.2"},
+      {:bcrypt_elixir, "~> 3.0"}
     ]
   end
 
