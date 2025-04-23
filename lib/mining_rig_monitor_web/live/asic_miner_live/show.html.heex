@@ -1,12 +1,14 @@
-<._show_top asic_miner={@asic_miner}/>
+<Layouts.app flash={@flash} >
+  <._show_top asic_miner={@asic_miner}/>
 
-<._show_general_information asic_miner={@asic_miner} asic_miner_log={@asic_miner_log} />
+  <._show_general_information asic_miner={@asic_miner} asic_miner_log={@asic_miner_log} />
 
-<div class="grid grid-cols-8 gap-2">
-  <._show_hashrate_table asic_miner_log={@asic_miner_log} />
-  <._show_fan_speed_table asic_miner_log={@asic_miner_log} />
-</div>
+  <div class="grid grid-cols-8 gap-2">
+    <._show_hashrate_table asic_miner_log={@asic_miner_log} />
+    <._show_fan_speed_table asic_miner_log={@asic_miner_log} />
+  </div>
 
-<div class="grid grid-cols-8 gap-2">
-  <._show_pool_table asic_miner_log={@asic_miner_log} />
-</div>
+  <div class="grid grid-cols-8 gap-2">
+    <._show_pool_table asic_miner_log={@asic_miner_log} />
+  </div>
+</Layouts.app>
