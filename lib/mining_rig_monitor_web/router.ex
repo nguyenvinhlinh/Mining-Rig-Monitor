@@ -17,6 +17,10 @@ defmodule MiningRigMonitorWeb.Router do
     plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root_no_nav}
   end
 
+  pipeline :nexus_no_nav_layout do
+    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :nexus_root_no_nav}
+  end
+
   pipeline :api_asic_miner do
     plug :accepts, ["json"]
     plug MiningRigMonitorWeb.Plugs.ApiCodeAuthentication, :asic_miner
@@ -104,7 +108,7 @@ defmodule MiningRigMonitorWeb.Router do
 
     live_session :redirect_if_user_is_authenticated,
       on_mount: [{MiningRigMonitorWeb.UserAuth, :redirect_if_user_is_authenticated}],
-      root_layout: {MiningRigMonitorWeb.Layouts, :root_no_nav} do
+      root_layout: {MiningRigMonitorWeb.Layouts, :nexus_root_no_nav} do
       live "/users/register", UserRegistrationLive, :new
       live "/users/log_in", UserLoginLive, :new
     end
