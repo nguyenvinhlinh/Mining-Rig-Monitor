@@ -8,9 +8,6 @@ defmodule MiningRigMonitorWeb.UserLoginLive do
 
     socket_mod = socket
     |> assign(:form, form)
-    |> put_flash(:error, "Invalid email or password")
-
-    Logger.warning("[UserLoginLive] debuging mount with fake flash message")
 
     {:ok, socket_mod, temporary_assigns: [form: form]}
   end
