@@ -43,19 +43,19 @@
             <span class="iconify lucide--palette hidden size-4 group-data-[theme=contrast]/html:inline group-data-[theme=dim]/html:inline group-data-[theme=material]/html:inline group-data-[theme=material-dark]/html:inline"></span>
           </div>
           <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-36 space-y-0.5 p-1 shadow-sm">
-            <li>
+            <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "light"})}>
               <div data-theme-control="light" class="group-data-[theme=light]/html:bg-base-200 flex gap-2">
                 <span class="iconify lucide--sun size-4.5"></span>
                 <span class="font-medium">Light</span>
               </div>
             </li>
-            <li>
+            <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "dark"})}>
               <div data-theme-control="dark" class="group-data-[theme=dark]/html:bg-base-200 flex gap-2">
                 <span class="iconify lucide--moon size-4.5"></span>
                 <span class="font-medium">Dark</span>
               </div>
             </li>
-            <li>
+            <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "system"})}>
               <div data-theme-control="system" class="group-[:not([data-theme])]/html:bg-base-200 flex gap-2">
                 <span class="iconify lucide--monitor size-4.5"></span>
                 <span class="font-medium">System</span>
