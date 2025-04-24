@@ -84,6 +84,7 @@ defmodule MiningRigMonitorWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import MiningRigMonitorWeb.CoreComponents
+      import MiningRigMonitorWeb.NexusComponents
       import MiningRigMonitorWeb.Gettext
 
       # Shortcut for generating JS commands

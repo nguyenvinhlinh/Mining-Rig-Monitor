@@ -21,6 +21,15 @@ defmodule MiningRigMonitorWeb.Layouts do
     """
   end
 
+  def login(assigns) do
+    ~H"""
+    {render_slot(@inner_block)}
+    <.nx_flash_group flash={@flash} />
+    """
+  end
+
+
+
   @doc """
   Shows the flash group with standard titles and content.
 
