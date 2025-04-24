@@ -1,5 +1,4 @@
 <!--  Start: Layout - Topbar -->
-
 <div role="navigation" aria-label="Navbar" class="flex items-center justify-between px-3" id="layout-topbar">
   <div class="inline-flex items-center gap-3">
     <label class="btn btn-square btn-ghost btn-sm" aria-label="Leftmenu toggle" for="layout-sidebar-toggle-trigger">
@@ -93,19 +92,19 @@
         <span class="iconify lucide--palette hidden size-4 size-4.5 group-data-[theme=contrast]/html:inline group-data-[theme=dim]/html:inline group-data-[theme=material]/html:inline group-data-[theme=material-dark]/html:inline"></span>
       </div>
       <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 mt-2 w-36 space-y-0.5 p-1 shadow-sm">
-        <li>
+        <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "light"})}>
           <div class="group-data-[theme=light]/html:bg-base-200 flex gap-2" data-theme-control="light">
             <span class="iconify lucide--sun size-4.5"></span>
             <span class="font-medium">Light</span>
           </div>
         </li>
-        <li>
+        <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "dark"})}>
           <div class="group-data-[theme=dark]/html:bg-base-200 flex gap-2" data-theme-control="dark">
             <span class="iconify lucide--moon size-4.5"></span>
             <span class="font-medium">Dark</span>
           </div>
         </li>
-        <li>
+        <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "system"})}>
           <div class="group-[:not([data-theme])]/html:bg-base-200 flex gap-2" data-theme-control="system">
             <span class="iconify lucide--monitor size-4.5"></span>
             <span class="font-medium">System</span>
