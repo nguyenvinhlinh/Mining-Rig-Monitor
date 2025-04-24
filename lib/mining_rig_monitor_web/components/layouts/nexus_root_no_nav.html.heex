@@ -16,21 +16,6 @@
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}></script>
     <link rel="stylesheet" href={~p"/assets/nexus_app.css"} />
 
-    <!-- This script is copy from Nexus Dashboard Template -->
-    <script>
-     try {
-       console.warn("Nexus Dashboard script is running from copy-paste. Consider removing it.")
-       const localStorageItem = localStorage.getItem("__NEXUS_CONFIG_v2.0__")
-       if (localStorageItem) {
-         const theme = JSON.parse(localStorageItem).theme
-         if (theme !== "system") {
-           document.documentElement.setAttribute("data-theme", theme)
-         }
-       }
-     } catch (err) {
-       console.log(err)
-     }
-    </script>
     <!-- This script is copy from newly generated mix phx.new -->
     <script>
      (() => {
