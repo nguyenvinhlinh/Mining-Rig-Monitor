@@ -13,6 +13,16 @@ defmodule MiningRigMonitorWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :nexus_browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :nexus_root}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+  end
+
   pipeline :no_nav_layout do
     plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root_no_nav}
   end
@@ -36,14 +46,20 @@ defmodule MiningRigMonitorWeb.Router do
     pipe_through [:browser, :no_nav_layout]
 
     get "/", PageController, :home
+  end
 
+  scope "/", MiningRigMonitorWeb do
+    pipe_through [:nexus_browser, :require_authenticated_user]
+    live "/asic_miners", AsicMinerLive.Index, :index
+    live "/asic_miners/new", AsicMinerLive.Index, :new
+    live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
   end
 
   scope "/", MiningRigMonitorWeb do
     pipe_through [:browser, :require_authenticated_user]
-    live "/asic_miners", AsicMinerLive.Index, :index
-    live "/asic_miners/new", AsicMinerLive.Index, :new
-    live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
+    # live "/asic_miners", AsicMinerLive.Index, :index
+    # live "/asic_miners/new", AsicMinerLive.Index, :new
+    # live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
 
     live "/asic_miners/:id", AsicMinerLive.Show, :show
 
