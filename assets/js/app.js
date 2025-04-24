@@ -26,6 +26,7 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 import "../vendor/sidebar.js"
 import "../vendor/charts.js"
+import password_field from "../vendor/password-field.js"
 
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")

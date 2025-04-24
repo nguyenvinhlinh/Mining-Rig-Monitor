@@ -84,7 +84,7 @@
               <span class="iconify lucide--key-round text-base-content/80 size-5"></span>
               <input class="grow focus:outline-0" placeholder="Password" type="password" name={@form[:password].name} id={@form[:password].id} />
               <label class="swap btn btn-xs btn-ghost btn-circle text-base-content/60">
-                <input type="checkbox" aria-label="Show password" data-password="password" />
+                <input type="checkbox" aria-label="Show password" data-password={@form[:password].id} />
                 <span class="iconify lucide--eye swap-off size-4"></span>
                 <span class="iconify lucide--eye-off swap-on size-4"></span>
               </label>
