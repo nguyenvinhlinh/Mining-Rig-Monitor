@@ -6,11 +6,11 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
   alias MiningRigMonitor.Utility
 
   embed_templates "index_html/*"
+  on_mount MiningRigMonitorWeb.UserAuthLive
 
   @impl true
   def mount(_params, _session, socket) do
     asic_miner_not_activated_list = AsicMiners.list_asic_miners_by_activated_state(false)
-
     asic_miner_activated_list = AsicMiners.list_asic_miners_by_activated_state(true)
     |> Enum.map(fn(e) ->
       %{

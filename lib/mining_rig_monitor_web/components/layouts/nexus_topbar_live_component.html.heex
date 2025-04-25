@@ -1,4 +1,3 @@
-<!--  Start: Layout - Topbar -->
 <div role="navigation" aria-label="Navbar" class="flex items-center justify-between px-3" id="layout-topbar">
   <div class="inline-flex items-center gap-3">
     <label class="btn btn-square btn-ghost btn-sm" aria-label="Leftmenu toggle" for="layout-sidebar-toggle-trigger">
@@ -11,77 +10,7 @@
     <button class="btn btn-outline btn-sm btn-square btn-ghost border-base-300 text-base-content/70 flex size-9 md:hidden" aria-label="Search">
       <span class="iconify lucide--search size-4"></span>
     </button>
-    <dialog id="topbar-search-modal" class="modal p-0">
-      <div class="modal-box p-0">
-        <div class="input border-base-300 w-full rounded-none border-0 border-b focus:!outline-0 active:!outline-0">
-          <span class="iconify lucide--search text-base-content/60 size-4.5"></span>
-          <input class="grow" placeholder="Search" aria-label="Search" type="search">
-          <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost" aria-label="Close">
-              <span class="iconify lucide--x text-base-content/80 size-4"></span>
-            </button>
-          </form>
-        </div>
-        <ul class="menu w-full pt-0">
-          <li class="menu-title">Actions</li>
-          <li>
-            <div>
-              <span class="iconify lucide--folder-plus size-4.5"></span>
-              <p class="grow text-sm">Create a new folder</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <span class="iconify lucide--file-plus size-4.5"></span>
-              <p class="grow text-sm">Upload new document</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <span class="iconify lucide--user-plus size-4.5"></span>
-              <p class="grow text-sm">Invite to project</p>
-            </div>
-          </li>
-        </ul>
-        <hr class="border-base-300 h-px">
-        <ul class="menu w-full pt-0">
-          <li class="menu-title">Quick Links</li>
-          <li>
-            <div>
-              <span class="iconify lucide--folders size-4.5"></span>
-              <p class="grow text-sm">File Manager</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <span class="iconify lucide--user size-4.5"></span>
-              <p class="grow text-sm">Profile</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <span class="iconify lucide--layout-dashboard size-4.5"></span>
-              <p class="grow text-sm">Dashboard</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <span class="iconify lucide--help-circle size-4.5"></span>
-              <p class="grow text-sm">Support</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <span class="iconify lucide--keyboard size-4.5"></span>
-              <p class="grow text-sm">Keyboard Shortcuts</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <form method="dialog" class="modal-backdrop">
-        <button>close</button>
-      </form>
-    </dialog>
+
   </div>
   <div class="inline-flex items-center gap-1.5">
     <div class="dropdown dropdown-center">
@@ -112,9 +41,7 @@
         </li>
       </ul>
     </div>
-    <label for="layout-rightbar-drawer" class="btn btn-circle btn-ghost btn-sm drawer-button">
-      <span class="iconify lucide--settings-2 size-4.5"></span>
-    </label>
+
     <div class="dropdown dropdown-bottom sm:dropdown-end max-sm:dropdown-center">
       <div tabindex="0" role="button" class="btn btn-circle btn-ghost btn-sm" aria-label="Notifications">
         <span class="iconify lucide--bell size-4.5"></span>
@@ -203,11 +130,11 @@
         <div class="flex items-center gap-2">
           <div class="avatar">
             <div class="bg-base-200 mask mask-squircle w-8">
-              <img alt="Avatar" src="./images/avatars/1.png">
+              <img alt="Avatar" src={~p"/images/avatars/1.png"} />
             </div>
           </div>
           <div class="-space-y-0.5 text-start">
-            <p class="text-sm">Denish</p>
+            <p class="text-sm">{@current_user.email}</p>
             <p class="text-base-content/60 text-xs">Profile</p>
           </div>
         </div>
@@ -215,19 +142,13 @@
       <div class="dropdown-content bg-base-100 rounded-box mt-4 w-44 shadow" tabindex="0">
         <ul class="menu w-full p-2">
           <li>
-            <a href="/pages-settings.html">
+            <a href={~p"/users/settings"}>
               <span class="iconify lucide--user size-4"></span>
               <span>My Profile</span>
             </a>
           </li>
           <li>
-            <a href="/pages-settings.html">
-              <span class="iconify lucide--settings size-4"></span>
-              <span>Settings</span>
-            </a>
-          </li>
-          <li>
-            <a href="/pages-get-help.html">
+            <a href="http://mrm-docs.hexalink.xyz/">
               <span class="iconify lucide--help-circle size-4"></span>
               <span>Help</span>
             </a>
@@ -236,21 +157,14 @@
         <hr class="border-base-300">
         <ul class="menu w-full p-2">
           <li>
-            <div>
-              <span class="iconify lucide--arrow-left-right size-4"></span>
-              <span>Switch Account</span>
-            </div>
-          </li>
-          <li>
-            <a class="text-error hover:bg-error/10" href="/auth/login">
-              <span class="iconify lucide--log-out size-4"></span>
-              <span>Logout</span>
-            </a>
+            <.link href={~p"/users/log_out"} method="delete"
+              class="text-error hover:bg-error/10" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+              Log out
+            </.link>
           </li>
         </ul>
       </div>
     </div>
   </div>
 </div>
-
-<!--  End: Layout - Topbar -->
