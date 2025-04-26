@@ -1,5 +1,5 @@
 defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
 
   alias MiningRigMonitor.AsicMiners
   alias MiningRigMonitor.AsicMiners.AsicMiner
