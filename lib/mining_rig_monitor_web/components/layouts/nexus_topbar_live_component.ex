@@ -3,9 +3,6 @@ defmodule MiningRigMonitorWeb.Layouts.NexusTopbarLiveComponent do
 
   @impl true
   def mount(socket) do
-    IO.inspect "DEBUG #{__ENV__.file} @#{__ENV__.line}"
-    IO.inspect socket
-    IO.inspect "END"
     {:ok, socket}
   end
 end

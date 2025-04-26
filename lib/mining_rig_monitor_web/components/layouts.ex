@@ -30,8 +30,10 @@ defmodule MiningRigMonitorWeb.Layouts do
 
   def nexus_app(assigns) do
     ~H"""
+    <.nx_flash_group flash={@flash} />
     <.live_component module={MiningRigMonitorWeb.Layouts.NexusTopbarLiveComponent} id="nexus_topbar" current_user={@current_user}/>
     {render_slot(@inner_block)}
+
     """
   end
 

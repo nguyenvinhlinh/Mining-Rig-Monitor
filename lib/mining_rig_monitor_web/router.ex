@@ -51,7 +51,7 @@ defmodule MiningRigMonitorWeb.Router do
   scope "/", MiningRigMonitorWeb do
     pipe_through [:nexus_browser, :require_authenticated_user]
     live "/asic_miners", AsicMinerLive.Index, :index
-    live "/asic_miners/new", AsicMinerLive.Index, :new
+    live "/asic_miners/new", AsicMinerLive.New, :new
     live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
   end
 

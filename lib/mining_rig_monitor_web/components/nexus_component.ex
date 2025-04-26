@@ -147,4 +147,29 @@ defmodule MiningRigMonitorWeb.NexusComponents do
          "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"}
     )
   end
+
+
+  @doc """
+  nx_error/1 , receives error tuple {2 elemens} from FormField.errors.
+  It will do string replacement and return error string
+  """
+  def nx_error({msg, opts}) do
+    if count = opts[:count] do
+      String.replace(msg, "%{count}", "#{count}", [global: true])
+    else
+      msg
+    end
+  end
+
+  @doc """
+  input_class/1 receives %FormField{} params. And return <input>'s class name.
+  It's useful for form input error display!
+  """
+  def input_class(%Phoenix.HTML.FormField{}=form_field) do
+    if used_input?(form_field) && form_field.errors != [] do
+      "input w-full input-error"
+    else
+      "input w-full"
+    end
+  end
 end
