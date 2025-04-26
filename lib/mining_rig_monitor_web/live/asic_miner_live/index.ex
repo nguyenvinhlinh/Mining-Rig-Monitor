@@ -16,6 +16,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
       %{
         id: e.id,
         name: e.name,
+        model: e.model,
+        model_variant: e.model_variant,
         hashrate_5_min: "Sync...",
         hashrate_30_min: "Sync...",
         coin: "Sync...",
@@ -81,6 +83,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
         asic_miner_mod = %{
         id: asic_miner.id,
         name: asic_miner.name,
+        model: "Sync...",
+        model_variant: "Sync...",
         hashrate_5_min: "Sync...",
         hashrate_30_min: "Sync...",
         coin: "Sync...",
@@ -214,6 +218,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     %{
       id: asic_miner.id,
       name: asic_miner.name,
+      model: asic_miner.model,
+      model_variant: asic_miner.model_variant,
       hashrate_5_min: hashrate_5_min,
       hashrate_30_min: hashrate_30_min,
       coin: coin,

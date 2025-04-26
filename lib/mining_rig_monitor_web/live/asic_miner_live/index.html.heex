@@ -1,10 +1,17 @@
 <Layouts.nexus_app flash={@flash} current_user={@current_user}>
-  <._index_top />
+  <div id="layout-content">
+    <._index_top />
+    <._index_overall_figures aggregated_coin_hashrate_map={@aggregated_coin_hashrate_map}
+      aggregated_total_power={@aggregated_total_power}
+      aggregated_total_power_uom={@aggregated_total_power_uom}
+      aggregated_asic_miner_alive={@aggregated_asic_miner_alive} />
 
-  <._index_overall_figures aggregated_coin_hashrate_map={@aggregated_coin_hashrate_map}
-    aggregated_total_power={@aggregated_total_power}
-    aggregated_total_power_uom={@aggregated_total_power_uom}
-    aggregated_asic_miner_alive={@aggregated_asic_miner_alive} />
+    <._index_activated_asic_miner_table_nexus streams={@streams} />
+  </div>
+
+
+
+
 
   <._index_activated_asic_miner_table streams={@streams} />
 
