@@ -1,50 +1,105 @@
-<div class="mx-1 p-1 mb-1
-  sm:mx-2 sm:mb-2 sm:p-3
-  md:mx-4 md:mb-4 md:p-6
-  bg-white border border-gray-200 rounded-lg shadow-sm
-  dark:border-gray-700 dark:bg-gray-800">
-  <h3 class="mb-4 text-xl font-semibold dark:text-white">Activated ASIC Miners!</h3>
-
-  <.table
-    id="asic_miners_activated"
-    rows={@streams.asic_miner_activated_list}
-    row_click={fn {_id, asic_miner} -> JS.navigate(~p"/asic_miners/#{asic_miner.id}") end}
-  >
-    <:col :let={{_id, asic_miner}} label="ID" class="hidden md:table-cell">{asic_miner.id}</:col>
-    <:col :let={{_id, asic_miner}} label="Name">{asic_miner.name}</:col>
-    <:col :let={{_id, asic_miner}} label="Coin">{asic_miner.coin}</:col>
-    <:col :let={{_id, asic_miner}} label="Hashrate 5m | 30m">
-      {asic_miner.hashrate_5_min} | {asic_miner.hashrate_30_min}
-    </:col>
-    <:col :let={{_id, asic_miner}} label="Max Temp." class="hidden md:table-cell">{asic_miner.max_hashboard_temp}</:col>
-    <:col :let={{_id, asic_miner}} label="Max Fan" class="hidden md:table-cell"> {asic_miner.max_fan}</:col>
-    <:col :let={{_id, asic_miner}} label="Power(Walt)" class="hidden md:table-cell"> {asic_miner.power}</:col>
-    <:col :let={{_id, asic_miner}} label="Uptime" class="hidden md:table-cell">{asic_miner.uptime}</:col>
-    <:action :let={{_id, asic_miner}}>
-      <div class="sr-only">
-        <.link navigate={~p"/asic_miners/#{asic_miner.id}"}>Show</.link>
+<div class="mt-6">
+  <div class="bg-base-100 card shadow">
+    <div class="card-body p-0">
+      <div class="flex items-center justify-between px-5 pt-5">
+        <div class="inline-flex items-center gap-3">
+          <b>Activated ASIC Miners</b>
+        </div>
+        <div class="inline-flex items-center gap-3">
+          <a aria-label="Create product link" class="btn btn-primary btn-sm max-sm:btn-square" href="./apps-ecommerce-products-create.html">
+            <span class="iconify lucide--plus size-4"></span>
+            <span class="hidden sm:inline">New ASIC Miners</span>
+          </a>
+        </div>
       </div>
-      <.link patch={~p"/asic_miners/#{asic_miner.id}/edit"}>
-        <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center
-          text-white rounded-lg bg-blue-700 hover:bg-blue-800
-          focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          <.icon name="hero-pencil-square-solid" class="size-5" />
-          <span class="ml-1">Edit</span>
-        </button>
+      <div class="mt-4 overflow-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Coin</th>
+              <th>Hashrate 5m / 30m</th>
+              <th>Max Temperature</th>
+              <th>Max Fan</th>
+              <th>Power(W)</th>
+              <th>Uptime</th>
+              <th>Action</th>
+            </tr>
+          </thead>
 
-      </.link>
-    </:action>
-    <:action :let={{id, asic_miner}}>
-      <.link
-        phx-click={JS.push("delete", value: %{id: asic_miner.id}) |> hide("##{id}")}
-        data-confirm="Are you sure?"
-      >
-        <button type="button"  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white
-          bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-          <.icon name="hero-trash-solid" class="size-5" />
-          <span class="ml-1">Delete</span>
-        </button>
-      </.link>
-    </:action>
-  </.table>
+          <tbody id="asic_miner_activated" phx-update="stream" >
+            <tr :for={ {tr_id, asic_miner} <- @streams.asic_miner_activated_list}  id={tr_id} class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+              <td>{asic_miner.id}</td>
+              <td>
+                <div class="flex items-center space-x-3 truncate">
+                  <div>
+                    <p class="font-medium">
+                      {asic_miner.name}
+                    </p>
+                    <p class="text-base-content/60 text-xs">
+                      {asic_miner.model} {asic_miner.model_variant}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                {asic_miner.coin}
+              </td>
+              <td class="text-sm font-medium">
+                <div class="flex items-center space-x-3 truncate">
+                  <div>
+                    <p class="font-medium">
+                      {asic_miner.hashrate_5_min}
+                    </p>
+                    <p class="text-base-content/60 text-xs">
+                      {asic_miner.hashrate_30_min}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-thermometer-icon lucide-thermometer"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+                  {asic_miner.max_hashboard_temp}
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg>
+                  {asic_miner.max_fan}
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap-icon lucide-zap"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                  {asic_miner.power}
+                </div>
+              </td>
+
+              <td>
+                <div class="flex items-center gap-2">
+                  <div class={asic_miner.uptime_class}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    {asic_miner.uptime}
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div class="inline-flex">
+                  <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                    <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                  </a>
+                  <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                    <span class="iconify lucide--trash size-4"></span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

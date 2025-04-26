@@ -6,16 +6,9 @@
       aggregated_total_power_uom={@aggregated_total_power_uom}
       aggregated_asic_miner_alive={@aggregated_asic_miner_alive} />
 
-    <._index_activated_asic_miner_table_nexus streams={@streams} />
+    <._index_activated_asic_miner_table     streams={@streams} />
+    <._index_not_activated_asic_miner_table streams={@streams} />
   </div>
-
-
-
-
-
-  <._index_activated_asic_miner_table streams={@streams} />
-
-  <._index_not_activated_asic_miner_table streams={@streams} />
 
   <.modal :if={@live_action in [:new, :edit]} id="asic_miner-modal" show on_cancel={JS.patch(~p"/asic_miners")}>
     <.live_component

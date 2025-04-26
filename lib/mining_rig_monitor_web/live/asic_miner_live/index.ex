@@ -24,7 +24,9 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
         power: "Sync...",
         max_hashboard_temp: "Sync...",
         max_fan: "Sync...",
-        uptime: "Sync..." }
+        uptime: "Sync...",
+        uptime_class: "badge badge-info"
+  }
     end)
     aggregated_coin_hashrate_map = %{"Crypto" => {"Hashrate Sync...", nil} }
     aggregated_total_power = "Sync..."
@@ -207,13 +209,17 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     max_hashboard_temp_mod = if Kernel.is_nil(max_hashboard_temp), do: "----", else: "#{max_hashboard_temp} ℃"
 
 
-    uptime =
+    {uptime, uptime_class} =
     if Kernel.is_nil(Map.get(asic_miner_log, :uptime, nil)) do
-      "OFFLINE"
+      {"OFFLINE", "badge badge-error"}
     else
       [e1, e2, e3, _e4] = String.split(asic_miner_log.uptime, ":")
-      "#{e1} days, #{e2} hours, #{e3} minutes"
+      {"#{e1} days, #{e2} hours, #{e3} minutes", "badge badge-success"}
     end
+
+
+
+
 
     %{
       id: asic_miner.id,
@@ -226,7 +232,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
       power: power,
       max_hashboard_temp: max_hashboard_temp_mod,
       max_fan: max_fan_mod,
-      uptime: uptime
+      uptime: uptime,
+      uptime_class: uptime_class
       }
   end
 end
