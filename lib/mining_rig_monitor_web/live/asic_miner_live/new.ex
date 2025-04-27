@@ -27,10 +27,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.New do
     |> AsicMiner.changeset_new_by_commander(asic_miner_params)
     |> to_form([action: :validate])
 
-    IO.inspect "DEBUG #{__ENV__.file} @#{__ENV__.line}"
-    IO.inspect asic_miner_params
-    IO.inspect form[:name].errors
-    IO.inspect "END"
     socket_mod = socket
     |> assign(:form, form)
     {:noreply, socket_mod}
@@ -41,10 +37,12 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.New do
       {:ok, asic_miner} ->
         Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index_channel",
           {:asic_miner_index_channel, :create_or_update, asic_miner})
+        message = "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} created successfully!"
         Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
-          {:flash_index, :info, "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} created successfully!"})
+          {:flash_index, :info, message})
 
         socket_mod = socket
+        |> put_flash(:info, message)
         |> push_navigate(to: ~p"/asic_miners")
         {:noreply, socket_mod}
       {:error, %Ecto.Changeset{} = changeset} ->
