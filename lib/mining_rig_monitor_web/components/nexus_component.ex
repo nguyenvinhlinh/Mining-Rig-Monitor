@@ -72,7 +72,7 @@ defmodule MiningRigMonitorWeb.NexusComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> nx_hide("##{@id}")}
       role="alert"
       class={[
-             "fixed top-2 right-2 mr-2 w-80 sm:w-96 z-50 rounded-lg p-3 ring-1",
+             "fixed top-2 right-2 mr-2 w-80 sm:w-96 z-100 rounded-lg p-3 ring-1",
              @kind == :info &&  "alert alert-success alert-soft",
              @kind == :error && "alert alert-error alert-soft"
              ]}
