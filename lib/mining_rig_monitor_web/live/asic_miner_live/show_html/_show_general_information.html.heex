@@ -1,49 +1,44 @@
-<div class="mx-1 p-1 mb-1
-  sm:mx-2 sm:p-2 sm:mb-3
-  md:mx-4 md:p-4 md:mb-4
-  bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-  <h3 class="mb-4 text-xl font-semibold dark:text-white">General Information</h3>
-  <div class="grid grid-cols-8 gap-2">
-    <div class="col-span-8 xl:col-span-4
-      text-base font-medium text-gray-900 dark:text-white">
-      <ul class="list-disc px-5">
-        <li>
-          <b>ASIC Model:</b> <%= @asic_miner.model %>
-        </li>
-        <li>
-          <b>ASIC Variant:</b> <%= @asic_miner.model_variant %>
-        </li>
-        <li>
-          <b>Firmware version:</b> <%= @asic_miner.firmware_version %>
-        </li>
-        <li>
-          <b>Software version:</b> <%= @asic_miner.software_version %>
-        </li>
-        <li>
-          <b>API Code:</b> <%= @asic_miner.api_code  %>
-        </li>
-      </ul>
-    </div>
+<div class="mt-6 grid gap-6">
+  <div class="card card-border bg-base-100 shadow-sm">
+    <div class="card-body">
+      <h2 class="text-xl font-bold">General Information</h2>
+      <div class="mt-3 grid lg:grid-cols-2">
+        <ul class="list-disc px-5">
+          <li>
+            <b>ASIC Model:</b> {@asic_miner.model}
+          </li>
+          <li>
+            <b>ASIC Variant:</b> {@asic_miner.model_variant}
+          </li>
+          <li>
+            <b>Firmware version:</b> {@asic_miner.firmware_version}
+          </li>
+          <li>
+            <b>Software version:</b> {@asic_miner.software_version}
+          </li>
+        </ul>
 
-    <div class="col-span-8 md:col-span-4  lg:col-span-4
-      text-base font-medium text-gray-900 dark:text-white">
       <ul class="list-disc px-5">
-        <li>
-          <b>Uptime:</b> <%= @asic_miner_log.uptime %>
-        </li>
-        <li>
-          <b>Power:</b> <%=   Kernel.round(@asic_miner_log.power) %> Walt
-        </li>
-        <li>
-          <b>Coin:</b> <%= @asic_miner_log.coin_name %>
-        </li>
-        <li>
-          <b>LAN IP:</b> <%= @asic_miner_log.lan_ip %>
-        </li>
-        <li>
-          <b>WAN IP:</b> <%= @asic_miner_log.wan_ip %>
-        </li>
+          <li>
+            <b>API Code:</b> {@asic_miner.api_code}
+          </li>
+          <li>
+            <b>Uptime:</b> {@asic_miner_log.uptime}
+          </li>
+          <li>
+            <b>Power:</b> {Kernel.round(@asic_miner_log.power)} Walt
+          </li>
+          <li>
+            <b>Coin:</b> {@asic_miner_log.coin_name}
+          </li>
+          <li>
+            <b>LAN IP:</b> {@asic_miner_log.lan_ip}
+          </li>
+          <li>
+            <b>WAN IP:</b> {@asic_miner_log.wan_ip}
+          </li>
       </ul>
+      </div>
     </div>
   </div>
 </div>

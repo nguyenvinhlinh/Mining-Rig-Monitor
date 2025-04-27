@@ -53,6 +53,7 @@ defmodule MiningRigMonitorWeb.Router do
     live "/asic_miners",          AsicMinerLive.Index, :index
     live "/asic_miners/new",      AsicMinerLive.New, :new
     live "/asic_miners/:id/edit", AsicMinerLive.Edit, :edit
+    live "/asic_miners/:id",      AsicMinerLive.Show, :show
   end
 
   scope "/", MiningRigMonitorWeb do
@@ -60,8 +61,7 @@ defmodule MiningRigMonitorWeb.Router do
     # live "/asic_miners", AsicMinerLive.Index, :index
     # live "/asic_miners/new", AsicMinerLive.Index, :new
     # live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
-
-    live "/asic_miners/:id", AsicMinerLive.Show, :show
+    # live "/asic_miners/:id", AsicMinerLive.Show, :show
 
     live "/cpu_gpu_miners", CpuGpuMinerLive.Index, :index
     live "/cpu_gpu_miners/new", CpuGpuMinerLive.Index, :new

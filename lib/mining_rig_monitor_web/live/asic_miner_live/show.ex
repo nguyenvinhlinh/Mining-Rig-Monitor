@@ -1,11 +1,12 @@
 defmodule MiningRigMonitorWeb.AsicMinerLive.Show do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
 
   alias MiningRigMonitor.AsicMiners
   alias MiningRigMonitor.AsicMinerLogs.AsicMinerLog
   alias MiningRigMonitor.GenServer.AsicMinerOperationalIndex
   alias MiningRigMonitor.Utility
 
+  on_mount MiningRigMonitorWeb.UserAuthLive
   embed_templates "show_html/*"
   @impl true
   def mount(%{"id" => asic_miner_id}, _session, socket) do

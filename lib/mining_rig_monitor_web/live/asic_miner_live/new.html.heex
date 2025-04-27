@@ -19,7 +19,6 @@
         <div class="card bg-base-100 shadow">
           <div class="card-body">
             <div class="card-title">ASIC Miner Information</div>
-
             <.form for={@form} method="post" action={~p"/asic_miners/new"}
                    phx-change="validate"
                    phx-submit="save">
@@ -30,16 +29,13 @@
                   </label>
                   <input class={input_class(@form[:name])}
                          type="text" id={@form[:name].id} name={@form[:name].name} value={@form[:name].value} placeholder="ASIC Miner Name">
-
                   <div :if={used_input?(@form[:name])} >
                     <p :for={error <- @form[:name].errors} class="alert alert-error alert-soft">
                       {nx_error(error)}
                     </p>
                   </div>
-
                 </div>
               </fieldset>
-
               <div class="mt-6 flex justify-end gap-3">
                 <a class="btn btn-sm btn-ghost" href={~p"/asic_miners"} >
                   <span class="iconify lucide--x size-4"></span>
@@ -51,7 +47,6 @@
                 </button>
               </div>
             </.form>
-
           </div>
         </div>
       </div>
