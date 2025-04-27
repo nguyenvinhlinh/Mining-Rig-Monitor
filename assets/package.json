@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@iconify-json/lucide": "^1.2.39",
+    "@iconify/tailwind4": "^1.0.6"
+  }
+}

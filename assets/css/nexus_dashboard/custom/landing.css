@@ -1,0 +1,20 @@
+.grainy {
+    /* You can generate custom noise: https://www.noisetexturegenerator.com/ */
+    /* Using 100% noise opacity, 50% noise density, background color: #FFFFFF, disable transparent noise, 200x200 image */
+    background: url("/images/landing/footer-grainy.png") center center repeat rgba(255, 255, 255, 0);
+}
+
+.landing-gradient-underline {
+    @apply relative;
+    &:after {
+        content: "";
+        background-image: url("/images/landing/hero-text-underline.svg");
+        position: absolute;
+        top: 16px;
+        left: 4px;
+        transform: rotate(2deg);
+        width: 160%;
+        height: 160%;
+        background-repeat: no-repeat;
+    }
+}

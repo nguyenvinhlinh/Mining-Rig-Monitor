@@ -1,1 +1,22 @@
-@import "./nexus_dashboard_bundle/nexus_dashboard_bundle.css"
+/* @import "./nexus_dashboard_bundle/nexus_dashboard_bundle.css" */
+
+/* Root Styling */
+@import "./nexus_dashboard/typography.css";
+@import "./nexus_dashboard/tailwind.css";
+@import "./nexus_dashboard/daisyui.css";
+
+/* Custom Styling */
+@import "./nexus_dashboard/custom/animation.css";
+@import "./nexus_dashboard/custom/components.css";
+@import "./nexus_dashboard/custom/layout.css";
+
+/* Plugin Overriding */
+@import "./nexus_dashboard/custom/plugins.css";
+
+/* Pages */
+@import "./nexus_dashboard/custom/landing.css";
+
+/* Plugin: Iconify (Lucide icons) */
+@plugin "../node_modules/@iconify/tailwind4" {
+    prefixes: lucide;
+}
