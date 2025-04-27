@@ -35,9 +35,13 @@
               </td>
               <td>
                 <div class="inline-flex">
-                  <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
-                    <span class="iconify lucide--trash size-4"></span>
-                  </button>
+                  <.link
+                    phx-click={JS.push("delete", value: %{id: asic_miner.id}) |> hide("##{asic_miner.id}")}
+                    data-confirm="Are you sure?" >
+                    <button aria-label="Dummy delete product" class="btn btn-square btn-error btn-outline btn-sm border-transparent" >
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </.link>
                 </div>
               </td>
             </tr>
