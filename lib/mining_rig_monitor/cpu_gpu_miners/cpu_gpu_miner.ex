@@ -53,6 +53,7 @@ defmodule MiningRigMonitor.CpuGpuMiners.CpuGpuMiner do
     cpu_gpu_miner
     |> cast(attrs, [:name])
     |> validate_required([:name])
+    |> validate_length(:name, [min: 2])
   end
 
 
