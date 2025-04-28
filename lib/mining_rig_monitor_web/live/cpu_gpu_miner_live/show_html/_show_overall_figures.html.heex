@@ -1,14 +1,36 @@
 <div class="mt-6 grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
-  <div :for={ {coin_name, {hashrate, uom}} <- @aggregated_coin_hashrate_map }class="card bg-base-100 shadow">
+
+  <div :if={@cpu_gpu_miner_log.cpu_coin_name} class="card bg-base-100 shadow">
     <div class="card-body gap-2">
       <div class="flex items-start justify-between gap-2 text-sm">
         <div>
           <p class="text-base-content/80 font-medium">
-            {coin_name}
+            { @cpu_gpu_miner_log.cpu_coin_name }
           </p>
           <div class="mt-3 flex items-center gap-2">
             <p class="inline text-2xl font-semibold">
-              {hashrate} {uom}
+              { @cpu_gpu_miner_log.cpu_hashrate } { @cpu_gpu_miner_log.cpu_hashrate_uom }
+            </p>
+
+          </div>
+        </div>
+        <div class="bg-base-200 rounded-box flex items-center p-2">
+          <span class="iconify lucide--circle-dollar-sign size-5"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div :if={@cpu_gpu_miner_log.gpu_coin_name_1} class="card bg-base-100 shadow">
+    <div class="card-body gap-2">
+      <div class="flex items-start justify-between gap-2 text-sm">
+        <div>
+          <p class="text-base-content/80 font-medium">
+            { @cpu_gpu_miner_log.gpu_coin_name_1 }
+          </p>
+          <div class="mt-3 flex items-center gap-2">
+            <p class="inline text-2xl font-semibold">
+              { CpuGpuMinerLog.sum_gpu_hashrate_1(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
             </p>
           </div>
         </div>
@@ -18,6 +40,27 @@
       </div>
     </div>
   </div>
+
+  <div :if={@cpu_gpu_miner_log.gpu_coin_name_2} class="card bg-base-100 shadow">
+    <div class="card-body gap-2">
+      <div class="flex items-start justify-between gap-2 text-sm">
+        <div>
+          <p class="text-base-content/80 font-medium">
+            { @cpu_gpu_miner_log.gpu_coin_name_2 }
+          </p>
+          <div class="mt-3 flex items-center gap-2">
+            <p class="inline text-2xl font-semibold">
+              { CpuGpuMinerLog.sum_gpu_hashrate_2(@cpu_gpu_miner_log) } { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
+            </p>
+          </div>
+        </div>
+        <div class="bg-base-200 rounded-box flex items-center p-2">
+          <span class="iconify lucide--circle-dollar-sign size-5"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="card bg-base-100 shadow">
     <div class="card-body gap-2">
       <div class="flex items-start justify-between gap-2 text-sm">
@@ -27,31 +70,12 @@
           </p>
           <div class="mt-3 flex items-center gap-2">
             <p class="inline text-2xl font-semibold">
-              {@aggregated_total_power} {@aggregated_total_power_uom}
+              { CpuGpuMinerLog.sum_total_power(@cpu_gpu_miner_log) } W
             </p>
           </div>
         </div>
         <div class="bg-base-200 rounded-box flex items-center p-2">
           <span class="iconify lucide--zap size-5"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card bg-base-100 shadow">
-    <div class="card-body gap-2">
-      <div class="flex items-start justify-between gap-2 text-sm">
-        <div>
-          <p class="text-base-content/80 font-medium">
-            Alive CPU/GPU Miners
-          </p>
-          <div class="mt-3 flex items-center gap-2">
-            <p class="inline text-2xl font-semibold">
-              {@cpu_gpu_miner_alive}
-            </p>
-          </div>
-        </div>
-        <div class="bg-base-200 rounded-box flex items-center p-2">
-          <span class="iconify lucide--microchip size-5"></span>
         </div>
       </div>
     </div>

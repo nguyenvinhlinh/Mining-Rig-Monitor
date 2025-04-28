@@ -1,10 +1,11 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Show do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
 
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog
   alias MiningRigMonitor.GenServer.CpuGpuMinerOperationalIndex
   embed_templates "show_html/*"
+  on_mount MiningRigMonitorWeb.UserAuthLive
 
   @impl true
   def mount(_params, _session, socket) do

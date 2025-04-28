@@ -1,0 +1,39 @@
+<div class="mt-6 grid gap-6">
+  <div class="card card-border bg-base-100 shadow-sm">
+    <div class="card-body">
+      <h2 class="text-xl font-bold">CPU Mining</h2>
+      <div class="mt-3 grid grid-cols-2">
+        <ul class="list-disc px-5 col-span-2 sm:col-span-1 ">
+          <li>
+            <b>Temperature:</b> {if @cpu_gpu_miner_log.cpu_temp, do: "#{@cpu_gpu_miner_log.cpu_temp} ℃", else: "----" }
+          </li>
+          <li>
+            <b>Coin Name:</b> {@cpu_gpu_miner_log.cpu_coin_name}
+          </li>
+          <li>
+            <b>Algorithm:</b> {@cpu_gpu_miner_log.cpu_algorithm}
+          </li>
+        </ul>
+
+        <ul class="list-disc px-5 col-span-2 sm:col-span-1">
+
+          <li>
+            <b>Hashrate:</b> {@cpu_gpu_miner_log.cpu_hashrate} {@cpu_gpu_miner_log.cpu_hashrate_uom}
+          </li>
+          <li>
+            <b>Power:</b> {if @cpu_gpu_miner_log.cpu_power, do: "#{@cpu_gpu_miner_log.cpu_power}W", else: "----" }
+          </li>
+        </ul>
+
+        <ul class="list-disc px-5 col-span-2">
+          <li>
+            <b>Pool Address:</b> {@cpu_gpu_miner_log.cpu_pool_address}
+          </li>
+          <li class="break-all">
+            <b>Wallet Address:</b>  {@cpu_gpu_miner_log.cpu_wallet_address}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
