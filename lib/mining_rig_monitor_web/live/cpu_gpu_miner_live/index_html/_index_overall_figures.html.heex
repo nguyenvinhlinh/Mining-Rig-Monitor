@@ -1,32 +1,59 @@
-<div class="mx-1 p-1 mb-1
-  sm:mx-2 sm:mb-2 sm:p-0
-  md:mx-4 md:mb-4 md:p-0
-  grid grid-cols-12
-  sm:gap-2 md:gap-4" >
-  <div :for={ {coin_name, {hashrate, uom}} <- @aggregated_coin_hashrate_map }
-    class="col-span-6 md:col-span-4 lg:col-span-3
-      p-1 md:px-2 md:py-4
-      bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
-    <h3 class="text-center text-xl font-semibold dark:text-white">
-      {coin_name}: {hashrate} {uom}
-    </h3>
+<div class="grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
+  <div :for={ {coin_name, {hashrate, uom}} <- @aggregated_coin_hashrate_map }class="card bg-base-100 shadow">
+    <div class="card-body gap-2">
+      <div class="flex items-start justify-between gap-2 text-sm">
+        <div>
+          <p class="text-base-content/80 font-medium">
+            {coin_name}
+          </p>
+          <div class="mt-3 flex items-center gap-2">
+            <p class="inline text-2xl font-semibold">
+              {hashrate} {uom}
+            </p>
+          </div>
+        </div>
+        <div class="bg-base-200 rounded-box flex items-center p-2">
+          <span class="iconify lucide--circle-dollar-sign size-5"></span>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="col-span-6 md:col-span-4 lg:col-span-3
-    p-1 md:p-2 md:py-4
-    bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
-    <h3 class="text-center text-xl font-semibold dark:text-white">
-      <.icon name="hero-bolt-solid" class="hidden lg:inline-block size-6"/>
-      {@aggregated_total_power} {@aggregated_total_power_uom}
-    </h3>
+  <div class="card bg-base-100 shadow">
+    <div class="card-body gap-2">
+      <div class="flex items-start justify-between gap-2 text-sm">
+        <div>
+          <p class="text-base-content/80 font-medium">
+            Total Power Consumption
+          </p>
+          <div class="mt-3 flex items-center gap-2">
+            <p class="inline text-2xl font-semibold">
+              {@aggregated_total_power} {@aggregated_total_power_uom}
+            </p>
+          </div>
+        </div>
+        <div class="bg-base-200 rounded-box flex items-center p-2">
+          <span class="iconify lucide--zap size-5"></span>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div  class="col-span-6 md:col-span-4 lg:col-span-3
-    p-1 md:px-2 md:py-4
-    bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 xl:mb-0">
-    <h3 class="text-center text-xl font-semibold dark:text-white">
-      <.icon name="hero-cpu-chip-solid" class="size-8" />
-      {@cpu_gpu_miner_alive}
-    </h3>
+  <div class="card bg-base-100 shadow">
+    <div class="card-body gap-2">
+      <div class="flex items-start justify-between gap-2 text-sm">
+        <div>
+          <p class="text-base-content/80 font-medium">
+            Alive CPU/GPU Miners
+          </p>
+          <div class="mt-3 flex items-center gap-2">
+            <p class="inline text-2xl font-semibold">
+              {@cpu_gpu_miner_alive}
+            </p>
+          </div>
+        </div>
+        <div class="bg-base-200 rounded-box flex items-center p-2">
+          <span class="iconify lucide--microchip size-5"></span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
