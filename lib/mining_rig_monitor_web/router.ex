@@ -54,6 +54,11 @@ defmodule MiningRigMonitorWeb.Router do
     live "/asic_miners/new",      AsicMinerLive.New, :new
     live "/asic_miners/:id/edit", AsicMinerLive.Edit, :edit
     live "/asic_miners/:id",      AsicMinerLive.Show, :show
+
+    live "/cpu_gpu_miners", CpuGpuMinerLive.Index, :index
+    live "/cpu_gpu_miners/new", CpuGpuMinerLive.New, :new
+    live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Index, :edit
+    live "/cpu_gpu_miners/:id", CpuGpuMinerLive.Show, :show
   end
 
   scope "/", MiningRigMonitorWeb do
@@ -63,10 +68,10 @@ defmodule MiningRigMonitorWeb.Router do
     # live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
     # live "/asic_miners/:id", AsicMinerLive.Show, :show
 
-    live "/cpu_gpu_miners", CpuGpuMinerLive.Index, :index
-    live "/cpu_gpu_miners/new", CpuGpuMinerLive.Index, :new
-    live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Index, :edit
-    live "/cpu_gpu_miners/:id", CpuGpuMinerLive.Show, :show
+    # live "/cpu_gpu_miners", CpuGpuMinerLive.Index, :index
+    # live "/cpu_gpu_miners/new", CpuGpuMinerLive.Index, :new
+    # live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Index, :edit
+    # live "/cpu_gpu_miners/:id", CpuGpuMinerLive.Show, :show
 
     live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks", CpuGpuMinerPlaybookLive.Index, :index
     live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new", CpuGpuMinerPlaybookLive.Index, :new
