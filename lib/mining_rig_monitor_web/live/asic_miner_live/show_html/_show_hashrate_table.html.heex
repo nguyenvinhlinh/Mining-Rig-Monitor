@@ -14,81 +14,58 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="hover:bg-base-200">
-              <td><b>#1 H.Board</b></td>
+            <tr :for={ i <- 1..3} class="hover:bg-base-200">
               <td>
-                {Kernel.round(@asic_miner_log.hashboard_1_hashrate_5_min)} {@asic_miner_log.hashrate_uom}
-              </td>
-              <td>
-                {Kernel.round(@asic_miner_log.hashboard_1_hashrate_30_min)} {@asic_miner_log.hashrate_uom}
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--circuit-board size-4"></span>
+                  <b>#{i} HashBoard</b>
+                </div>
               </td>
               <td>
                 <div class="flex items-center gap-2">
-                  <span class="iconify lucide--thermometer size-4"></span>
-                  {Kernel.round(@asic_miner_log.hashboard_1_temp_1)} &#8451;
+                  <span class="iconify lucide--activity size-4"></span>
+                  { get_hashboard_hashrate_5_min(@asic_miner_log, i) } {@asic_miner_log.hashrate_uom}
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--activity size-4"></span>
+                  { get_hashboard_hashrate_5_min(@asic_miner_log, i) } {@asic_miner_log.hashrate_uom}
                 </div>
               </td>
               <td>
                 <div class="flex items-center gap-2">
                   <span class="iconify lucide--thermometer size-4"></span>
-                  {Kernel.round(@asic_miner_log.hashboard_1_temp_2)} &#8451;
-                </div>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-base-200">
-              <td><b>#2 H.Board</b></td>
-              <td>
-                {Kernel.round(@asic_miner_log.hashboard_2_hashrate_5_min)} {@asic_miner_log.hashrate_uom}
-              </td>
-              <td>
-                {Kernel.round(@asic_miner_log.hashboard_2_hashrate_30_min)} {@asic_miner_log.hashrate_uom}
-              </td>
-              <td>
-                <div class="flex items-center gap-2">
-                  <span class="iconify lucide--thermometer size-4"></span>
-                  {Kernel.round(@asic_miner_log.hashboard_2_temp_1)} &#8451;
+                  { get_hashboard_temp_1(@asic_miner_log, i) } ℃
                 </div>
               </td>
               <td>
                 <div class="flex items-center gap-2">
                   <span class="iconify lucide--thermometer size-4"></span>
-                  {Kernel.round(@asic_miner_log.hashboard_2_temp_2)} &#8451;
+                  { get_hashboard_temp_2(@asic_miner_log, i) } ℃
                 </div>
-
-              </td>
-            </tr>
-
-            <tr class="hover:bg-base-200">
-              <td><b>#3 H.Board</b></td>
-              <td>
-                {Kernel.round(@asic_miner_log.hashboard_3_hashrate_5_min)} {@asic_miner_log.hashrate_uom}
-              </td>
-              <td>
-                {Kernel.round(@asic_miner_log.hashboard_3_hashrate_30_min)} {@asic_miner_log.hashrate_uom}
-              </td>
-              <td>
-                <div class="flex items-center gap-2">
-                  <span class="iconify lucide--thermometer size-4"></span>
-                  {Kernel.round(@asic_miner_log.hashboard_3_temp_1)} &#8451;
-                </div>
-              </td>
-              <td>
-                <div class="flex items-center gap-2">
-                  <span class="iconify lucide--thermometer size-4"></span>
-                  {Kernel.round(@asic_miner_log.hashboard_3_temp_2)} &#8451;
-                </div>
-
               </td>
             </tr>
 
             <tr>
-              <td><b>Total:</b></td>
               <td>
-                <b><%= Kernel.round(@asic_miner_log.hashrate_5_min) %> <%= @asic_miner_log.hashrate_uom %></b>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--circuit-board size-4"></span>
+                  <b>Total:</b>
+                </div>
               </td>
               <td>
-                <b><%= Kernel.round(@asic_miner_log.hashrate_30_min) %> <%= @asic_miner_log.hashrate_uom %></b>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--activity size-4"></span>
+                  <b><%= Kernel.round(@asic_miner_log.hashrate_5_min) %> <%= @asic_miner_log.hashrate_uom %></b>
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--activity size-4"></span>
+                  <b><%= Kernel.round(@asic_miner_log.hashrate_30_min) %> <%= @asic_miner_log.hashrate_uom %></b>
+                </div>
+
               </td>
               <td></td>
               <td></td>

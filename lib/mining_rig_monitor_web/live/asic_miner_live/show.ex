@@ -103,4 +103,33 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Show do
     |> Map.put(:wan_ip, "----")
     |> Map.put(:coin_name, "----")
   end
+
+
+  defp get_hashboard_hashrate_5_min(asic_miner_log , hashboard_number) do
+    field_name = "hashboard_#{hashboard_number}_hashrate_5_min"
+    |> String.to_atom()
+    Map.get(asic_miner_log, field_name)
+    |> Kernel.round()
+  end
+
+  defp get_hashboard_hashrate_30_min(asic_miner_log , hashboard_number) do
+    field_name = "hashboard_#{hashboard_number}_hashrate_30_min"
+    |> String.to_atom()
+    Map.get(asic_miner_log, field_name)
+    |> Kernel.round()
+  end
+
+  defp get_hashboard_temp_1(asic_miner_log , hashboard_number) do
+    field_name = "hashboard_#{hashboard_number}_temp_1"
+    |> String.to_atom()
+    Map.get(asic_miner_log, field_name)
+    |> Kernel.round()
+  end
+
+  defp get_hashboard_temp_2(asic_miner_log , hashboard_number) do
+    field_name = "hashboard_#{hashboard_number}_temp_2"
+    |> String.to_atom()
+    Map.get(asic_miner_log, field_name)
+    |> Kernel.round()
+  end
 end
