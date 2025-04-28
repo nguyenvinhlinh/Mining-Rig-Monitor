@@ -1,10 +1,11 @@
 defmodule MiningRigMonitorWeb.AddressLive.Index do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
 
   alias MiningRigMonitor.Addresses
   alias MiningRigMonitor.Addresses.Address
 
   embed_templates "index_html/*"
+  on_mount MiningRigMonitorWeb.UserAuthLive
 
   @impl true
   def mount(_params, _session, socket) do
