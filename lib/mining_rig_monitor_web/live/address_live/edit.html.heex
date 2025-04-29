@@ -1,0 +1,85 @@
+<Layouts.nexus_app flash={@flash} current_user={@current_user}>
+  <div id="layout-content">
+    <!-- Start: address_live/edit top -->
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-medium">Edit {@address.type} address</h3>
+      <div class="breadcrumbs hidden p-0 text-sm sm:inline">
+        <ul>
+          <li><a href={~p"/"} >Minings Rigs</a></li>
+          <li><a href={~p"/addresses"} >Address</a></li>
+          <li><a>{@address.name}</a></li>
+          <li class="opacity-80">Edit</li>
+        </ul>
+      </div>
+    </div>
+    <!-- End: address_live/edit top -->
+
+    <!-- Start: address_live/edit form -->
+    <div class="mt-6">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">
+        <div class="card bg-base-100 shadow">
+          <div class="card-body">
+            <div class="card-title">Address Information</div>
+            <.form for={@form} method="post" action={~p"/asic_miners/new"}
+                   phx-change="validate"
+                   phx-submit="update" >
+              <fieldset class="fieldset mt-2 grid grid-cols-1 gap-4">
+                <div class="space-y-2">
+                  <label class="fieldset-label" for={@form[:name].id}>
+                    Name
+                  </label>
+                  <input class={input_class(@form[:name])}
+                    type="text" id={@form[:name].id} name={@form[:name].name} value={@form[:name].value} placeholder="Address Name" />
+                  <div :if={used_input?(@form[:name])} >
+                    <p :for={error <- @form[:name].errors} class="alert alert-error alert-soft">
+                      {nx_error(error)}
+                    </p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="fieldset mt-2 grid grid-cols-1 gap-4">
+                <div class="space-y-2">
+                  <label class="fieldset-label" for={@form[:address].id}>
+                    Address
+                  </label>
+                  <input class={input_class(@form[:address])}
+                    type="text" id={@form[:address].id} name={@form[:address].name} value={@form[:address].value} placeholder="Address" />
+                  <div :if={used_input?(@form[:address])} >
+                    <p :for={error <- @form[:address].errors} class="alert alert-error alert-soft">
+                      {nx_error(error)}
+                    </p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="fieldset mt-2 grid grid-cols-1 gap-4">
+                <div class="space-y-2">
+                  <label class="fieldset-label" for={@form[:type].id} >
+                    Type
+                  </label>
+                  <input class={input_class(@form[:type])}
+                    type="text" id={@form[:type].id} name={@form[:type].name} value={@form[:type].value} placeholder="Type" disabled/>
+                </div>
+              </fieldset>
+
+
+
+              <div class="mt-6 flex justify-end gap-3">
+                <a class="btn btn-sm btn-ghost" href={~p"/addresses"} >
+                  <span class="iconify lucide--x size-4"></span>
+                  Cancel
+                </a>
+                <button class="btn btn-sm btn-primary" type="submit">
+                  <span class="iconify lucide--check size-4"></span>
+                  Update
+                </button>
+              </div>
+            </.form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End: address_live/edit form -->
+  </div>
+</Layouts.nexus_app>

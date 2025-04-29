@@ -51,18 +51,19 @@ defmodule MiningRigMonitorWeb.Router do
   scope "/", MiningRigMonitorWeb do
     pipe_through [:nexus_browser, :require_authenticated_user]
     live "/asic_miners",          AsicMinerLive.Index, :index
-    live "/asic_miners/new",      AsicMinerLive.New, :new
-    live "/asic_miners/:id/edit", AsicMinerLive.Edit, :edit
-    live "/asic_miners/:id",      AsicMinerLive.Show, :show
+    live "/asic_miners/new",      AsicMinerLive.New,   :new
+    live "/asic_miners/:id/edit", AsicMinerLive.Edit,  :edit
+    live "/asic_miners/:id",      AsicMinerLive.Show,  :show
 
-    live "/cpu_gpu_miners", CpuGpuMinerLive.Index, :index
-    live "/cpu_gpu_miners/new", CpuGpuMinerLive.New, :new
-    live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Edit, :edit
-    live "/cpu_gpu_miners/:id", CpuGpuMinerLive.Show, :show
+    live "/cpu_gpu_miners",          CpuGpuMinerLive.Index, :index
+    live "/cpu_gpu_miners/new",      CpuGpuMinerLive.New,   :new
+    live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Edit,  :edit
+    live "/cpu_gpu_miners/:id",      CpuGpuMinerLive.Show,  :show
 
-    live "/addresses", AddressLive.Index, :index
-    live "/addresses/new", AddressLive.Index, :new
-    live "/addresses/:id/edit", AddressLive.Index, :edit
+    live "/addresses",            AddressLive.Index, :index
+    live "/addresses/new_wallet", AddressLive.New,   :new_wallet
+    live "/addresses/new_pool",   AddressLive.New,   :new_pool
+    live "/addresses/:id/edit",   AddressLive.Edit,  :edit
   end
 
   scope "/", MiningRigMonitorWeb do

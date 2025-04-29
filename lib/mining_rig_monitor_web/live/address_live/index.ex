@@ -11,7 +11,6 @@ defmodule MiningRigMonitorWeb.AddressLive.Index do
   def mount(_params, _session, socket) do
     wallet_address_list = Addresses.list_addresses_by_type(Address.type_wallet())
     pool_address_list =   Addresses.list_addresses_by_type(Address.type_pool())
-
     socket_mod = socket
     |> stream(:wallet_address_list, wallet_address_list)
     |> stream(:pool_address_list, pool_address_list)
@@ -21,25 +20,10 @@ defmodule MiningRigMonitorWeb.AddressLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
-  end
-
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Address")
-    |> assign(:address, Addresses.get_address!(id))
-  end
-
-  defp apply_action(socket, :new, _params) do
-    socket
-    |> assign(:page_title, "New Address")
-    |> assign(:address, %Address{})
-  end
-
-  defp apply_action(socket, :index, _params) do
-    socket
+    socket_mod = socket
     |> assign(:page_title, "Listing Addresses")
     |> assign(:address, nil)
+    {:noreply, socket_mod}
   end
 
   @impl true
