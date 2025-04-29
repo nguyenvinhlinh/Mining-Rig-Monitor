@@ -1,5 +1,5 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
   require Logger
 
   alias MiningRigMonitor.CpuGpuMinerPlaybooks
@@ -7,6 +7,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.Repo
 
+  on_mount MiningRigMonitorWeb.UserAuthLive
   embed_templates "show_html/*"
 
   @impl true

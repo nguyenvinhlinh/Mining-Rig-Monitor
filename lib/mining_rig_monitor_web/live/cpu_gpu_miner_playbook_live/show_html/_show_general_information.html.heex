@@ -1,54 +1,61 @@
-<div class="mx-1 p-1 mb-1
-  sm:mx-2 sm:p-2 sm:mb-3
-  md:mx-4 md:p-4 md:mb-4
-  bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-
-  <h3 class="mb-4 text-xl font-semibold dark:text-white">
-    General Information
-  </h3>
-
-  <div class="grid grid-cols-12">
-    <div class="col-span-12 sm:col-span-6
-      text-base font-medium text-gray-900 dark:text-white">
-      <ul class="list-disc px-5 sm:px-3 md:px-5">
-        <li>
-          <b>Software name:</b> {@cpu_gpu_miner_playbook.software_name}
-        </li>
-        <li>
-          <b>Software version:</b> {@cpu_gpu_miner_playbook.software_version}
-        </li>
-        <li>
-          <b>Inserted at:</b> {@cpu_gpu_miner_playbook.inserted_at |> NaiveDateTime.to_string() }
-        </li>
-        <li>
-          <b>Updated at:</b> {@cpu_gpu_miner_playbook.updated_at   |> NaiveDateTime.to_string() }
-        </li>
-      </ul>
-    </div>
-
-    <div class="col-span-12 sm:col-span-6
-      text-base font-medium text-gray-900 dark:text-white">
-      <ul class="list-disc px-5 sm:px-3 md:px-5">
-
-        <li>
-          <b>[CPU] Coin name:</b> {@cpu_gpu_miner_playbook.cpu_coin_name}
-        </li>
-        <li>
-          <b>[CPU] Algorithm:</b> {@cpu_gpu_miner_playbook.cpu_algorithm}
-        </li>
-        <li>
-          <b>[GPU] Coin name [1]:</b> {@cpu_gpu_miner_playbook.gpu_coin_name_1}
-        </li>
-        <li>
-          <b>[GPU] Algorithm [1]:</b> {@cpu_gpu_miner_playbook.gpu_algorithm_1}
-        </li>
-        <li>
-          <b>[GPU] Coin name [2]:</b> {@cpu_gpu_miner_playbook.gpu_coin_name_2}
-        </li>
-        <li>
-          <b>[GPU] Algorithm [2]:</b> {@cpu_gpu_miner_playbook.gpu_algorithm_2}
-        </li>
-      </ul>
+<div class="mt-6">
+  <div class="bg-base-100 card shadow">
+    <div class="card-body p-5">
+      <!-- Start: card-body title -->
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-3">
+          <b>General Information</b>
+        </div>
+        <div class="inline-flex items-center gap-3">
+          <a class="btn btn-primary btn-sm max-sm:btn-square" href={~p"/cpu_gpu_miners/#{@cpu_gpu_miner.id}/playbooks/#{@cpu_gpu_miner_playbook.id}/edit"}>
+            <span class="iconify lucide--pencil size-4"></span>
+            <span class="hidden sm:inline">Edit Playbook</span>
+          </a>
+        </div>
+      </div>
+      <!-- End: card-body title -->
+      <div class="mt-3 grid grid-cols-8">
+        <ul class="list-disc px-5 col-span-8 md:col-span-4 2xl:col-span-2">
+          <li>
+            <b>Software name:</b> {@cpu_gpu_miner_playbook.software_name}
+          </li>
+          <li>
+            <b>Software version:</b> {@cpu_gpu_miner_playbook.software_version}
+          </li>
+        </ul>
+        <ul class="list-disc px-5 col-span-8 md:col-span-4 2xl:col-span-2">
+          <li>
+            <b>[CPU] Coin name:</b> {@cpu_gpu_miner_playbook.cpu_coin_name}
+          </li>
+          <li>
+            <b>[CPU] Algorithm:</b> {@cpu_gpu_miner_playbook.cpu_algorithm}
+          </li>
+        </ul>
+        <ul class="list-disc px-5 col-span-8 md:col-span-4 2xl:col-span-2">
+          <li>
+            <b>[GPU] Coin name [1]:</b> {@cpu_gpu_miner_playbook.gpu_coin_name_1}
+          </li>
+          <li>
+            <b>[GPU] Algorithm [1]:</b> {@cpu_gpu_miner_playbook.gpu_algorithm_1}
+          </li>
+        </ul>
+        <ul class="list-disc px-5 col-span-8 md:col-span-4 2xl:col-span-2">
+          <li>
+            <b>[GPU] Coin name [2]:</b> {@cpu_gpu_miner_playbook.gpu_coin_name_2}
+          </li>
+          <li>
+            <b>[GPU] Algorithm [2]:</b> {@cpu_gpu_miner_playbook.gpu_algorithm_2}
+          </li>
+        </ul>
+        <ul class="list-disc px-5 col-span-8 md:col-span-4 2xl:col-span-2">
+          <li>
+            <b>Inserted at:</b> {@cpu_gpu_miner_playbook.inserted_at |> NaiveDateTime.to_string() }
+          </li>
+          <li>
+            <b>Updated at:</b> {@cpu_gpu_miner_playbook.updated_at   |> NaiveDateTime.to_string() }
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
