@@ -88,7 +88,7 @@
                     </button>
                   </.link>
                   <.link
-                    phx-click={JS.push("delete", value: %{id: playbook.id}) |> hide("##{playbook.id}")}
+                    phx-click={JS.push("delete", value: %{playbook_id: playbook.id}) |> hide("##{playbook.id}")}
                     data-confirm="Are you sure?" >
                     <button class="btn btn-square btn-error btn-outline btn-sm border-transparent" >
                       <span class="iconify lucide--trash size-4"></span>

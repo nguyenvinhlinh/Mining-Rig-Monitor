@@ -57,9 +57,13 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
 
   @impl true
   def handle_event("delete", %{"playbook_id" => id}, socket) do
-    cpu_gpu_miner_playbook = CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(id)
-    {:ok, _} = CpuGpuMinerPlaybooks.delete_cpu_gpu_miner_playbook(cpu_gpu_miner_playbook)
+    miner_playbook = CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(id)
+    {:ok, _} = CpuGpuMinerPlaybooks.delete_cpu_gpu_miner_playbook(miner_playbook)
 
-    {:noreply, stream_delete(socket, :cpu_gpu_miner_playbook_list, cpu_gpu_miner_playbook)}
+    socket_mod = socket
+    |> stream_delete(:cpu_gpu_miner_playbook_list, miner_playbook)
+    |> put_flash(:info, "Playbook #{miner_playbook.software_name} #{miner_playbook.software_version} deleted")
+
+    {:noreply, socket_mod}
   end
 end

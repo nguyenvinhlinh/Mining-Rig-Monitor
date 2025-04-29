@@ -22,30 +22,30 @@
     </div>
   </div>
   <div class="space-y-2">
-    <label class="fieldset-label" for={@form[:gpu_pool_address_id_2].id}>
+    <label class="fieldset-label" for={@form[:gpu_pool_address_2_id].id}>
       [GPU] Pool Address [2]
     </label>
-    <select class="select w-full" id={@form[:gpu_pool_address_id_2].id} name={@form[:gpu_pool_address_id_2].name} >
-      { Phoenix.HTML.Form.options_for_select(@pool_address_option_list, @form[:cpu_pool_address_id].value) }
+    <select class="select w-full" id={@form[:gpu_pool_address_2_id].id} name={@form[:gpu_pool_address_2_id].name} >
+      { Phoenix.HTML.Form.options_for_select(@pool_address_option_list, @form[:gpu_pool_address_2_id].value) }
     </select>
     <div class="badge badge-accent">$GPU_POOL_2</div>
-    <div :if={used_input?(@form[:gpu_pool_address_id_2])} >
-      <p :for={error <- @form[:gpu_pool_address_id_2].errors} class="alert alert-error alert-soft">
+    <div :if={used_input?(@form[:gpu_pool_address_2_id])} >
+      <p :for={error <- @form[:gpu_pool_address_2_id].errors} class="alert alert-error alert-soft">
         {nx_error(error)}
       </p>
     </div>
   </div>
 
   <div class="space-y-2">
-    <label class="fieldset-label" for={@form[:gpu_wallet_address_id_2].id}>
+    <label class="fieldset-label" for={@form[:gpu_wallet_address_2_id].id}>
       [GPU] Wallet Address [2]
     </label>
-    <select class="select w-full" id={@form[:gpu_wallet_address_id_2].id} name={@form[:gpu_wallet_address_id_2].name} >
-      { Phoenix.HTML.Form.options_for_select(@wallet_address_option_list, @form[:cpu_wallet_address_id].value) }
+    <select class="select w-full" id={@form[:gpu_wallet_address_2_id].id} name={@form[:gpu_wallet_address_2_id].name} >
+      { Phoenix.HTML.Form.options_for_select(@wallet_address_option_list, @form[:gpu_wallet_address_2_id].value) }
     </select>
     <div class="badge badge-accent">$GPU_WALLET_2</div>
-    <div :if={used_input?(@form[:gpu_wallet_address_id_2])} >
-      <p :for={error <- @form[:gpu_wallet_address_id_2].errors} class="alert alert-error alert-soft">
+    <div :if={used_input?(@form[:gpu_wallet_address_2_id])} >
+      <p :for={error <- @form[:gpu_wallet_address_2_id].errors} class="alert alert-error alert-soft">
         {nx_error(error)}
       </p>
     </div>

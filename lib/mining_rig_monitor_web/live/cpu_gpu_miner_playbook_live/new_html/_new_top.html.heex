@@ -5,7 +5,11 @@
       <li><a href={~p"/"} >Minings Rigs</a></li>
       <li><a href={~p"/cpu_gpu_miners"} >CPU/GPU Miners</a></li>
       <li><a href={~p"/cpu_gpu_miners/#{@cpu_gpu_miner.id}"}>{@cpu_gpu_miner.name}</a></li>
-      <li>Playbooks</li>
+      <li>
+        <a href={~p"/cpu_gpu_miners/#{@cpu_gpu_miner.id}/playbooks"}>
+          Playbooks
+        </a>
+      </li>
       <li class="opacity-80">New</li>
     </ul>
   </div>

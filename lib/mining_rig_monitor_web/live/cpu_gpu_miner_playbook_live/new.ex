@@ -41,10 +41,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.New do
     params_software_name = Map.get(playbook_params, "software_name")
     software_version_option_list = CpuGpuMinerPlaybook.get_software_version_list_by_name(params_software_name)
     changeset = CpuGpuMinerPlaybooks.change_cpu_gpu_miner_playbook(%CpuGpuMinerPlaybook{}, playbook_params)
-
-    IO.inspect "DEBUG #{__ENV__.file} @#{__ENV__.line}"
-    IO.inspect changeset
-    IO.inspect "END"
     form = to_form(changeset, action: :validate)
     socket_mod = socket
     |> assign(:form, form)
@@ -57,26 +53,17 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.New do
     playbook_params_mod = Map.put(playbook_params, "cpu_gpu_miner_id", cpu_gpu_miner.id)
 
     case CpuGpuMinerPlaybooks.create_cpu_gpu_miner_playbook(playbook_params_mod) do
-      {:ok, cpu_gpu_miner_playbook} ->
+      {:ok, miner_playbook} ->
         socket_mod = socket
-        |> put_flash(:info, "CPU/GPU miner playbook created successfully")
-        |> push_patch(to: ~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}/playbooks")
+        |> put_flash(:info, "Playbook #{miner_playbook.software_name} #{miner_playbook.software_version} created successfully")
+        |> push_navigate(to: ~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}/playbooks/#{miner_playbook.id}")
         {:noreply, socket_mod}
       {:error, %Ecto.Changeset{} = changeset} ->
-
-        IO.inspect "DEBUG #{__ENV__.file} @#{__ENV__.line}"
-        IO.inspect changeset
-        IO.inspect "END"
         form = to_form(changeset)
-        IO.inspect used_input?(form[:software_name])
-        IO.inspect form[:software_name].errors
         socket_mod = socket
         |> assign(:form, form)
         |> put_flash(:error, "Please fix playbook error before saving...")
         {:noreply, socket_mod}
     end
-
-
-    {:noreply, socket }
   end
 end

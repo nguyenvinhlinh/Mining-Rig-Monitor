@@ -1,6 +1,6 @@
 <fieldset class="fieldset mt-2 grid grid-cols-1 lg:grid-cols-2 gap-4 ">
   <div class="space-y-2">
-    <label class="fieldset-label" for="name">
+    <label class="fieldset-label" for={@form[:software_name].id} >
       Software Name
     </label>
     <select class="select w-full" id={@form[:software_name].id} name={@form[:software_name].name}  >
@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="space-y-2">
-    <label class="fieldset-label" for="name">
+    <label class="fieldset-label" for={@form[:software_version].id} >
       Software Version
     </label>
     <select class="select w-full" id={@form[:software_version].id} name={@form[:software_version].name}  >
