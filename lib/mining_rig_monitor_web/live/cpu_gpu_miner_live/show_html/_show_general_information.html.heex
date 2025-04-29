@@ -1,8 +1,21 @@
-<div class="mt-6 grid gap-6">
-  <div class="card card-border bg-base-100 shadow-sm">
-    <div class="card-body">
-      <h2 class="text-xl font-bold">General Information</h2>
-      <div class="mt-3 grid grid-cols-8">
+<div class="mt-6">
+  <div class="bg-base-100 card shadow">
+    <div class="card-body p-0">
+      <!-- Start: card-body title -->
+      <div class="flex items-center justify-between px-5 pt-5">
+        <div class="inline-flex items-center gap-3">
+          <b>General Information</b>
+        </div>
+        <div class="inline-flex items-center gap-3">
+          <a class="btn btn-primary btn-sm max-sm:btn-square" href={~p"/cpu_gpu_miners/#{@cpu_gpu_miner.id}/playbooks"}>
+            <span class="iconify lucide--file-code size-4"></span>
+            <span class="hidden sm:inline">Mining Playbooks</span>
+          </a>
+        </div>
+      </div>
+      <!-- End: card-body title -->
+
+      <div class="mt-3 grid grid-cols-8 px-5 pb-5">
         <ul class="list-disc px-5 col-span-8 sm:col-span-4 lg:col-span-2">
           <li>
             <b>Motherboard:</b> <%= @cpu_gpu_miner.motherboard_name %>
