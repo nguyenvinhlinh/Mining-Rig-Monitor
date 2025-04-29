@@ -1,12 +1,12 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
   require Logger
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMinerPlaybooks
   alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
   alias MiningRigMonitor.Repo
 
-
+  on_mount MiningRigMonitorWeb.UserAuthLive
   embed_templates "index_html/*"
 
   @impl true
@@ -28,17 +28,18 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"playbook_id" => playbook_id}) do
-    socket
-    |> assign(:page_title, "Edit CPU/GPU miner playbook")
-    |> assign(:cpu_gpu_miner_playbook, CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(playbook_id))
-  end
+  # delete me
+  # defp apply_action(socket, :edit, %{"playbook_id" => playbook_id}) do
+  #   socket
+  #   |> assign(:page_title, "Edit CPU/GPU miner playbook")
+  #   |> assign(:cpu_gpu_miner_playbook, CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(playbook_id))
+  # end
 
-  defp apply_action(socket, :new, %{"cpu_gpu_miner_id"=> cpu_gpu_miner_id}=params) do
-    socket
-    |> assign(:page_title, "New CPU/GPU miner playbook")
-    |> assign(:cpu_gpu_miner_playbook, %CpuGpuMinerPlaybook{cpu_gpu_miner_id: cpu_gpu_miner_id})
-  end
+  # defp apply_action(socket, :new, %{"cpu_gpu_miner_id"=> cpu_gpu_miner_id}=params) do
+  #   socket
+  #   |> assign(:page_title, "New CPU/GPU miner playbook")
+  #   |> assign(:cpu_gpu_miner_playbook, %CpuGpuMinerPlaybook{cpu_gpu_miner_id: cpu_gpu_miner_id})
+  # end
 
   defp apply_action(socket, :index, _params) do
     socket
