@@ -1,0 +1,46 @@
+<fieldset class="fieldset mt-2 grid grid-cols-1 lg:grid-cols-2 gap-4 ">
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:software_name].id} >
+      Software Name
+    </label>
+    <select class="select w-full" id={@form[:software_name].id} name={@form[:software_name].name}  >
+      { Phoenix.HTML.Form.options_for_select(@software_name_option_list, @form[:software_name].value) }
+    </select>
+    <div :if={used_input?(@form[:software_name])} >
+      <p :for={error <- @form[:software_name].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:software_version].id} >
+      Software Version
+    </label>
+    <select class="select w-full" id={@form[:software_version].id} name={@form[:software_version].name}  >
+      { Phoenix.HTML.Form.options_for_select(@software_version_option_list, @form[:software_version].value) }
+    </select>
+    <div :if={used_input?(@form[:software_version])} >
+      <p :for={error <- @form[:software_version].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset class="fieldset mt-2 grid grid-cols-1 gap-4 ">
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:command_argument].id}>
+      Command Argument
+    </label>
+
+    <textarea class="textarea w-full" placeholder="Command Argument"
+      id={@form[:command_argument].id} name={@form[:command_argument].name}
+    >{ Phoenix.HTML.Form.normalize_value("textarea", @form[:command_argument].value) }</textarea>
+
+    <div :if={used_input?(@form[:command_argument])} >
+      <p :for={error <- @form[:command_argument].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+</fieldset>

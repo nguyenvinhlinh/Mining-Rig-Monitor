@@ -65,36 +65,10 @@ defmodule MiningRigMonitorWeb.Router do
     live "/addresses/new_pool",   AddressLive.New,   :new_pool
     live "/addresses/:id/edit",   AddressLive.Edit,  :edit
 
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks",                  CpuGpuMinerPlaybookLive.Index, :index
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new", CpuGpuMinerPlaybookLive.New,   :new
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id",     CpuGpuMinerPlaybookLive.Show,  :show
-
-  end
-
-  scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser, :require_authenticated_user]
-    # live "/asic_miners", AsicMinerLive.Index, :index
-    # live "/asic_miners/new", AsicMinerLive.Index, :new
-    # live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
-    # live "/asic_miners/:id", AsicMinerLive.Show, :show
-
-    # live "/cpu_gpu_miners", CpuGpuMinerLive.Index, :index
-    # live "/cpu_gpu_miners/new", CpuGpuMinerLive.Index, :new
-    # live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Index, :edit
-    # live "/cpu_gpu_miners/:id", CpuGpuMinerLive.Show, :show
-
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks", CpuGpuMinerPlaybookLive.Index, :index
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new", CpuGpuMinerPlaybookLive.Index, :new
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/edit", CpuGpuMinerPlaybookLive.Index, :edit
-
-    # live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id",          CpuGpuMinerPlaybookLive.Show, :show
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/show/edit", CpuGpuMinerPlaybookLive.Show, :edit
-
-    # live "/addresses", AddressLive.Index, :index
-    # live "/addresses/new", AddressLive.Index, :new
-    # live "/addresses/:id/edit", AddressLive.Index, :edit
-
-
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks",                   CpuGpuMinerPlaybookLive.Index, :index
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new",               CpuGpuMinerPlaybookLive.New,   :new
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id",      CpuGpuMinerPlaybookLive.Show,  :show
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/edit", CpuGpuMinerPlaybookLive.Edit,  :edit
   end
 
   scope "/api/v1" do
