@@ -65,8 +65,10 @@ defmodule MiningRigMonitorWeb.Router do
     live "/addresses/new_pool",   AddressLive.New,   :new_pool
     live "/addresses/:id/edit",   AddressLive.Edit,  :edit
 
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks",              CpuGpuMinerPlaybookLive.Index, :index
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id", CpuGpuMinerPlaybookLive.Show,  :show
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks",                  CpuGpuMinerPlaybookLive.Index, :index
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new", CpuGpuMinerPlaybookLive.New,   :new
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id",     CpuGpuMinerPlaybookLive.Show,  :show
+
   end
 
   scope "/", MiningRigMonitorWeb do

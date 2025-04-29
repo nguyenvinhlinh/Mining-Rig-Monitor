@@ -1,0 +1,53 @@
+<fieldset class="fieldset mt-2 grid grid-cols-4">
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:gpu_coin_name_1].id}>
+      [GPU] Coin Name [1]
+    </label>
+    <input class="input w-full" id={@form[:gpu_coin_name_1].id} name={@form[:gpu_coin_name_1].name} value={@form[:gpu_coin_name_1].value}>
+    <div :if={used_input?(@form[:gpu_coin_name_1])} >
+      <p :for={error <- @form[:gpu_coin_name_1].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:gpu_algorithm_1].id}>
+      [GPU] Coin Algorithm [1]
+    </label>
+    <input class="input w-full" id={@form[:gpu_algorithm_1].id} name={@form[:gpu_algorithm_1].name} value={@form[:gpu_algorithm_1].value}>
+    <div :if={used_input?(@form[:gpu_algorithm_1])} >
+      <p :for={error <- @form[:gpu_algorithm_1].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:gpu_pool_address_id_1].id}>
+      [GPU] Pool Address [1]
+    </label>
+    <select class="select w-full" id={@form[:gpu_pool_address_id_1].id} name={@form[:gpu_pool_address_id_1].name} >
+      { Phoenix.HTML.Form.options_for_select(@pool_address_option_list, @form[:cpu_pool_address_id].value) }
+    </select>
+    <div class="badge badge-accent">$GPU_POOL_1</div>
+    <div :if={used_input?(@form[:gpu_pool_address_id_1])} >
+      <p :for={error <- @form[:gpu_pool_address_id_1].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:gpu_wallet_address_id_1].id}>
+      [CPU] Wallet Address
+    </label>
+    <select class="select w-full" id={@form[:gpu_wallet_address_id_1].id} name={@form[:gpu_wallet_address_id_1].name} >
+      { Phoenix.HTML.Form.options_for_select(@wallet_address_option_list, @form[:cpu_wallet_address_id].value) }
+    </select>
+    <div class="badge badge-accent">$GPU_WALLET_1</div>
+    <div :if={used_input?(@form[:gpu_wallet_address_id_1])} >
+      <p :for={error <- @form[:gpu_wallet_address_id_1].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+</fieldset>

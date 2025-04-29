@@ -1,0 +1,14 @@
+<Layouts.nexus_app flash={@flash} current_user={@current_user}>
+  <div id="layout-content">
+    <._new_top cpu_gpu_miner={@cpu_gpu_miner} />
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <._new_form form={@form}
+        software_name_option_list={@software_name_option_list}
+        software_version_option_list={@software_version_option_list}
+        wallet_address_option_list={@wallet_address_option_list}
+        pool_address_option_list={@pool_address_option_list} />
+      <._new_string_replacement_helper />
+    </div>
+
+  </div>
+</Layouts.nexus_app>
