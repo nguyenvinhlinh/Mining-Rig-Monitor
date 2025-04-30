@@ -28,8 +28,9 @@ defmodule MiningRigMonitorWeb.NexusComponents do
         phx-connected={nx_hide("#client-error") |> JS.set_attribute({"hidden", ""})}
         hidden
       >
-        {gettext("Attempting to reconnect")}
-        <.nx_icon name="hero-arrow-path" class="ml-1 h-3 w-3 motion-safe:animate-spin" />
+
+
+    {gettext("Attempting to reconnect")}
       </.nx_flash>
 
       <.nx_flash
@@ -39,9 +40,8 @@ defmodule MiningRigMonitorWeb.NexusComponents do
         phx-disconnected={nx_show(".phx-client-error #client-error") |> JS.remove_attribute("hidden")}
         phx-connected={nx_hide("#client-error") |> JS.set_attribute({"hidden", ""})}
         hidden
-      >
+        >
         {gettext("Hang in there while we get back on track")}
-        <.nx_icon name="hero-arrow-path" class="ml-1 h-3 w-3 motion-safe:animate-spin" />
       </.nx_flash>
     </div>
     """
@@ -93,34 +93,6 @@ defmodule MiningRigMonitorWeb.NexusComponents do
       </svg>
       <span>{@title}{msg}</span>
     </div>
-    """
-  end
-
-  @doc """
-  Renders a [Heroicon](https://heroicons.com).
-
-  Heroicons come in three styles – outline, solid, and mini.
-  By default, the outline style is used, but solid and mini may
-  be applied by using the `-solid` and `-mini` suffix.
-
-  You can customize the size and colors of the icons by setting
-  width, height, and background color classes.
-
-  Icons are extracted from the `deps/heroicons` directory and bundled within
-  your compiled app.css by the plugin in your `assets/tailwind.config.js`.
-
-  ## Examples
-
-      <.icon name="hero-x-mark-solid" />
-      <.icon name="hero-arrow-path" class="ml-1 w-3 h-3 animate-spin" />
-  """
-  attr :name, :string, required: true
-  attr :class, :string, default: nil
-  attr :id, :string, default: nil
-
-  def nx_icon(%{name: "hero-" <> _} = assigns) do
-    ~H"""
-    <span class={[@name, @class]} id={@id}/>
     """
   end
 
