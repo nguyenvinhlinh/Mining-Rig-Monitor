@@ -1,0 +1,694 @@
+<!--  Start: Layout - Content -->
+
+<div id="layout-content">
+  <div class="flex items-center justify-between">
+    <h3 class="text-lg font-medium">Products</h3>
+    <div class="breadcrumbs hidden p-0 text-sm sm:inline">
+      <ul>
+        <li><a href="./dashboards-ecommerce.html">Nexus</a></li>
+        <li>Ecommerce</li>
+        <li class="opacity-80">Products</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-6">
+    <div class="bg-base-100 card shadow">
+      <div class="card-body p-0">
+        <div class="flex items-center justify-between px-5 pt-5">
+          <div class="inline-flex items-center gap-3">
+            <label class="input input-sm">
+              <span class="iconify lucide--search text-base-content/80 size-3.5"></span>
+              <input class="w-24 sm:w-36" placeholder="Search along products" aria-label="Search products" type="search">
+            </label>
+            <div class="hidden sm:block">
+              <select class="select select-sm w-36" aria-label="Select category">
+                <option value="" disabled="" selected="">
+                  Select Category
+                </option>
+                <option>Fashion</option>
+                <option>Daily Need</option>
+                <option>Cosmetic</option>
+                <option>Electronics</option>
+                <option>Food</option>
+              </select>
+            </div>
+          </div>
+          <div class="inline-flex items-center gap-3">
+            <a aria-label="Create product link" class="btn btn-primary btn-sm max-sm:btn-square" href="./apps-ecommerce-products-create.html">
+              <span class="iconify lucide--plus size-4"></span>
+              <span class="hidden sm:inline">New Product</span>
+            </a>
+            <div class="dropdown dropdown-bottom dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost border-base-300 btn-sm btn-square" aria-label="More option">
+                <span class="iconify lucide--settings-2 size-4"></span>
+              </div>
+              <div tabindex="0" class="dropdown-content bg-base-100 rounded-box z-1 w-52 shadow">
+                <ul class="menu w-full p-2">
+                  <li>
+                    <div>
+                      <span class="iconify lucide--wand size-4"></span>
+                      Bulk Actions
+                    </div>
+                  </li>
+                </ul>
+                <hr class="border-base-300">
+                <ul class="menu w-full p-2">
+                  <li>
+                    <div>
+                      <span class="iconify lucide--download-cloud size-4"></span>
+                      Import from Store
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <span class="iconify lucide--copy-plus size-4"></span>
+                      Create from Existing
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 overflow-auto">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  <input aria-label="Check all" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Ratings</th>
+                <th>Orders</th>
+                <th>Stock</th>
+                <th>Created At</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1001</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/1.jpg">
+                    <div>
+                      <p class="font-medium">
+                        Men's tracking shoes
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #SHOES
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Fashion</td>
+                <td class="text-sm font-medium">$29</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success text-success size-4"></span>
+                    4.7
+                    <span class="text-base-content/60 text-xs">
+                      (130)
+                    </span>
+                  </div>
+                </td>
+                <td>10</td>
+                <td>
+                  <span class="text-success">Available</span>
+                </td>
+                <td class="text-sm">30 Nov 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1002</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/2.jpg">
+                    <div>
+                      <p class="font-medium">
+                        Cocooil body oil
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #COCOOIL
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Daily Need</td>
+                <td class="text-sm font-medium">$16</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success text-success size-4"></span>
+                    4.2
+                    <span class="text-base-content/60 text-xs">
+                      (547)
+                    </span>
+                  </div>
+                </td>
+                <td>15</td>
+                <td>
+                  <span class="text-success">Available</span>
+                </td>
+                <td class="text-sm">30 Nov 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1003</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/3.jpg">
+                    <div>
+                      <p class="font-medium">
+                        Freeze air
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #FREEAIR
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Cosmetic</td>
+                <td class="text-sm font-medium">$32</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success text-warning size-4"></span>
+                    3.8
+                    <span class="text-base-content/60 text-xs">
+                      (862)
+                    </span>
+                  </div>
+                </td>
+                <td>25</td>
+                <td>
+                  <span class="text-success">Available</span>
+                </td>
+                <td class="text-sm">30 Jul 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1004</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/4.jpg">
+                    <div>
+                      <p class="font-medium">
+                        Ladies's shoes
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #LASHOES
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Fashion</td>
+                <td class="text-sm font-medium">$32</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success textarea-error size-4"></span>
+                    2.9
+                    <span class="text-base-content/60 text-xs">
+                      (861)
+                    </span>
+                  </div>
+                </td>
+                <td>10</td>
+                <td>
+                  <span class="textarea-error">
+                    Out of stock
+                  </span>
+                </td>
+                <td class="text-sm">30 Jan 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1005</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/5.jpg">
+                    <div>
+                      <p class="font-medium">Gamepad</p>
+                      <p class="text-base-content/60 text-xs">
+                        #GAMEPAD
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Electronics</td>
+                <td class="text-sm font-medium">$59</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success text-success size-4"></span>
+                    4.1
+                    <span class="text-base-content/60 text-xs">
+                      (96)
+                    </span>
+                  </div>
+                </td>
+                <td>42</td>
+                <td>
+                  <span class="text-success">Available</span>
+                </td>
+                <td class="text-sm">30 Oct 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1006</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/6.jpg">
+                    <div>
+                      <p class="font-medium">
+                        Blue &amp; Pink Clothes
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #BPCloth
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Fashion</td>
+                <td class="text-sm font-medium">$27</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success text-success size-4"></span>
+                    4.24
+                    <span class="text-base-content/60 text-xs">
+                      (72)
+                    </span>
+                  </div>
+                </td>
+                <td>31</td>
+                <td>
+                  <span class="text-success">Available</span>
+                </td>
+                <td class="text-sm">30 May 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1007</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/7.jpg">
+                    <div>
+                      <p class="font-medium">
+                        Ladies's shorts wear
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #LSWEAR
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Fashion</td>
+                <td class="text-sm font-medium">$24</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success text-warning size-4"></span>
+                    3.5
+                    <span class="text-base-content/60 text-xs">
+                      (48)
+                    </span>
+                  </div>
+                </td>
+                <td>42</td>
+                <td>
+                  <span class="text-success">Available</span>
+                </td>
+                <td class="text-sm">30 Sep 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1008</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/8.jpg">
+                    <div>
+                      <p class="font-medium">
+                        Kitchen's Fruits &amp; Vegetable
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #KFVEGE
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Food</td>
+                <td class="text-sm font-medium">$45</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success textarea-error size-4"></span>
+                    2.7
+                    <span class="text-base-content/60 text-xs">
+                      (54)
+                    </span>
+                  </div>
+                </td>
+                <td>36</td>
+                <td>
+                  <span class="text-success">Available</span>
+                </td>
+                <td class="text-sm">30 Apr 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1009</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/9.jpg">
+                    <div>
+                      <p class="font-medium">
+                        Quokka Lemon Water
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #QUOKKA
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Food</td>
+                <td class="text-sm font-medium">$7</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success text-success size-4"></span>
+                    4.1
+                    <span class="text-base-content/60 text-xs">
+                      (64)
+                    </span>
+                  </div>
+                </td>
+                <td>27</td>
+                <td>
+                  <span class="text-success">Available</span>
+                </td>
+                <td class="text-sm">30 Dec 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1010</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/10.jpg">
+                    <div>
+                      <p class="font-medium">
+                        White &amp; Brown Candy
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #CANDY
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Food</td>
+                <td class="text-sm font-medium">$14</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success text-warning size-4"></span>
+                    3.6
+                    <span class="text-base-content/60 text-xs">
+                      (84)
+                    </span>
+                  </div>
+                </td>
+                <td>42</td>
+                <td>
+                  <span class="textarea-error">
+                    Out of stock
+                  </span>
+                </td>
+                <td class="text-sm">30 Jun 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+                <th>
+                  <input aria-label="Single check" class="checkbox checkbox-sm" type="checkbox">
+                </th>
+                <td>1011</td>
+                <td>
+                  <div class="flex items-center space-x-3 truncate">
+                    <img alt="Product" class="rounded-box size-10" src="./images/apps/ecommerce/products/11.jpg">
+                    <div>
+                      <p class="font-medium">
+                        Yellow Ice cream
+                      </p>
+                      <p class="text-base-content/60 text-xs">
+                        #ICECREAM
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>Food</td>
+                <td class="text-sm font-medium">$15</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="iconify lucide--star text-success text-success size-4"></span>
+                    4.9
+                    <span class="text-base-content/60 text-xs">
+                      (52)
+                    </span>
+                  </div>
+                </td>
+                <td>31</td>
+                <td>
+                  <span class="text-success">Available</span>
+                </td>
+                <td class="text-sm">30 Jan 2024</td>
+                <td>
+                  <div class="inline-flex">
+                    <a aria-label="Edit product link" class="btn btn-square btn-ghost btn-sm" href="./apps-ecommerce-products-edit.html">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </a>
+                    <button aria-label="Dummy show product" class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                    <button aria-label="Dummy delete product" onclick="apps_product_delete.showModal()" class="btn btn-square btn-error btn-outline btn-sm border-transparent">
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex items-center justify-between p-6">
+          <div class="text-base-content/80 hover:text-base-content flex gap-2 text-sm">
+            <span class="hidden sm:inline">Per page</span>
+            <select class="select select-xs w-18" aria-label="Per page">
+              <option value="10">10</option>
+              <option value="20" selected="">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <span class="text-base-content/80 hidden text-sm lg:inline">
+            Showing
+            <span class="text-base-content font-medium">
+              1 to 20
+            </span>
+            of 457 items
+          </span>
+          <div class="inline-flex items-center gap-1">
+            <button class="btn btn-circle sm:btn-sm btn-xs btn-ghost" aria-label="Prev">
+              <span class="iconify lucide--chevron-left"></span>
+            </button>
+            <button class="btn btn-primary btn-circle sm:btn-sm btn-xs">
+              1
+            </button>
+            <button class="btn btn-ghost btn-circle sm:btn-sm btn-xs">
+              2
+            </button>
+            <button class="btn btn-ghost btn-circle sm:btn-sm btn-xs">
+              3
+            </button>
+            <button class="btn btn-circle sm:btn-sm btn-xs btn-ghost" aria-label="Next">
+              <span class="iconify lucide--chevron-right"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <dialog id="apps_product_delete" class="modal">
+      <div class="modal-box">
+        <div class="flex items-center justify-between text-lg font-medium">
+          Confirm Delete
+          <form method="dialog">
+            <button class="btn btn-sm btn-ghost btn-circle" aria-label="Close modal">
+              <span class="iconify lucide--x size-4"></span>
+            </button>
+          </form>
+        </div>
+        <p class="py-4">
+          You are about to delete this product. Would you like to
+          proceed further ?
+        </p>
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn btn-ghost btn-sm">No</button>
+          </form>
+          <form method="dialog">
+            <button class="btn btn-sm btn-error">
+              Yes, delete it
+            </button>
+          </form>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
+  </div>
+</div>
+
+<!--  End: Layout - Content -->

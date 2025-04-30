@@ -1,5 +1,5 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
 
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMiners.CpuGpuMiner
@@ -7,6 +7,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
   alias MiningRigMonitor.Utility
 
   embed_templates "index_html/*"
+  on_mount MiningRigMonitorWeb.UserAuthLive
 
   @impl true
   def mount(_params, _session, socket) do
@@ -39,7 +40,9 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
         gpu_fan_uom: nil,
 
         total_power: "SYNC...",
-        uptime: "SYNC..." }
+        uptime: "SYNC...",
+        uptime_class: "badge badge-info"
+      }
     end)
 
     cpu_gpu_miner_alive = "Sync..."
@@ -223,7 +226,8 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
       gpu_fan_uom: nil,
 
       total_power: "----",
-      uptime: "OFFLINE"
+      uptime: "OFFLINE",
+      uptime_class: "badge badge-error"
     }
   end
   def beautify_activated_cpu_gpu_miner(%CpuGpuMiner{} = cpu_gpu_miner, %CpuGpuMinerLog{} = cpu_gpu_miner_log) do
@@ -235,6 +239,12 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
     max_gpu_fan =       CpuGpuMinerLog.find_max_gpu_fan_speed(cpu_gpu_miner_log)
 
     total_power = CpuGpuMinerLog.sum_total_power(cpu_gpu_miner_log)
+
+    uptime_class = if cpu_gpu_miner_log.uptime do
+      "badge badge-success"
+    else
+      "badge badge-error"
+    end
 
     %{
       id: cpu_gpu_miner.id,
@@ -261,7 +271,8 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Index do
       max_gpu_fan: max_gpu_fan,
       gpu_fan_uom: cpu_gpu_miner_log.gpu_fan_uom,
       total_power: "#{total_power} W",
-      uptime: cpu_gpu_miner_log.uptime
+      uptime: cpu_gpu_miner_log.uptime,
+      uptime_class: uptime_class
     }
   end
 end

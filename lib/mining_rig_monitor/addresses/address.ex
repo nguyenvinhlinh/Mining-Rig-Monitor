@@ -9,7 +9,6 @@ defmodule MiningRigMonitor.Addresses.Address do
     field :name, :string
     field :type, :string
     field :address, :string
-
     timestamps(type: :utc_datetime)
   end
 
@@ -27,11 +26,15 @@ defmodule MiningRigMonitor.Addresses.Address do
     address
     |> cast(attrs, [:name, :type, :address])
     |> validate_required([:name, :type, :address])
+    |> validate_length(:name, [min: 2])
+    |> validate_length(:address, [min: 2])
   end
 
   def changeset_update(address, attrs) do
     address
     |> cast(attrs, [:name, :address])
     |> validate_required([:name, :address])
+    |> validate_length(:name, [min: 2])
+    |> validate_length(:address, [min: 2])
   end
 end

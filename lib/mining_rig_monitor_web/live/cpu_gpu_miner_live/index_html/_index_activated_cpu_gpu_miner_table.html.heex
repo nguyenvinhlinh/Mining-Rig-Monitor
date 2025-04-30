@@ -1,70 +1,108 @@
-<div class="mx-1 p-1 mb-1
-  sm:mx-2 sm:mb-2 sm:p-3
-  md:mx-4 md:mb-4 md:p-6
-  bg-white border border-gray-200 rounded-lg shadow-sm
-  dark:border-gray-700 dark:bg-gray-800">
-  <h3 class="mb-4 text-xl font-semibold dark:text-white">Activated CPU/GPU Miners!</h3>
-
-  <.table
-    id="cpu_gpu_miners_activated"
-    rows={@streams.cpu_gpu_miner_activated_list}
-    row_click={fn {_id, cpu_gpu_miner} -> JS.navigate(~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}") end}
-  >
-    <:col :let={{_id, cpu_gpu_miner}} label="ID" class="hidden 2xl:table-cell">{cpu_gpu_miner.id}</:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Name">{cpu_gpu_miner.name}</:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Coin">
-      {cpu_gpu_miner.cpu_coin_name}
-      <br :if={cpu_gpu_miner.gpu_coin_name_1} /> {cpu_gpu_miner.gpu_coin_name_1}
-      <br :if={cpu_gpu_miner.gpu_coin_name_2} /> {cpu_gpu_miner.gpu_coin_name_2}
-    </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Hashrate">
-      { if(cpu_gpu_miner.cpu_coin_name,   do: "#{cpu_gpu_miner.cpu_hashrate} #{cpu_gpu_miner.cpu_hashrate_uom} #{cpu_gpu_miner.cpu_algorithm}") }
-      <br :if={cpu_gpu_miner.gpu_hashrate_1} />
-      { if(cpu_gpu_miner.gpu_coin_name_1, do: "#{cpu_gpu_miner.gpu_hashrate_1} #{cpu_gpu_miner.gpu_hashrate_uom_1} #{cpu_gpu_miner.gpu_algorithm_1}") }
-      <br :if={cpu_gpu_miner.gpu_coin_name_2} />
-      { if(cpu_gpu_miner.gpu_coin_name_2, do: "#{cpu_gpu_miner.gpu_hashrate_2} #{cpu_gpu_miner.gpu_hashrate_uom_2} #{cpu_gpu_miner.gpu_algorithm_2}") }
-    </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="CPU Temp." class="hidden md:table-cell">
-      {cpu_gpu_miner.cpu_temp}
-    </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Core/Memory Temp." class="hidden lg:table-cell">
-      {cpu_gpu_miner.max_gpu_core_temp} / {cpu_gpu_miner.max_gpu_mem_temp}
-    </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Max GPU Fan" class="hidden lg:table-cell">
-      {cpu_gpu_miner.max_gpu_fan}{cpu_gpu_miner.gpu_fan_uom}
-    </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Power" class="hidden xl:table-cell">
-      {cpu_gpu_miner.total_power}
-    </:col>
-    <:col :let={{_id, cpu_gpu_miner}} label="Uptime" class="hidden 2xl:table-cell">
-      {cpu_gpu_miner.uptime}
-    </:col>
-    <:action :let={{_id, cpu_gpu_miner}}>
-      <div class="sr-only">
-        <.link navigate={~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}"}>Show</.link>
+<div class="mt-6">
+  <div class="bg-base-100 card shadow">
+    <div class="card-body p-0">
+      <div class="flex items-center justify-between px-5 pt-5">
+        <div class="inline-flex items-center gap-3">
+          <b>Activated CPU/GPU Miners</b>
+        </div>
+        <div class="inline-flex items-center gap-3">
+          <a class="btn btn-primary btn-sm max-sm:btn-square" href={~p"/cpu_gpu_miners/new"}>
+            <span class="iconify lucide--plus size-4"></span>
+            <span class="hidden sm:inline">New CPU/GPU Miners</span>
+          </a>
+        </div>
       </div>
-      <.link patch={~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}/edit"}>
-        <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center
-          text-white rounded-lg bg-blue-700 hover:bg-blue-800
-          focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          <.icon name="hero-pencil-square-solid" class="size-5" />
-          <span class="ml-1">Edit</span>
-        </button>
+      <div class="mt-4 overflow-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Coin</th>
+              <th>Hashrate</th>
+              <th>CPU Temp.</th>
+              <th>Max GPU Core/Memory Temp.</th>
+              <th>Max GPU Fan</th>
+              <th>Power(W)</th>
+              <th>Uptime</th>
+              <th>Action</th>
+            </tr>
+          </thead>
 
-      </.link>
-    </:action>
+          <tbody id="cpu_gpu_miner_activated" phx-update="stream" >
+            <tr :for={ {tr_id, cpu_gpu_miner} <- @streams.cpu_gpu_miner_activated_list }  id={tr_id} class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+              <td>{cpu_gpu_miner.id}</td>
+              <td>{cpu_gpu_miner.name}</td>
+              <td>
+                {cpu_gpu_miner.cpu_coin_name}
+                <br :if={cpu_gpu_miner.gpu_coin_name_1} /> {cpu_gpu_miner.gpu_coin_name_1}
+                <br :if={cpu_gpu_miner.gpu_coin_name_2} /> {cpu_gpu_miner.gpu_coin_name_2}
+              </td>
+              <td>
+                { if(cpu_gpu_miner.cpu_coin_name, do: "#{cpu_gpu_miner.cpu_hashrate} #{cpu_gpu_miner.cpu_hashrate_uom} #{cpu_gpu_miner.cpu_algorithm}") }
+                <br :if={cpu_gpu_miner.gpu_coin_name_1} />
+                { if(cpu_gpu_miner.gpu_coin_name_1, do: "#{cpu_gpu_miner.gpu_hashrate_1} #{cpu_gpu_miner.gpu_hashrate_uom_1} #{cpu_gpu_miner.gpu_algorithm_1}") }
+                <br :if={cpu_gpu_miner.gpu_coin_name_2} />
+                { if(cpu_gpu_miner.gpu_coin_name_2, do: "#{cpu_gpu_miner.gpu_hashrate_2} #{cpu_gpu_miner.gpu_hashrate_uom_2} #{cpu_gpu_miner.gpu_algorithm_2}") }
+              </td>
+              <td>
+                <div class="flex items-center gap-2" >
+                  <span class="iconify lucide--thermometer size-4"> </span>
+                  {cpu_gpu_miner.cpu_temp}
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2" >
+                  <span class="iconify lucide--thermometer size-4"> </span>
+                  {cpu_gpu_miner.max_gpu_core_temp} / {cpu_gpu_miner.max_gpu_mem_temp}
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2" >
+                  <span class="iconify lucide--fan size-4"> </span>
+                  {cpu_gpu_miner.max_gpu_fan}{cpu_gpu_miner.gpu_fan_uom}
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2" >
+                  <span class="iconify lucide--zap size-4"> </span>
+                  {cpu_gpu_miner.total_power}
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <div class={cpu_gpu_miner.uptime_class}>
+                    <span class="iconify lucide--clock size-4"></span>
+                    {cpu_gpu_miner.uptime}
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="inline-flex">
+                  <.link phx-click={JS.navigate(~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}/edit")} >
+                    <button class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </button>
+                  </.link>
+                  <.link phx-click={JS.navigate(~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}")} >
+                    <button class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--eye text-base-content/80 size-4"></span>
+                    </button>
+                  </.link>
 
-    <:action :let={{id, cpu_gpu_miner}}>
-      <.link
-        phx-click={JS.push("delete", value: %{id: cpu_gpu_miner.id}) |> hide("##{id}")}
-        data-confirm="Are you sure?"
-      >
-        <button type="button"  class="mr-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white
-          bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-          <.icon name="hero-trash-solid" class="size-5" />
-          <span class="ml-1">Delete</span>
-        </button>
-      </.link>
-    </:action>
-  </.table>
+                  <.link
+                    phx-click={JS.push("delete", value: %{id: cpu_gpu_miner.id}) |> hide("##{cpu_gpu_miner.id}")}
+                    data-confirm="Are you sure?" >
+                    <button class="btn btn-square btn-error btn-outline btn-sm border-transparent" >
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </.link>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

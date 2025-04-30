@@ -28,6 +28,7 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
     asic_miner
     |> cast(attrs, [:name, :api_code])
     |> validate_required([:name, :api_code])
+    |> validate_length(:name, [min: 2])
   end
 
   def changeset_edit_by_commander(asic_miner, attrs) do

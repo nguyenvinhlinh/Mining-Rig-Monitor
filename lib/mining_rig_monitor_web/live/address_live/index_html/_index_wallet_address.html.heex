@@ -1,40 +1,56 @@
-<div class="mx-1 p-1 mb-1
-  sm:mx-2 sm:mb-2 sm:p-3
-  md:mx-4 md:mb-4 md:p-6
-  bg-white border border-gray-200 rounded-lg shadow-sm
-  dark:border-gray-700 dark:bg-gray-800">
-  <h3 class="mb-4 text-xl font-semibold dark:text-white">Wallet Addresses</h3>
-
-  <.table
-    id="wallet_address_table"
-    rows={@streams.wallet_address_list}
-  >
-    <:col :let={{_id, wallet_address}} label="ID" class="hidden 2xl:table-cell">{wallet_address.id}</:col>
-    <:col :let={{_id, wallet_address}} label="Name">{wallet_address.name}</:col>
-    <:col :let={{_id, wallet_address}} label="Address">{wallet_address.address}</:col>
-
-    <:action :let={{_id, wallet_address}}>
-      <.link patch={~p"/addresses/#{wallet_address.id}/edit"}>
-        <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center
-          text-white rounded-lg bg-blue-700 hover:bg-blue-800
-          focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          <.icon name="hero-pencil-square-solid" class="size-5" />
-          <span class="ml-1">Edit</span>
-        </button>
-      </.link>
-    </:action>
-
-    <:action :let={{id, wallet_address}}>
-      <.link
-        phx-click={JS.push("delete", value: %{id: wallet_address.id}) |> hide("##{id}")}
-        data-confirm="Are you sure?"
-      >
-        <button type="button"  class="mr-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white
-          bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-          <.icon name="hero-trash-solid" class="size-5" />
-          <span class="ml-1">Delete</span>
-        </button>
-      </.link>
-    </:action>
-  </.table>
+<div class="mt-6">
+  <div class="bg-base-100 card shadow">
+    <div class="card-body p-0">
+      <div class="flex items-center justify-between px-5 pt-5">
+        <div class="inline-flex items-center gap-3">
+          <b>Wallet Addresses</b>
+        </div>
+        <div class="inline-flex items-center gap-3">
+          <a class="btn btn-primary btn-sm max-sm:btn-square" href={~p"/addresses/new_wallet"}>
+            <span class="iconify lucide--plus size-4"></span>
+            <span class="hidden sm:inline">New Wallet Address</span>
+          </a>
+        </div>
+      </div>
+      <div class="mt-4 overflow-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="asic_miner_activated" phx-update="stream" >
+            <tr :for={ {tr_id, wallet_address} <- @streams.wallet_address_list}  id={tr_id} class="hover:bg-base-200/40 cursor-pointer *:text-nowrap">
+              <td>{wallet_address.id}</td>
+              <td>
+                {wallet_address.name}
+              </td>
+              <td>
+                {wallet_address.address}
+              </td>
+              <td>
+                <div class="inline-flex">
+                  <.link phx-click={JS.navigate(~p"/addresses/#{wallet_address.id}/edit")} >
+                    <button class="btn btn-square btn-ghost btn-sm">
+                      <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
+                    </button>
+                  </.link>
+                  <.link
+                    phx-click={JS.push("delete", value: %{id: wallet_address.id}) |> hide("##{wallet_address.id}")}
+                    data-confirm="Are you sure?" >
+                    <button class="btn btn-square btn-error btn-outline btn-sm border-transparent" >
+                      <span class="iconify lucide--trash size-4"></span>
+                    </button>
+                  </.link>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

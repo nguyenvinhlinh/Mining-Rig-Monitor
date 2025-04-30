@@ -1,5 +1,5 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
   require Logger
 
   alias MiningRigMonitor.CpuGpuMinerPlaybooks
@@ -7,6 +7,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.Repo
 
+  on_mount MiningRigMonitorWeb.UserAuthLive
   embed_templates "show_html/*"
 
   @impl true
@@ -23,16 +24,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Show do
     |> assign(:cpu_gpu_miner, cpu_gpu_miner)
     |> assign(:cpu_gpu_miner_playbook, cpu_gpu_miner_playbook)
     |> assign(:command_argument_replaced, command_argument_replaced)
-
-
     {:ok, socket_mod}
-  end
-
-  @impl true
-  def handle_params(%{"playbook_id" => id}=params, _, socket) do
-    socket_mod = socket
-    |> assign(:page_title, page_title(socket.assigns.live_action))
-    {:noreply, socket_mod}
   end
 
   @impl true

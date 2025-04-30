@@ -1,15 +1,6 @@
 {
-  "name": "assets",
-  "version": "1.0.0",
-  "main": "tailwind.config.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "apexcharts": "^3.49.2",
-    "flowbite": "^2.4.1"
+    "@iconify-json/lucide": "^1.2.39",
+    "@iconify/tailwind4": "^1.0.6"
   }
 }

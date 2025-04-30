@@ -51,8 +51,15 @@ defmodule MiningRigMonitorWeb do
 
   def live_view do
     quote do
-      use Phoenix.LiveView,
-        layout: {MiningRigMonitorWeb.Layouts, :app}
+      use Phoenix.LiveView
+
+      unquote(html_helpers())
+    end
+  end
+
+  def live_view_container_grow do
+    quote do
+      use Phoenix.LiveView, container: {:div, class: "grow"}
 
       unquote(html_helpers())
     end
@@ -85,10 +92,12 @@ defmodule MiningRigMonitorWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import MiningRigMonitorWeb.CoreComponents
+      import MiningRigMonitorWeb.NexusComponents
       import MiningRigMonitorWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
+      alias MiningRigMonitorWeb.Layouts
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())

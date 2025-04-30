@@ -1,12 +1,11 @@
 defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
   require Logger
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMinerPlaybooks
-  alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
   alias MiningRigMonitor.Repo
 
-
+  on_mount MiningRigMonitorWeb.UserAuthLive
   embed_templates "index_html/*"
 
   @impl true
@@ -19,31 +18,9 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
     socket_mod = socket
     |> stream(:cpu_gpu_miner_playbook_list, cpu_gpu_miner_playbook_list)
     |> assign(:cpu_gpu_miner, cpu_gpu_miner)
-
-    {:ok, socket_mod}
-  end
-
-  @impl true
-  def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
-  end
-
-  defp apply_action(socket, :edit, %{"playbook_id" => playbook_id}) do
-    socket
-    |> assign(:page_title, "Edit CPU/GPU miner playbook")
-    |> assign(:cpu_gpu_miner_playbook, CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(playbook_id))
-  end
-
-  defp apply_action(socket, :new, %{"cpu_gpu_miner_id"=> cpu_gpu_miner_id}=params) do
-    socket
-    |> assign(:page_title, "New CPU/GPU miner playbook")
-    |> assign(:cpu_gpu_miner_playbook, %CpuGpuMinerPlaybook{cpu_gpu_miner_id: cpu_gpu_miner_id})
-  end
-
-  defp apply_action(socket, :index, _params) do
-    socket
     |> assign(:page_title, "Listing CPU/GPU miner playbooks")
     |> assign(:cpu_gpu_miner_playbook, nil)
+    {:ok, socket_mod}
   end
 
   @impl true
@@ -56,9 +33,13 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
 
   @impl true
   def handle_event("delete", %{"playbook_id" => id}, socket) do
-    cpu_gpu_miner_playbook = CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(id)
-    {:ok, _} = CpuGpuMinerPlaybooks.delete_cpu_gpu_miner_playbook(cpu_gpu_miner_playbook)
+    miner_playbook = CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(id)
+    {:ok, _} = CpuGpuMinerPlaybooks.delete_cpu_gpu_miner_playbook(miner_playbook)
 
-    {:noreply, stream_delete(socket, :cpu_gpu_miner_playbook_list, cpu_gpu_miner_playbook)}
+    socket_mod = socket
+    |> stream_delete(:cpu_gpu_miner_playbook_list, miner_playbook)
+    |> put_flash(:info, "Playbook #{miner_playbook.software_name} #{miner_playbook.software_version} deleted")
+
+    {:noreply, socket_mod}
   end
 end

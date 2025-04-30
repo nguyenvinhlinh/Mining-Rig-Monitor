@@ -18,7 +18,7 @@ defmodule MiningRigMonitor.ChangesetHelper do
     else
       key = Keyword.get(keyword, :error_key, List.first(field_list))
       changeset
-      |> add_error(key, "Must be exist together #{field_list |> Enum.join(",")}")
+      |> add_error(key, "Must be exist together #{field_list |> Enum.join(", ")}")
     end
   end
 end

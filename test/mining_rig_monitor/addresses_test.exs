@@ -35,11 +35,10 @@ defmodule MiningRigMonitor.AddressesTest do
 
     test "update_address/2 with valid data updates the address" do
       address = address_fixture()
-      update_attrs = %{name: "some updated name", type: "some updated type", address: "some updated address"}
+      update_attrs = %{name: "some updated name", address: "some updated address"}
 
       assert {:ok, %Address{} = address} = Addresses.update_address(address, update_attrs)
       assert address.name == "some updated name"
-      assert address.type == "some updated type"
       assert address.address == "some updated address"
     end
 

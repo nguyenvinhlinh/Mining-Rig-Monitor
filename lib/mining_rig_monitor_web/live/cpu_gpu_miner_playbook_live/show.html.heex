@@ -1,23 +1,34 @@
-<._show_top cpu_gpu_miner={@cpu_gpu_miner} cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} />
+<Layouts.nexus_app flash={@flash} current_user={@current_user} >
+  <div id="layout-content">
+    <._show_top cpu_gpu_miner={@cpu_gpu_miner} cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} />
+    <._show_general_information cpu_gpu_miner={@cpu_gpu_miner} cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} />
+    <._show_cpu_minining cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} />
+    <._show_gpu_mining cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} />
+    <._show_command_argument cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} command_argument_replaced={@command_argument_replaced}/>
+    <._show_string_replacement_helper />
+  </div>
 
-<._show_general_information cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} />
+  <!-- <._show_top cpu_gpu_miner={@cpu_gpu_miner} cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} /> -->
 
-<._show_cpu_minining cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} />
+  <!-- <._show_general_information cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} /> -->
 
-<._show_gpu_mining cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} />
+  <!-- <._show_cpu_minining cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} /> -->
 
-<._show_command_argument cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} command_argument_replaced={@command_argument_replaced}/>
+  <!-- <._show_gpu_mining cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} /> -->
 
-<._show_string_replacement />
+  <!-- <._show_command_argument cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} command_argument_replaced={@command_argument_replaced}/> -->
 
-<.modal :if={@live_action in [:edit]} id="cpu_gpu_miner_playbook-modal" show on_cancel={JS.patch(~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/#{@cpu_gpu_miner_playbook}")}>
-  <.live_component
-    module={MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent}
-    id={@cpu_gpu_miner_playbook.id}
-    title={@page_title}
-    action={@live_action}
-    cpu_gpu_miner={@cpu_gpu_miner}
-    cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook}
-    patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/#{@cpu_gpu_miner_playbook}"}
-  />
-</.modal>
+  <!-- <._show_string_replacement /> -->
+
+  <!-- <.modal :if={@live_action in [:edit]} id="cpu_gpu_miner_playbook-modal" show on_cancel={JS.patch(~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/#{@cpu_gpu_miner_playbook}")}> -->
+  <!--   <.live_component -->
+  <!--     module={MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.FormComponent} -->
+  <!--     id={@cpu_gpu_miner_playbook.id} -->
+  <!--     title={@page_title} -->
+  <!--     action={@live_action} -->
+  <!--     cpu_gpu_miner={@cpu_gpu_miner} -->
+  <!--     cpu_gpu_miner_playbook={@cpu_gpu_miner_playbook} -->
+  <!--     patch={~p"/cpu_gpu_miners/#{@cpu_gpu_miner}/playbooks/#{@cpu_gpu_miner_playbook}"} -->
+  <!--   /> -->
+  <!-- </.modal> -->
+</Layouts.nexus_app>

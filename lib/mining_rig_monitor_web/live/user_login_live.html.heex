@@ -1,25 +1,119 @@
-<div class="flex flex-col items-center justify-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
-  <a href="https://flowbite-admin-dashboard.vercel.app/" class="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
-    <img src="https://flowbite-admin-dashboard.vercel.app/images/logo.svg" class="mr-4 h-11" alt="FlowBite Logo">
-    <span>Mining Rig Monitor</span>
-  </a>
-  <!-- Card -->
-  <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
-    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-      Sign in to platform
-    </h2>
-    <.simple_form for={@form} id="login_form" action={~p"/users/log_in"} class="mt-8 space-y-6" phx-update="ignore">
-      <.input field={@form[:email]} type="email" placeholder="name@company.com" required="" label="Your email" />
-      <br>
-      <.input field={@form[:password]} type="password" placeholder="••••••••" required="" label="Your password"/>
-      <br>
-      <div class="flex items-start">
-        <div class="flex items-center h-5">
-          <.input field={@form[:remember_me]} type="checkbox" label="Remember me" />
+<Layouts.login flash={@flash} >
+<div class="grid grid-cols-12 overflow-auto sm:h-screen">
+  <div class="relative hidden bg-[#FFE9D1] lg:col-span-7 lg:block xl:col-span-8 2xl:col-span-9 dark:bg-[#14181c]">
+    <div class="absolute inset-0 flex items-center justify-center">
+      <img class="object-cover" alt="Auth Image" src={~p"/images/auth/auth-hero.png"} />
+    </div>
+    <div class="animate-bounce-2 absolute right-[20%] bottom-[15%]">
+      <div class="card bg-base-100/80 w-64 backdrop-blur-lg">
+        <div class="card-body p-5">
+          <div class="flex flex-col items-center justify-center">
+            <div class="mask mask-squircle overflow-hidden">
+              <img class="bg-base-200 size-14" alt="" src={~p"/images/landing/nguyenvinhlinh-avatar.jpg"} />
+            </div>
+            <div class="mt-3 flex items-center justify-center gap-0.5">
+              <span class="iconify lucide--star size-4 text-orange-600"></span>
+              <span class="iconify lucide--star size-4 text-orange-600"></span>
+              <span class="iconify lucide--star size-4 text-orange-600"></span>
+              <span class="iconify lucide--star size-4 text-orange-600"></span>
+              <span class="iconify lucide--star size-4 text-orange-600"></span>
+              </div>
+              <p class="mt-1 text-lg font-medium">Nguyễn Vĩnh Linh</p>
+              <p class="text-base-content/60 text-sm">Creator of Mining Rig Monitor</p>
+            </div>
+            <p class="mt-2 text-center text-sm">
+              It's a great time for me to work on this project. I love what I do, and I do what I love.
+            </p>
+          </div>
         </div>
       </div>
-      <br/>
-      <button type="submit" class="block mx-auto w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
-    </.simple_form>
+    </div>
+  <div class="col-span-12 lg:col-span-5 xl:col-span-4 2xl:col-span-3">
+    <div class="flex flex-col items-stretch p-6 md:p-8 lg:p-16">
+      <div class="flex items-center justify-between">
+        <a href="./dashboards-ecommerce.html">
+          <img alt="logo-dark" class="hidden h-5.5 dark:inline" src={~p"/images/logo/logo-dark.png"} />
+          <img alt="logo-light" class="h-5.5 dark:hidden" src={~p"/images/logo/logo-light.png"} />
+        </a>
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-circle btn-outline border-base-300" aria-label="Theme toggle">
+            <span class="iconify lucide--sun hidden size-4 group-data-[theme=light]/html:inline"></span>
+            <span class="iconify lucide--moon hidden size-4 group-data-[theme=dark]/html:inline"></span>
+            <span class="iconify lucide--monitor hidden size-4 group-[:not([data-theme])]/html:inline"></span>
+            <span class="iconify lucide--palette hidden size-4 group-data-[theme=contrast]/html:inline group-data-[theme=dim]/html:inline group-data-[theme=material]/html:inline group-data-[theme=material-dark]/html:inline"></span>
+          </div>
+          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-36 space-y-0.5 p-1 shadow-sm">
+            <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "light"})}>
+              <div data-theme-control="light" class="group-data-[theme=light]/html:bg-base-200 flex gap-2">
+                <span class="iconify lucide--sun size-4.5"></span>
+                <span class="font-medium">Light</span>
+              </div>
+            </li>
+            <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "dark"})}>
+              <div data-theme-control="dark" class="group-data-[theme=dark]/html:bg-base-200 flex gap-2">
+                <span class="iconify lucide--moon size-4.5"></span>
+                <span class="font-medium">Dark</span>
+              </div>
+            </li>
+            <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "system"})}>
+              <div data-theme-control="system" class="group-[:not([data-theme])]/html:bg-base-200 flex gap-2">
+                <span class="iconify lucide--monitor size-4.5"></span>
+                <span class="font-medium">System</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h3 class="mt-8 text-center text-xl font-semibold md:mt-12 lg:mt-24">Login</h3>
+      <h3 class="text-base-content/70 mt-2 text-center text-sm">
+        Seamless Access, Secure Connection: Your Gateway to monitor your mining rigs
+      </h3>
+      <div class="mt-6 md:mt-10">
+        <.form for={@form} action={~p"/users/log_in"} phx-update="ignore">
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Email Address</legend>
+            <label class="input w-full focus:outline-0">
+              <span class="iconify lucide--mail text-base-content/80 size-5"></span>
+              <input class="grow focus:outline-0" placeholder="Email Address" type="email" name={@form[:email].name}  id={@form[:email].id} value={@form[:email].value} />
+            </label>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Password</legend>
+            <label class="input w-full focus:outline-0">
+              <span class="iconify lucide--key-round text-base-content/80 size-5"></span>
+              <input class="grow focus:outline-0" placeholder="Password" type="password" name={@form[:password].name} id={@form[:password].id} />
+              <label class="swap btn btn-xs btn-ghost btn-circle text-base-content/60">
+                <input type="checkbox" aria-label="Show password" data-password={@form[:password].id} />
+                <span class="iconify lucide--eye swap-off size-4"></span>
+                <span class="iconify lucide--eye-off swap-on size-4"></span>
+              </label>
+            </label>
+          </fieldset>
+
+          <div class="mt-4 flex items-center gap-3 md:mt-6">
+            <input class="checkbox checkbox-sm checkbox-primary" aria-label="Checkbox example" type="checkbox" name={@form[:remember_me].name} id={@form[:remember_me].id} />
+              <label for="agreement" class="text-sm">
+                Remember me
+              </label>
+            </div>
+
+          <button type="submit" class="btn btn-primary btn-wide mt-4 max-w-full gap-3 md:mt-6">
+            <span class="iconify lucide--log-in size-4"></span>
+            Login
+          </button>
+        </.form>
+
+
+        <p class="text-base-content/80 mt-4 text-center text-sm md:mt-6">
+          Haven't account
+          <a class="text-primary ms-1 hover:underline" href="http://mrm-docs.hexalink.xyz/04.06-release-commands/#2-create-new-account">
+            Create One
+          </a>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
+
+</Layouts.login>

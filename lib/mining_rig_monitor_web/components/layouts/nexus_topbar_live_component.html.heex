@@ -1,0 +1,172 @@
+<div role="navigation" aria-label="Navbar" class="flex items-center justify-between px-3" id="layout-topbar">
+  <div class="inline-flex items-center gap-3">
+    <label class="btn btn-square btn-ghost btn-sm" aria-label="Leftmenu toggle" for="layout-sidebar-toggle-trigger">
+      <span class="iconify lucide--menu size-5"></span>
+    </label>
+    <!-- Start topbar search  -->
+    <!-- <button class="btn btn-outline btn-sm btn-ghost border-base-300 text-base-content/70 hidden h-9 w-48 justify-start gap-2 !text-sm md:flex">
+         <span class="iconify lucide--search size-4"></span>
+         <span>Search</span>
+         </button>
+         <button class="btn btn-outline btn-sm btn-square btn-ghost border-base-300 text-base-content/70 flex size-9 md:hidden" aria-label="Search">
+         <span class="iconify lucide--search size-4"></span>
+         </button> -->
+    <!-- Start topbar search  -->
+  </div>
+  <div class="inline-flex items-center gap-1.5">
+    <div class="dropdown dropdown-center">
+      <div tabindex="0" role="button" class="btn btn-sm btn-circle btn-ghost" aria-label="Theme toggle">
+        <span class="iconify lucide--sun hidden size-4 size-4.5 group-data-[theme=light]/html:inline"></span>
+        <span class="iconify lucide--moon hidden size-4 size-4.5 group-data-[theme=dark]/html:inline"></span>
+        <span class="iconify lucide--monitor hidden size-4 size-4.5 group-[:not([data-theme])]/html:inline"></span>
+        <span class="iconify lucide--palette hidden size-4 size-4.5 group-data-[theme=contrast]/html:inline group-data-[theme=dim]/html:inline group-data-[theme=material]/html:inline group-data-[theme=material-dark]/html:inline"></span>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 mt-2 w-36 space-y-0.5 p-1 shadow-sm">
+        <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "light"})}>
+          <div class="group-data-[theme=light]/html:bg-base-200 flex gap-2" data-theme-control="light">
+            <span class="iconify lucide--sun size-4.5"></span>
+            <span class="font-medium">Light</span>
+          </div>
+        </li>
+        <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "dark"})}>
+          <div class="group-data-[theme=dark]/html:bg-base-200 flex gap-2" data-theme-control="dark">
+            <span class="iconify lucide--moon size-4.5"></span>
+            <span class="font-medium">Dark</span>
+          </div>
+        </li>
+        <li phx-click={JS.dispatch("phx:set-theme", detail: %{theme: "system"})}>
+          <div class="group-[:not([data-theme])]/html:bg-base-200 flex gap-2" data-theme-control="system">
+            <span class="iconify lucide--monitor size-4.5"></span>
+            <span class="font-medium">System</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- Start: Topbar notification  -->
+    <!-- <div class="dropdown dropdown-bottom sm:dropdown-end max-sm:dropdown-center">
+         <div tabindex="0" role="button" class="btn btn-circle btn-ghost btn-sm" aria-label="Notifications">
+         <span class="iconify lucide--bell size-4.5"></span>
+         </div>
+         <div tabindex="0" class="dropdown-content bg-base-100 rounded-box card card-compact mt-5 w-60 p-2 shadow sm:w-84">
+         <div class="flex items-center justify-between px-2">
+         <p class="text-base font-medium">Notification</p>
+         <button tabindex="0" class="btn btn-sm btn-circle btn-ghost" aria-label="Close">
+         <span class="iconify lucide--x size-4"></span>
+         </button>
+         </div>
+         <div class="flex items-center justify-center">
+         <div class="badge badge-sm badge-primary badge-soft">Today</div>
+         </div>
+         <div class="mt-2">
+         <div class="rounded-box hover:bg-base-200 flex cursor-pointer gap-3 px-2 py-1.5 transition-all">
+         <img class="bg-base-200 mask mask-squircle size-10 p-0.5" alt="" src={~p"/images/avatars/1.png"}>
+         <div class="grow">
+         <p class="text-sm leading-tight">
+         Customer has requested a return for item
+         </p>
+         <p class="text-base-content/60 text-end text-xs leading-tight">
+         1 Hour ago
+         </p>
+         </div>
+         </div>
+         <div class="rounded-box hover:bg-base-200 flex cursor-pointer gap-3 px-2 py-1.5 transition-all">
+         <img class="bg-base-200 mask mask-squircle size-10 p-0.5" alt="" src={~p"/images/avatars/1.png"}>
+         <div class="grow">
+         <p class="text-sm leading-tight">
+         A new review has been submitted for product
+         </p>
+         <p class="text-base-content/60 text-end text-xs leading-tight">
+         1 Hour ago
+         </p>
+         </div>
+         </div>
+         </div>
+         <div class="mt-2 flex items-center justify-center">
+         <div class="badge badge-sm">Previous</div>
+         </div>
+         <div class="mt-2">
+         <div class="rounded-box hover:bg-base-200 flex cursor-pointer gap-3 px-2 py-1.5 transition-all">
+         <img class="bg-base-200 mask mask-squircle size-10 p-0.5" alt="" src={~p"/images/avatars/1.png"}>
+         <div class="grow">
+         <p class="text-sm leading-tight">
+         Prepare for the upcoming weekend promotion
+         </p>
+         <p class="text-base-content/60 text-end text-xs leading-tight">
+         2 Days ago
+         </p>
+         </div>
+         </div>
+         <div class="rounded-box hover:bg-base-200 flex cursor-pointer gap-3 px-2 py-1.5 transition-all">
+         <img class="bg-base-200 mask mask-squircle size-10 p-0.5" alt="" src={~p"/images/avatars/1.png"}>
+         <div class="grow">
+         <p class="text-sm leading-tight">
+         Product 'ABC123' is running low in stock.
+         </p>
+         <p class="text-base-content/60 text-end text-xs leading-tight">
+         3 Days ago
+         </p>
+         </div>
+         </div>
+         <div class="rounded-box hover:bg-base-200 flex cursor-pointer gap-3 px-2 py-1.5 transition-all">
+         <img class="bg-base-200 mask mask-squircle size-10 p-0.5" alt="" src={~p"/images/avatars/1.png"}>
+         <div class="grow">
+         <p class="text-sm leading-tight">
+         Payment received for Order ID: #67890
+         </p>
+         <p class="text-base-content/60 text-end text-xs leading-tight">
+         Week ago
+         </p>
+         </div>
+         </div>
+         </div>
+         <hr class="border-base-300 -mx-2 mt-2">
+         <div class="flex items-center justify-between pt-2">
+         <button class="btn btn-sm btn-ghost">Mark as read</button>
+         <button class="btn btn-sm btn-soft btn-primary">View All</button>
+         </div>
+         </div>
+         </div>
+         <!-- End: Topbar notification  -->
+    <div class="dropdown dropdown-bottom dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost rounded-btn px-1.5">
+        <div class="flex items-center gap-2">
+          <div class="avatar">
+            <div class="bg-base-200 mask mask-squircle w-8">
+              <img alt="Avatar" src={~p"/images/avatars/1.png"} />
+            </div>
+          </div>
+          <div class="-space-y-0.5 text-start">
+            <p class="text-sm">{@current_user.email}</p>
+            <p class="text-base-content/60 text-xs">Profile</p>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-content bg-base-100 rounded-box mt-4 w-44 shadow" tabindex="0">
+        <ul class="menu w-full p-2">
+          <li>
+            <a href={~p"/users/settings"}>
+              <span class="iconify lucide--user size-4"></span>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="http://mrm-docs.hexalink.xyz/">
+              <span class="iconify lucide--help-circle size-4"></span>
+              <span>Help</span>
+            </a>
+          </li>
+        </ul>
+        <hr class="border-base-300">
+        <ul class="menu w-full p-2">
+          <li>
+            <.link href={~p"/users/log_out"} method="delete"
+            class="text-error hover:bg-error/10" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+            Log out
+            </.link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
