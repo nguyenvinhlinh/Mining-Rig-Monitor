@@ -41,15 +41,9 @@ defmodule MiningRigMonitorWeb.Router do
     plug MiningRigMonitorWeb.Plugs.ApiCodeAuthentication, :cpu_gpu_miner
   end
 
-
-  scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser, :no_nav_layout]
-
-    get "/", PageController, :home
-  end
-
   scope "/", MiningRigMonitorWeb do
     pipe_through [:nexus_browser, :require_authenticated_user]
+
     live "/asic_miners",          AsicMinerLive.Index, :index
     live "/asic_miners/new",      AsicMinerLive.New,   :new
     live "/asic_miners/:id/edit", AsicMinerLive.Edit,  :edit
@@ -71,6 +65,14 @@ defmodule MiningRigMonitorWeb.Router do
     live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/edit", CpuGpuMinerPlaybookLive.Edit,  :edit
 
     live "/users/settings", UserSettingsLive, :edit
+  end
+
+  scope "/", MiningRigMonitorWeb do
+    pipe_through [:nexus_browser, :nexus_no_nav_layout]
+
+    live "/users/log_in", UserLoginLive, :new
+    post "/users/log_in", UserSessionController, :create
+    delete "/users/log_out", UserSessionController, :delete
   end
 
   scope "/api/v1" do
@@ -106,35 +108,5 @@ defmodule MiningRigMonitorWeb.Router do
       live_dashboard "/dashboard", metrics: MiningRigMonitorWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
-  end
-
-  ## Authentication routes
-
-  scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
-
-    live_session :redirect_if_user_is_authenticated,
-      on_mount: [{MiningRigMonitorWeb.UserAuth, :redirect_if_user_is_authenticated}],
-      root_layout: {MiningRigMonitorWeb.Layouts, :nexus_root_no_nav} do
-#      live "/users/register", UserRegistrationLive, :new
-      live "/users/log_in", UserLoginLive, :new
-    end
-
-    post "/users/log_in", UserSessionController, :create
-  end
-
-  scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser, :require_authenticated_user]
-
-    live_session :require_authenticated_user,
-      on_mount: [{MiningRigMonitorWeb.UserAuth, :ensure_authenticated}] do
-      live "/users/settings", UserSettingsLive, :edit
-    end
-  end
-
-  scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser]
-
-    delete "/users/log_out", UserSessionController, :delete
   end
 end
