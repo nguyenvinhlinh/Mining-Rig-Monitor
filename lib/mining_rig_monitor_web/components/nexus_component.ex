@@ -9,7 +9,7 @@ defmodule MiningRigMonitorWeb.NexusComponents do
 
   ## Examples
 
-      <.flash_group flash={@flash} />
+      <.nx_flash_group flash={@flash} />
   """
   attr :flash, :map, required: true, doc: "the map of flash messages"
   attr :id, :string, default: "flash-group", doc: "the optional id of flash container"

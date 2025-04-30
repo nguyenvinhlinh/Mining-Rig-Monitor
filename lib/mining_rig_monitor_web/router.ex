@@ -3,15 +3,15 @@ defmodule MiningRigMonitorWeb.Router do
 
   import MiningRigMonitorWeb.UserAuth
 
-  pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-    plug :fetch_current_user
-  end
+  # pipeline :browser do
+  #   plug :accepts, ["html"]
+  #   plug :fetch_session
+  #   plug :fetch_live_flash
+  #   plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root}
+  #   plug :protect_from_forgery
+  #   plug :put_secure_browser_headers
+  #   plug :fetch_current_user
+  # end
 
   pipeline :nexus_browser do
     plug :accepts, ["html"]
@@ -23,9 +23,9 @@ defmodule MiningRigMonitorWeb.Router do
     plug :fetch_current_user
   end
 
-  pipeline :no_nav_layout do
-    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root_no_nav}
-  end
+  # pipeline :no_nav_layout do
+  #   plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root_no_nav}
+  # end
 
   pipeline :nexus_no_nav_layout do
     plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :nexus_root_no_nav}
@@ -104,7 +104,7 @@ defmodule MiningRigMonitorWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
-      pipe_through :browser
+      pipe_through :nexus_browser
 
       live_dashboard "/dashboard", metrics: MiningRigMonitorWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
