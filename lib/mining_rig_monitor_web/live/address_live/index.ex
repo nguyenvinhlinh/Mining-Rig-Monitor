@@ -19,7 +19,7 @@ defmodule MiningRigMonitorWeb.AddressLive.Index do
   end
 
   @impl true
-  def handle_params(params, _url, socket) do
+  def handle_params(_params, _url, socket) do
     socket_mod = socket
     |> assign(:page_title, "Listing Addresses")
     |> assign(:address, nil)

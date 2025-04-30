@@ -7,7 +7,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.Edit do
   alias MiningRigMonitor.CpuGpuMiners
 
   @impl true
-  def mount(%{"id" => id}, session, socket) do
+  def mount(%{"id" => id}, _session, socket) do
     cpu_gpu_miner = CpuGpuMiners.get_cpu_gpu_miner!(id)
 
     form = cpu_gpu_miner

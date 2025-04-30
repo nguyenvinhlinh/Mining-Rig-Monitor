@@ -8,7 +8,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.New do
   embed_templates "new_html/*"
 
   @impl true
-  def mount(%{"cpu_gpu_miner_id" => cpu_gpu_miner_id}, session, socket) do
+  def mount(%{"cpu_gpu_miner_id" => cpu_gpu_miner_id}, _session, socket) do
     cpu_gpu_miner = CpuGpuMiners.get_cpu_gpu_miner!(cpu_gpu_miner_id)
     software_name_option_list = CpuGpuMinerPlaybook.get_software_name_list()
     software_version_option_list = CpuGpuMinerPlaybook.get_software_version_list_by_name("XMRig")
@@ -37,6 +37,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.New do
     {:ok, socket_mod}
   end
 
+  @impl true
   def handle_event("validate", %{"cpu_gpu_miner_playbook" => playbook_params}, socket) do
     params_software_name = Map.get(playbook_params, "software_name")
     software_version_option_list = CpuGpuMinerPlaybook.get_software_version_list_by_name(params_software_name)
@@ -48,6 +49,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.New do
     {:noreply, socket_mod}
   end
 
+  @impl true
   def handle_event("save", %{"cpu_gpu_miner_playbook" => playbook_params}, socket) do
     cpu_gpu_miner = socket.assigns[:cpu_gpu_miner]
     playbook_params_mod = Map.put(playbook_params, "cpu_gpu_miner_id", cpu_gpu_miner.id)

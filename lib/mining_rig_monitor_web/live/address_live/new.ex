@@ -6,16 +6,16 @@ defmodule MiningRigMonitorWeb.AddressLive.New do
   alias MiningRigMonitor.Addresses
 
   @impl true
-  def mount(params, session, socket) do
+  def mount(_params, _session, socket) do
     {:ok, socket}
   end
 
   @impl true
-  def handle_params(params, url, socket) do
+  def handle_params(params, _url, socket) do
     apply_action(socket, socket.assigns.live_action, params)
   end
 
-  @imple true
+  @impl true
   def handle_event("validate", %{"address" => address_params}, socket) do
     form = %Address{}
     |> Address.changeset_new(address_params)
@@ -27,6 +27,7 @@ defmodule MiningRigMonitorWeb.AddressLive.New do
     {:noreply, socket_mod}
   end
 
+  @impl true
   def handle_event("save", %{"address" => address_params}, socket) do
     address_params_mod =
       case socket.assigns.live_action do
@@ -54,7 +55,7 @@ defmodule MiningRigMonitorWeb.AddressLive.New do
   end
 
 
-  defp apply_action(socket, :new_wallet, params) do
+  defp apply_action(socket, :new_wallet, _params) do
     form = %Address{}
     |> Address.changeset_new(%{type: "wallet"})
     |> to_form()
@@ -66,7 +67,7 @@ defmodule MiningRigMonitorWeb.AddressLive.New do
     {:noreply, socket_mod}
   end
 
-  defp apply_action(socket, :new_pool, params) do
+  defp apply_action(socket, :new_pool, _params) do
     form = %Address{}
     |> Address.changeset_new(%{type: "pool"})
     |> to_form()

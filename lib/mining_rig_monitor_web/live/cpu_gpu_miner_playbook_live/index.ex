@@ -3,7 +3,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.Index do
   require Logger
   alias MiningRigMonitor.CpuGpuMiners
   alias MiningRigMonitor.CpuGpuMinerPlaybooks
-  alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
   alias MiningRigMonitor.Repo
 
   on_mount MiningRigMonitorWeb.UserAuthLive

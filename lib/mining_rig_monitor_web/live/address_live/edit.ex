@@ -6,7 +6,7 @@ defmodule MiningRigMonitorWeb.AddressLive.Edit do
   alias MiningRigMonitor.Addresses
 
   @impl true
-  def mount(%{"id" => id}, session, socket) do
+  def mount(%{"id" => id}, _session, socket) do
     address = Addresses.get_address!(id)
     form = address
     |> Address.changeset_update(%{})
@@ -19,11 +19,6 @@ defmodule MiningRigMonitorWeb.AddressLive.Edit do
   end
 
   @impl true
-  def handle_params(params, url, socket) do
-    {:noreply, socket}
-  end
-
-  @imple true
   def handle_event("validate", %{"address" => address_params}, socket) do
     form = %Address{}
     |> Address.changeset_update(address_params)
@@ -35,6 +30,7 @@ defmodule MiningRigMonitorWeb.AddressLive.Edit do
     {:noreply, socket_mod}
   end
 
+  @impl true
   def handle_event("update", %{"address" => address_params}, socket) do
     address = socket.assigns[:address]
     case Addresses.update_address(address, address_params) do

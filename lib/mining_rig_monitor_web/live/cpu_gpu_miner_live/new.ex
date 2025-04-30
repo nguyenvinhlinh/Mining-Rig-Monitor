@@ -7,7 +7,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.New do
   alias MiningRigMonitor.CpuGpuMiners
 
   @impl true
-  def mount(params, session, socket) do
+  def mount(_params, _session, socket) do
     form = %CpuGpuMiner{}
     |> CpuGpuMiner.changeset_new_by_commander(%{})
     |> to_form()
