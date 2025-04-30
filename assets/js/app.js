@@ -16,7 +16,7 @@
 //
 
 // import the Flowbite JS package, For reference, please check: https://flowbite.com/docs/getting-started/phoenix/#install-flowbite
-import "flowbite/dist/flowbite.phoenix.js";
+// import "flowbite/dist/flowbite.phoenix.js";
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
 
@@ -24,9 +24,10 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
-import "../vendor/sidebar.js"
-import "../vendor/charts.js"
 import password_field from "../vendor/password-field.js"
+
+//import "../vendor/sidebar.js"
+//import "../vendor/charts.js"
 
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
