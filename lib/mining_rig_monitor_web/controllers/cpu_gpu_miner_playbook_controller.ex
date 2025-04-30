@@ -62,7 +62,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookController do
     json(conn, data)
   end
 
-  def get_playbook_module_binary(conn, %{"playbook_id" => playbook_id}=params) do
+  def get_playbook_module_binary(conn, %{"playbook_id" => playbook_id}) do
     playbook = CpuGpuMinerPlaybooks.get_cpu_gpu_miner_playbook!(playbook_id)
     module = CpuGpuMinerPlaybook.get_software_module_by_name_and_version(playbook.software_name, playbook.software_version)
 

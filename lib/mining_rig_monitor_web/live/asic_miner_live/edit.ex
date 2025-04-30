@@ -19,12 +19,12 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Edit do
   end
 
   @impl true
-  def handle_params(params, _url, socket) do
+  def handle_params(_params, _url, socket) do
     {:noreply, socket}
   end
 
   @impl true
-  def handle_event("validate", %{"asic_miner" => asic_miner_params}=params, socket) do
+  def handle_event("validate", %{"asic_miner" => asic_miner_params}, socket) do
     asic_miner = socket.assigns[:asic_miner]
     form = asic_miner
     |> AsicMiner.changeset_new_by_commander(asic_miner_params)
