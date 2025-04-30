@@ -57,6 +57,14 @@ defmodule MiningRigMonitorWeb do
     end
   end
 
+  def live_view_container_grow do
+    quote do
+      use Phoenix.LiveView, container: {:div, class: "grow"}
+
+      unquote(html_helpers())
+    end
+  end
+
   def live_component do
     quote do
       use Phoenix.LiveComponent
@@ -84,6 +92,7 @@ defmodule MiningRigMonitorWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import MiningRigMonitorWeb.CoreComponents
+      import MiningRigMonitorWeb.NexusComponents
       import MiningRigMonitorWeb.Gettext
 
       # Shortcut for generating JS commands

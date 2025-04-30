@@ -1,0 +1,53 @@
+<fieldset class="fieldset mt-2 grid grid-cols-4">
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:cpu_coin_name].id}>
+      [CPU] Coin Name
+    </label>
+    <input class="input w-full" id={@form[:cpu_coin_name].id} name={@form[:cpu_coin_name].name} value={@form[:cpu_coin_name].value}>
+    <div :if={used_input?(@form[:cpu_coin_name])} >
+      <p :for={error <- @form[:cpu_coin_name].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:cpu_algorithm].id}>
+      [CPU] Coin Algorithm
+    </label>
+    <input class="input w-full" id={@form[:cpu_algorithm].id} name={@form[:cpu_algorithm].name} value={@form[:cpu_algorithm].value}>
+    <div :if={used_input?(@form[:cpu_algorithm])} >
+      <p :for={error <- @form[:cpu_algorithm].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:cpu_pool_address_id].id}>
+      [CPU] Pool Address
+    </label>
+    <select class="select w-full" id={@form[:cpu_pool_address_id].id} name={@form[:cpu_pool_address_id].name} >
+      { Phoenix.HTML.Form.options_for_select(@pool_address_option_list, @form[:cpu_pool_address_id].value) }
+    </select>
+    <div class="badge badge-accent">$CPU_POOL</div>
+    <div :if={used_input?(@form[:cpu_pool_address_id])} >
+      <p :for={error <- @form[:cpu_pool_address_id].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+
+  <div class="space-y-2">
+    <label class="fieldset-label" for={@form[:cpu_wallet_address_id].id}>
+      [CPU] Wallet Address
+    </label>
+    <select class="select w-full" id={@form[:cpu_wallet_address_id].id} name={@form[:cpu_wallet_address_id].name} >
+      { Phoenix.HTML.Form.options_for_select(@wallet_address_option_list, @form[:cpu_wallet_address_id].value) }
+    </select>
+    <div class="badge badge-accent">$CPU_WALLET</div>
+    <div :if={used_input?(@form[:cpu_wallet_address_id])} >
+      <p :for={error <- @form[:cpu_wallet_address_id].errors} class="alert alert-error alert-soft">
+        {nx_error(error)}
+      </p>
+    </div>
+  </div>
+</fieldset>

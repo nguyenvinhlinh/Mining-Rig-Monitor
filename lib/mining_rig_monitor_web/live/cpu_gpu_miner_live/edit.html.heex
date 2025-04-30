@@ -1,0 +1,57 @@
+<Layouts.nexus_app flash={@flash} current_user={@current_user}>
+  <div id="layout-content">
+    <!-- Start: cpu_gpu_miner_live/edit top -->
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-medium">Edit CPU/GPU Miners - {@cpu_gpu_miner.name}</h3>
+      <div class="breadcrumbs hidden p-0 text-sm sm:inline">
+        <ul>
+          <li><a href={~p"/"} >Minings Rigs</a></li>
+          <li><a href={~p"/cpu_gpu_miners"} >CPU/GPU Miners</a></li>
+          <li><a href={~p"/cpu_gpu_miners/#{@cpu_gpu_miner.id}"} > {@cpu_gpu_miner.name}</a></li>
+          <li class="opacity-80">Edit</li>
+        </ul>
+      </div>
+    </div>
+    <!-- End: cpu_gpu_miner_live/edit top -->
+
+    <!-- Start: cpu_gpu_miner_live/edit form -->
+    <div class="mt-6">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">
+        <div class="card bg-base-100 shadow">
+          <div class="card-body">
+            <div class="card-title">CPU/GPU Miner Information</div>
+            <.form for={@form} method="post"
+                   phx-change="validate"
+                   phx-submit="update">
+              <fieldset class="fieldset mt-2 grid grid-cols-1 gap-4">
+                <div class="space-y-2">
+                  <label class="fieldset-label" for="name">
+                    CPU/GPU Miner Name
+                  </label>
+                  <input class={input_class(@form[:name])}
+                         type="text" id={@form[:name].id} name={@form[:name].name} value={@form[:name].value} placeholder="CPU/GPU Miner Name">
+                  <div :if={used_input?(@form[:name])} >
+                    <p :for={error <- @form[:name].errors} class="alert alert-error alert-soft">
+                      {nx_error(error)}
+                    </p>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="mt-6 flex justify-end gap-3">
+                <a class="btn btn-sm btn-ghost" href={~p"/cpu_gpu_miners"} >
+                  <span class="iconify lucide--x size-4"></span>
+                  Cancel
+                </a>
+                <button class="btn btn-sm btn-primary" type="submit">
+                  <span class="iconify lucide--check size-4"></span>
+                  Save
+                </button>
+              </div>
+            </.form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End: cpu_gpu_miner_live/edit form -->
+  </div>
+</Layouts.nexus_app>

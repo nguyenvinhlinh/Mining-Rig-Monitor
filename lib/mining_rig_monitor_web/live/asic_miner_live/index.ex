@@ -1,28 +1,32 @@
 defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
 
   alias MiningRigMonitor.AsicMiners
   alias MiningRigMonitor.AsicMiners.AsicMiner
   alias MiningRigMonitor.Utility
 
   embed_templates "index_html/*"
+  on_mount MiningRigMonitorWeb.UserAuthLive
 
   @impl true
   def mount(_params, _session, socket) do
     asic_miner_not_activated_list = AsicMiners.list_asic_miners_by_activated_state(false)
-
     asic_miner_activated_list = AsicMiners.list_asic_miners_by_activated_state(true)
     |> Enum.map(fn(e) ->
       %{
         id: e.id,
         name: e.name,
+        model: e.model,
+        model_variant: e.model_variant,
         hashrate_5_min: "Sync...",
         hashrate_30_min: "Sync...",
         coin: "Sync...",
         power: "Sync...",
         max_hashboard_temp: "Sync...",
         max_fan: "Sync...",
-        uptime: "Sync..." }
+        uptime: "Sync...",
+        uptime_class: "badge badge-info"
+  }
     end)
     aggregated_coin_hashrate_map = %{"Crypto" => {"Hashrate Sync...", nil} }
     aggregated_total_power = "Sync..."
@@ -81,6 +85,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
         asic_miner_mod = %{
         id: asic_miner.id,
         name: asic_miner.name,
+        model: "Sync...",
+        model_variant: "Sync...",
         hashrate_5_min: "Sync...",
         hashrate_30_min: "Sync...",
         coin: "Sync...",
@@ -203,24 +209,31 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     max_hashboard_temp_mod = if Kernel.is_nil(max_hashboard_temp), do: "----", else: "#{max_hashboard_temp} ℃"
 
 
-    uptime =
+    {uptime, uptime_class} =
     if Kernel.is_nil(Map.get(asic_miner_log, :uptime, nil)) do
-      "OFFLINE"
+      {"OFFLINE", "badge badge-error"}
     else
       [e1, e2, e3, _e4] = String.split(asic_miner_log.uptime, ":")
-      "#{e1} days, #{e2} hours, #{e3} minutes"
+      {"#{e1} days, #{e2} hours, #{e3} minutes", "badge badge-success"}
     end
+
+
+
+
 
     %{
       id: asic_miner.id,
       name: asic_miner.name,
+      model: asic_miner.model,
+      model_variant: asic_miner.model_variant,
       hashrate_5_min: hashrate_5_min,
       hashrate_30_min: hashrate_30_min,
       coin: coin,
       power: power,
       max_hashboard_temp: max_hashboard_temp_mod,
       max_fan: max_fan_mod,
-      uptime: uptime
+      uptime: uptime,
+      uptime_class: uptime_class
       }
   end
 end

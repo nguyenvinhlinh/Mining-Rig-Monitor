@@ -1,0 +1,104 @@
+/* == Apex Charts == */
+.apexcharts-canvas {
+    * {
+        @apply !font-body;
+    }
+
+    .apexcharts-gridline,
+    .apexcharts-xaxis line,
+    .apexcharts-inner .apexcharts-grid-borders line,
+    .apexcharts-yaxis line,
+    .apexcharts-xaxis-tick {
+        @apply stroke-base-content/15;
+    }
+
+    .apexcharts-menu {
+        @apply !border-base-300 !bg-base-100;
+
+        .apexcharts-menu-item {
+            @apply hover:bg-base-200;
+        }
+    }
+
+    .apexcharts-tooltip {
+        @apply !bg-base-100 !border-base-300 !shadow;
+
+        .apexcharts-tooltip-title {
+            @apply !bg-base-200 !border-base-300;
+        }
+    }
+
+    .apexcharts-xaxis,
+    .apexcharts-yaxis {
+        text {
+            @apply !fill-base-content;
+        }
+    }
+
+    .apexcharts-tooltip-text {
+        @apply text-base-content;
+    }
+
+    .apexcharts-xaxistooltip {
+        @apply !bg-base-100 !border-base-300;
+
+        &:before {
+            @apply !border-b-base-300;
+        }
+
+        &:after {
+            @apply !border-b-base-300;
+        }
+    }
+
+    .apexcharts-title-text,
+    .apexcharts-datalabels-group .apexcharts-text {
+        @apply !fill-base-content;
+    }
+
+    .apexcharts-legend-marker {
+        path.apexcharts-marker {
+            @apply stroke-transparent;
+        }
+    }
+
+    .apexcharts-legend-text {
+        @apply !text-base-content;
+    }
+
+    .apexcharts-series-markers-wrap {
+        .apexcharts-series-markers {
+            path {
+                @apply stroke-base-200;
+            }
+        }
+    }
+}
+
+/* == File Pond == */
+
+.filepond--root {
+    @apply !font-body !mb-0 max-sm:!text-sm;
+
+    .filepond--drop-label,
+    .filepond--panel-root {
+        @apply rounded-box bg-base-200 text-base-content;
+    }
+}
+
+/* == Simplebar == */
+.simplebar-vertical {
+    .simplebar-scrollbar {
+        &:before {
+            @apply !bg-base-content/20;
+            left: 3px !important;
+        }
+
+        &:hover {
+            &:before {
+                @apply !bg-base-content/35;
+                left: 3px !important;
+            }
+        }
+    }
+}

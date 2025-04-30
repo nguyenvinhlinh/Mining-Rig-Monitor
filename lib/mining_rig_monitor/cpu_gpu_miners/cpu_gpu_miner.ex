@@ -5,6 +5,8 @@ defmodule MiningRigMonitor.CpuGpuMiners.CpuGpuMiner do
   alias MiningRigMonitor.CpuGpuMinerLogs.CpuGpuMinerLog
   alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
 
+  require Logger
+
   schema "cpu_gpu_miners" do
     field :name, :string
     field :api_code, :string
@@ -39,15 +41,19 @@ defmodule MiningRigMonitor.CpuGpuMiners.CpuGpuMiner do
   end
 
   def changeset_new_by_commander(cpu_gpu_miner, attrs) do
+    Logger.warning("[CpuGpuMiners.CpuGpuMiner] changeset_new_by_commander/2 replace func a better name")
     cpu_gpu_miner
     |> cast(attrs, [:name, :api_code])
     |> validate_required([:name, :api_code])
+    |> validate_length(:name, [min: 2])
   end
 
   def changeset_edit_by_commander(cpu_gpu_miner, attrs) do
+    Logger.warning("[CpuGpuMiners.CpuGpuMiner] changeset_edit_by_commander/2 replace func a better name")
     cpu_gpu_miner
     |> cast(attrs, [:name])
     |> validate_required([:name])
+    |> validate_length(:name, [min: 2])
   end
 
 

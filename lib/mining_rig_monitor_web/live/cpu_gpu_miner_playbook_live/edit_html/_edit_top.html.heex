@@ -1,0 +1,21 @@
+<div class="flex items-center justify-between">
+  <h3 class="text-lg font-medium">{@cpu_gpu_miner.name} - Edit playbook</h3>
+  <div class="breadcrumbs hidden p-0 text-sm sm:inline">
+    <ul>
+      <li><a href={~p"/"} >Minings Rigs</a></li>
+      <li><a href={~p"/cpu_gpu_miners"} >CPU/GPU Miners</a></li>
+      <li><a href={~p"/cpu_gpu_miners/#{@cpu_gpu_miner.id}"}>{@cpu_gpu_miner.name}</a></li>
+      <li>
+        <a href={~p"/cpu_gpu_miners/#{@cpu_gpu_miner.id}/playbooks"}>
+          Playbooks
+        </a>
+      </li>
+      <li>
+        <a href={~p"/cpu_gpu_miners/#{@cpu_gpu_miner.id}/playbooks/#{@cpu_gpu_miner_playbook.id}"}>
+          {@cpu_gpu_miner_playbook.software_name} {@cpu_gpu_miner_playbook.software_version}
+        </a>
+      </li>
+      <li class="opacity-80">Edit</li>
+    </ul>
+  </div>
+</div>

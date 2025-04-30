@@ -1,81 +1,78 @@
-<div class="mx-1 p-1 mb-1
-  sm:mx-2 sm:p-2 sm:mb-3
-  md:mx-4 md:p-4 md:mb-4
-  bg-white border border-gray-200 rounded-lg shadow-sm  dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+<div class="mt-6">
+  <div class="bg-base-100 card shadow">
+    <div class="card-body p-5">
+      <!-- Start: card-body title -->
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-3">
+          <b>General Information</b>
+        </div>
+        <div class="inline-flex items-center gap-3">
+          <a class="btn btn-primary btn-sm max-sm:btn-square" href={~p"/cpu_gpu_miners/#{@cpu_gpu_miner.id}/playbooks"}>
+            <span class="iconify lucide--file-code size-4"></span>
+            <span class="hidden sm:inline">Mining Playbooks</span>
+          </a>
+        </div>
+      </div>
+      <!-- End: card-body title -->
 
-  <h3 class="mb-4 text-xl font-semibold dark:text-white">
-    General Information
-  </h3>
+      <div class="mt-3 grid grid-cols-8">
+        <ul class="list-disc px-5 col-span-8 sm:col-span-4 lg:col-span-2">
+          <li>
+            <b>Motherboard:</b> <%= @cpu_gpu_miner.motherboard_name %>
+          </li>
+          <li>
+            <b>CPU:</b> <%= @cpu_gpu_miner.cpu_name %>
+          </li>
+          <li>
+            <b>RAM:</b> <%= @cpu_gpu_miner.ram_size %>
+          </li>
+        </ul>
 
-  <div class="grid grid-cols-12">
-    <div class="col-span-12 2xl:col-span-4
-      text-base font-medium text-gray-900 dark:text-white">
-      <ul class="list-disc px-5">
-        <li>
-          <b>Motherboard:</b> <%= @cpu_gpu_miner.motherboard_name %>
-        </li>
-        <li>
-          <b>CPU:</b> <%= @cpu_gpu_miner.cpu_name %>
-        </li>
-        <li>
-          <b>RAM:</b> <%= @cpu_gpu_miner.ram_size %>
-        </li>
-      </ul>
-    </div>
+        <ul class="list-disc px-5 col-span-8 sm:col-span-4 lg:col-span-2">
+          <li>
+            <b>Uptime:</b>  { @cpu_gpu_miner_log.uptime}
+          </li>
+          <li>
+            <b>LAN IP:</b> { @cpu_gpu_miner_log.lan_ip }
+          </li>
+          <li>
+            <b>WAN IP:</b> { @cpu_gpu_miner_log.wan_ip }
+          </li>
+          <li>
+            <b>API Code:</b> { @cpu_gpu_miner.api_code }
+          </li>
+        </ul>
 
-    <div class="col-span-12 md:col-span-6 2xl:col-span-4
-      text-base font-medium text-gray-900 dark:text-white">
-      <ul class="list-disc px-5">
-        <li :if={@cpu_gpu_miner.gpu_1_name}>
-          <b>GPU[1]:</b> <%= @cpu_gpu_miner.gpu_1_name %>
-        </li>
-        <li :if={@cpu_gpu_miner.gpu_2_name}>
-          <b>GPU[2]:</b> <%= @cpu_gpu_miner.gpu_2_name %>
-        </li>
-        <li :if={@cpu_gpu_miner.gpu_3_name} >
-          <b>GPU[3]:</b> <%= @cpu_gpu_miner.gpu_3_name %>
-        </li>
-        <li :if={@cpu_gpu_miner.gpu_4_name}>
-          <b>GPU[4]:</b> <%= @cpu_gpu_miner.gpu_4_name %>
-        </li>
-      </ul>
-    </div>
+        <ul class="list-disc px-5 col-span-8 sm:col-span-4 lg:col-span-2">
+          <li :if={@cpu_gpu_miner.gpu_1_name}>
+            <b>GPU[1]:</b> <%= @cpu_gpu_miner.gpu_1_name %>
+          </li>
+          <li :if={@cpu_gpu_miner.gpu_2_name}>
+            <b>GPU[2]:</b> <%= @cpu_gpu_miner.gpu_2_name %>
+          </li>
+          <li :if={@cpu_gpu_miner.gpu_3_name} >
+            <b>GPU[3]:</b> <%= @cpu_gpu_miner.gpu_3_name %>
+          </li>
+          <li :if={@cpu_gpu_miner.gpu_4_name}>
+            <b>GPU[4]:</b> <%= @cpu_gpu_miner.gpu_4_name %>
+          </li>
+        </ul>
 
-    <div class="col-span-12 md:col-span-6 2xl:col-span-4
-      text-base font-medium text-gray-900 dark:text-white">
-      <ul class="list-disc px-5">
-        <li :if={@cpu_gpu_miner.gpu_5_name}>
-          <b>GPU[5]:</b> <%= @cpu_gpu_miner.gpu_5_name %>
-        </li>
-        <li :if={@cpu_gpu_miner.gpu_6_name}>
-          <b>GPU[6]:</b> <%= @cpu_gpu_miner.gpu_6_name %>
-        </li>
-        <li :if={@cpu_gpu_miner.gpu_7_name}>
-          <b>GPU[7]:</b> <%= @cpu_gpu_miner.gpu_7_name %>
-        </li>
-        <li :if={@cpu_gpu_miner.gpu_8_name}>
-          <b>GPU[8]:</b> <%= @cpu_gpu_miner.gpu_8_name %>
-        </li>
-      </ul>
-    </div>
-
-    <div class="col-span-12
-      text-base font-medium text-gray-900 dark:text-white">
-      <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
-      <ul class="list-disc px-5">
-        <li>
-          <b>Uptime:</b>  { @cpu_gpu_miner_log.uptime}
-        </li>
-        <li>
-          <b>LAN IP:</b> { @cpu_gpu_miner_log.lan_ip }
-        </li>
-        <li>
-          <b>WAN IP:</b> { @cpu_gpu_miner_log.wan_ip }
-        </li>
-        <li>
-          <b>API Code:</b> { @cpu_gpu_miner.api_code }
-        </li>
-      </ul>
+        <ul class="list-disc px-5 col-span-8 sm:col-span-4 lg:col-span-2">
+          <li :if={@cpu_gpu_miner.gpu_5_name}>
+            <b>GPU[5]:</b> <%= @cpu_gpu_miner.gpu_5_name %>
+          </li>
+          <li :if={@cpu_gpu_miner.gpu_6_name}>
+            <b>GPU[6]:</b> <%= @cpu_gpu_miner.gpu_6_name %>
+          </li>
+          <li :if={@cpu_gpu_miner.gpu_7_name}>
+            <b>GPU[7]:</b> <%= @cpu_gpu_miner.gpu_7_name %>
+          </li>
+          <li :if={@cpu_gpu_miner.gpu_8_name}>
+            <b>GPU[8]:</b> <%= @cpu_gpu_miner.gpu_8_name %>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

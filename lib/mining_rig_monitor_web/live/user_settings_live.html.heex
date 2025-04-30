@@ -1,16 +1,11 @@
-<Layouts.app flash={@flash}>
-  <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-2 xl:gap-4 dark:bg-gray-900">
-    <div class="mb-4 col-span-full xl:mb-2">
-      <._breadcrumb />
-    </div>
-    <!-- Right Content -->
-    <div class="col-span-1">
-      <._email_information email_form={ @email_form } email_form_current_password={@email_form_current_password} />
-    </div>
+<Layouts.nexus_app flash={@flash} current_user={@current_user}>
+  <div id="layout-content">
+    <._breadcrumb />
 
-    <div class="col-span-1">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <._email_information email_form={ @email_form } email_form_current_password={@email_form_current_password} />
       <._password_information password_form={ @password_form} trigger_submit={ @trigger_submit }
         current_email={@current_email} current_password={@current_password}/>
     </div>
   </div>
-</Layouts.app>
+</Layouts.nexus_app>

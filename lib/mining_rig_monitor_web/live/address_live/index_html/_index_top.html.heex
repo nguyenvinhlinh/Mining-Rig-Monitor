@@ -1,31 +1,9 @@
-<div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
-  <div class="mb-4 col-span-full xl:mb-2">
-    <nav class="flex mb-5" aria-label="Breadcrumb">
-      <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
-        <li class="inline-flex items-center">
-          <a href={~p(/)} class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
-            <.icon name="hero-home-solid" class="size-5 mr-2.5"  />
-            Home
-          </a>
-        </li>
-        <li>
-          <div class="flex items-center">
-            <.icon name="hero-chevron-right-solid" class="size-6 text-gray-400" />
-            <.icon name="hero-book-open-solid" class="size-5" />
-            <a href={~p(/addresses)} class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Address Book</a>
-          </div>
-        </li>
-      </ol>
-    </nav>
-    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white inline">
-      Address Book
-    </h1>
-    <.link patch={~p"/addresses/new"} class="float-right">
-      <.button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2
-        dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-        type="button">
-        New Address
-      </.button>
-    </.link>
+<div class="flex items-center justify-between">
+  <h3 class="text-lg font-medium">Address Book</h3>
+  <div class="breadcrumbs hidden p-0 text-sm sm:inline">
+    <ul>
+      <li><a href={~p"/"} >Minings Rigs</a></li>
+      <li class="opacity-80">Address Book</li>
+    </ul>
   </div>
 </div>

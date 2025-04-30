@@ -1,0 +1,93 @@
+<div class="mt-6">
+  <div class="bg-base-100 card shadow">
+    <div class="card-body p-0">
+      <!-- Start: card-body title -->
+      <div class="flex items-center justify-between px-5 pt-5">
+        <div class="inline-flex items-center gap-3">
+          <b>GPU Mining</b>
+        </div>
+      </div>
+      <!-- End: card-body title -->
+
+      <div class="mt-4 overflow-auto *:text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>GPU</th>
+              <th>Coin</th>
+              <th>Hashrate(Algorithm)</th>
+              <th>Core / Memory Clock</th>
+              <th>Core / Memory Temp.</th>
+              <th>Fan Speed</th>
+              <th>Power(W)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr :for={i <- 1..8} :if={ Map.get(@cpu_gpu_miner, String.to_atom("gpu_#{i}_name")) }  >
+              <td>
+                <p class="font-medium">
+                  [{i}] { Map.get(@cpu_gpu_miner,  String.to_atom("gpu_#{i}_name")) }
+                </p>
+
+              </td>
+              <td>
+                {@cpu_gpu_miner_log.gpu_coin_name_1}
+                <br :if={@cpu_gpu_miner_log.gpu_coin_name_2} /> {@cpu_gpu_miner_log.gpu_coin_name_2}
+              </td>
+              <td>
+                <div :if={@cpu_gpu_miner_log.gpu_coin_name_1} class="flex items-center gap-2">
+                  <span class="iconify lucide--activity size-4"></span>
+                  { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_1")) }
+                  { @cpu_gpu_miner_log.gpu_hashrate_uom_1 }
+                  { @cpu_gpu_miner_log.gpu_algorithm_1 }
+                </div>
+                <div :if={@cpu_gpu_miner_log.gpu_coin_name_2} class="flex items-center gap-2">
+                  <span class="iconify lucide--activity size-4"></span>
+                  { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_hashrate_2")) }
+                  { @cpu_gpu_miner_log.gpu_hashrate_uom_2 }
+                  { @cpu_gpu_miner_log.gpu_algorithm_2 }
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--cpu size-4"></span>
+                  <span class="iconify lucide--audio-lines size-4"></span>
+                  { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_clock")) } Mhz
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--microchip size-4"></span>
+                  <span class="iconify lucide--audio-lines size-4"></span>
+                  { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_clock")) } MHz
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--cpu size-4"></span>
+                  <span class="iconify lucide--thermometer size-4"></span>
+                  { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_core_temp")) }℃
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--microchip size-4"></span>
+                  <span class="iconify lucide--thermometer size-4"></span>
+                  { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_mem_temp")) }℃
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--fan size-4"></span>
+                  { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_fan")) }{ Map.get(@cpu_gpu_miner_log, :gpu_fan_uom) }
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--zap size-4"></span>
+                  { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_#{i}_power")) }W
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

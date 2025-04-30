@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" class="group/html">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title default="Mining Rig Monitor" suffix=" · Phoenix Framework">
+    {assigns[:page_title]}
+    </.live_title>
+
+    <link rel="shortcut icon" href={~p"/images/favicon-dark.png"}  media="(prefers-color-scheme: dark)" />
+    <link rel="shortcut icon" href={~p"/images/favicon-light.png"} media="(prefers-color-scheme: light)" />
+    <!-- Font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;1000&display=swap" rel="stylesheet" />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}></script>
+    <link rel="stylesheet" href={~p"/assets/nexus_app.css"} />
+
+    <!-- This script is copy from newly generated mix phx.new -->
+    <script>
+     (() => {
+       const setTheme = (theme) => {
+         if (theme === "system") {
+           localStorage.removeItem("phx:theme");
+           document.documentElement.removeAttribute("data-theme");
+         } else {
+           localStorage.setItem("phx:theme", theme);
+           document.documentElement.setAttribute("data-theme", theme);
+         }
+       };
+       setTheme(localStorage.getItem("phx:theme") || "system");
+       window.addEventListener("storage", (e) => e.key === "phx:theme" && setTheme(e.newValue || "system"));
+       window.addEventListener("phx:set-theme", ({ detail: { theme } }) => setTheme(theme));
+     })();
+    </script>
+  </head>
+
+  <body>
+    <div class="size-full">
+      <div class="flex">
+        <._nexus_root_sidebar />
+        <div class="flex h-screen min-w-0 grow flex-col overflow-auto">
+          {@inner_content}
+          <._nexus_root_footer />
+        </div>
+      </div>
+    </div>
+
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.7/simplebar.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.7/simplebar.css" />
+</html>

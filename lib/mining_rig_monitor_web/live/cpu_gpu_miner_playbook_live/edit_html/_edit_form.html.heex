@@ -1,0 +1,47 @@
+<div class="mt-6">
+  <div class="grid">
+    <div class="card bg-base-100 shadow">
+      <div class="card-body">
+        <div class="card-title">CPU/GPU Miner Playbook</div>
+        <.form for={@form}
+          phx-change="validate"
+          phx-submit="save">
+        <._edit_form_software form={@form}
+          software_name_option_list={@software_name_option_list}
+          software_version_option_list={@software_version_option_list} />
+
+        <div class="divider">
+          <b>CPU Mining</b>
+        </div>
+        <._edit_form_cpu form={@form}
+          pool_address_option_list={@pool_address_option_list}
+          wallet_address_option_list={@wallet_address_option_list} />
+
+        <div class="divider">
+          <b>GPU Mining [1]</b>
+        </div>
+        <._edit_form_gpu_1 form={@form}
+          pool_address_option_list={@pool_address_option_list}
+          wallet_address_option_list={@wallet_address_option_list} />
+
+        <div class="divider">
+          <b>GPU Mining [2]</b>
+        </div>
+        <._edit_form_gpu_2 form={@form}
+          pool_address_option_list={@pool_address_option_list}
+          wallet_address_option_list={@wallet_address_option_list} />
+        <div class="mt-6 flex justify-end gap-3">
+          <a class="btn btn-sm btn-ghost" href={~p"/cpu_gpu_miners"} >
+            <span class="iconify lucide--x size-4"></span>
+            Cancel
+          </a>
+          <button class="btn btn-sm btn-primary" type="submit">
+            <span class="iconify lucide--check size-4"></span>
+            Update
+          </button>
+        </div>
+        </.form>
+      </div>
+    </div>
+  </div>
+</div>

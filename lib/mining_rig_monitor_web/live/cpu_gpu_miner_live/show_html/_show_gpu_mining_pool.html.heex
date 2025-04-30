@@ -1,0 +1,42 @@
+<div class="mt-6">
+  <div class="bg-base-100 card shadow">
+    <div class="card-body p-0">
+      <!-- Start: card-body title -->
+      <div class="flex items-center justify-between px-5 pt-5">
+        <div class="inline-flex items-center gap-3">
+          <b>GPU Mining Pools</b>
+        </div>
+      </div>
+      <!-- End: card-body title -->
+
+      <div class="mt-4 overflow-auto *:text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Pool Address</th>
+              <th>Wallet Address</th>
+              <th>Algorithm</th>
+              <th>Coin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr :for={i <- [1,2]} :if={ Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) } >
+              <td>
+                { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_pool_address_#{i}")) }
+              </td>
+              <td>
+                { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_wallet_address_#{i}")) }
+              </td>
+              <td>
+                { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_algorithm_#{i}")) }
+              </td>
+              <td>
+                { Map.get(@cpu_gpu_miner_log, String.to_atom("gpu_coin_name_#{i}")) }
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

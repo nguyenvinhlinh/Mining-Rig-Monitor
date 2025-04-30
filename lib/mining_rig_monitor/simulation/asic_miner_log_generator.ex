@@ -62,7 +62,7 @@ defmodule MiningRigMonitor.Simulation.AsicMinerLogGenerator do
     %{
       "hashrate_5_min" => hashrate_5_min,
       "hashrate_30_min" => hashrate_30_min,
-      "hashrate_uom" => "G",
+      "hashrate_uom" => "GH/s",
       "pool_rejection_rate" => 0.0001,
       "uptime" => "07:23:50:20",
       "pool_1_address" => "stratum+tcp://#{UUID.uuid1()}:4441",

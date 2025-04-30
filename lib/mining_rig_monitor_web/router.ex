@@ -3,18 +3,18 @@ defmodule MiningRigMonitorWeb.Router do
 
   import MiningRigMonitorWeb.UserAuth
 
-  pipeline :browser do
+  pipeline :nexus_browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root}
+    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :nexus_root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
   end
 
-  pipeline :no_nav_layout do
-    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :root_no_nav}
+  pipeline :nexus_no_nav_layout do
+    plug :put_root_layout, html: {MiningRigMonitorWeb.Layouts, :nexus_root_no_nav}
   end
 
   pipeline :api_asic_miner do
@@ -27,39 +27,39 @@ defmodule MiningRigMonitorWeb.Router do
     plug MiningRigMonitorWeb.Plugs.ApiCodeAuthentication, :cpu_gpu_miner
   end
 
-
   scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser, :no_nav_layout]
+    pipe_through [:nexus_browser, :require_authenticated_user]
 
-    get "/", PageController, :home
+    live "/",                     AsicMinerLive.Index, :index
+    live "/asic_miners",          AsicMinerLive.Index, :index
+    live "/asic_miners/new",      AsicMinerLive.New,   :new
+    live "/asic_miners/:id/edit", AsicMinerLive.Edit,  :edit
+    live "/asic_miners/:id",      AsicMinerLive.Show,  :show
 
+    live "/cpu_gpu_miners",          CpuGpuMinerLive.Index, :index
+    live "/cpu_gpu_miners/new",      CpuGpuMinerLive.New,   :new
+    live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Edit,  :edit
+    live "/cpu_gpu_miners/:id",      CpuGpuMinerLive.Show,  :show
+
+    live "/addresses",            AddressLive.Index, :index
+    live "/addresses/new_wallet", AddressLive.New,   :new_wallet
+    live "/addresses/new_pool",   AddressLive.New,   :new_pool
+    live "/addresses/:id/edit",   AddressLive.Edit,  :edit
+
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks",                   CpuGpuMinerPlaybookLive.Index, :index
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new",               CpuGpuMinerPlaybookLive.New,   :new
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id",      CpuGpuMinerPlaybookLive.Show,  :show
+    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/edit", CpuGpuMinerPlaybookLive.Edit,  :edit
+
+    live "/users/settings", UserSettingsLive, :edit
   end
 
   scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser, :require_authenticated_user]
-    live "/asic_miners", AsicMinerLive.Index, :index
-    live "/asic_miners/new", AsicMinerLive.Index, :new
-    live "/asic_miners/:id/edit", AsicMinerLive.Index, :edit
+    pipe_through [:nexus_browser, :nexus_no_nav_layout]
 
-    live "/asic_miners/:id", AsicMinerLive.Show, :show
-
-    live "/cpu_gpu_miners", CpuGpuMinerLive.Index, :index
-    live "/cpu_gpu_miners/new", CpuGpuMinerLive.Index, :new
-    live "/cpu_gpu_miners/:id/edit", CpuGpuMinerLive.Index, :edit
-    live "/cpu_gpu_miners/:id", CpuGpuMinerLive.Show, :show
-
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks", CpuGpuMinerPlaybookLive.Index, :index
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new", CpuGpuMinerPlaybookLive.Index, :new
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/edit", CpuGpuMinerPlaybookLive.Index, :edit
-
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id",          CpuGpuMinerPlaybookLive.Show, :show
-    live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/show/edit", CpuGpuMinerPlaybookLive.Show, :edit
-
-    live "/addresses", AddressLive.Index, :index
-    live "/addresses/new", AddressLive.Index, :new
-    live "/addresses/:id/edit", AddressLive.Index, :edit
-
-
+    live "/users/log_in", UserLoginLive, :new
+    post "/users/log_in", UserSessionController, :create
+    delete "/users/log_out", UserSessionController, :delete
   end
 
   scope "/api/v1" do
@@ -90,40 +90,10 @@ defmodule MiningRigMonitorWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
-      pipe_through :browser
+      pipe_through :nexus_browser
 
       live_dashboard "/dashboard", metrics: MiningRigMonitorWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
-  end
-
-  ## Authentication routes
-
-  scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
-
-    live_session :redirect_if_user_is_authenticated,
-      on_mount: [{MiningRigMonitorWeb.UserAuth, :redirect_if_user_is_authenticated}],
-      root_layout: {MiningRigMonitorWeb.Layouts, :root_no_nav} do
-      live "/users/register", UserRegistrationLive, :new
-      live "/users/log_in", UserLoginLive, :new
-    end
-
-    post "/users/log_in", UserSessionController, :create
-  end
-
-  scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser, :require_authenticated_user]
-
-    live_session :require_authenticated_user,
-      on_mount: [{MiningRigMonitorWeb.UserAuth, :ensure_authenticated}] do
-      live "/users/settings", UserSettingsLive, :edit
-    end
-  end
-
-  scope "/", MiningRigMonitorWeb do
-    pipe_through [:browser]
-
-    delete "/users/log_out", UserSessionController, :delete
   end
 end

@@ -125,7 +125,7 @@ monero_address = %Address{
 |> Repo.insert!
 
 %Address{
-  name: "Ethereum",
+  name: "Beam",
   type: "wallet",
   address: "0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E"
 }

@@ -42,13 +42,23 @@ config :esbuild,
   ]
 
 # Configure tailwind (the version is required)
+# config :tailwind,
+#   version: "3.4.3",
+#   mining_rig_monitor: [
+#     args: ~w(
+#       --config=tailwind.config.js
+#       --input=css/app.css
+#       --output=../priv/static/assets/app.css
+#     ),
+#     cd: Path.expand("../assets", __DIR__)
+#   ]
+
 config :tailwind,
-  version: "3.4.3",
+  version: "4.1.4",
   mining_rig_monitor: [
     args: ~w(
-      --config=tailwind.config.js
-      --input=css/app.css
-      --output=../priv/static/assets/app.css
+      --input=css/nexus_app.css
+      --output=../priv/static/assets/nexus_app.css
     ),
     cd: Path.expand("../assets", __DIR__)
   ]
