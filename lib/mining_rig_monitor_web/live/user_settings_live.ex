@@ -1,9 +1,9 @@
 defmodule MiningRigMonitorWeb.UserSettingsLive do
-  use MiningRigMonitorWeb, :live_view
+  use MiningRigMonitorWeb, :live_view_container_grow
 
   alias MiningRigMonitor.Accounts
   embed_templates "user_settings_live_html/*"
-
+  on_mount MiningRigMonitorWeb.UserAuthLive
   def mount(_params, _session, socket) do
     user = socket.assigns.current_user
     email_changeset = Accounts.change_user_email(user)

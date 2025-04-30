@@ -69,6 +69,8 @@ defmodule MiningRigMonitorWeb.Router do
     live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/new",               CpuGpuMinerPlaybookLive.New,   :new
     live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id",      CpuGpuMinerPlaybookLive.Show,  :show
     live "/cpu_gpu_miners/:cpu_gpu_miner_id/playbooks/:playbook_id/edit", CpuGpuMinerPlaybookLive.Edit,  :edit
+
+    live "/users/settings", UserSettingsLive, :edit
   end
 
   scope "/api/v1" do
@@ -114,7 +116,7 @@ defmodule MiningRigMonitorWeb.Router do
     live_session :redirect_if_user_is_authenticated,
       on_mount: [{MiningRigMonitorWeb.UserAuth, :redirect_if_user_is_authenticated}],
       root_layout: {MiningRigMonitorWeb.Layouts, :nexus_root_no_nav} do
-      live "/users/register", UserRegistrationLive, :new
+#      live "/users/register", UserRegistrationLive, :new
       live "/users/log_in", UserLoginLive, :new
     end
 
