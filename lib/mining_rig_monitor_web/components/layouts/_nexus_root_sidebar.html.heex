@@ -13,60 +13,60 @@
         </div>
         <div class="simplebar-mask">
           <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-            <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px;">
-              <div id="sidebar-menu">
-
-                <p class="sidebar-menu-title">Mining Rigs</p>
-                <a class="sidebar-menu-item" href={~p"/asic_miners"}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cpu-icon lucide-cpu"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg>
-                  ASIC Miner
-                </a>
-                <a class="sidebar-menu-item" href={~p"/cpu_gpu_miners"}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-microchip-icon lucide-microchip"><path d="M18 12h2"/><path d="M18 16h2"/><path d="M18 20h2"/><path d="M18 4h2"/><path d="M18 8h2"/><path d="M4 12h2"/><path d="M4 16h2"/><path d="M4 20h2"/><path d="M4 4h2"/><path d="M4 8h2"/><path d="M8 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-1.5c-.276 0-.494.227-.562.495a2 2 0 0 1-3.876 0C9.994 2.227 9.776 2 9.5 2z"/></svg>
-                  CPU/GPU Miner
-                </a>
-                <a class="sidebar-menu-item" href={~p"/addresses"}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-user-icon lucide-book-user"><path d="M15 13a3 3 0 1 0-6 0"/><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><circle cx="12" cy="8" r="2"/></svg>
-                  Address Book
-                </a>
+            <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
+              <div class="simplebar-content" style="padding: 0px;">
+                <div id="sidebar-menu">
+                  <!-- Start: mining rig group -->
+                  <p class="sidebar-menu-title">Mining Rigs</p>
+                  <a class="sidebar-menu-item" href={~p"/asic_miners"}>
+                    <span class="iconify lucide--cpu size-5"></span>
+                    ASIC Miner
+                  </a>
+                  <a class="sidebar-menu-item" href={~p"/cpu_gpu_miners"}>
+                    <span class="iconify lucide--microchip size-5"></span>
+                    CPU/GPU Miner
+                  </a>
+                  <a class="sidebar-menu-item" href={~p"/addresses"}>
+                    <span class="iconify lucide--book-user size-5"></span>
+                    Address Book
+                  </a>
+                  <!-- End: mining rig group -->
+                  <!-- Start: Software group -->
+                  <p class="sidebar-menu-title">Softwares</p>
+                  <a class="sidebar-menu-item" href="https://github.com/nguyenvinhlinh/ASIC-Sentry/releases">
+                    <span class="iconify lucide--package size-5"></span>
+                    ASIC Sentry
+                  </a>
+                  <a class="sidebar-menu-item" href="https://github.com/nguyenvinhlinh/CPU-GPU-Sentry/releases">
+                    <span class="iconify lucide--package size-5"></span>
+                    CPU/GPU Sentry
+                  </a>
+                  <!-- End: Software group -->
+                  <!-- Start: Other group -->
+                  <p class="sidebar-menu-title">Others</p>
+                  <a class="sidebar-menu-item" href="https://miningpoolstats.stream/newcoins">
+                    <span class="iconify lucide--link size-5"></span>
+                    Mining Pool Stats
+                  </a>
+                  <a class="sidebar-menu-item" href="https://www.hashrate.no">
+                    <span class="iconify lucide--link size-5"></span>
+                    https://www.hashrate.no
+                  </a>
+                  <a class="sidebar-menu-item" href="https://minerstat.com/hardware/asics">
+                    <span class="iconify lucide--link size-5"></span>
+                    Minerstats - Best ASIC
+                  </a>
+                  <a class="sidebar-menu-item" href="https://minerstat.com/hardware/gpus">
+                    <span class="iconify lucide--link size-5"></span>
+                    Minerstats - Best GPU
+                  </a>
+                  <a class="sidebar-menu-item" href="https://minerstat.com/hashrate-converter">
+                    <span class="iconify lucide--link size-5"></span>
+                    Hashrate converter
+                  </a>
+                  <!-- End: Other group -->
+                </div>
               </div>
-
-              <div id="sidebar-menu">
-                <p class="sidebar-menu-title">Softwares</p>
-                <a class="sidebar-menu-item" href="https://github.com/nguyenvinhlinh/ASIC-Sentry/releases">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-icon lucide-package"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg>
-                  ASIC Sentry
-                </a>
-                <a class="sidebar-menu-item" href="https://github.com/nguyenvinhlinh/CPU-GPU-Sentry/releases">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-icon lucide-package"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg>
-                  CPU/GPU Sentry
-                </a>
-              </div>
-
-              <div id="sidebar-menu">
-                <p class="sidebar-menu-title">Others</p>
-                <a class="sidebar-menu-item" href="https://miningpoolstats.stream/newcoins">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                  Mining Pool Stats
-                </a>
-                <a class="sidebar-menu-item" href="https://www.hashrate.no">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                  https://www.hashrate.no
-                </a>
-                <a class="sidebar-menu-item" href="https://minerstat.com/hardware/asics">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                  Minerstats - Best ASIC
-                </a>
-                <a class="sidebar-menu-item" href="https://minerstat.com/hardware/gpus">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                  Minerstats - Best GPU
-                </a>
-                <a class="sidebar-menu-item" href="https://minerstat.com/hashrate-converter">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                  Hashrate converter
-                </a>
-              </div>
-            </div>
             </div>
           </div>
         </div>
