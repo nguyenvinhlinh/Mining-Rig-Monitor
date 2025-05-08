@@ -54,6 +54,17 @@ defmodule MiningRigMonitor.AsicMinersTest do
       assert_raise Ecto.NoResultsError, fn -> AsicMiners.get_asic_miner!(asic_miner.id) end
     end
 
+    test "get_asic_miner_by_api_code with valid api_code" do
+      asic_miner = asic_miner_fixture_by_commander()
+      test_asic_miner = AsicMiners.get_asic_miner_by_api_code(asic_miner.api_code)
+      assert asic_miner == test_asic_miner
+    end
+
+    test "get_asic_miner_by_api_code with invalid api_code" do
+      test_asic_miner = AsicMiners.get_asic_miner_by_api_code("invalid api_code")
+      assert Kernel.is_nil(test_asic_miner)
+    end
+
     test "get_asic_miner_by_api_code_list with valid api_code list" do
       asic_miner_1 = asic_miner_fixture_by_commander(%{"name" => "Thanh Long", "api_code" => "api_code_1"})
       asic_miner_2 = asic_miner_fixture_by_commander(%{"name" => "Bach Ho", "api_code" => "api_code_2"})

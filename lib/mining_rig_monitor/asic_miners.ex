@@ -102,7 +102,6 @@ defmodule MiningRigMonitor.AsicMiners do
   end
 
   def get_asic_miner_by_api_code(code) do
-    Logger.warning("[#{__MODULE__}] get_asic_miner_by_api_code/1 needs unit test")
     Repo.get_by(AsicMiner, api_code: code)
   end
 
