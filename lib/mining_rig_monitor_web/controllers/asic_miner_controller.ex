@@ -23,4 +23,10 @@ defmodule MiningRigMonitorWeb.AsicMinerController do
       {:error, changeset} -> {:error, changeset}
     end
   end
+
+  def get_expected_status(conn, _params) do
+    data = conn.assigns.asic_miner
+    |> Map.take([:asic_expected_status, :light_expected_status])
+    json(conn, data)
+  end
 end

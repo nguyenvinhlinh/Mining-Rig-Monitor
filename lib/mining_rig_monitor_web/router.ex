@@ -64,11 +64,13 @@ defmodule MiningRigMonitorWeb.Router do
 
   scope "/api/v1" do
     get "/ping", MiningRigMonitorWeb.PingPongController, :ping
+    post "/expected_status_many", MiningRigMonitorWeb.AsicMinerController, :get_expected_status_many
 
     scope "/asic_miners" do
       pipe_through :api_asic_miner
-      post "/specs", MiningRigMonitorWeb.AsicMinerController, :update_asic_miner_specs
-      post "/logs",  MiningRigMonitorWeb.AsicMinerLogController, :create
+      post "/specs",           MiningRigMonitorWeb.AsicMinerController, :update_asic_miner_specs
+      get  "/expected_status", MiningRigMonitorWeb.AsicMinerController, :get_expected_status
+      post "/logs",            MiningRigMonitorWeb.AsicMinerLogController, :create
     end
 
     scope "/cpu_gpu_miners" do
