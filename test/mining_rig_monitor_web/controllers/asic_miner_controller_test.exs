@@ -76,8 +76,8 @@ defmodule MiningRigMonitorWeb.AsicMinerControllerTest do
   end
 
   defp create_asic_miner_list(_) do
-    asic_miner_1 = AsicMinersFixtures.asic_miner_fixture_by_commander()
-    asic_miner_2 = AsicMinersFixtures.asic_miner_fixture_by_commander()
+    asic_miner_1 = AsicMinersFixtures.asic_miner_fixture_by_commander(%{"name" => "Thanh Long", "api_code" => "api_code_1"})
+    asic_miner_2 = AsicMinersFixtures.asic_miner_fixture_by_commander(%{"name" => "Bach Ho", "api_code" => "api_code_2"})
     %{asic_miner_1: asic_miner_1, asic_miner_2: asic_miner_2}
   end
 end

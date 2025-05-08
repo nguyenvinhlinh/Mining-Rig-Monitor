@@ -33,7 +33,13 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.New do
   end
 
   def handle_event("save", %{"asic_miner" => asic_miner_params}, socket) do
-    case AsicMiners.create_asic_miner_by_commander(asic_miner_params) do
+    asic_miner_params_mod = asic_miner_params
+    |> Map.put("api_code", UUID.uuid1())
+    |> Map.put("activated", false)
+    |> Map.put("asic_expected_status",  "on")
+    |> Map.put("light_expected_status", "off")
+
+    case AsicMiners.create_asic_miner_by_commander(asic_miner_params_mod) do
       {:ok, asic_miner} ->
         Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index_channel",
           {:asic_miner_index_channel, :create_or_update, asic_miner})

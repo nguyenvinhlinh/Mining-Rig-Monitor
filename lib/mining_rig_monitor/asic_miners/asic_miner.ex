@@ -32,11 +32,13 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
     |> cast(attrs, [:name, :api_code, :asic_expected_status, :light_expected_status])
     |> validate_required([:name, :api_code, :asic_expected_status, :light_expected_status])
     |> validate_length(:name, [min: 2])
+    |> unique_constraint([:api_code])
   end
 
   def changeset_edit_by_commander(asic_miner, attrs) do
     asic_miner
     |> cast(attrs, [:name, :asic_expected_status, :light_expected_status])
+    |> validate_required([:name, :asic_expected_status, :light_expected_status])
     |> validate_inclusion(:asic_expected_status,  ["on", "off"])
     |> validate_inclusion(:light_expected_status, ["on", "off"])
   end

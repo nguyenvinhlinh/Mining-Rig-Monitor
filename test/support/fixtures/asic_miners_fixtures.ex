@@ -8,8 +8,16 @@ defmodule MiningRigMonitor.AsicMinersFixtures do
   Generate a asic_miner.
   """
   def asic_miner_fixture_by_commander(attrs \\ %{}) do
+    default_map = %{
+      "name" => "asic_name",
+      "api_code" => "api_code",
+      "activated" => false,
+      "asic_expected_status" => "on",
+      "light_expected_status" => "off",
+    }
+
     {:ok, asic_miner} = attrs
-    |> Enum.into(%{"name" => "some name"})
+    |> Enum.into(default_map)
     |> MiningRigMonitor.AsicMiners.create_asic_miner_by_commander()
 
     asic_miner
