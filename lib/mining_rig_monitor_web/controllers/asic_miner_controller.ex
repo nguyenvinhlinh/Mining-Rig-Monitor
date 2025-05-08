@@ -1,6 +1,6 @@
 defmodule MiningRigMonitorWeb.AsicMinerController do
   use MiningRigMonitorWeb, :controller
-
+  require Logger
   alias MiningRigMonitor.AsicMiners
 
   action_fallback MiningRigMonitorWeb.FallbackController
@@ -22,5 +22,22 @@ defmodule MiningRigMonitorWeb.AsicMinerController do
         json(conn, nil)
       {:error, changeset} -> {:error, changeset}
     end
+  end
+
+  def get_expected_status(conn, _params) do
+    data = conn.assigns.asic_miner
+    |> Map.take([:asic_expected_status, :light_expected_status])
+    json(conn, data)
+  end
+
+  def get_expected_status_many(conn, %{"api_code_list" => api_code_list}) do
+    asic_miner_list = AsicMiners.get_asic_miner_by_api_code_list(api_code_list)
+    response = asic_miner_list
+    |> Enum.reduce(%{}, fn(e, acc) ->
+      data = Map.take(e, [:asic_expected_status, :light_expected_status])
+      Map.put(acc, e.api_code, data)
+    end)
+
+    json(conn, response)
   end
 end

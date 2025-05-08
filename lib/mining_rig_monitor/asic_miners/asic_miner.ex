@@ -12,6 +12,9 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
 
     field :activated, :boolean, default: false
 
+    field :asic_expected_status,  :string
+    field :light_expected_status, :string
+
     has_many :asic_miner_logs, AsicMinerLog, [on_delete: :delete_all]
 
     timestamps(type: :utc_datetime)
@@ -26,15 +29,18 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
 
   def changeset_new_by_commander(asic_miner, attrs) do
     asic_miner
-    |> cast(attrs, [:name, :api_code])
-    |> validate_required([:name, :api_code])
+    |> cast(attrs, [:name, :api_code, :asic_expected_status, :light_expected_status])
+    |> validate_required([:name, :api_code, :asic_expected_status, :light_expected_status])
     |> validate_length(:name, [min: 2])
+    |> unique_constraint([:api_code])
   end
 
   def changeset_edit_by_commander(asic_miner, attrs) do
     asic_miner
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :asic_expected_status, :light_expected_status])
+    |> validate_required([:name, :asic_expected_status, :light_expected_status])
+    |> validate_inclusion(:asic_expected_status,  ["on", "off"])
+    |> validate_inclusion(:light_expected_status, ["on", "off"])
   end
 
   def changeset_edit_by_sentry(asic_miner, attrs) do
