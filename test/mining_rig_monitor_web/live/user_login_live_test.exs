@@ -7,8 +7,7 @@ defmodule MiningRigMonitorWeb.UserLoginLiveTest do
   describe "Log in page" do
     test "renders log in page", %{conn: conn} do
       {:ok, _lv, html} = live(conn, ~p"/users/log_in")
-
-      assert html =~ "Sign in to platform"
+      assert html =~ "Login"
     end
 
     test "redirects if already logged in", %{conn: conn} do

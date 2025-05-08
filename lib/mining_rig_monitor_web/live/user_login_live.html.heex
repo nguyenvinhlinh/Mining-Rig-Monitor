@@ -31,7 +31,7 @@
   <div class="col-span-12 lg:col-span-5 xl:col-span-4 2xl:col-span-3">
     <div class="flex flex-col items-stretch p-6 md:p-8 lg:p-16">
       <div class="flex items-center justify-between">
-        <a href="./dashboards-ecommerce.html">
+        <a href={~p"/"}>
           <img alt="logo-dark" class="hidden h-5.5 dark:inline" src={~p"/images/logo/logo-dark.png"} />
           <img alt="logo-light" class="h-5.5 dark:hidden" src={~p"/images/logo/logo-light.png"} />
         </a>
@@ -69,7 +69,7 @@
         Seamless Access, Secure Connection: Your Gateway to monitor your mining rigs
       </h3>
       <div class="mt-6 md:mt-10">
-        <.form for={@form} action={~p"/users/log_in"} phx-update="ignore">
+        <.form id="login_form" for={@form} action={~p"/users/log_in"} phx-update="ignore" >
           <fieldset class="fieldset">
             <legend class="fieldset-legend">Email Address</legend>
             <label class="input w-full focus:outline-0">
