@@ -6,7 +6,6 @@ defmodule MiningRigMonitor.AsicMiners do
   import Ecto.Query, warn: false
   require Logger
   alias MiningRigMonitor.Repo
-
   alias MiningRigMonitor.AsicMiners.AsicMiner
 
   @doc """
@@ -54,6 +53,7 @@ defmodule MiningRigMonitor.AsicMiners do
       {:error, %Ecto.Changeset{}}
 
   """
+
   def create_asic_miner_by_commander(attrs \\ %{}) do
     %AsicMiner{}
     |> AsicMiner.changeset_new_by_commander(attrs)
@@ -79,6 +79,7 @@ defmodule MiningRigMonitor.AsicMiners do
   end
 
   def update_asic_miner_by_sentry(%AsicMiner{} = asic_miner, attrs) do
+    Logger.warning("[#{__MODULE__}] update_asic_miner_by_sentry/1 needs unit test")
     asic_miner
     |> AsicMiner.changeset_edit_by_sentry(attrs)
     |> Repo.update()
@@ -100,23 +101,10 @@ defmodule MiningRigMonitor.AsicMiners do
     Repo.delete(asic_miner)
   end
 
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking asic_miner changes.
-
-  ## Examples
-
-      iex> change_asic_miner(asic_miner)
-      %Ecto.Changeset{data: %AsicMiner{}}
-
-  """
-  def change_asic_miner(%AsicMiner{} = asic_miner, attrs \\ %{}) do
-    AsicMiner.changeset(asic_miner, attrs)
-  end
-
   def get_asic_miner_by_api_code(code) do
+    Logger.warning("[#{__MODULE__}] get_asic_miner_by_api_code/1 needs unit test")
     Repo.get_by(AsicMiner, api_code: code)
   end
-
 
   def get_asic_miner_by_api_code_list(api_code_list) when is_list(api_code_list) do
     query = from am in AsicMiner, where: am.api_code in ^api_code_list

@@ -54,11 +54,6 @@ defmodule MiningRigMonitor.AsicMinersTest do
       assert_raise Ecto.NoResultsError, fn -> AsicMiners.get_asic_miner!(asic_miner.id) end
     end
 
-    test "change_asic_miner/1 returns a asic_miner changeset" do
-      asic_miner = asic_miner_fixture_by_commander()
-      assert %Ecto.Changeset{} = AsicMiners.change_asic_miner(asic_miner)
-    end
-
     test "get_asic_miner_by_api_code_list with valid api_code list" do
       asic_miner_1 = asic_miner_fixture_by_commander(%{"name" => "Thanh Long", "api_code" => "api_code_1"})
       asic_miner_2 = asic_miner_fixture_by_commander(%{"name" => "Bach Ho", "api_code" => "api_code_2"})
