@@ -8,10 +8,9 @@ defmodule MiningRigMonitor.AsicMinersFixtures do
   Generate a asic_miner.
   """
   def asic_miner_fixture_by_commander(attrs \\ %{}) do
-    {:ok, asic_miner} =
-      attrs
-      |> Enum.into(%{"name" => "some name"})
-      |> MiningRigMonitor.AsicMiners.create_asic_miner_by_commander()
+    {:ok, asic_miner} = attrs
+    |> Enum.into(%{"name" => "some name"})
+    |> MiningRigMonitor.AsicMiners.create_asic_miner_by_commander()
 
     asic_miner
   end

@@ -71,6 +71,8 @@ defmodule MiningRigMonitor.AsicMiners do
     attrs_mod = attrs
     |> Map.put("api_code", api_code)
     |> Map.put("activated", false)
+    |> Map.put("asic_expected_status",  "on")
+    |> Map.put("light_expected_status", "off")
 
     %AsicMiner{}
     |> AsicMiner.changeset_new_by_commander(attrs_mod)
