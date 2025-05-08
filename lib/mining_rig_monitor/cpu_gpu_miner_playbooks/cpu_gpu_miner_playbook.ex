@@ -32,7 +32,7 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
   end
 
   @doc false
-  def changeset(cpu_gpu_miner_playbook, attrs) do
+  def changeset_new(cpu_gpu_miner_playbook, attrs) do
     field_list = [:cpu_gpu_miner_id, :software_name, :software_version,
                   :command_argument,
                   :cpu_coin_name, :gpu_coin_name_1, :gpu_coin_name_2,
@@ -49,6 +49,28 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
     |> validate_field_list_exist_together([:cpu_coin_name, :cpu_algorithm],     error_key: :cpu_coin_name)
     |> validate_field_list_exist_together([:gpu_coin_name_1, :gpu_algorithm_1], error_key: :gpu_coin_name_1)
     |> validate_field_list_exist_together([:gpu_coin_name_2, :gpu_algorithm_2], error_key: :gpu_coin_name_2)
+    |> unique_constraint([:cpu_gpu_miner_id, :software_name])
+  end
+
+  @doc false
+  def changeset_edit(cpu_gpu_miner_playbook, attrs) do
+    field_list = [:software_name, :software_version,
+                  :command_argument,
+                  :cpu_coin_name, :gpu_coin_name_1, :gpu_coin_name_2,
+                  :cpu_algorithm, :gpu_algorithm_1, :gpu_algorithm_2,
+                  :cpu_wallet_address_id, :gpu_wallet_address_1_id, :gpu_wallet_address_2_id,
+                  :cpu_pool_address_id,   :gpu_pool_address_1_id,   :gpu_pool_address_2_id]
+    required_field_list = [:software_name, :software_version,
+                           :command_argument]
+
+    cpu_gpu_miner_playbook
+    |> cast(attrs, field_list)
+    |> validate_required(required_field_list)
+    |> unique_constraint([:cpu_gpu_miner_id, :software_name], error_key: :software_name)
+    |> validate_field_list_exist_together([:cpu_coin_name, :cpu_algorithm],     error_key: :cpu_coin_name)
+    |> validate_field_list_exist_together([:gpu_coin_name_1, :gpu_algorithm_1], error_key: :gpu_coin_name_1)
+    |> validate_field_list_exist_together([:gpu_coin_name_2, :gpu_algorithm_2], error_key: :gpu_coin_name_2)
+    |> unique_constraint([:cpu_gpu_miner_id, :software_name])
   end
 
   def get_command_argument_replaced(%__MODULE__{}=playbook, args \\ []) do
@@ -81,15 +103,11 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook do
   end
 
   def get_software_name_list() do
-    ["XMRig", "BZMiner"]
+    ["XMRig"]
   end
 
   def get_software_version_list_by_name("XMRig") do
     ["6.22.2"]
-  end
-
-  def get_software_version_list_by_name("BZMiner") do
-    ["23.0.2"]
   end
 
   def get_software_module_by_name_and_version("XMRig", version) do
