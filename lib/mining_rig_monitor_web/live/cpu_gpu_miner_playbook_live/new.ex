@@ -25,7 +25,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.New do
 
 
     form = %CpuGpuMinerPlaybook{}
-    |> CpuGpuMinerPlaybook.changeset(%{})
+    |> CpuGpuMinerPlaybooks.change_new_cpu_gpu_miner_playbook()
     |> to_form()
     socket_mod = socket
     |> assign(:cpu_gpu_miner, cpu_gpu_miner)
@@ -41,7 +41,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerPlaybookLive.New do
   def handle_event("validate", %{"cpu_gpu_miner_playbook" => playbook_params}, socket) do
     params_software_name = Map.get(playbook_params, "software_name")
     software_version_option_list = CpuGpuMinerPlaybook.get_software_version_list_by_name(params_software_name)
-    changeset = CpuGpuMinerPlaybooks.change_cpu_gpu_miner_playbook(%CpuGpuMinerPlaybook{}, playbook_params)
+    changeset = CpuGpuMinerPlaybooks.change_new_cpu_gpu_miner_playbook(%CpuGpuMinerPlaybook{}, playbook_params)
     form = to_form(changeset, action: :validate)
     socket_mod = socket
     |> assign(:form, form)
