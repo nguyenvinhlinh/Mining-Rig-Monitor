@@ -10,19 +10,6 @@ defmodule MiningRigMonitor.AsicMiners do
   alias MiningRigMonitor.AsicMiners.AsicMiner
 
   @doc """
-  Returns the list of asic_miners.
-
-  ## Examples
-
-      iex> list_asic_miners()
-      [%AsicMiner{}, ...]
-
-  """
-  def list_asic_miners do
-    Repo.all(AsicMiner)
-  end
-
-  @doc """
   Returns the list of asic_miners by given activated_state (true/false).
 
   ## Examples

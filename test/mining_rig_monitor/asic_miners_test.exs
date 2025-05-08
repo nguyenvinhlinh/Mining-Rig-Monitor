@@ -10,11 +10,6 @@ defmodule MiningRigMonitor.AsicMinersTest do
 
     @invalid_attrs %{"name" => nil, "api_code" => nil, "firmware_version" => nil, "software_version" => nil, "model" => nil, "model_variant" => nil}
 
-    test "list_asic_miners/0 returns all asic_miners" do
-      asic_miner = asic_miner_fixture_by_commander()
-      assert AsicMiners.list_asic_miners() == [asic_miner]
-    end
-
     test "get_asic_miner!/1 returns the asic_miner with given id" do
       asic_miner = asic_miner_fixture_by_commander()
       assert AsicMiners.get_asic_miner!(asic_miner.id) == asic_miner
@@ -32,7 +27,6 @@ defmodule MiningRigMonitor.AsicMinersTest do
     test "create_asic_miner_by_commander/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = AsicMiners.create_asic_miner_by_commander(@invalid_attrs)
     end
-
 
     test "update_asic_miner_by_commander/2 with valid data updates the asic_miner" do
       asic_miner = asic_miner_fixture_by_commander()
