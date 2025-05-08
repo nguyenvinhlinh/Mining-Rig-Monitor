@@ -139,7 +139,6 @@ defmodule MiningRigMonitor.AsicMiners do
 
 
   def get_asic_miner_by_api_code_list(api_code_list) when is_list(api_code_list) do
-    Logger.warning("[#{__MODULE__}] get_asic_miner_by_api_code_list/1 need to write test")
     query = from am in AsicMiner, where: am.api_code in ^api_code_list
     Repo.all(query)
   end

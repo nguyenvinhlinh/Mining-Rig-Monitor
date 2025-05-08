@@ -58,5 +58,23 @@ defmodule MiningRigMonitor.AsicMinersTest do
       asic_miner = asic_miner_fixture_by_commander()
       assert %Ecto.Changeset{} = AsicMiners.change_asic_miner(asic_miner)
     end
+
+    test "get_asic_miner_by_api_code_list with valid api_code list" do
+      asic_miner_1 = asic_miner_fixture_by_commander()
+      asic_miner_2 = asic_miner_fixture_by_commander()
+      api_code_list = [asic_miner_1.api_code, asic_miner_2.api_code]
+      asic_miner_list = AsicMiners.get_asic_miner_by_api_code_list(api_code_list)
+      assert asic_miner_1 in asic_miner_list
+      assert asic_miner_2 in asic_miner_list
+    end
+
+    @tag runonly: true
+    test "get_asic_miner_by_api_code_list with invalid api_code list" do
+      api_code_list = ["invalid api_code 1", "invalid api_code 2"]
+      asic_miner_list = AsicMiners.get_asic_miner_by_api_code_list(api_code_list)
+      assert asic_miner_list == []
+    end
+
+
   end
 end
