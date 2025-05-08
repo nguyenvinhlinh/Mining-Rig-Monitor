@@ -32,6 +32,8 @@ Repo.delete_all(Address)
   model_variant: "10TH",
   firmware_version: "BOOT_3_1_image_1.0",
   software_version: "ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg",
+  asic_expected_status: "on",
+  light_expected_status: "off",
   activated: true
 }
 |> Repo.insert!
@@ -42,6 +44,8 @@ Repo.delete_all(Address)
   model_variant: "12TH",
   firmware_version: "BOOT_3_1_image_1.0",
   software_version: "ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg",
+  asic_expected_status: "on",
+  light_expected_status: "off",
   activated: true
 }
 |> Repo.insert!
@@ -52,7 +56,9 @@ Repo.delete_all(Address)
   model_variant: "15TH",
   firmware_version: "BOOT_3_1_image_1.0",
   software_version: "ICM168_3_2_10_ks5L_miner_ICM168_3_2_10_ks5L_bg",
-  activated: false
+  asic_expected_status: "on",
+  light_expected_status: "off",
+  activated: true
 }
 |> Repo.insert!
 
