@@ -156,7 +156,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     asic_miner = AsicMiners.get_asic_miner!(id)
     asic_expected_status = asic_miner.asic_expected_status
 
-    asic_expected_status_mod = if(asic_expected_status == "on", do: "off", else: "on")
+    asic_expected_status_mod = if(asic_expected_status == "on", do: AsicMiner.asic_expected_status_off() , else: AsicMiner.asic_expected_status_on())
 
     {:ok, asic_miner} = AsicMiners.update_asic_miner_by_commander(asic_miner, %{asic_expected_status: asic_expected_status_mod})
 
@@ -180,8 +180,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     Logger.warning("[#{__MODULE__}] handle_event, toggle_light need unit test")
     asic_miner = AsicMiners.get_asic_miner!(id)
     light_expected_status = asic_miner.light_expected_status
-
-    light_expected_status_mod = if(light_expected_status == "on", do: "off", else: "on")
+    light_expected_status_mod = if(light_expected_status == "on", do: AsicMiner.light_expected_status_off() , else: AsicMiner.light_expected_status_on())
 
     {:ok, asic_miner} = AsicMiners.update_asic_miner_by_commander(asic_miner, %{light_expected_status: light_expected_status_mod})
 

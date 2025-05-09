@@ -2,6 +2,11 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
   use Ecto.Schema
   import Ecto.Changeset
   alias MiningRigMonitor.AsicMinerLogs.AsicMinerLog
+
+  @asic_expected_status_on "on"
+  @asic_expected_status_off "off"
+  @light_expected_status_on "on"
+  @light_expected_status_off "off"
   schema "asic_miners" do
     field :name, :string
     field :api_code, :string
@@ -39,8 +44,8 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
     asic_miner
     |> cast(attrs, [:name, :asic_expected_status, :light_expected_status])
     |> validate_required([:name, :asic_expected_status, :light_expected_status])
-    |> validate_inclusion(:asic_expected_status,  ["on", "off"])
-    |> validate_inclusion(:light_expected_status, ["on", "off"])
+    |> validate_inclusion(:asic_expected_status,  [@asic_expected_status_on,  @asic_expected_status_off])
+    |> validate_inclusion(:light_expected_status, [@light_expected_status_on, @light_expected_status_off])
   end
 
   def changeset_edit_by_sentry(asic_miner, attrs) do
@@ -48,4 +53,9 @@ defmodule MiningRigMonitor.AsicMiners.AsicMiner do
     |> cast(attrs,       [:model, :model_variant, :firmware_version, :software_version, :activated])
     |> validate_required([:model,                 :firmware_version, :software_version, :activated])
   end
+
+  def asic_expected_status_on,   do: @asic_expected_status_on
+  def asic_expected_status_off,  do: @asic_expected_status_off
+  def light_expected_status_on,  do: @light_expected_status_on
+  def light_expected_status_off, do: @light_expected_status_off
 end
