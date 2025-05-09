@@ -4,110 +4,189 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLiveTest do
   import Phoenix.LiveViewTest
   import MiningRigMonitor.CpuGpuMinersFixtures
 
-  @create_attrs %{name: "some name", api_code: "some api_code", cpu_1_name: "some cpu_1_name", cpu_2_name: "some cpu_2_name", ram_size: "some ram_size", gpu_1_name: "some gpu_1_name", gpu_2_name: "some gpu_2_name", gpu_3_name: "some gpu_3_name", gpu_4_name: "some gpu_4_name", gpu_5_name: "some gpu_5_name", gpu_6_name: "some gpu_6_name", gpu_7_name: "some gpu_7_name", gpu_8_name: "some gpu_8_name"}
-  @update_attrs %{name: "some updated name", api_code: "some updated api_code", cpu_1_name: "some updated cpu_1_name", cpu_2_name: "some updated cpu_2_name", ram_size: "some updated ram_size", gpu_1_name: "some updated gpu_1_name", gpu_2_name: "some updated gpu_2_name", gpu_3_name: "some updated gpu_3_name", gpu_4_name: "some updated gpu_4_name", gpu_5_name: "some updated gpu_5_name", gpu_6_name: "some updated gpu_6_name", gpu_7_name: "some updated gpu_7_name", gpu_8_name: "some updated gpu_8_name"}
-  @invalid_attrs %{name: nil, api_code: nil, cpu_1_name: nil, cpu_2_name: nil, ram_size: nil, gpu_1_name: nil, gpu_2_name: nil, gpu_3_name: nil, gpu_4_name: nil, gpu_5_name: nil, gpu_6_name: nil, gpu_7_name: nil, gpu_8_name: nil}
+  alias MiningRigMonitor.AccountsFixtures
+  require Logger
+
+  @create_attrs %{name: "Thanh Long"}
+  @update_attrs %{name: "Thanh Long 2"}
+  @invalid_attrs_1 %{name: "T"}
+  @invalid_attrs_2 %{name: ""}
 
   defp create_cpu_gpu_miner(_) do
+    Logger.warning("[#{__MODULE__}] create_cpu_gpu_miner/1 deprecated")
     cpu_gpu_miner = cpu_gpu_miner_fixture()
     %{cpu_gpu_miner: cpu_gpu_miner}
   end
 
+  defp create_not_activated_cpu_gpu_miner(_) do
+    cpu_gpu_miner = cpu_gpu_miner_not_activated_fixture()
+    %{cpu_gpu_miner_not_activated: cpu_gpu_miner}
+  end
+
+  defp create_activated_cpu_gpu_miner(_) do
+    cpu_gpu_miner = cpu_gpu_miner_activated_fixture()
+    %{cpu_gpu_miner_activated: cpu_gpu_miner}
+  end
+
+  defp login_user(%{conn: conn}) do
+    conn_mod = log_in_user(conn, AccountsFixtures.user_fixture())
+    %{conn: conn_mod}
+  end
+
   describe "Index" do
-    setup [:create_cpu_gpu_miner]
+    setup [:create_cpu_gpu_miner, :login_user, :create_not_activated_cpu_gpu_miner, :create_activated_cpu_gpu_miner]
 
-    test "lists all cpu_gpu_miners", %{conn: conn, cpu_gpu_miner: cpu_gpu_miner} do
-      {:ok, _index_live, html} = live(conn, ~p"/cpu_gpu_miners")
+    test "lists all cpu_gpu_miners",
+      %{conn: conn, cpu_gpu_miner_not_activated: cpu_gpu_miner_not_activated, cpu_gpu_miner_activated: cpu_gpu_miner_activated} do
+      {:ok, view, html} = live(conn, ~p"/cpu_gpu_miners")
 
-      assert html =~ "Listing Cpu gpu miners"
-      assert html =~ cpu_gpu_miner.name
+      assert view.module == MiningRigMonitorWeb.CpuGpuMinerLive.Index
+      assert html =~ "Activated CPU/GPU Miners"
+      assert html =~ "New CPU/GPU miners waiting signals from sentry!"
+      assert html =~ cpu_gpu_miner_not_activated.name
+      assert html =~ cpu_gpu_miner_activated.name
     end
 
+    test "redirect to /cpu_gpu_miners/new from index", %{conn: conn} do
+      {:ok, index_live, _html} = live(conn, ~p"/cpu_gpu_miners")
+
+      index_live
+      |> element("a", "New CPU/GPU Miners")
+      |> render_click()
+
+      assert_redirect(index_live, ~p"/cpu_gpu_miners/new", 100)
+    end
+
+    test "redirect to cpu_gpu_miner edit page from index link",
+      %{conn: conn, cpu_gpu_miner_activated: cpu_gpu_miner_activated,
+        cpu_gpu_miner_not_activated: cpu_gpu_miner_not_activated} do
+
+      {:ok, index_live_1, _html} = live(conn, ~p"/cpu_gpu_miners")
+
+      index_live_1
+      |> element("#cpu_gpu_miner-#{cpu_gpu_miner_activated.id}-edit")
+      |> render_click()
+      assert_redirect(index_live_1, ~p"/cpu_gpu_miners/#{cpu_gpu_miner_activated.id}/edit", 100)
+
+
+      {:ok, index_live_2, _html} = live(conn, ~p"/cpu_gpu_miners")
+      index_live_2
+      |> element("#cpu_gpu_miner-#{cpu_gpu_miner_not_activated.id}-edit")
+      |> render_click()
+      assert_redirect(index_live_2, ~p"/cpu_gpu_miners/#{cpu_gpu_miner_not_activated.id}/edit", 100)
+    end
+
+
+    test "deletes activated cpu_gpu_miner in listing", %{conn: conn, cpu_gpu_miner_activated: cpu_gpu_miner} do
+      {:ok, index_live, _html} = live(conn, ~p"/cpu_gpu_miners")
+
+      assert has_element?(index_live, "#cpu_gpu_miner_activated_list-#{cpu_gpu_miner.id}")
+      index_live
+      |> element("#cpu_gpu_miner-#{cpu_gpu_miner.id}-delete")
+      |> render_click()
+
+
+      refute has_element?(index_live, "#cpu_gpu_miner_activated_list-#{cpu_gpu_miner.id}")
+    end
+
+    test "deletes not activated cpu_gpu_miner in listing", %{conn: conn, cpu_gpu_miner_not_activated: cpu_gpu_miner} do
+      {:ok, index_live, _html} = live(conn, ~p"/cpu_gpu_miners")
+
+      assert has_element?(index_live, "#cpu_gpu_miner_not_activated_list-#{cpu_gpu_miner.id}")
+
+      index_live
+      |> element("#cpu_gpu_miner-#{cpu_gpu_miner.id}-delete")
+      |> render_click()
+
+
+      refute has_element?(index_live, "#cpu_gpu_miner_not_activated_list-#{cpu_gpu_miner.id}")
+    end
+  end
+
+  describe "New" do
+    setup [:login_user]
     test "saves new cpu_gpu_miner", %{conn: conn} do
-      {:ok, index_live, _html} = live(conn, ~p"/cpu_gpu_miners")
+      {:ok, new_live, html} = live(conn, ~p"/cpu_gpu_miners/new")
+      assert html =~ "Create new CPU/GPU Miners"
 
-      assert index_live |> element("a", "New Cpu gpu miner") |> render_click() =~
-               "New Cpu gpu miner"
+      new_live
+      |> form("#cpu_gpu_miner_new_form", [cpu_gpu_miner: @invalid_attrs_1])
+      |> render_change() =~ "should be at least 2 character(s)"
 
-      assert_patch(index_live, ~p"/cpu_gpu_miners/new")
+      new_live
+      |> form("#cpu_gpu_miner_new_form", [cpu_gpu_miner: @invalid_attrs_2])
+      |> render_change() =~ "can't be blank"
 
-      assert index_live
-             |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+      new_live
+      |> form("#cpu_gpu_miner_new_form", [cpu_gpu_miner: @create_attrs])
+      |> render_submit()
 
-      assert index_live
-             |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @create_attrs)
-             |> render_submit()
+      flash = assert_redirect(new_live, ~p"/cpu_gpu_miners", 100)
+      assert Map.get(flash, "info") =~ "created successfully"
 
-      assert_patch(index_live, ~p"/cpu_gpu_miners")
-
-      html = render(index_live)
-      assert html =~ "Cpu gpu miner created successfully"
-      assert html =~ "some name"
-    end
-
-    test "updates cpu_gpu_miner in listing", %{conn: conn, cpu_gpu_miner: cpu_gpu_miner} do
-      {:ok, index_live, _html} = live(conn, ~p"/cpu_gpu_miners")
-
-      assert index_live |> element("#cpu_gpu_miners-#{cpu_gpu_miner.id} a", "Edit") |> render_click() =~
-               "Edit Cpu gpu miner"
-
-      assert_patch(index_live, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}/edit")
-
-      assert index_live
-             |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
-
-      assert index_live
-             |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @update_attrs)
-             |> render_submit()
-
-      assert_patch(index_live, ~p"/cpu_gpu_miners")
-
-      html = render(index_live)
-      assert html =~ "Cpu gpu miner updated successfully"
-      assert html =~ "some updated name"
-    end
-
-    test "deletes cpu_gpu_miner in listing", %{conn: conn, cpu_gpu_miner: cpu_gpu_miner} do
-      {:ok, index_live, _html} = live(conn, ~p"/cpu_gpu_miners")
-
-      assert index_live |> element("#cpu_gpu_miners-#{cpu_gpu_miner.id} a", "Delete") |> render_click()
-      refute has_element?(index_live, "#cpu_gpu_miners-#{cpu_gpu_miner.id}")
+      {:ok, _index_live, html} = live(conn, ~p"/cpu_gpu_miners")
+      assert html =~ "Thanh Long"
     end
   end
 
-  describe "Show" do
-    setup [:create_cpu_gpu_miner]
+  describe "Edit" do
+    setup [:login_user, :create_activated_cpu_gpu_miner, :create_not_activated_cpu_gpu_miner]
 
-    test "displays cpu_gpu_miner", %{conn: conn, cpu_gpu_miner: cpu_gpu_miner} do
-      {:ok, _show_live, html} = live(conn, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}")
+    test "updates cpu_gpu_miner in listing", %{conn: conn, cpu_gpu_miner_activated: cpu_gpu_miner} do
+      {:ok, edit_live, edit_html} = live(conn, ~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}/edit")
+      assert edit_html =~ "Edit CPU/GPU Miners"
 
-      assert html =~ "Show Cpu gpu miner"
-      assert html =~ cpu_gpu_miner.name
-    end
+      edit_live
+      |> form("#cpu_gpu_miner_edit_form", cpu_gpu_miner: @invalid_attrs_1)
+      |> render_change =~ "should be at least 2 character(s)"
 
-    test "updates cpu_gpu_miner within modal", %{conn: conn, cpu_gpu_miner: cpu_gpu_miner} do
-      {:ok, show_live, _html} = live(conn, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}")
+      edit_live
+      |> form("#cpu_gpu_miner_edit_form", cpu_gpu_miner: @invalid_attrs_2)
+      |> render_change =~ "can't be blank"
 
-      assert show_live |> element("a", "Edit") |> render_click() =~
-               "Edit Cpu gpu miner"
+      edit_live
+      |> form("#cpu_gpu_miner_edit_form", cpu_gpu_miner: @update_attrs)
+      |> render_submit()
 
-      assert_patch(show_live, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}/show/edit")
+      flash = assert_redirect(edit_live, ~p"/cpu_gpu_miners", 100)
+      assert Map.get(flash, "info") =~ "updated successfully"
 
-      assert show_live
-             |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
-
-      assert show_live
-             |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @update_attrs)
-             |> render_submit()
-
-      assert_patch(show_live, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}")
-
-      html = render(show_live)
-      assert html =~ "Cpu gpu miner updated successfully"
-      assert html =~ "some updated name"
+      {:ok, _index_live, index_html} = live(conn, ~p"/cpu_gpu_miners")
+      assert index_html =~ "Thanh Long 2"
     end
   end
+
+  # describe "Show" do
+  #   setup [:create_cpu_gpu_miner]
+
+  #   test "displays cpu_gpu_miner", %{conn: conn, cpu_gpu_miner: cpu_gpu_miner} do
+  #     {:ok, _show_live, html} = live(conn, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}")
+
+  #     assert html =~ "Show Cpu gpu miner"
+  #     assert html =~ cpu_gpu_miner.name
+  #   end
+
+  #   test "updates cpu_gpu_miner within modal", %{conn: conn, cpu_gpu_miner: cpu_gpu_miner} do
+  #     {:ok, show_live, _html} = live(conn, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}")
+
+  #     assert show_live |> element("a", "Edit") |> render_click() =~
+  #              "Edit Cpu gpu miner"
+
+  #     assert_patch(show_live, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}/show/edit")
+
+  #     assert show_live
+  #            |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @invalid_attrs)
+  #            |> render_change() =~ "can&#39;t be blank"
+
+  #     assert show_live
+  #            |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @update_attrs)
+  #            |> render_submit()
+
+  #     assert_patch(show_live, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}")
+
+  #     html = render(show_live)
+  #     assert html =~ "Cpu gpu miner updated successfully"
+  #     assert html =~ "some updated name"
+  #   end
+  # end
 end

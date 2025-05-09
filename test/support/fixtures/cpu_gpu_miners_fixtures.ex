@@ -1,4 +1,6 @@
 defmodule MiningRigMonitor.CpuGpuMinersFixtures do
+  alias MiningRigMonitor.CpuGpuMiners
+  require Logger
   @moduledoc """
   This module defines test helpers for creating
   entities via the `MiningRigMonitor.CpuGpuMiners` context.
@@ -8,6 +10,7 @@ defmodule MiningRigMonitor.CpuGpuMinersFixtures do
   Generate a cpu_gpu_miner.
   """
   def cpu_gpu_miner_fixture(attrs \\ %{}) do
+    Logger.warning("[#{__MODULE__}] cpu_gpu_miner_fixture/1 deprecated")
     {:ok, cpu_gpu_miner} = attrs
     |> Enum.into(
       %{
@@ -21,5 +24,29 @@ defmodule MiningRigMonitor.CpuGpuMinersFixtures do
     |> MiningRigMonitor.CpuGpuMiners.create_cpu_gpu_miner()
 
     cpu_gpu_miner
+  end
+
+  def cpu_gpu_miner_not_activated_fixture(attrs \\ %{}) do
+    {:ok, cpu_gpu_miner} = attrs
+    |> Enum.into(%{name: "cpu_gpu_miner name", api_code: "cpu_gpu_miner api_code", activated: false})
+    |> CpuGpuMiners.create_cpu_gpu_miner_by_commander()
+
+    cpu_gpu_miner
+  end
+
+  def cpu_gpu_miner_activated_fixture(attrs \\ %{}) do
+    attrs_mod = attrs
+    |> Enum.into(
+      %{
+        motherboard_name: "motherboard name",
+        cpu_name: "AMD 7950X3d", ram_size: "128GB",
+        gpu_1_name: "gpu_1_name", gpu_2_name: "gpu_2_name", gpu_3_name: "gpu_3_name", gpu_4_name: "gpu_4_name",
+        gpu_5_name: "gpu_5_name", gpu_6_name: "gpu_6_name", gpu_7_name: "gpu_7_name", gpu_8_name: "gpu_8_name",
+        activated: true
+      })
+
+    cpu_gpu_miner_not_activated = cpu_gpu_miner_not_activated_fixture()
+    {:ok, cpu_gpu_miner_activated} = CpuGpuMiners.update_cpu_gpu_miner_by_sentry(cpu_gpu_miner_not_activated, attrs_mod)
+    cpu_gpu_miner_activated
   end
 end
