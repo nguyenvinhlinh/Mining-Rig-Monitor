@@ -1,13 +1,9 @@
 defmodule MiningRigMonitor.AsicMinersTest do
   use MiningRigMonitor.DataCase
-
   alias MiningRigMonitor.AsicMiners
-
+  alias MiningRigMonitor.AsicMiners.AsicMiner
+  import MiningRigMonitor.AsicMinersFixtures
   describe "asic_miners" do
-    alias MiningRigMonitor.AsicMiners.AsicMiner
-
-    import MiningRigMonitor.AsicMinersFixtures
-
     @commander_invalid_attrs %{"name" => nil, "asic_expected_status" => "invalid status", "light_expected_status" => "invalid status"}
 
     @commander_valid_attrs %{"name" => "Thanh Long", "activated" => false, "api_code" => "api_code",
