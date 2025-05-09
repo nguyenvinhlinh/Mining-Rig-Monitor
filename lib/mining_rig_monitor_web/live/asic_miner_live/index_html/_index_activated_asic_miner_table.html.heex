@@ -91,7 +91,8 @@
                   <span class="iconify lucide--power size-4"> </span>
                   <input id={"asic_miner-#{asic_miner.id}-power"} class="toggle toggle-success" type="checkbox" name="asic_expected_status"
                     checked={if asic_miner.asic_expected_status == "on", do: "true", else: nil }
-                    phx-click={JS.push("toggle_asic", value: %{id: asic_miner.id})} />
+                    phx-click={JS.push("toggle_asic", value: %{id: asic_miner.id})}
+                    data-confirm="Are you sure?"/>
                 </div>
 
                 <div class="mt-1 flex items-center gap-2">

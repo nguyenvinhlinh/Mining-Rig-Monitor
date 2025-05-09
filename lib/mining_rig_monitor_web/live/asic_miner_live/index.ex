@@ -166,8 +166,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
       {:asic_miner_channel, :update_asic_miner, asic_miner})
     message =
       case asic_expected_status_mod do
-        "on" -> "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn Power On!"
-        _ -> "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn Power Off!"
+        "on" -> "ASIC Miner id##{asic_miner.id} name: #{asic_miner.name} Turn Power On!"
+        _ ->    "ASIC Miner id##{asic_miner.id} name: #{asic_miner.name} Turn Power Off!"
       end
     Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
       {:flash_index, :info, message})
@@ -191,8 +191,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
       {:asic_miner_channel, :update_asic_miner, asic_miner})
     message =
       case light_expected_status_mod do
-        "on" -> "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn Light On!"
-        _ ->    "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn Light Off!"
+        "on" -> "ASIC Miner id##{asic_miner.id} name: #{asic_miner.name} Turn Light On!"
+        _ ->    "ASIC Miner id##{asic_miner.id} name: #{asic_miner.name} Turn Light Off!"
       end
     Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
       {:flash_index, :info, message})
