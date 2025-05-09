@@ -152,6 +152,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   @impl true
   def handle_event("toggle_asic", %{"id" => id}, socket) do
+    Logger.warning("[#{__MODULE__}] handle_event, toggle_asic need unit test")
     asic_miner = AsicMiners.get_asic_miner!(id)
     asic_expected_status = asic_miner.asic_expected_status
 
@@ -165,14 +166,42 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
       {:asic_miner_channel, :update_asic_miner, asic_miner})
     message =
       case asic_expected_status_mod do
-        "on" -> "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn On!"
-        _ -> "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn Off!"
+        "on" -> "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn Power On!"
+        _ -> "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn Power Off!"
       end
     Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
       {:flash_index, :info, message})
 
     {:noreply, socket}
   end
+
+  @impl true
+  def handle_event("toggle_light", %{"id" => id}, socket) do
+    Logger.warning("[#{__MODULE__}] handle_event, toggle_light need unit test")
+    asic_miner = AsicMiners.get_asic_miner!(id)
+    light_expected_status = asic_miner.light_expected_status
+
+    light_expected_status_mod = if(light_expected_status == "on", do: "off", else: "on")
+
+    {:ok, asic_miner} = AsicMiners.update_asic_miner_by_commander(asic_miner, %{light_expected_status: light_expected_status_mod})
+
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index_channel",
+      {:asic_miner_index_channel, :create_or_update, asic_miner})
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_channel:#{asic_miner.id}",
+      {:asic_miner_channel, :update_asic_miner, asic_miner})
+    message =
+      case light_expected_status_mod do
+        "on" -> "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn Light On!"
+        _ ->    "ASIC miner id##{asic_miner.id} name: #{asic_miner.name} Turn Light Off!"
+      end
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
+      {:flash_index, :info, message})
+
+    {:noreply, socket}
+  end
+
+
+
 
   def get_asic_miner_activated_list(asic_miner_map, asic_miner_operational_map) do
     Enum.map(asic_miner_map, fn({asic_miner_id, asic_miner}) ->
