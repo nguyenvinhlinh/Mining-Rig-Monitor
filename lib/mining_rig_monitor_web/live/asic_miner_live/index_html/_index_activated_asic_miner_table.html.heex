@@ -105,12 +105,14 @@
 
               <td>
                 <div class="inline-flex">
-                  <.link phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}/edit")} >
+                  <.link href={~p"/asic_miners/#{asic_miner.id}/edit"}
+                    phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}/edit")} >
                     <button class="btn btn-square btn-ghost btn-sm">
                       <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
                     </button>
                   </.link>
-                  <.link phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}")} >
+                  <.link href={~p"/asic_miners/#{asic_miner.id}"}
+                    phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}")} >
                     <button class="btn btn-square btn-ghost btn-sm">
                       <span class="iconify lucide--eye text-base-content/80 size-4"></span>
                     </button>
