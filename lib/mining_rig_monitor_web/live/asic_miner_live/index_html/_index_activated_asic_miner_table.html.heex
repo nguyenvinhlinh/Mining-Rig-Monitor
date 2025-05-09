@@ -6,7 +6,7 @@
           <b>Activated ASIC Miners</b>
         </div>
         <div class="inline-flex items-center gap-3">
-          <a aria-label="Create product link" class="btn btn-primary btn-sm max-sm:btn-square" href={~p"/asic_miners/new"}>
+          <a id="asic_miners_new" class="btn btn-primary btn-sm max-sm:btn-square" href={~p"/asic_miners/new"}>
             <span class="iconify lucide--plus size-4"></span>
             <span class="hidden sm:inline">New ASIC Miners</span>
           </a>
@@ -105,13 +105,15 @@
 
               <td>
                 <div class="inline-flex">
-                  <.link href={~p"/asic_miners/#{asic_miner.id}/edit"}
+                  <.link id={"asic_miner-#{asic_miner.id}-edit"}
+                    href={~p"/asic_miners/#{asic_miner.id}/edit"}
                     phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}/edit")} >
                     <button class="btn btn-square btn-ghost btn-sm">
                       <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
                     </button>
                   </.link>
-                  <.link href={~p"/asic_miners/#{asic_miner.id}"}
+                  <.link id={"asic_miner-#{asic_miner.id}-show"}
+                    href={~p"/asic_miners/#{asic_miner.id}"}
                     phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}")} >
                     <button class="btn btn-square btn-ghost btn-sm">
                       <span class="iconify lucide--eye text-base-content/80 size-4"></span>
