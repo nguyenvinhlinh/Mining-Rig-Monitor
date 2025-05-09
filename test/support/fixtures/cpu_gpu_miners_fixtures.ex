@@ -38,9 +38,9 @@ defmodule MiningRigMonitor.CpuGpuMinersFixtures do
     attrs_mod = attrs
     |> Enum.into(
       %{
-        motherboard_name: "motherboard name",
-        cpu_name: "AMD 7950X3d", ram_size: "128GB",
-        gpu_1_name: "gpu_1_name", gpu_2_name: "gpu_2_name", gpu_3_name: "gpu_3_name", gpu_4_name: "gpu_4_name",
+        motherboard_name: "MSI B650",
+        cpu_name: "AMD 7950x3D", ram_size: "128GB",
+        gpu_1_name: "MSI 3080 Suprim", gpu_2_name: "gpu_2_name", gpu_3_name: "gpu_3_name", gpu_4_name: "gpu_4_name",
         gpu_5_name: "gpu_5_name", gpu_6_name: "gpu_6_name", gpu_7_name: "gpu_7_name", gpu_8_name: "gpu_8_name",
         activated: true
       })

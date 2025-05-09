@@ -12,12 +12,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLiveTest do
   @invalid_attrs_1 %{name: "T"}
   @invalid_attrs_2 %{name: ""}
 
-  defp create_cpu_gpu_miner(_) do
-    Logger.warning("[#{__MODULE__}] create_cpu_gpu_miner/1 deprecated")
-    cpu_gpu_miner = cpu_gpu_miner_fixture()
-    %{cpu_gpu_miner: cpu_gpu_miner}
-  end
-
   defp create_not_activated_cpu_gpu_miner(_) do
     cpu_gpu_miner = cpu_gpu_miner_not_activated_fixture()
     %{cpu_gpu_miner_not_activated: cpu_gpu_miner}
@@ -34,7 +28,7 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLiveTest do
   end
 
   describe "Index" do
-    setup [:create_cpu_gpu_miner, :login_user, :create_not_activated_cpu_gpu_miner, :create_activated_cpu_gpu_miner]
+    setup [:login_user, :create_not_activated_cpu_gpu_miner, :create_activated_cpu_gpu_miner]
 
     test "lists all cpu_gpu_miners",
       %{conn: conn, cpu_gpu_miner_not_activated: cpu_gpu_miner_not_activated, cpu_gpu_miner_activated: cpu_gpu_miner_activated} do
@@ -68,7 +62,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLiveTest do
       |> render_click()
       assert_redirect(index_live_1, ~p"/cpu_gpu_miners/#{cpu_gpu_miner_activated.id}/edit", 100)
 
-
       {:ok, index_live_2, _html} = live(conn, ~p"/cpu_gpu_miners")
       index_live_2
       |> element("#cpu_gpu_miner-#{cpu_gpu_miner_not_activated.id}-edit")
@@ -76,6 +69,22 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLiveTest do
       assert_redirect(index_live_2, ~p"/cpu_gpu_miners/#{cpu_gpu_miner_not_activated.id}/edit", 100)
     end
 
+    test "redirect to cpu_gpu_miner show page from index link",
+      %{conn: conn, cpu_gpu_miner_activated: cpu_gpu_miner_activated,
+        cpu_gpu_miner_not_activated: cpu_gpu_miner_not_activated} do
+
+      {:ok, index_live_1, _html} = live(conn, ~p"/cpu_gpu_miners")
+      index_live_1
+      |> element("#cpu_gpu_miner-#{cpu_gpu_miner_activated.id}-show")
+      |> render_click()
+      assert_redirect(index_live_1, ~p"/cpu_gpu_miners/#{cpu_gpu_miner_activated.id}")
+
+      {:ok, index_live_2, _html} = live(conn, ~p"/cpu_gpu_miners")
+      index_live_2
+      |> element("#cpu_gpu_miner-#{cpu_gpu_miner_not_activated.id}-show")
+      |> render_click()
+      assert_redirect(index_live_2, ~p"/cpu_gpu_miners/#{cpu_gpu_miner_not_activated.id}")
+    end
 
     test "deletes activated cpu_gpu_miner in listing", %{conn: conn, cpu_gpu_miner_activated: cpu_gpu_miner} do
       {:ok, index_live, _html} = live(conn, ~p"/cpu_gpu_miners")
@@ -84,7 +93,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLiveTest do
       index_live
       |> element("#cpu_gpu_miner-#{cpu_gpu_miner.id}-delete")
       |> render_click()
-
 
       refute has_element?(index_live, "#cpu_gpu_miner_activated_list-#{cpu_gpu_miner.id}")
     end
@@ -97,7 +105,6 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLiveTest do
       index_live
       |> element("#cpu_gpu_miner-#{cpu_gpu_miner.id}-delete")
       |> render_click()
-
 
       refute has_element?(index_live, "#cpu_gpu_miner_not_activated_list-#{cpu_gpu_miner.id}")
     end
@@ -156,37 +163,26 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLiveTest do
     end
   end
 
-  # describe "Show" do
-  #   setup [:create_cpu_gpu_miner]
+  describe "Show" do
+    setup [:login_user, :create_activated_cpu_gpu_miner, :create_not_activated_cpu_gpu_miner]
 
-  #   test "displays cpu_gpu_miner", %{conn: conn, cpu_gpu_miner: cpu_gpu_miner} do
-  #     {:ok, _show_live, html} = live(conn, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}")
+    test "display cpu_gpu_miner activated",
+      %{conn: conn, cpu_gpu_miner_activated: cpu_gpu_miner} do
+      {:ok, _show_live, html} = live(conn, ~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}")
+      assert html =~ cpu_gpu_miner.name
+      assert html =~ cpu_gpu_miner.api_code
+      assert html =~ "AMD 7950x3D"
+      assert html =~ "128GB"
+      assert html =~ "MSI B650"
+      assert html =~ "MSI 3080 Suprim"
+    end
 
-  #     assert html =~ "Show Cpu gpu miner"
-  #     assert html =~ cpu_gpu_miner.name
-  #   end
+    test "display cpu_gpu_miner not activated",
+      %{conn: conn, cpu_gpu_miner_not_activated: cpu_gpu_miner} do
+      {:ok, _show_live, html} = live(conn, ~p"/cpu_gpu_miners/#{cpu_gpu_miner.id}")
+      assert html =~ cpu_gpu_miner.name
+      assert html =~ cpu_gpu_miner.api_code
 
-  #   test "updates cpu_gpu_miner within modal", %{conn: conn, cpu_gpu_miner: cpu_gpu_miner} do
-  #     {:ok, show_live, _html} = live(conn, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}")
-
-  #     assert show_live |> element("a", "Edit") |> render_click() =~
-  #              "Edit Cpu gpu miner"
-
-  #     assert_patch(show_live, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}/show/edit")
-
-  #     assert show_live
-  #            |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @invalid_attrs)
-  #            |> render_change() =~ "can&#39;t be blank"
-
-  #     assert show_live
-  #            |> form("#cpu_gpu_miner-form", cpu_gpu_miner: @update_attrs)
-  #            |> render_submit()
-
-  #     assert_patch(show_live, ~p"/cpu_gpu_miners/#{cpu_gpu_miner}")
-
-  #     html = render(show_live)
-  #     assert html =~ "Cpu gpu miner updated successfully"
-  #     assert html =~ "some updated name"
-  #   end
-  # end
+    end
+  end
 end
