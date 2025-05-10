@@ -9,7 +9,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
 
   @create_attrs %{name: "KS5L-1"}
   @update_attrs %{name: "some updated name"}
-  @invalid_attrs %{name: nil}
+  @invalid_attrs_1 %{name: nil}
+  @invalid_attrs_2 %{name: "K"}
 
   defp create_asic_miner_by_commander(_) do
     Logger.warning("[#{__MODULE__}] create_asic_miner_by_commander/1 deprecated")
@@ -215,7 +216,30 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
   end
 
   describe "New" do
-    test "edit page", do: nil
+    setup [:login_user]
+
+    @tag run: true
+    test "create new asic_miner", %{conn: conn} do
+      {:ok, new_live, new_html} = live(conn, ~p"/asic_miners/new")
+      assert new_html =~ "Create new ASIC Miners"
+
+      assert new_live
+      |> form("#asic_miner_new_form", asic_miner: @invalid_attrs_1)
+      |> render_change() =~ "can&#39;t be blank"
+
+      assert new_live
+      |> form("#asic_miner_new_form", asic_miner: @invalid_attrs_2)
+      |> render_change() =~ "should be at least 2 character(s)"
+
+     new_live
+     |> form("#asic_miner_new_form", asic_miner: @create_attrs)
+     |> render_submit()
+
+     assert_redirect(new_live, ~p"/asic_miners", 100)
+
+     {:ok, _index_live, index_html} = live(conn, ~p"/asic_miners")
+     assert index_html =~ "KS5L-1"
+    end
   end
 
   describe "Edit" do
