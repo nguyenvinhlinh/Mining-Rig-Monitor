@@ -4,6 +4,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
   import Phoenix.LiveViewTest
   import MiningRigMonitor.AsicMinersFixtures
   import MiningRigMonitor.AccountsFixtures
+  alias  MiningRigMonitor.AsicMiners
   require Logger
 
   @create_attrs %{name: "KS5L-1"}
@@ -123,8 +124,28 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
 
     test "toggle asic expected status",
       %{conn: conn, asic_miner_activated: asic_miner_activated} do
-      
+      {:ok, index_live, html} = live(conn, ~p"/asic_miners")
 
+      index_live
+      |> element("#asic_miner-#{asic_miner_activated.id}-asic_toggle")
+      |> render_click()
+
+      after_toggle_asic_expected_status = if(asic_miner_activated.asic_expected_status == "on", do: "off", else: "on")
+      updated_asic_miner_activated = AsicMiners.get_asic_miner!(asic_miner_activated.id)
+      assert updated_asic_miner_activated.asic_expected_status == after_toggle_asic_expected_status
+    end
+
+    test "toggle light expected status",
+      %{conn: conn, asic_miner_activated: asic_miner_activated} do
+      {:ok, index_live, html} = live(conn, ~p"/asic_miners")
+
+      index_live
+      |> element("#asic_miner-#{asic_miner_activated.id}-light_toggle")
+      |> render_click()
+
+      after_toggle_light_expected_status = if(asic_miner_activated.light_expected_status == "on", do: "off", else: "on")
+      updated_asic_miner_activated = AsicMiners.get_asic_miner!(asic_miner_activated.id)
+      assert updated_asic_miner_activated.light_expected_status == after_toggle_light_expected_status
     end
   end
 

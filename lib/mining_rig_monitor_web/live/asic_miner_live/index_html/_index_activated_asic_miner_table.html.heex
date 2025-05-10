@@ -89,7 +89,7 @@
               <td>
                 <div class="flex items-center gap-2">
                   <span class="iconify lucide--power size-4"> </span>
-                  <input id={"asic_miner-#{asic_miner.id}-power"} class="toggle toggle-success" type="checkbox" name="asic_expected_status"
+                  <input id={"asic_miner-#{asic_miner.id}-asic_toggle"} class="toggle toggle-success" type="checkbox" name="asic_expected_status"
                     checked={if asic_miner.asic_expected_status == "on", do: "true", else: nil }
                     phx-click={JS.push("toggle_asic", value: %{id: asic_miner.id})}
                     data-confirm="Are you sure?"/>
@@ -97,7 +97,7 @@
 
                 <div class="mt-1 flex items-center gap-2">
                   <span class="iconify lucide--lightbulb size-4"> </span>
-                  <input id={"asic_miner-#{asic_miner.id}-light"} class="toggle toggle-success" type="checkbox" name="light_expected_status"
+                  <input id={"asic_miner-#{asic_miner.id}-light_toggle"} class="toggle toggle-success" type="checkbox" name="light_expected_status"
                     checked={if asic_miner.light_expected_status == "on", do: "true", else: nil }
                     phx-click={JS.push("toggle_light", value: %{id: asic_miner.id})} />
                 </div>
