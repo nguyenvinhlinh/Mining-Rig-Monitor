@@ -150,56 +150,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
     end
   end
 
-  # test "saves new asic_miner", %{conn: conn} do
-    #   {:ok, index_live, _html} = conn
-    #   |> log_in_user(user_fixture())
-    #   |> live(~p"/asic_miners")
-
-    #   assert index_live |> element("a", "New ASIC Miner") |> render_click() =~
-    #            "New ASIC Miner"
-
-    #   assert_patch(index_live, ~p"/asic_miners/new")
-
-    #   assert index_live
-    #          |> form("#asic_miner-form", asic_miner: @invalid_attrs)
-    #          |> render_change() =~ "can&#39;t be blank"
-
-    #   assert index_live
-    #          |> form("#asic_miner-form", asic_miner: @create_attrs)
-    #          |> render_submit()
-
-    #   assert_patch(index_live, ~p"/asic_miners")
-
-    #   html = render(index_live)
-    #   assert html =~ "created successfully!"
-    #   assert html =~ "KS5L-1"
-    # end
-
-    # test "updates asic_miner in listing", %{conn: conn, asic_miner: asic_miner} do
-    #   {:ok, index_live, _html} = conn
-    #   |> log_in_user(user_fixture())
-    #   |> live(~p"/asic_miners")
-
-    #   assert index_live |> element("#asic_miner_not_activated_list-#{asic_miner.id}  a", "Edit") |> render_click() =~
-    #            "Edit ASIC miner"
-
-    #   assert_patch(index_live, ~p"/asic_miners/#{asic_miner}/edit")
-
-    #   assert index_live
-    #          |> form("#asic_miner-form", asic_miner: @invalid_attrs)
-    #          |> render_change() =~ "can&#39;t be blank"
-
-    #   assert index_live
-    #          |> form("#asic_miner-form", asic_miner: @update_attrs)
-    #          |> render_submit()
-
-    #   assert_patch(index_live, ~p"/asic_miners")
-
-    #   html = render(index_live)
-    #   assert html =~ "updated successfully!"
-    #   assert html =~ "some updated name"
-    # end
-
   describe "Show" do
     setup [:login_user, :create_activated_asic_miner]
 
@@ -218,7 +168,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
   describe "New" do
     setup [:login_user]
 
-    @tag run: true
     test "create new asic_miner", %{conn: conn} do
       {:ok, new_live, new_html} = live(conn, ~p"/asic_miners/new")
       assert new_html =~ "Create new ASIC Miners"
@@ -243,8 +192,27 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
   end
 
   describe "Edit" do
-    test "edit page", do: nil
+    setup [:login_user, :create_activated_asic_miner]
+    test "edit asic miner",
+      %{conn: conn, asic_miner_activated: asic_miner} do
+      {:ok, edit_live, edit_html} = live(conn, ~p"/asic_miners/#{asic_miner.id}/edit")
+      assert edit_html =~ asic_miner.name
+
+      assert edit_live
+      |> form("#asic_miner_edit_form", asic_miner: @invalid_attrs_1)
+      |> render_change() =~ "can&#39;t be blank"
+
+      assert edit_live
+      |> form("#asic_miner_edit_form", asic_miner: @invalid_attrs_2)
+      |> render_change() =~ "should be at least 2 character(s)"
+
+      edit_live
+      |> form("#asic_miner_edit_form", asic_miner: @create_attrs)
+      |> render_submit()
+
+      assert_redirect(edit_live, ~p"/asic_miners", 100)
+      {:ok, _index_live, index_html} = live(conn, ~p"/asic_miners")
+      assert index_html =~ "KS5L-1"
+    end
   end
-
-
 end
