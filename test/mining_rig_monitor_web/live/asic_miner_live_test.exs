@@ -32,15 +32,26 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
    %{conn: conn_mod}
   end
 
-  @tag run: true
-  test "go to /asic_miners without login, redirect to login page", %{conn: conn} do
-    assert {:error, {:redirect, %{to: "/users/log_in"}}} = live(conn, ~p"/asic_miners")
+  describe "Test redirect to login page if not login" do
+    test "go to /asic_miners without login, redirect to login page", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/users/log_in"}}} = live(conn, ~p"/asic_miners")
+    end
+
+    test "go to /asic_miners/:id without login, redirect to login page", %{conn: conn} do
+      asic_miner = asic_miner_not_activated_fixture()
+      assert {:error, {:redirect, %{to: "/users/log_in"}}} = live(conn, ~p"/asic_miners/#{asic_miner.id}")
+    end
+
+    test "go to /asic_miners/:id/edit without login, redirect to login page", %{conn: conn} do
+      asic_miner = asic_miner_not_activated_fixture()
+      assert {:error, {:redirect, %{to: "/users/log_in"}}} = live(conn, ~p"/asic_miners/#{asic_miner.id}/edit")
+    end
   end
+
 
   describe "Index" do
     setup [:create_not_activated_asic_miner, :create_activated_asic_miner, :login_user]
 
-    @tag run: true
     test "lists all asic_miners",
       %{conn: conn, asic_miner_not_activated: asic_miner_not_activated,
         asic_miner_activated: asic_miner_activated} do
@@ -53,7 +64,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
       assert html =~ asic_miner_activated.name
     end
 
-    @tag run: true
     test "redirect to new page", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, ~p"/asic_miners")
       index_live
@@ -63,7 +73,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
       assert_redirect index_live, ~p"/asic_miners/new", 100
     end
 
-    @tag run: true
     test "redirect to edit page",
       %{conn: conn, asic_miner_not_activated: asic_miner_not_activated,
         asic_miner_activated: asic_miner_activated} do
@@ -81,7 +90,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
       assert_redirect(index_live_2, ~p"/asic_miners/#{asic_miner_not_activated.id}/edit", 100)
     end
 
-    @tag run: true
     test "redirect to show page",
       %{conn: conn,  asic_miner_activated: asic_miner_activated} do
 
@@ -92,9 +100,37 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
       assert_redirect(index_live, ~p"/asic_miners/#{asic_miner_activated.id}", 100)
     end
 
+    test "deletes asic_miner in activated listing",
+      %{conn: conn, asic_miner_activated: asic_miner_activated} do
+
+      {:ok, index_live, _html} = live(conn, ~p"/asic_miners")
+      assert has_element?(index_live, "#asic_miner_activated_list-#{asic_miner_activated.id}")
+      index_live
+      |> element("#asic_miner-#{asic_miner_activated.id}-delete")
+      |> render_click()
+      refute has_element?(index_live, "#asic_miner_activated_list-#{asic_miner_activated.id}")
+    end
+
+    test "deletes asic_miner in not activated listing",
+      %{conn: conn, asic_miner_not_activated: asic_miner_not_activated} do
+      {:ok, index_live, _html} = live(conn, ~p"/asic_miners")
+      assert has_element?(index_live, "#asic_miner_not_activated_list-#{asic_miner_not_activated.id}")
+      index_live
+      |> element("#asic_miner-#{asic_miner_not_activated.id}-delete")
+      |> render_click()
+      refute has_element?(index_live, "#asic_miner_not_activated_list-#{asic_miner_not_activated.id}")
+    end
+
+    test "toggle asic expected status",
+      %{conn: conn, asic_miner_activated: asic_miner_activated} do
+      
+
+    end
+  end
 
 
-    # test "saves new asic_miner", %{conn: conn} do
+
+  # test "saves new asic_miner", %{conn: conn} do
     #   {:ok, index_live, _html} = conn
     #   |> log_in_user(user_fixture())
     #   |> live(~p"/asic_miners")
@@ -144,15 +180,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
     #   assert html =~ "some updated name"
     # end
 
-    test "deletes asic_miner in listing", %{conn: conn, asic_miner: asic_miner} do
-      {:ok, index_live, _html} = conn
-      |> log_in_user(user_fixture())
-      |> live(~p"/asic_miners")
 
-      assert index_live |> element("#asic_miner_not_activated_list-#{asic_miner.id} a", "Delete") |> render_click()
-      refute has_element?(index_live, "#asic_miners-#{asic_miner.id}")
-    end
-  end
 
   describe "Show" do
     setup [:create_asic_miner_by_commander]
