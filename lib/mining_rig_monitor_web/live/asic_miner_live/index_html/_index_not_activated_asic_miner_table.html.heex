@@ -45,7 +45,7 @@
                       <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
                     </button>
                   </.link>
-                  <.link
+                  <.link id={"asic_miner-#{asic_miner.id}-delete"}
                     phx-click={JS.push("delete", value: %{id: asic_miner.id}) |> hide("##{asic_miner.id}")}
                     data-confirm="Are you sure?" >
                     <button aria-label="Dummy delete product" class="btn btn-square btn-error btn-outline btn-sm border-transparent" >

@@ -120,7 +120,7 @@
                     </button>
                   </.link>
 
-                  <.link
+                  <.link id={"asic_miner-#{asic_miner.id}-delete"}
                     phx-click={JS.push("delete", value: %{id: asic_miner.id}) |> hide("##{asic_miner.id}")}
                     data-confirm="Are you sure?" >
                     <button class="btn btn-square btn-error btn-outline btn-sm border-transparent" >
