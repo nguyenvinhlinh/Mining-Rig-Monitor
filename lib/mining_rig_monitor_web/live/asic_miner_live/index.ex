@@ -152,7 +152,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   @impl true
   def handle_event("toggle_asic", %{"id" => id}, socket) do
-    Logger.warning("[#{__MODULE__}] handle_event, toggle_asic need unit test")
     asic_miner = AsicMiners.get_asic_miner!(id)
     asic_expected_status = asic_miner.asic_expected_status
 
@@ -177,7 +176,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
 
   @impl true
   def handle_event("toggle_light", %{"id" => id}, socket) do
-    Logger.warning("[#{__MODULE__}] handle_event, toggle_light need unit test")
     asic_miner = AsicMiners.get_asic_miner!(id)
     light_expected_status = asic_miner.light_expected_status
     light_expected_status_mod = if(light_expected_status == "on", do: AsicMiner.light_expected_status_off() , else: AsicMiner.light_expected_status_on())
