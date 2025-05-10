@@ -149,8 +149,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
     end
   end
 
-
-
   # test "saves new asic_miner", %{conn: conn} do
     #   {:ok, index_live, _html} = conn
     #   |> log_in_user(user_fixture())
@@ -201,29 +199,28 @@ defmodule MiningRigMonitorWeb.AsicMinerLiveTest do
     #   assert html =~ "some updated name"
     # end
 
-
-
   describe "Show" do
-    setup [:create_asic_miner_by_commander]
+    setup [:login_user, :create_activated_asic_miner]
 
-    test "displays asic_miner", %{conn: conn, asic_miner: asic_miner} do
-      {:ok, _show_live, html} = conn
-      |> log_in_user(user_fixture())
-      |> live(~p"/asic_miners/#{asic_miner}")
+    test "displays asic_miner", %{conn: conn, asic_miner_activated: asic_miner_activated} do
+      {:ok, _show_live, html} = live(conn, ~p"/asic_miners/#{asic_miner_activated.id}")
 
-      assert html =~ "General Information"
-      assert html =~ "Hashrate"
-      assert html =~ "Fan Speed"
-      assert html =~ "Mining Pool"
-      assert html =~ asic_miner.name
+      assert html =~ asic_miner_activated.name
+      assert html =~ asic_miner_activated.api_code
+      assert html =~ asic_miner_activated.firmware_version
+      assert html =~ asic_miner_activated.software_version
+      assert html =~ asic_miner_activated.model
+      assert html =~ asic_miner_activated.model_variant
     end
+  end
+
+  describe "New" do
+    test "edit page", do: nil
   end
 
   describe "Edit" do
     test "edit page", do: nil
   end
 
-  describe "New" do
-    test "edit page", do: nil
-  end
+
 end
