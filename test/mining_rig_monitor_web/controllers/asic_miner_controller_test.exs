@@ -31,17 +31,17 @@ defmodule MiningRigMonitorWeb.AsicMinerControllerTest do
     end
   end
 
-  describe "get_expected_status_many_test_group" do
+  describe "get_expected_status_bulk_test_group" do
     setup [:create_asic_miner_list]
 
-    test "get_expected_status_many with valid API_CODE list",
+    test "get_expected_status_bulk with valid API_CODE list",
       %{conn: conn, asic_miner_1: asic_miner_1, asic_miner_2: asic_miner_2} do
       api_code_list = [asic_miner_1.api_code, asic_miner_2.api_code]
       post_body = %{
         "api_code_list" => api_code_list
       }
       conn_mod = conn
-      |> post(~p"/api/v1/asic_miners/expected_status_many", post_body)
+      |> post(~p"/api/v1/asic_miners/expected_status_bulk", post_body)
 
       test_body = json_response(conn_mod, 200)
       expected_body = %{
@@ -57,12 +57,12 @@ defmodule MiningRigMonitorWeb.AsicMinerControllerTest do
       assert test_body == expected_body
     end
 
-    test "get_expected_status_many with invalid API_CODE list", %{conn: conn} do
+    test "get_expected_status_bulk with invalid API_CODE list", %{conn: conn} do
       post_body = %{
         "api_code_list" => ["invalid api_code 1", "invalid_api_code_2"]
       }
       conn_mod = conn
-      |> post(~p"/api/v1/asic_miners/expected_status_many", post_body)
+      |> post(~p"/api/v1/asic_miners/expected_status_bulk", post_body)
 
       test_body = json_response(conn_mod, 200)
       expected_body = %{}

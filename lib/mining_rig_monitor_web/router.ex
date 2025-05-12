@@ -64,7 +64,7 @@ defmodule MiningRigMonitorWeb.Router do
 
   scope "/api/v1" do
     get "/ping", MiningRigMonitorWeb.PingPongController, :ping
-    post "/asic_miners/expected_status_many", MiningRigMonitorWeb.AsicMinerController, :get_expected_status_many
+    post "/asic_miners/expected_status_bulk", MiningRigMonitorWeb.AsicMinerController, :get_expected_status_bulk
 
     scope "/asic_miners" do
       pipe_through :api_asic_miner

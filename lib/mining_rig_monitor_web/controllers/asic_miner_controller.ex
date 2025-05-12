@@ -30,7 +30,7 @@ defmodule MiningRigMonitorWeb.AsicMinerController do
     json(conn, data)
   end
 
-  def get_expected_status_many(conn, %{"api_code_list" => api_code_list}) do
+  def get_expected_status_bulk(conn, %{"api_code_list" => api_code_list}) do
     asic_miner_list = AsicMiners.get_asic_miner_by_api_code_list(api_code_list)
     response = asic_miner_list
     |> Enum.reduce(%{}, fn(e, acc) ->
