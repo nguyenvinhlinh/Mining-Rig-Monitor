@@ -26,7 +26,7 @@ defmodule MiningRigMonitorWeb.AsicMinerController do
 
   def get_expected_status(conn, _params) do
     data = conn.assigns.asic_miner
-    |> Map.take([:asic_expected_status, :light_expected_status])
+    |> Map.take([:name, :asic_expected_status, :light_expected_status])
     json(conn, data)
   end
 
@@ -34,7 +34,7 @@ defmodule MiningRigMonitorWeb.AsicMinerController do
     asic_miner_list = AsicMiners.get_asic_miner_by_api_code_list(api_code_list)
     response = asic_miner_list
     |> Enum.reduce(%{}, fn(e, acc) ->
-      data = Map.take(e, [:asic_expected_status, :light_expected_status])
+      data = Map.take(e, [:name, :asic_expected_status, :light_expected_status])
       Map.put(acc, e.api_code, data)
     end)
 
