@@ -21,6 +21,7 @@ defmodule MiningRigMonitor.AsicMiners do
   def list_asic_miners_by_activated_state(activated_state) when is_boolean(activated_state)  do
     AsicMiner
     |> where(activated: ^activated_state)
+    |> order_by([am], asc: am.id)
     |> Repo.all()
   end
 
