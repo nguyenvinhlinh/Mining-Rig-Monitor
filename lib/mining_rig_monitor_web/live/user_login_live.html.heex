@@ -93,10 +93,10 @@
 
           <div class="mt-4 flex items-center gap-3 md:mt-6">
             <input class="checkbox checkbox-sm checkbox-primary" aria-label="Checkbox example" type="checkbox" name={@form[:remember_me].name} id={@form[:remember_me].id} />
-              <label for="agreement" class="text-sm">
-                Remember me
-              </label>
-            </div>
+            <label for={@form[:remember_me].id} class="text-sm">
+              Remember me
+            </label>
+          </div>
 
           <button type="submit" class="btn btn-primary btn-wide mt-4 max-w-full gap-3 md:mt-6">
             <span class="iconify lucide--log-in size-4"></span>
