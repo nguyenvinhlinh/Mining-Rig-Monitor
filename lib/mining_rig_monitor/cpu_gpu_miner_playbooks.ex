@@ -7,19 +7,7 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks do
   alias MiningRigMonitor.Repo
 
   alias MiningRigMonitor.CpuGpuMinerPlaybooks.CpuGpuMinerPlaybook
-
-  @doc """
-  Returns the list of cpu_gpu_miner_playbooks.
-
-  ## Examples
-
-      iex> list_cpu_gpu_miner_playbooks()
-      [%CpuGpuMinerPlaybook{}, ...]
-
-  """
-  def list_cpu_gpu_miner_playbooks do
-    Repo.all(CpuGpuMinerPlaybook)
-  end
+  require Logger
 
   def list_cpu_gpu_miner_playbooks_by_cpu_gpu_miner_id(id) do
     query = CpuGpuMinerPlaybook
@@ -58,7 +46,7 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks do
   """
   def create_cpu_gpu_miner_playbook(attrs \\ %{}) do
     %CpuGpuMinerPlaybook{}
-    |> CpuGpuMinerPlaybook.changeset(attrs)
+    |> CpuGpuMinerPlaybook.changeset_new(attrs)
     |> Repo.insert()
   end
 
@@ -76,7 +64,7 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks do
   """
   def update_cpu_gpu_miner_playbook(%CpuGpuMinerPlaybook{} = cpu_gpu_miner_playbook, attrs) do
     cpu_gpu_miner_playbook
-    |> CpuGpuMinerPlaybook.changeset(attrs)
+    |> CpuGpuMinerPlaybook.changeset_edit(attrs)
     |> Repo.update()
   end
 
@@ -105,7 +93,11 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooks do
       %Ecto.Changeset{data: %CpuGpuMinerPlaybook{}}
 
   """
-  def change_cpu_gpu_miner_playbook(%CpuGpuMinerPlaybook{} = cpu_gpu_miner_playbook, attrs \\ %{}) do
-    CpuGpuMinerPlaybook.changeset(cpu_gpu_miner_playbook, attrs)
+  def change_new_cpu_gpu_miner_playbook(%CpuGpuMinerPlaybook{} = cpu_gpu_miner_playbook, attrs \\ %{}) do
+    CpuGpuMinerPlaybook.changeset_new(cpu_gpu_miner_playbook, attrs)
+  end
+
+  def change_edit_cpu_gpu_miner_playbook(%CpuGpuMinerPlaybook{} = cpu_gpu_miner_playbook, attrs \\ %{}) do
+    CpuGpuMinerPlaybook.changeset_edit(cpu_gpu_miner_playbook, attrs)
   end
 end

@@ -5,6 +5,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
   alias MiningRigMonitor.AsicMiners.AsicMiner
   alias MiningRigMonitor.Utility
 
+  require Logger
+
   embed_templates "index_html/*"
   on_mount MiningRigMonitorWeb.UserAuthLive
 
@@ -18,6 +20,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
         name: e.name,
         model: e.model,
         model_variant: e.model_variant,
+        asic_expected_status: e.asic_expected_status,
+        light_expected_status: e.light_expected_status,
         hashrate_5_min: "Sync...",
         hashrate_30_min: "Sync...",
         coin: "Sync...",
@@ -39,6 +43,7 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     end
 
     new_socket = socket
+    |> assign(:page_title, "ASIC Miner Index")
     |> stream(:asic_miner_activated_list, asic_miner_activated_list)
     |> stream(:asic_miner_not_activated_list, asic_miner_not_activated_list)
     |> assign(:aggregated_coin_hashrate_map, aggregated_coin_hashrate_map)
@@ -47,29 +52,6 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     |> assign(:aggregated_asic_miner_alive, aggregated_asic_miner_alive)
 
     {:ok, new_socket}
-  end
-
-  @impl true
-  def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
-  end
-
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit ASIC miner")
-    |> assign(:asic_miner, AsicMiners.get_asic_miner!(id))
-  end
-
-  defp apply_action(socket, :new, _params) do
-    socket
-    |> assign(:page_title, "New ASIC miner")
-    |> assign(:asic_miner, %AsicMiner{})
-  end
-
-  defp apply_action(socket, :index, _params) do
-    socket
-    |> assign(:page_title, "ASIC miner index")
-    |> assign(:asic_miner, nil)
   end
 
   @impl true
@@ -85,15 +67,22 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
         asic_miner_mod = %{
         id: asic_miner.id,
         name: asic_miner.name,
-        model: "Sync...",
-        model_variant: "Sync...",
+        model: asic_miner.model,
+        model_variant: asic_miner.model_variant,
+        asic_expected_status: asic_miner.asic_expected_status,
+        light_expected_status: asic_miner.light_expected_status,
+
         hashrate_5_min: "Sync...",
         hashrate_30_min: "Sync...",
         coin: "Sync...",
         power: "Sync...",
         max_hashboard_temp: "Sync...",
         max_fan: "Sync...",
-        uptime: "Sync..."}
+        uptime: "Sync...",
+        uptime_class: "badge badge-info"
+        }
+
+
 
         socket_mod = socket
         |> stream_insert(:asic_miner_activated_list, asic_miner_mod)
@@ -161,6 +150,56 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
     {:noreply, socket}
   end
 
+  @impl true
+  def handle_event("toggle_asic", %{"id" => id}, socket) do
+    asic_miner = AsicMiners.get_asic_miner!(id)
+    asic_expected_status = asic_miner.asic_expected_status
+
+    asic_expected_status_mod = if(asic_expected_status == "on", do: AsicMiner.asic_expected_status_off() , else: AsicMiner.asic_expected_status_on())
+
+    {:ok, asic_miner} = AsicMiners.update_asic_miner_by_commander(asic_miner, %{asic_expected_status: asic_expected_status_mod})
+
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index_channel",
+      {:asic_miner_index_channel, :create_or_update, asic_miner})
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_channel:#{asic_miner.id}",
+      {:asic_miner_channel, :update_asic_miner, asic_miner})
+    message =
+      case asic_expected_status_mod do
+        "on" -> "ASIC Miner id##{asic_miner.id} name: #{asic_miner.name} Turn Power On!"
+        _ ->    "ASIC Miner id##{asic_miner.id} name: #{asic_miner.name} Turn Power Off!"
+      end
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
+      {:flash_index, :info, message})
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("toggle_light", %{"id" => id}, socket) do
+    asic_miner = AsicMiners.get_asic_miner!(id)
+    light_expected_status = asic_miner.light_expected_status
+    light_expected_status_mod = if(light_expected_status == "on", do: AsicMiner.light_expected_status_off() , else: AsicMiner.light_expected_status_on())
+
+    {:ok, asic_miner} = AsicMiners.update_asic_miner_by_commander(asic_miner, %{light_expected_status: light_expected_status_mod})
+
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_index_channel",
+      {:asic_miner_index_channel, :create_or_update, asic_miner})
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "asic_miner_channel:#{asic_miner.id}",
+      {:asic_miner_channel, :update_asic_miner, asic_miner})
+    message =
+      case light_expected_status_mod do
+        "on" -> "ASIC Miner id##{asic_miner.id} name: #{asic_miner.name} Turn Light On!"
+        _ ->    "ASIC Miner id##{asic_miner.id} name: #{asic_miner.name} Turn Light Off!"
+      end
+    Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "flash_index",
+      {:flash_index, :info, message})
+
+    {:noreply, socket}
+  end
+
+
+
+
   def get_asic_miner_activated_list(asic_miner_map, asic_miner_operational_map) do
     Enum.map(asic_miner_map, fn({asic_miner_id, asic_miner}) ->
       asic_miner_log = Map.get(asic_miner_operational_map, asic_miner_id, %{})
@@ -226,6 +265,8 @@ defmodule MiningRigMonitorWeb.AsicMinerLive.Index do
       name: asic_miner.name,
       model: asic_miner.model,
       model_variant: asic_miner.model_variant,
+      asic_expected_status: asic_miner.asic_expected_status,
+      light_expected_status: asic_miner.light_expected_status,
       hashrate_5_min: hashrate_5_min,
       hashrate_30_min: hashrate_30_min,
       coin: coin,

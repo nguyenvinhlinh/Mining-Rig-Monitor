@@ -30,7 +30,11 @@ defmodule MiningRigMonitorWeb.CpuGpuMinerLive.New do
 
   @impl true
   def handle_event("save", %{"cpu_gpu_miner" => cpu_gpu_miner_params}, socket) do
-    case CpuGpuMiners.create_cpu_gpu_miner_by_commander(cpu_gpu_miner_params) do
+    cpu_gpu_miner_params_mod = cpu_gpu_miner_params
+    |> Map.put("api_code", UUID.uuid1())
+    |> Map.put("activated", false)
+
+    case CpuGpuMiners.create_cpu_gpu_miner_by_commander(cpu_gpu_miner_params_mod) do
       {:ok, cpu_gpu_miner} ->
         Phoenix.PubSub.broadcast(MiningRigMonitor.PubSub, "cpu_gpu_miner_index_channel",
           {:cpu_gpu_miner_index_channel, :create_or_update, cpu_gpu_miner})

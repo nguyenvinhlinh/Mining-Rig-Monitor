@@ -6,7 +6,7 @@
           <b>Activated ASIC Miners</b>
         </div>
         <div class="inline-flex items-center gap-3">
-          <a aria-label="Create product link" class="btn btn-primary btn-sm max-sm:btn-square" href={~p"/asic_miners/new"}>
+          <a id="asic_miners_new" class="btn btn-primary btn-sm max-sm:btn-square" href={~p"/asic_miners/new"}>
             <span class="iconify lucide--plus size-4"></span>
             <span class="hidden sm:inline">New ASIC Miners</span>
           </a>
@@ -24,6 +24,7 @@
               <th>Max Fan</th>
               <th>Power(W)</th>
               <th>Uptime</th>
+              <th>RRC Control</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -86,19 +87,40 @@
                 </div>
               </td>
               <td>
+                <div class="flex items-center gap-2">
+                  <span class="iconify lucide--power size-4"> </span>
+                  <input id={"asic_miner-#{asic_miner.id}-asic_toggle"} class="toggle toggle-success" type="checkbox" name="asic_expected_status"
+                    checked={if asic_miner.asic_expected_status == "on", do: "true", else: nil }
+                    phx-click={JS.push("toggle_asic", value: %{id: asic_miner.id})}
+                    data-confirm="Are you sure?"/>
+                </div>
+
+                <div class="mt-1 flex items-center gap-2">
+                  <span class="iconify lucide--lightbulb size-4"> </span>
+                  <input id={"asic_miner-#{asic_miner.id}-light_toggle"} class="toggle toggle-success" type="checkbox" name="light_expected_status"
+                    checked={if asic_miner.light_expected_status == "on", do: "true", else: nil }
+                    phx-click={JS.push("toggle_light", value: %{id: asic_miner.id})} />
+                </div>
+              </td>
+
+              <td>
                 <div class="inline-flex">
-                  <.link phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}/edit")} >
+                  <.link id={"asic_miner-#{asic_miner.id}-edit"}
+                    href={~p"/asic_miners/#{asic_miner.id}/edit"}
+                    phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}/edit")} >
                     <button class="btn btn-square btn-ghost btn-sm">
                       <span class="iconify lucide--pencil text-base-content/80 size-4"></span>
                     </button>
                   </.link>
-                  <.link phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}")} >
+                  <.link id={"asic_miner-#{asic_miner.id}-show"}
+                    href={~p"/asic_miners/#{asic_miner.id}"}
+                    phx-click={JS.navigate(~p"/asic_miners/#{asic_miner.id}")} >
                     <button class="btn btn-square btn-ghost btn-sm">
                       <span class="iconify lucide--eye text-base-content/80 size-4"></span>
                     </button>
                   </.link>
 
-                  <.link
+                  <.link id={"asic_miner-#{asic_miner.id}-delete"}
                     phx-click={JS.push("delete", value: %{id: asic_miner.id}) |> hide("##{asic_miner.id}")}
                     data-confirm="Are you sure?" >
                     <button class="btn btn-square btn-error btn-outline btn-sm border-transparent" >

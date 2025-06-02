@@ -31,9 +31,9 @@
   <div class="col-span-12 lg:col-span-5 xl:col-span-4 2xl:col-span-3">
     <div class="flex flex-col items-stretch p-6 md:p-8 lg:p-16">
       <div class="flex items-center justify-between">
-        <a href="./dashboards-ecommerce.html">
-          <img alt="logo-dark" class="hidden h-5.5 dark:inline" src={~p"/images/logo/logo-dark.png"} />
-          <img alt="logo-light" class="h-5.5 dark:hidden" src={~p"/images/logo/logo-light.png"} />
+        <a href={~p"/"}>
+          <img alt="logo-light" class="h-10 dark:hidden"        src={~p"/images/logo/mrm_light.png"} />
+          <img alt="logo-dark"  class="h-10 hidden dark:inline" src={~p"/images/logo/mrm_dark.png"} />
         </a>
         <div class="dropdown dropdown-end">
           <div tabindex="0" role="button" class="btn btn-circle btn-outline border-base-300" aria-label="Theme toggle">
@@ -69,7 +69,7 @@
         Seamless Access, Secure Connection: Your Gateway to monitor your mining rigs
       </h3>
       <div class="mt-6 md:mt-10">
-        <.form for={@form} action={~p"/users/log_in"} phx-update="ignore">
+        <.form id="login_form" for={@form} action={~p"/users/log_in"} phx-update="ignore" >
           <fieldset class="fieldset">
             <legend class="fieldset-legend">Email Address</legend>
             <label class="input w-full focus:outline-0">
@@ -93,10 +93,10 @@
 
           <div class="mt-4 flex items-center gap-3 md:mt-6">
             <input class="checkbox checkbox-sm checkbox-primary" aria-label="Checkbox example" type="checkbox" name={@form[:remember_me].name} id={@form[:remember_me].id} />
-              <label for="agreement" class="text-sm">
-                Remember me
-              </label>
-            </div>
+            <label for={@form[:remember_me].id} class="text-sm">
+              Remember me
+            </label>
+          </div>
 
           <button type="submit" class="btn btn-primary btn-wide mt-4 max-w-full gap-3 md:mt-6">
             <span class="iconify lucide--log-in size-4"></span>

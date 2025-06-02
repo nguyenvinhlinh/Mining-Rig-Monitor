@@ -27,4 +27,8 @@ defmodule MiningRigMonitorWeb.Layouts do
 
     """
   end
+
+  def version() do
+    Application.spec(:mining_rig_monitor)[:vsn]
+  end
 end

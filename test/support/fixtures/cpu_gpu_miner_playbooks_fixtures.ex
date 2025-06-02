@@ -11,10 +11,11 @@ defmodule MiningRigMonitor.CpuGpuMinerPlaybooksFixtures do
     {:ok, cpu_gpu_miner_playbook} =
       attrs
       |> Enum.into(%{
-        command_argument: "some command_argument",
-        cpu_gpu_miner_id: 42,
-        software_name: "some software_name",
-        software_version: "some software_version"
+          command_argument: "--no-color --url $CPU_POOL --algo rx/0 --user $CPU_WALLET --pass $WORKER_NAME",
+          software_name: "XMRig",
+          software_version: "6.22.2",
+          cpu_coin_name: "Monero",
+          cpu_algorithm: "RandomX"
       })
       |> MiningRigMonitor.CpuGpuMinerPlaybooks.create_cpu_gpu_miner_playbook()
 
