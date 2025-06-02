@@ -4,7 +4,7 @@ defmodule MiningRigMonitor.MixProject do
   def project do
     [
       app: :mining_rig_monitor,
-      version: "4.0.0",
+      version: "5.0.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
